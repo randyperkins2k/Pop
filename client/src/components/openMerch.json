@@ -1,0 +1,134 @@
+{
+  "merchants": [
+    {
+      "id": 12411,
+      "name": "Deez Nuts Jewelry",
+      "picture": "",
+      "lat": 29.959252736079804,
+      "lon": -90.10501046009264,
+      "admin_id": 441,
+      "category": "arts",
+      "website": "deeznuts.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "id": 34451,
+      "name": "Philly cheesesteaks",
+      "picture": "",
+      "lat": 29.961443003163353,
+      "lon": -90.10495961189591,
+      "admin_id": 231,
+      "category": "foodpopup",
+      "website": "phillysteaks.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "id": 66362,
+      "name": "Tacos tacos tacos",
+      "picture": "",
+      "lat": 29.95671123236816,
+      "lon": -90.06596441200743,
+      "admin_id": 731,
+      "category": "foodtruck",
+      "website": "gettacos.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "id": 23831,
+      "name": "gumbostop",
+      "picture": "",
+      "lat": 29.959351117820336,
+      "lon": -90.06109352072647,
+      "admin_id": 452,
+      "category": "foodpopup",
+      "website": "getyourgumbo.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "id": 32451,
+      "name": "Good fortune",
+      "picture": "",
+      "lat": 29.960596673232956,
+      "lon": -90.0603210445762,
+      "admin_id": 234,
+      "category": "performer",
+      "website": "seethefuture.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "id": 44252,
+      "name": "churros inc",
+      "picture": "",
+      "lat": 29.958458770018144,
+      "lon": -90.06594295433658,
+      "admin_id": 231,
+      "category": "foodtruck",
+      "website": "churrosyum.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "id": 48234,
+      "name": "fresh produce",
+      "picture": "",
+      "lat": 29.984813644336278,
+      "lon": -90.07085508363026,
+      "admin_id": 331,
+      "category": "produce",
+      "website": null,
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "id": 12412,
+      "name": "streetpoboys",
+      "picture": "",
+      "lat": 29.93912067140665,
+      "lon": -90.07137034779632,
+      "admin_id": 231,
+      "category": "foodtruck",
+      "website": "eatpoboys.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "id": 13312,
+      "name": "we're never open",
+      "picture": "",
+      "lat": 29.938412531677425,
+      "lon": -90.07125891340533,
+      "admin_id": 442,
+      "category": "foodpopup",
+      "website": "donteventry.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "id": 33114,
+      "name": "freefood",
+      "picture": "",
+      "lat": 29.92431653205646,
+      "lon": -90.08504671064433,
+      "admin_id": 331,
+      "category": "foodpopup",
+      "website": "eat4free.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    }
+  ]
+}
