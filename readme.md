@@ -1,4 +1,4 @@
-A boilerplate dev environment for express/react/webpack projects
+Connect popups to customers
 
 get started:
 shell into mysql database
