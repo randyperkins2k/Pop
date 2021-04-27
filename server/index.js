@@ -9,6 +9,8 @@ const PORT = 8080;
 const CLIENT_PATH = path.resolve(__dirname, '../client/dist');
 app.use(express.static(CLIENT_PATH));
 
+//starting authentication
+
 
 /**
  * Idea: It would be cool if you couldn't add another pop up until you finished all the info on your current one
