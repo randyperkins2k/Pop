@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import CreatePop from './CreatePop.jsx';
 import MyPops from './MyPops.jsx';
 import { 
@@ -12,23 +13,20 @@ import * as merchData from './openMerch.json';
 // const MapView = withScriptjs(withGoogleMap(Map));
 
 
+import axios from 'axios';
+
 const App = () => {
-    const [myPops, setMyPops] = useState([
-      {
-        name: 'Tight Taco Truck',
-        lat: 0,
-        lon: 0,
-      },
-      {
-        name: 'Lit Art Stand',
-        lat: 0,
-        lon: 0,
-      },
-    ]);
-    
+    const [myPops, setMyPops] = useState([]);
+    //grab from database
+    const getPops = () => {
+      axios.get('/merchants')
+        .then(response => setMyPops(response.data))
+    }
+    getPops();
     return (
       <div>
-        <div style={{width: '100vw', height: '100vh'}}>
+        <div>
+        <h1>Welcome to Pop^</h1>
         <CreatePop myPops={myPops} setMyPops={setMyPops}/>
         <MyPops myPops={myPops} setMyPops={setMyPops}/>
         <Map

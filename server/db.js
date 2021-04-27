@@ -8,7 +8,7 @@ const sequelize = new Sequelize({
   database: 'pop',
 });
 
-const Popups = sequelize.define('Popups', {
+const Merchants = sequelize.define('Merchants', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -34,5 +34,5 @@ const Popups = sequelize.define('Popups', {
 
 module.exports = {
   db: sequelize,
-  Popups,
+  Merchants,
 };
