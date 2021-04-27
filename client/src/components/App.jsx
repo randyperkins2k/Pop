@@ -2,19 +2,16 @@ import React, { useState } from 'react';
 import CreatePop from './CreatePop.jsx';
 import MyPops from './MyPops.jsx';
 
+import axios from 'axios';
+
 const App = () => {
-    const [myPops, setMyPops] = useState([
-      {
-        name: 'Tight Taco Truck',
-        lat: 0,
-        lon: 0,
-      },
-      {
-        name: 'Lit Art Stand',
-        lat: 0,
-        lon: 0,
-      },
-    ]);
+    const [myPops, setMyPops] = useState([]);
+    //grab from database
+    const getPops = () => {
+      axios.get('/merchants')
+        .then(response => setMyPops(response.data))
+    }
+    getPops();
     return (
       <div>
         <CreatePop myPops={myPops} setMyPops={setMyPops}/>
