@@ -12,7 +12,6 @@ const App = () => {
     const [username, setUsername] = useState('');
     const [isLogged, setIsLogged] = useState(false);
     const [myPops, setMyPops] = useState([]);
-    const [login, setLogin] = useState(<a href="/google"> Login </a>)
     //grab from database
     const getPops = () => {
       if (!gotPops) {
@@ -31,7 +30,6 @@ const App = () => {
             if (results.data.displayName) {
               setIsLogged(true);
               setUsername(data.displayName);
-              setLogin(<a href="/logout"> Logout </a>);
             }
           });
       }
