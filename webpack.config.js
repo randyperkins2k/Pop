@@ -1,4 +1,5 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 const SRC_DIR = path.join(__dirname, 'client/src');
 const DIST_DIR = path.join(__dirname, 'client/dist');
 
@@ -33,5 +34,8 @@ module.exports = {
     port: 8080,
     outputPath: buildPath,
     historyApiFallback: true
-  }
+  },
+  plugins: [
+    new Dotenv()
+  ]
 };
