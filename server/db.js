@@ -6,6 +6,7 @@ const sequelize = new Sequelize({
   username: 'root',
   password: '',
   database: 'pop',
+  logging: false,
 });
 
 const Users = sequelize.define('Users', {
@@ -79,7 +80,7 @@ const Reviews = sequelize.define('Reviews', {
     unique: true,
   },
   user: DataTypes.INTEGER, //references Users.id
-  popup: DataTypes.INTEGER, //references Merchants.id
+  merchant: DataTypes.INTEGER, //references Merchants.id
   rating: DataTypes.INTEGER,
   message: DataTypes.STRING,
 });

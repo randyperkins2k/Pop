@@ -186,6 +186,46 @@ app.delete('/deleteallproducts', (req, res) => {
     .catch(err => res.send(err));
 });
 
+/**
+ * Reviews
+ */
+
+//get all reviews
+app.get('/reviews', (req, res) => {
+  Reviews.findAll({
+    where: {}
+  })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+//add new review
+app.post('/addreview/:user/:merchant/:rating/:message', (req, res) => {
+  const { user, merchant, rating, message } = req.params;
+  Reviews.create({ user, merchant, rating, message })
+    .then(Reviews.findAll({
+      where: {}
+    })).then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+//delete review
+app.delete('/deletereview/:id', (req, res) => {
+  const { id } = req.params;
+  Reviews.destroy({
+    where: {id: id}
+  })
+    .then(res.send(`review ${id} deleted`));
+});
+//delete all reviews
+app.delete('/deleteallreviews', (req, res) => {
+  Reviews.destroy({
+    where: {}
+  })
+    .then(res.send('no more reviews'))
+    .catch(err => res.send(err));
+});
+
+
+
 app.listen(PORT, (() => {
   console.log(`Server listening at http://127.0.0.1:${PORT}`);
 }));

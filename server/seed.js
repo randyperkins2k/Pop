@@ -42,17 +42,17 @@ const seedMysql = () => {
       ].map((user) => Users.create(user))
     )
   )
-  .then(() => Products.sync({ force: true }))
+  .then(() => Reviews.sync({ force: true }))
     .then(() =>
       console.log(
-        "\nDatabase (MySQL): 'Products' table succesfully created!"
+        "\nDatabase (MySQL): 'Reviews' table succesfully created!"
       )
     )
     .then(() =>
       Promise.all([
-        {name:'chicken taco', merchant: 1},
-        {name: 'Mona Lisa', merchant: 2},
-      ].map((prod) => Products.create(prod))
+        {user: 2, merchant: 1, rating: 5, message: 'tightest tacos'},
+        {user: 1, merchant: 2, rating: 5, message: 'great paintings'},
+      ].map((rev) => Reviews.create(rev))
     )
   )
   .then((arr) =>
