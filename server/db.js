@@ -110,5 +110,10 @@ const Admins = sequelize.define('Admins', {
 
 module.exports = {
   db: sequelize,
+  Users,
   Merchants,
+  Products,
+  Reviews,
+  Subs,
+  Admins
 };

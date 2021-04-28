@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const axios = require('axios');
 
-const { Merchants } = require('./db.js');
+const { Merchants, Users, Products, Reviews, Subs, Admins } = require('./db.js');
 
 const app = express();
 const PORT = 8080;
@@ -62,6 +62,11 @@ app.get('/failed', (req, res) => {
 /**
  * end authentication routes
  */
+
+/**
+ * Merchants
+ */
+
 //get all merchants
  app.get('/merchants', (req, res) => {
   Merchants.findAll({
@@ -79,6 +84,14 @@ app.post('/addmerchant/:name', (req, res) => {
     })).then(data => res.send(data))
     .catch(err => res.send(err));
 });
+//delete merchant
+app.delete('/deletemerchant/:id', (req, res) => {
+  const { id } = req.params;
+  Merchants.destroy({
+    where: {id: id}
+  })
+    .then(res.send(`merchant ${id} deleted`));
+});
 //delete all merchants
 app.delete('/deleteallmerchants', (req, res) => {
   Merchants.destroy({
@@ -87,13 +100,43 @@ app.delete('/deleteallmerchants', (req, res) => {
     .then(res.send('no more merchants'))
     .catch(err => res.send(err));
 });
-//delete merchant
-app.delete('/deletemerchant/:id', (req, res) => {
+
+/**
+ * Users
+ */
+
+//get all users
+app.get('/users', (req, res) => {
+  Users.findAll({
+    where: {}
+  })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+//add new user
+app.post('/adduser/:name', (req, res) => {
+  const { name } = req.params;
+  Users.create({ name })
+    .then(Users.findAll({
+      where: {}
+    })).then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+//delete user
+app.delete('/deleteuser/:id', (req, res) => {
   const { id } = req.params;
-  Merchants.destroy({
+  Users.destroy({
     where: {id: id}
   })
-    .then(res.send(`merchant ${id} deleted`));
+    .then(res.send(`users ${id} deleted`));
+});
+//delete all merchants
+app.delete('/deleteallusers', (req, res) => {
+  Users.destroy({
+    where: {}
+  })
+    .then(res.send('no more users'))
+    .catch(err => res.send(err));
 });
 
 app.listen(PORT, (() => {
