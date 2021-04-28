@@ -19,29 +19,29 @@ const styles = {
   }
 }
 
-const SideBar = () => {
+const SideBar = ({ close }) => {
 
   return (
     <div style={styles.main} className='sidebar'>
       <ul styles={styles.links}>
         <Link to='/' exact>
-          <a>PopUps</a> 
+          <a onClick={() => close(false)}>PopUps</a> 
         </Link>
         <br/>
         <Link to='/yourprofile'>
-          <a>Your Profile</a> 
+          <a onClick={() => close(false)}>Your Profile</a> 
         </Link>
         <br/>
         <Link to='/yourpopups'>
-          <a>Your PopUps</a> 
+          <a onClick={() => close(false)}>Your PopUps</a> 
         </Link>
         <br/>
         <Link to='/settings'>
-          <a>Settings</a> 
+          <a onClick={() => close(false)}>Settings</a> 
         </Link>
         <br/>
         <Link to='/login'>
-          <a>Logout</a> 
+          <a onClick={() => close(false)}>Logout</a> 
         </Link>
       </ul>
     </div>

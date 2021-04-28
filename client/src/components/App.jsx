@@ -44,56 +44,68 @@ const App = () => {
     <Router>
       <div>
         <div>
-        <h1 onClick={() => setSideBarDisplay(!sideBarDisplay)}>Welcome to Pop^</h1>
-        {
-          !sideBarDisplay ? 
-          ''
-          :
-          <SideBar/>
-        }
-        <Link to='/'>
-          <button >Map view</button>
-        </Link>
-        <Link to='/listview'>
-          <button>List view</button>
-        </Link>
-          <Route 
-          path='/'
-          exact
-          render={(props) => {
-            return <Map
-              loadingElement={<div style={{height: '80%' }}/>}
-              containerElement={<div style={{height: '80%' }}/>}
-              mapElement={<div style={{height: '80%' }}/>}
-              merchData={merchData}
+          <div className='sidebar-view'>
+            <h1 onClick={() => setSideBarDisplay(!sideBarDisplay)}>Welcome to Pop^</h1>
+            {
+              !sideBarDisplay ? 
+              ''
+              :
+              <Route
+                path='/'
+                render={(props) => {
+                  return <SideBar close={setSideBarDisplay}/>
+                }}
               />
-          }}/>
-          <Route
-            path='/listview'
-            render={(props) => {
-              return <ListView
-                merchData={merchData}
+            }
+          </div>
+          <div 
+            onClick={() => setSideBarDisplay(false)}
+            className='main'
+            >
+            <Link to='/'>
+              <button >Map view</button>
+            </Link>
+            <Link to='/listview'>
+              <button>List view</button>
+            </Link>
+              <Route 
+              path='/'
+              exact
+              render={(props) => {
+                return <Map
+                  loadingElement={<div style={{height: '80%' }}/>}
+                  containerElement={<div style={{height: '80%' }}/>}
+                  mapElement={<div style={{height: '80%' }}/>}
+                  merchData={merchData}
+                  />
+              }}/>
+              <Route
+                path='/listview'
+                render={(props) => {
+                  return <ListView
+                    merchData={merchData}
+                  />
+                }}
               />
-            }}
-          />
-          <Route
-            path='/yourprofile'
-            render={(props) => {
-              return <UserProfile/>
-            }}
-          />
-          <Route
-            path='/yourpopups'
-            render={(props) => {
-              return <YourPopUps/>
-            }}
-          />
-          <Route
-            path='/settings'
-            render={(props) => {
-              return <SettingsView/>
-            }}
-          />
+              <Route
+                path='/yourprofile'
+                render={(props) => {
+                  return <UserProfile/>
+                }}
+              />
+              <Route
+                path='/yourpopups'
+                render={(props) => {
+                  return <YourPopUps/>
+                }}
+              />
+              <Route
+                path='/settings'
+                render={(props) => {
+                  return <SettingsView/>
+                }}
+              />
+            </div>
         </div>
       </div>
     </Router>
