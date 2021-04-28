@@ -1,129 +1,40 @@
 import React, { useState } from 'react';
+import mapStyles from './mapstyles'; 
 import { 
   GoogleMap, 
   useLoadScript,
   Marker,
   InfoWindow
 } from '@react-google-maps/api';
-import { mapStyles } from './mapstyles'; 
+import Window from '../MapView/Window.jsx'
+//import map from '../popup/foodmarker.png'
+
 const libraries = ["places"];
+
 const mapContainerStyle = {
   width: '100vw',
   height: '100vh'
 }
+
 const center = {lat: 29.956124, lng: -90.090509};
+
 const options = {
-  styles: [
-    {
-        "featureType": "all",
-        "elementType": "all",
-        "stylers": [
-            {
-                "saturation": "32"
-            },
-            {
-                "lightness": "-3"
-            },
-            {
-                "visibility": "on"
-            },
-            {
-                "weight": "1.18"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.man_made",
-        "elementType": "all",
-        "stylers": [
-            {
-                "saturation": "-70"
-            },
-            {
-                "lightness": "14"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    // {
-    //     "featureType": "road",
-    //     "elementType": "labels",
-    //     "stylers": [
-    //         {
-    //             "visibility": "off"
-    //         }
-    //     ]
-    // },
-    {
-        "featureType": "transit",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-            {
-                "saturation": "100"
-            },
-            {
-                "lightness": "-14"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "off"
-            },
-            {
-                "lightness": "12"
-            }
-        ]
-    }
-  ],
-  disableDefaultUI: true
+  styles: mapStyles,
+  disableDefaultUI: true,
 }
 
 const Map = ({ merchData }) => {
   const [ selectedPopUp, setSelectedPopUp ] = useState(null);
+  const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: 'AIzaSyDwWzORKJaC58xsnhwOmI2YwmUJS1iGMEU',
     libraries
   })
   
+  const mapMarkerClick = React.useCallback(()=>{
+    setSelectedPopUp(merch)
+  } , []);
+
   if (loadError) {
     return "error loading map"
   }
@@ -139,9 +50,17 @@ const Map = ({ merchData }) => {
       zoom={12}
       center={center}
       options={options}
-
+      onClick={(event) =>{
+        setCurrentLocMarker({
+          lat: event.latLng.lat(),
+          lng: event.latLng.lng(),
+          time: new Date()
+        })
+        console.log(currentLocMarker)
+      }}
     >
      {merchData.merchants.map(merch => {
+       console.log(merch);
         if (merch.isOpen) {
           return <Marker
             key={merch.id}
@@ -149,7 +68,13 @@ const Map = ({ merchData }) => {
               lat: merch.lat,
               lng: merch.lon
             }}
-            onClick={()=>{
+            // icon={{
+            //   url: '../popup/foodmarker2.svg',
+            //   scaledSize: new window.google.maps.Size(30, 30),
+            //   origin: new window.google.maps.Point(0, 0),
+            //   anchor: new window.google.maps.Point(15, 0)
+            // }}
+             onClick={()=>{
               setSelectedPopUp(merch)
             }}
           />
@@ -166,10 +91,7 @@ const Map = ({ merchData }) => {
             setSelectedPopUp(null);
           }}
           >
-            <div>
-              <div>{selectedPopUp.name}</div>
-              <div>{selectedPopUp.website}</div>
-            </div>
+           <Window merchant={selectedPopUp}/>
           </InfoWindow>
         )
       }

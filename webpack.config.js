@@ -9,11 +9,12 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path:DIST_DIR,
+    publicPath = '/'
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|css)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -23,5 +24,14 @@ module.exports = {
         }
       },
     ]
+  },
+  devServer: {
+    contentBase: 'app/ui/www',
+    devtool: 'eval',
+    hot: true,
+    inline: true,
+    port: 8080,
+    outputPath: buildPath,
+    historyApiFallback: true
   }
 };
