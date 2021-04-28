@@ -40,8 +40,8 @@ const SideBar = ({ close }) => {
           <a onClick={() => close(false)}>Settings</a> 
         </Link>
         <br/>
-        <Link to='/login'>
-          <a onClick={() => close(false)}>Logout</a> 
+        <Link>
+          <a href="/logout" onClick={() => close(false)}>Logout</a> 
         </Link>
       </ul>
     </div>
