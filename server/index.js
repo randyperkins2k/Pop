@@ -224,7 +224,99 @@ app.delete('/deleteallreviews', (req, res) => {
     .catch(err => res.send(err));
 });
 
+/**
+ * Subs
+ */
 
+//get all subs
+app.get('/subs', (req, res) => {
+  Subs.findAll({
+    where: {}
+  })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+//add new sub
+app.post('/addsub/:user/:merchant', (req, res) => {
+  const { user, merchant } = req.params;
+  Subs.findAll({
+    where: {user: user, merchant: merchant}
+  })
+    .then(results => {
+      if (!results.length) {
+        Subs.create({ user, merchant })
+          .then(Subs.findAll({
+            where: {}
+          })).then(data => res.send(data))
+      } else {
+        res.send(`${user} is already following ${merchant}`);
+      }
+    })
+    .catch(err => res.send(err));
+});
+//delete sub
+app.delete('/deletesub/:id', (req, res) => {
+  const { id } = req.params;
+  Subs.destroy({
+    where: {id: id}
+  })
+    .then(res.send(`sub ${id} deleted`));
+});
+//delete all subs
+app.delete('/deleteallsubs', (req, res) => {
+  Subs.destroy({
+    where: {}
+  })
+    .then(res.send('no more subs'))
+    .catch(err => res.send(err));
+});
+
+/**
+ * Admins
+ */
+
+//get all subs
+app.get('/admins', (req, res) => {
+  Admins.findAll({
+    where: {}
+  })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+//add new sub
+app.post('/addadmin/:user/:merchant', (req, res) => {
+  const { user, merchant } = req.params;
+  Admins.findAll({
+    where: {user: user, merchant: merchant}
+  })
+    .then(results => {
+      if (!results.length) {
+        Admins.create({ user, merchant })
+          .then(Admins.findAll({
+            where: {}
+          })).then(data => res.send(data))
+      } else {
+        res.send(`${user} is already administrating ${merchant}`);
+      }
+    })
+    .catch(err => res.send(err));
+});
+//delete sub
+app.delete('/deleteadmin/:id', (req, res) => {
+  const { id } = req.params;
+  Admins.destroy({
+    where: {id: id}
+  })
+    .then(res.send(`admin ${id} deleted`));
+});
+//delete all subs
+app.delete('/deletealladmins', (req, res) => {
+  Admins.destroy({
+    where: {}
+  })
+    .then(res.send('no more admins'))
+    .catch(err => res.send(err));
+});
 
 app.listen(PORT, (() => {
   console.log(`Server listening at http://127.0.0.1:${PORT}`);

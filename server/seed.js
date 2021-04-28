@@ -55,6 +55,32 @@ const seedMysql = () => {
       ].map((rev) => Reviews.create(rev))
     )
   )
+  .then(() => Subs.sync({ force: true }))
+    .then(() =>
+      console.log(
+        "\nDatabase (MySQL): 'Subs' table succesfully created!"
+      )
+    )
+    .then(() =>
+      Promise.all([
+        {user: 2, merchant: 1},
+        {user: 1, merchant: 2},
+      ].map((sub) => Subs.create(sub))
+    )
+  )
+  .then(() => Admins.sync({ force: true }))
+    .then(() =>
+      console.log(
+        "\nDatabase (MySQL): 'Admins' table succesfully created!"
+      )
+    )
+    .then(() =>
+      Promise.all([
+        {user: 1, merchant: 1},
+        {user: 2, merchant: 2},
+      ].map((admin) => Admins.create(admin))
+    )
+  )
   .then((arr) =>
     console.log(
       '\x1b[32m',
