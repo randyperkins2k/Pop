@@ -10,7 +10,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path:DIST_DIR,
-    publicPath = '/'
+    publicPath : '/'
   },
   module: {
     rules: [
@@ -27,12 +27,6 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: 'app/ui/www',
-    devtool: 'eval',
-    hot: true,
-    inline: true,
-    port: 8080,
-    outputPath: buildPath,
     historyApiFallback: true
   },
   plugins: [
