@@ -120,7 +120,7 @@ const options = {
 const Map = ({ merchData }) => {
   const [ selectedPopUp, setSelectedPopUp ] = useState(null);
   const {isLoaded, loadError} = useLoadScript({
-    googleMapsApiKey: 'AIzaSyDwWzORKJaC58xsnhwOmI2YwmUJS1iGMEU',
+    googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries
   })
   
