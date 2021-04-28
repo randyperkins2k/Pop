@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 import CreatePop from './CreatePop.jsx';
@@ -7,34 +7,26 @@ import MyPops from './MyPops.jsx';
 import axios from 'axios';
 
 const App = () => {
-    const [gotPops, setGotPops] = useState(false);
-    const [gotLogged, setGotLogged] = useState(false);
     const [username, setUsername] = useState('');
     const [isLogged, setIsLogged] = useState(false);
     const [myPops, setMyPops] = useState([]);
     //grab from database
     const getPops = () => {
-      if (!gotPops) {
-        setGotPops(true);
         axios.get('/merchants')
           .then(response => setMyPops(response.data))
-      }
     }
-    getPops();
     const logged = () => {
-      if (!gotLogged) {
-        setGotLogged(true);
         axios.get('/testing')
-          .then(results => {
-            console.log(results.data);
-            if (results.data.displayName) {
-              setIsLogged(true);
-              setUsername(data.displayName);
-            }
-          });
-      }
+        .then(results => {
+          console.log(results.data);
+          if (results.data.displayName) {
+            setIsLogged(true);
+            setUsername(data.displayName);
+          }
+        });
     }
-    logged();
+    useEffect(() => logged(), []);
+    useEffect(() => getPops(), []);
     return (
       <div>
         {isLogged === true
