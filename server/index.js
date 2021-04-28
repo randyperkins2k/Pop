@@ -78,10 +78,19 @@ app.get('/failed', (req, res) => {
 //add new merchant
 app.post('/addmerchant/:name', (req, res) => {
   const { name } = req.params;
-  Merchants.create({ name })
-    .then(Merchants.findAll({
-      where: {}
-    })).then(data => res.send(data))
+  Merchants.findAll({
+    where: {name: name}
+  })
+    .then(results => {
+      if (!results.length) {
+        Merchants.create({ name })
+          .then(Merchants.findAll({
+            where: {}
+          })).then(data => res.send(data))
+      } else {
+        res.send(`${name} is already a pop-up`);
+      }
+    })
     .catch(err => res.send(err));
 });
 //delete merchant
@@ -128,14 +137,52 @@ app.delete('/deleteuser/:id', (req, res) => {
   Users.destroy({
     where: {id: id}
   })
-    .then(res.send(`users ${id} deleted`));
+    .then(res.send(`user ${id} deleted`));
 });
-//delete all merchants
+//delete all users
 app.delete('/deleteallusers', (req, res) => {
   Users.destroy({
     where: {}
   })
     .then(res.send('no more users'))
+    .catch(err => res.send(err));
+});
+
+/**
+ * Products
+ */
+
+//get all products
+app.get('/products', (req, res) => {
+  Products.findAll({
+    where: {}
+  })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+//add new product
+app.post('/addproduct/:name', (req, res) => {
+  const { name } = req.params;
+  Products.create({ name })
+    .then(Products.findAll({
+      where: {}
+    })).then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+//delete product
+app.delete('/deleteproduct/:id', (req, res) => {
+  const { id } = req.params;
+  Products.destroy({
+    where: {id: id}
+  })
+    .then(res.send(`product ${id} deleted`));
+});
+//delete all products
+app.delete('/deleteallproducts', (req, res) => {
+  Products.destroy({
+    where: {}
+  })
+    .then(res.send('no more products'))
     .catch(err => res.send(err));
 });
 

@@ -63,7 +63,7 @@ const Products = sequelize.define('Products', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  merchant_Id: DataTypes.INTEGER, //reference to Merchants.id
+  merchant: DataTypes.INTEGER, //reference to Merchants.id
   price: DataTypes.DECIMAL(7, 5),
   status: DataTypes.STRING,
 });

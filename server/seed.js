@@ -42,6 +42,19 @@ const seedMysql = () => {
       ].map((user) => Users.create(user))
     )
   )
+  .then(() => Products.sync({ force: true }))
+    .then(() =>
+      console.log(
+        "\nDatabase (MySQL): 'Products' table succesfully created!"
+      )
+    )
+    .then(() =>
+      Promise.all([
+        {name:'chicken taco', merchant: 1},
+        {name: 'Mona Lisa', merchant: 2},
+      ].map((prod) => Products.create(prod))
+    )
+  )
   .then((arr) =>
     console.log(
       '\x1b[32m',
