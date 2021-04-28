@@ -52,7 +52,6 @@ const App = () => {
         mapElement={<div style={{height: '80%' }}/>}
         merchData={merchData}
         />
-        </div>
       </div>
     )
 };
