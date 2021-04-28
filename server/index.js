@@ -62,24 +62,39 @@ app.get('/failed', (req, res) => {
 /**
  * end authentication routes
  */
-
-//add catch statements
-app.post('/addmerchant/:name/:lat/:lon', (req, res) => {
-  const { name, lat, lon } = req.params;
-  Merchants.create({name, lat, lon})
-    .then(Merchants.findAll({
-      where: {}
-    })).then(data => res.send(data))
-});
-
-//add catch statements
-app.get('/merchants', (req, res) => {
+//get all merchants
+ app.get('/merchants', (req, res) => {
   Merchants.findAll({
     where: {}
   })
-    .then(data => res.send(data));
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
 });
-
+//add new merchant
+app.post('/addmerchant/:name', (req, res) => {
+  const { name } = req.params;
+  Merchants.create({ name })
+    .then(Merchants.findAll({
+      where: {}
+    })).then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+//delete all merchants
+app.delete('/deleteallmerchants', (req, res) => {
+  Merchants.destroy({
+    where: {}
+  })
+    .then(res.send('no more merchants'))
+    .catch(err => res.send(err));
+});
+//delete merchant
+app.delete('/deletemerchant/:id', (req, res) => {
+  const { id } = req.params;
+  Merchants.destroy({
+    where: {id: id}
+  })
+    .then(res.send(`merchant ${id} deleted`));
+});
 
 app.listen(PORT, (() => {
   console.log(`Server listening at http://127.0.0.1:${PORT}`);
