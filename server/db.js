@@ -31,7 +31,7 @@ const Merchants = sequelize.define('Merchants', {
   isOpen: DataTypes.BOOLEAN,
   lastOpen: DataTypes.DATE,
 });
-
+//user schema
 module.exports = {
   db: sequelize,
   Merchants,
