@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import EditPopupProfile from './EditPopUp/EditPopupProfile.jsx';
 import { Link } from 'react-router-dom';
 
-const MerchList = ({ merchant, selectMerchant }) => {
+const YourPopupView = ({ merchant, selectMerch }) => {
 
   return (
     <div className="merchant-listing">
@@ -10,12 +11,14 @@ const MerchList = ({ merchant, selectMerchant }) => {
         <span></span>
         <h2>{merchant.name}</h2>
         <h2></h2>
-        <Link to='/profile'>
-          <button onClick={() => selectMerchant(merchant)}>profile</button>
+        <Link
+          to={`/edit`}
+        >
+          <button onClick={() => selectMerch(merchant)}>Edit</button>
         </Link>
       </li>
     </div>
   )
 };
 
-export default MerchList;
+export default YourPopupView;

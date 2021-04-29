@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import MerchList from './MerchList.jsx';
 
-const ListView= ({ merchData }) => {
+const ListView= ({ merchData, selectMerchant }) => {
 
   return (
     <div>
@@ -11,10 +11,10 @@ const ListView= ({ merchData }) => {
         {
           merchData.merchants.map(merch => {
             if (merch.isOpen) {
-              return <li>
-                <h3>{merch.name}</h3>
-                <h3>{merch.website}</h3>
-              </li>
+              return <MerchList 
+              key={merch.id} 
+              merchant={merch}
+              selectMerchant={selectMerchant}/>
             }
           })
         }

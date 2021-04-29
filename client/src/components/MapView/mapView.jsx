@@ -23,7 +23,7 @@ const options = {
   disableDefaultUI: true,
 }
 
-const Map = ({ merchData }) => {
+const Map = ({ merchData, selectMerchant }) => {
   const [ selectedPopUp, setSelectedPopUp ] = useState(null);
   const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
   const {isLoaded, loadError} = useLoadScript({
@@ -60,7 +60,6 @@ const Map = ({ merchData }) => {
       }}
     >
      {merchData.merchants.map(merch => {
-       console.log(merch);
         if (merch.isOpen) {
           return <Marker
             key={merch.id}
@@ -91,7 +90,10 @@ const Map = ({ merchData }) => {
             setSelectedPopUp(null);
           }}
           >
-           <Window merchant={selectedPopUp}/>
+           <Window 
+              merchant={selectedPopUp}
+              selectMerchant={selectMerchant}
+           />
           </InfoWindow>
         )
       }
