@@ -57,7 +57,7 @@ color: #ffd1dc;
 margin-bottom: 4.5rem;
 `
 
-const LogginOut = styled.a`
+const LogOutBtn = styled.a`
 font-family: 'Londrina Outline', cursive;
 color: black;
 background-color: white;
@@ -133,7 +133,7 @@ const Home = ({ myPops, setMyPops, user, setUser, sideBarDisplay, setSideBarDisp
   return(
     <Well>
     <div>
-      <a href="/logout"> Logout </a>
+      <LogOutBtn href="/logout"> Logout </LogOutBtn>
 
         <div className='sidebar-view'>
             <Welcome onClick={() => setSideBarDisplay(!sideBarDisplay)}>Pop^</Welcome>
