@@ -17,6 +17,7 @@ import EditPopupProfile from './YourPopups/EditPopUp/EditPopupProfile.jsx';
 import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
 import * as merchData from './openMerch.json';
 import YourPopUps from './YourPopups/YourPopUps.jsx';
+import ToggleSwitch from './ToggleSwitch.jsx';
 import {
   BrowserRouter as Router,
   Route,
@@ -67,6 +68,7 @@ const App = () => {
         }
         <div className='sidebar-view'>
             <h1 onClick={() => setSideBarDisplay(!sideBarDisplay)}>Welcome to Pop^</h1>
+            <ToggleSwitch />
             {
               !sideBarDisplay ?
               ''

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import EditProfile from './EditProfile.jsx'
 
+
 const UserProfile = ({ user }) => {
   const [editWindowOpen, setEditWindowOpen] = useState(false);
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import YourPopupView from './YourPopupView.jsx';
 
+
 const YourPopUps = ({ merchData, selectMerch }) => {
   const [ yourPopups, setYourPopups ] = useState([]);
   const [ adminId, setAdminId] = useState(231);
@@ -22,8 +23,8 @@ const YourPopUps = ({ merchData, selectMerch }) => {
             merchant={merch}
             selectMerch={selectMerch}
             />
-        })
-      }
+          })
+        }
     </div>
   )
 };
