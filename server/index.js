@@ -3,6 +3,7 @@ const path = require('path');
 const axios = require('axios');
 
 const { Merchants } = require('./db.js');
+const { Subscriptions } = require('./db.js');
 
 const app = express();
 const PORT = 8080;
@@ -32,7 +33,6 @@ app.get('/merchants', (req, res) => {
   })
     .then(data => res.send(data));
 });
-
 
 app.listen(PORT, (() => {
   console.log(`Server listening at http://127.0.0.1:${PORT}`);

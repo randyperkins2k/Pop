@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 
 import CreatePop from './CreatePop.jsx';
 import MyPops from './MyPops.jsx';
-import { 
-  GoogleMap, 
+import {
+  GoogleMap,
   useLoadScript,
   Marker,
   InfoWindow
 } from '@react-google-maps/api';
 import Map from './mapView.jsx';
 import * as merchData from './openMerch.json';
+//import ToggleSwitch from './ToggleSwitch.jsx';
 // const MapView = withScriptjs(withGoogleMap(Map));
 
 
@@ -23,6 +24,7 @@ const App = () => {
         .then(response => setMyPops(response.data))
     }
     getPops();
+
     return (
       <div>
         <div>

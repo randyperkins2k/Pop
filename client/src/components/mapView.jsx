@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { 
-  GoogleMap, 
+import {
+  GoogleMap,
   useLoadScript,
   Marker,
   InfoWindow
 } from '@react-google-maps/api';
-import { mapStyles } from './mapstyles'; 
+import { mapStyles } from './mapstyles';
 const libraries = ["places"];
 const mapContainerStyle = {
   width: '100vw',
@@ -123,18 +123,18 @@ const Map = ({ merchData }) => {
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries
   })
-  
+
   if (loadError) {
     return "error loading map"
   }
-  
+
   if (!isLoaded) {
     return "loading maps"
   }
 
 
   return (
-    <GoogleMap 
+    <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={12}
       center={center}
