@@ -27,7 +27,7 @@ const Map = ({ merchData, selectMerchant }) => {
   const [ selectedPopUp, setSelectedPopUp ] = useState(null);
   const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
   const {isLoaded, loadError} = useLoadScript({
-    googleMapsApiKey: 'AIzaSyDwWzORKJaC58xsnhwOmI2YwmUJS1iGMEU',
+    googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries
   })
   
