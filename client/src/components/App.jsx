@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import CreatePop from './CreatePop.jsx';
 import MyPops from './MyPops.jsx';
-import { 
-  GoogleMap, 
+import {
+  GoogleMap,
   useLoadScript,
   Marker,
   InfoWindow
@@ -57,7 +57,7 @@ const App = () => {
 
   useEffect(() => logged(), []);
   useState(() => getPops(), []);
-  
+
   return (
     <Router>
       <div>
@@ -68,7 +68,7 @@ const App = () => {
         <div className='sidebar-view'>
             <h1 onClick={() => setSideBarDisplay(!sideBarDisplay)}>Welcome to Pop^</h1>
             {
-              !sideBarDisplay ? 
+              !sideBarDisplay ?
               ''
               :
               <Route
@@ -79,7 +79,7 @@ const App = () => {
               />
             }
           </div>
-          <div 
+          <div
             onClick={() => setSideBarDisplay(false)}
             className='main'
             >
@@ -90,7 +90,7 @@ const App = () => {
               <button>List view</button>
             </Link>
               <Switch>
-                <Route 
+                <Route
                 path='/'
                 exact
                 render={(props) => {
@@ -120,7 +120,7 @@ const App = () => {
                 <Route
                   path='/yourpopups'
                   render={(props) => {
-                    return <YourPopUps 
+                    return <YourPopUps
                       merchData={merchData}
                       selectMerch={setSelectedMerchant}
                       />
