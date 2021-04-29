@@ -51,7 +51,7 @@ const Merchants = sequelize.define('Merchants', {
   isOpen: DataTypes.BOOLEAN,
   lastOpen: DataTypes.DATE,
 });
-
+//stupid stupid comment
 const Products = sequelize.define('Products', {
   id: {
     type: DataTypes.INTEGER,
