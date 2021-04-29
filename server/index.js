@@ -63,6 +63,13 @@ app.get('/failed', (req, res) => {
  * end authentication routes
  */
 
+// app.get('/login', (req, res) => {
+//   res.send('<a href="/google"> Login </a>');
+// })
+
+
+
+
 /**
  * Merchants
  */

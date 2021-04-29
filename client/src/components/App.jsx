@@ -18,12 +18,14 @@ import EditPopupProfile from './YourPopups/EditPopUp/EditPopupProfile.jsx';
 import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
 import * as merchData from './openMerch.json';
 import YourPopUps from './YourPopups/YourPopUps.jsx';
-//import ToggleSwitch from './ToggleSwitch.jsx';
+import Login from './Login.jsx'
 import {
+  HashRouter as Well,
   BrowserRouter as Router,
   Route,
   Switch,
-  Link
+  Link,
+  Redirect,
 } from 'react-router-dom';
 import styled from 'styled-components'
 
@@ -73,11 +75,12 @@ const App = () => {
     axios.get('/merchants')
       .then(response => setMyPops(response.data))
   }
-
+  { myPops, setMyPops, user, setUser, sideBarDisplay, setSideBarDisplay, isLogged, setIsLogged, selectedMerchant, setSelectedMerchant }
+  //check log in
   const logged = () => {
     axios.get('/testing')
     .then(results => {
-      //console.log(results.data);
+      console.log(results.data);
       if (results.data.displayName) {
         setIsLogged(true);
         setUser({
@@ -85,6 +88,10 @@ const App = () => {
           email: results.data.email,
           picture: results.data.picture
         });
+      }
+      else {
+        setIsLogged(false);
+        setUser({});
       }
     });
 }
@@ -94,11 +101,40 @@ const App = () => {
 
   return (
     <Router>
-      <div>
-        {isLogged === true
-          ? (<LogginOut href="/logout"> Logout </LogginOut>)
-          : (<LogginOut href="/google"> Login </LogginOut>)
-        }
+      {isLogged === true
+        ? (<Redirect to="/" />)
+        : (<Redirect to="/login" />)
+      }
+      <Switch>
+      <Route
+        exact path="/"
+        render={props => {
+          return <Home
+            myPops={myPops}
+            setMyProps={setMyPops}
+            user={user}
+            setUser={setUser}
+            sideBarDisplay={sideBarDisplay}
+            setSideBarDisplay={setSideBarDisplay}
+            isLogged={isLogged}
+            setIsLogged={setIsLogged}
+            selectedMerchant={selectedMerchant}
+            setSelectedMerchant={setSelectedMerchant}
+           />}}/>
+      <Route
+        path="/login"
+        render={props => <Login />}/>
+      </Switch>
+      </Router>
+  )
+};
+
+const Home = ({ myPops, setMyPops, user, setUser, sideBarDisplay, setSideBarDisplay, isLogged, setIsLogged, selectedMerchant, setSelectedMerchant }) => {
+  return(
+    <Well>
+    <div>
+      <a href="/logout"> Logout </a>
+
         <div className='sidebar-view'>
             <Welcome onClick={() => setSideBarDisplay(!sideBarDisplay)}>Pop^</Welcome>
             {/* <ToggleSwitch /> */}
@@ -178,8 +214,8 @@ const App = () => {
               </Switch>
             </div>
       </div>
-    </Router>
+      </Well>
   )
-};
+}
 
 export default App;
