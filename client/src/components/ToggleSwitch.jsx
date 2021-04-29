@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import axios from 'axios';
+
 
 const InputWrapper = styled.label`
 	position: relative;
@@ -56,17 +58,43 @@ const Slider = styled.span`
 		width: 28px;
 	}
 `
-//
+// if toggled change follow to true
+
+
 const ToggleSwitch = () => {
 	const [toggled, setToggled] = useState(false);
+	const [subs, setSubs] = useState([]);
+	console.log('subs', subs)
+
+
+	const getSubs = async () => {
+		try {
+			const res = await axios.get('/subs')
+			const { data } = res;
+			console.log('subs data in call', data)
+			setSubs(data)
+		} catch (e) {
+			console.log('error in catch', e)
+		}
+	}
+//
+// logic for if the button is toggled on or off
+	const createSub = async () => {
+		const res = axios.post('/subs', {
+			toggled: true
+		})
+	}
+
+
 	return (
 		<InputWrapper>
 			<Input
 			type="checkbox"
+			onClick={() => getSubs()}
 			onChange={(event) => setToggled(event.target.checked)}
 			/>
 			<Slider />
-			<p style={{fontFamily: 'helvetica'}}>{toggled ? 'unfollow' : 'follow'}</p>
+			<p style={{fontFamily: 'Ubuntu', fontSize: '11px', marginTop: '3px'}}>{toggled ? 'unfollow' : 'follow'}</p>
 		</InputWrapper>
 
 	)
