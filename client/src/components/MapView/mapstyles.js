@@ -1,4 +1,4 @@
-const mapStyles = [
+export default [
   {
       "featureType": "all",
       "elementType": "all",
@@ -56,15 +56,15 @@ const mapStyles = [
           }
       ]
   },
-  {
-      "featureType": "road",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
-  },
+  // {
+  //     "featureType": "road",
+  //     "elementType": "labels",
+  //     "stylers": [
+  //         {
+  //             "visibility": "off"
+  //         }
+  //     ]
+  // },
   {
       "featureType": "transit",
       "elementType": "labels",
@@ -99,5 +99,3 @@ const mapStyles = [
       ]
   }
 ]
-
-export default mapStyles;
