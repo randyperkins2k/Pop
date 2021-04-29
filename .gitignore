@@ -1,5 +1,9 @@
 node_modules
 node_modules
 .env
+<<<<<<< HEAD
+bundle.js
+=======
 newfile.js
 bundle.js
+>>>>>>> 7e8c287ddbeb5fa1e44cc47511ac03b6a6ea7fad

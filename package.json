@@ -23,8 +23,9 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-google-maps": "^9.4.5",
-    "react-router-dom": "^5.2.0",
-    "sequelize": "^6.6.2"
+    "sequelize": "^6.6.2",
+    "styled-components": "^5.2.3",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.16",
