@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import CreatePop from './CreatePop.jsx';
 import MyPops from './MyPops.jsx';
@@ -17,16 +18,48 @@ import EditPopupProfile from './YourPopups/EditPopUp/EditPopupProfile.jsx';
 import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
 import * as merchData from './openMerch.json';
 import YourPopUps from './YourPopups/YourPopUps.jsx';
-import ToggleSwitch from './ToggleSwitch.jsx';
+//import ToggleSwitch from './ToggleSwitch.jsx';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Link
 } from 'react-router-dom';
+import styled from 'styled-components'
+
 // const MapView = withScriptjs(withGoogleMap(Map));
 
+const ListViewButton = styled.button`
+  margin-left: -1px;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgray;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
 
+`
+const MapViewButton = styled.button`
+  margin-left: 98px;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgray;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+`
+const Welcome = styled.h1`
+font-family: 'Londrina Solid', cursive;
+text-align: center;
+color: #ffd1dc;
+margin-bottom: 4.5rem;
+`
+
+const LogginOut = styled.a`
+font-family: 'Londrina Outline', cursive;
+color: black;
+background-color: white;
+`
 import axios from 'axios';
 
 const App = () => {
@@ -63,12 +96,12 @@ const App = () => {
     <Router>
       <div>
         {isLogged === true
-          ? (<a href="/logout"> Logout </a>)
-          : (<a href="/google"> Login </a>)
+          ? (<LogginOut href="/logout"> Logout </LogginOut>)
+          : (<LogginOut href="/google"> Login </LogginOut>)
         }
         <div className='sidebar-view'>
-            <h1 onClick={() => setSideBarDisplay(!sideBarDisplay)}>Welcome to Pop^</h1>
-            <ToggleSwitch />
+            <Welcome onClick={() => setSideBarDisplay(!sideBarDisplay)}>Pop^</Welcome>
+            {/* <ToggleSwitch /> */}
             {
               !sideBarDisplay ?
               ''
@@ -86,10 +119,10 @@ const App = () => {
             className='main'
             >
             <Link to='/'>
-              <button >Map view</button>
+              <MapViewButton >Map view</MapViewButton>
             </Link>
             <Link to='/listview'>
-              <button>List view</button>
+              <ListViewButton>List view</ListViewButton>
             </Link>
               <Switch>
                 <Route

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import axios from 'axios';
 
@@ -64,21 +64,21 @@ const Slider = styled.span`
 const ToggleSwitch = () => {
 	const [toggled, setToggled] = useState(false);
 	const [subs, setSubs] = useState([]);
-	console.log('this is subssss', subs)
+	console.log('subs', subs)
 
 
 	const getSubs = async () => {
 		try {
 			const res = await axios.get('/subs')
 			const { data } = res;
-			console.log('ressssssssdattttaaa', data)
+			console.log('subs data in call', data)
 			setSubs(data)
 		} catch (e) {
-			console.log('errrrrreeeeerrrr', e)
+			console.log('error in catch', e)
 		}
 	}
-
-// not logic for if the button is toggled on or off
+//
+// logic for if the button is toggled on or off
 	const createSub = async () => {
 		const res = axios.post('/subs', {
 			toggled: true
@@ -94,7 +94,7 @@ const ToggleSwitch = () => {
 			onChange={(event) => setToggled(event.target.checked)}
 			/>
 			<Slider />
-			<p style={{fontFamily: 'Ubuntu', fontSize: '14px', marginTop: '3px'}}>{toggled ? 'unfollow' : 'follow'}</p>
+			<p style={{fontFamily: 'Ubuntu', fontSize: '11px', marginTop: '3px'}}>{toggled ? 'unfollow' : 'follow'}</p>
 		</InputWrapper>
 
 	)

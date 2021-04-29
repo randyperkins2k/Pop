@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const MerchantInfo = styled.button`
+  margin-left: 1px;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgray;
+  border-radius: 6px;
+`
 
 const MerchList = ({ merchant, selectMerchant }) => {
 
@@ -11,7 +21,7 @@ const MerchList = ({ merchant, selectMerchant }) => {
         <h2>{merchant.name}</h2>
         <h2></h2>
         <Link to='/profile'>
-          <button onClick={() => selectMerchant(merchant)}>profile</button>
+          <MerchantInfo onClick={() => selectMerchant(merchant)}>Merchant Info</MerchantInfo>
         </Link>
       </li>
     </div>
