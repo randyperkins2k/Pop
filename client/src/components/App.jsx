@@ -13,6 +13,8 @@ import UserProfile from './UserProfileView/UserProfile.jsx';
 import SettingsView from './SettingsView/SettingsView.jsx';
 import SideBar from './SideBarView/SideBar.jsx';
 import ListView from './ListView/ListView.jsx'
+import EditPopupProfile from './YourPopups/EditPopUp/EditPopupProfile.jsx';
+import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
 import * as merchData from './openMerch.json';
 import YourPopUps from './YourPopups/YourPopUps.jsx';
 import {
@@ -28,9 +30,10 @@ import axios from 'axios';
 
 const App = () => {
   const [myPops, setMyPops] = useState([]);
-  const [username, setUsername] = useState('');
+  const [user, setUser] = useState();
   const [sideBarDisplay, setSideBarDisplay] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
+  const [ selectedMerchant, setSelectedMerchant ] = useState();
   //grab from database
   const getPops = () => {
     axios.get('/merchants')
@@ -40,16 +43,20 @@ const App = () => {
   const logged = () => {
     axios.get('/testing')
     .then(results => {
-      console.log(results.data);
+      //console.log(results.data);
       if (results.data.displayName) {
         setIsLogged(true);
-        setUsername(data.displayName);
+        setUser({
+          name: results.data.displayName,
+          email: results.data.email,
+          picture: results.data.picture
+        });
       }
     });
 }
 
   useEffect(() => logged(), []);
-  useState(() => getPops());
+  useState(() => getPops(), []);
 
   return (
     <Router>
@@ -82,43 +89,58 @@ const App = () => {
             <Link to='/listview'>
               <button>List view</button>
             </Link>
-              <Route
-              path='/'
-              exact
-              render={(props) => {
-                return <Map
-                  loadingElement={<div style={{height: '80%' }}/>}
-                  containerElement={<div style={{height: '80%' }}/>}
-                  mapElement={<div style={{height: '80%' }}/>}
-                  merchData={merchData}
-                  />
-              }}/>
-              <Route
-                path='/listview'
+              <Switch>
+                <Route
+                path='/'
+                exact
                 render={(props) => {
-                  return <ListView
+                  return <Map
+                    loadingElement={<div style={{height: '100%' }}/>}
+                    containerElement={<div style={{height: '100%' }}/>}
+                    mapElement={<div style={{height: '100%' }}/>}
                     merchData={merchData}
-                  />
-                }}
-              />
-              <Route
-                path='/yourprofile'
-                render={(props) => {
-                  return <UserProfile/>
-                }}
-              />
-              <Route
-                path='/yourpopups'
-                render={(props) => {
-                  return <YourPopUps/>
-                }}
-              />
-              <Route
-                path='/settings'
-                render={(props) => {
-                  return <SettingsView/>
-                }}
-              />
+                    selectMerchant={setSelectedMerchant}
+                    />
+                }}/>
+                <Route
+                  path='/listview'
+                  render={(props) => {
+                    return <ListView
+                      merchData={merchData}
+                      selectMerchant={setSelectedMerchant}
+                    />
+                  }}
+                />
+                <Route
+                  path='/yourprofile'
+                  render={(props) => {
+                    return <UserProfile user={user}/>
+                  }}
+                />
+                <Route
+                  path='/yourpopups'
+                  render={(props) => {
+                    return <YourPopUps
+                      merchData={merchData}
+                      selectMerch={setSelectedMerchant}
+                      />
+                  }}
+                />
+                <Route
+                  path='/settings'
+                  render={(props) => {
+                    return <SettingsView/>
+                  }}
+                />
+                <Route
+                  path='/edit'
+                  render={(props) => <EditPopupProfile merchant={selectedMerchant}/>}
+                />
+                <Route
+                  path="/profile"
+                  render={(props => <MerchantProfile merchant={selectedMerchant}/>)}
+                />
+              </Switch>
             </div>
       </div>
     </Router>

@@ -5,17 +5,17 @@ const styles = {
   main:{'margin': 0,
     'padding': 0,
     'width': '200px',
-    'background-color': '#f1f1f1',
+    'backgroundColor': '#f1f1f1',
     'position': 'absolute',
     'height': '100%',
     'overflow': 'auto',
-    'z-index': 99
+    'zIndex': 99
   },
   links:{
     'display': 'block',
     'color': 'black',
     'padding': '16px',
-    'text-decoration': 'none'
+    'textDecoration': 'none'
   }
 }
 
@@ -24,7 +24,7 @@ const SideBar = ({ close }) => {
   return (
     <div style={styles.main} className='sidebar'>
       <ul styles={styles.links}>
-        <Link to='/' exact>
+        <Link to='/' exact='true'>
           <a onClick={() => close(false)}>PopUps</a> 
         </Link>
         <br/>
@@ -40,9 +40,7 @@ const SideBar = ({ close }) => {
           <a onClick={() => close(false)}>Settings</a> 
         </Link>
         <br/>
-        <Link>
           <a href="/logout" onClick={() => close(false)}>Logout</a> 
-        </Link>
       </ul>
     </div>
   )
