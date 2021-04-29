@@ -39,7 +39,7 @@ const App = () => {
     axios.get('/merchants')
       .then(response => setMyPops(response.data))
   }
-
+  //check log in
   const logged = () => {
     axios.get('/testing')
     .then(results => {
