@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
+
 const sequelize = new Sequelize({
   host: 'localhost',
   dialect: 'mysql',
@@ -39,17 +40,15 @@ const Merchants = sequelize.define('Merchants', {
     allowNull: false
   },
   picture: DataTypes.STRING,
-  cloudinary_id: DataTypes.STRING,
-  about: DataTypes.STRING,
-  lat: DataTypes.DECIMAL(8, 4),
-  lon: DataTypes.DECIMAL(8, 4),
-  admin: DataTypes.INTEGER, //reference to Admins.id
+  info: DataTypes.STRING,
+  lat: DataTypes.DECIMAL(20, 15),
+  lon: DataTypes.DECIMAL(20, 15),
   category: DataTypes.STRING,
   website: DataTypes.STRING,
   phone: DataTypes.STRING,
   rating: DataTypes.INTEGER,
   isOpen: DataTypes.BOOLEAN,
-  lastOpen: DataTypes.DATE,
+  lastOpen: DataTypes.STRING,
 });
 //stupid stupid comment
 const Products = sequelize.define('Products', {

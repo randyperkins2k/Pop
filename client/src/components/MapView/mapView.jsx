@@ -7,6 +7,7 @@ import {
   InfoWindow
 } from '@react-google-maps/api';
 import Window from '../MapView/Window.jsx'
+
 //import map from '../popup/foodmarker.png'
 
 const libraries = ["places"];

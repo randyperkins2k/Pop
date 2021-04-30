@@ -1,6 +1,8 @@
 const mysql = require('mysql2/promise');
 
 const { Merchants, Users, Products, Reviews, Subs, Admins,  db } = require('./db.js');
+const dummyData = require('./openMerch.json').merchants;
+//const data = JSON.parse(dummyData);
 
 db.options.logging = false;
 console.log('getting started...');
@@ -23,10 +25,7 @@ const seedMysql = () => {
       )
     )
     .then(() =>
-      Promise.all([
-        {name:'Tight Taco Truck'},
-        {name: 'Lit Art Stand'},
-      ].map((pop) => Merchants.create(pop))
+      Promise.all(dummyData.map((pop) => Merchants.create(pop))
     )
   )
   .then(() => Users.sync({ force: true }))
@@ -92,3 +91,4 @@ const seedMysql = () => {
 };
 
 seedMysql();
+//console.log(dummyData);

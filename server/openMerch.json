@@ -1,0 +1,124 @@
+{
+  "merchants": [
+    {
+      "name": "Deez Nuts Jewelry",
+      "cloudinary_id": "",
+      "lat": 29.959252736079804,
+      "lon": -90.10501046009264,
+      "info": "Hi, me and my husband have been making and selling jewelry made from nuts",
+      "category": "arts",
+      "website": "deeznuts.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "name": "Philly cheesesteaks",
+      "cloudinary_id": "",
+      "lat": 29.961443003163353,
+      "lon": -90.10495961189591,
+      "info": "we sell cheese steaks fresh",
+      "category": "foodpopup",
+      "website": "phillysteaks.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "name": "Tacos tacos tacos",
+      "cloudinary_id": "",
+      "lat": 29.95671123236816,
+      "lon": -90.06596441200743,
+      "info": "Get your tacos, fresh tacos",
+      "category": "foodtruck",
+      "website": "gettacos.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "name": "gumbostop",
+      "cloudinary_id": "",
+      "lat": 29.959351117820336,
+      "lon": -90.06109352072647,
+      "info": "Your one stop for the best gumbo in neworleans",
+      "category": "foodpopup",
+      "website": "getyourgumbo.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "name": "Good fortune",
+      "cloudinary_id": "",
+      "lat": 29.960596673232956,
+      "lon": -90.0603210445762,
+      "info": "Come get a reading of your fortune",
+      "category": "performer",
+      "website": "seethefuture.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "name": "churros inc",
+      "cloudinary_id": "",
+      "lat": 29.958458770018144,
+      "lon": -90.06594295433658,
+      "info": "Sweet sweet sweet sweet churros",
+      "category": "foodtruck",
+      "website": "churrosyum.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "name": "fresh produce",
+      "cloudinary_id": "",
+      "lat": 29.984813644336278,
+      "lon": -90.07085508363026,
+      "info": "Apples, Oranges, WaterMelong, Grapefruit, Bananas, Sweet Potatos", 
+      "category": "produce",
+      "website": null,
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "name": "streetpoboys",
+      "cloudinary_id": "",
+      "lat": 29.93912067140665,
+      "lon": -90.07137034779632,
+      "info": "Shrimp, Catfish, Chicken and Roast beef poboys, we currently have crawfish as well 3.99/lb",
+      "category": "foodtruck",
+      "website": "eatpoboys.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "name": "we're never open",
+      "cloudinary_id": "",
+      "lat": 29.938412531677425,
+      "lon": -90.07125891340533,
+      "info": "We literally are never open lol",
+      "category": "foodpopup",
+      "website": "donteventry.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    },
+    {
+      "name": "freefood",
+      "cloudinary_id": "",
+      "lat": 29.92431653205646,
+      "lon": -90.08504671064433,
+      "info": "giving away free food everyday until the end of time!!!",
+      "category": "foodpopup",
+      "website": "eat4free.com",
+      "isOpen": true,
+      "lastOpen": ""
+
+    }
+  ]
+}
