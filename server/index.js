@@ -303,6 +303,9 @@ app.delete('/deleteallproducts', (req, res) => {
     .then(res.send('no more products'))
     .catch(err => res.send(err));
 });
+
+
+
 /**
  * Reviews
  */
@@ -314,6 +317,7 @@ app.get('/reviews/:merchant', (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
+
 //add new review
 app.post('/addreview/:user/:merchant/:rating/:message', (req, res) => {
   const { user, merchant, rating, message } = req.params;
@@ -321,6 +325,7 @@ app.post('/addreview/:user/:merchant/:rating/:message', (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
+
 //delete review
 app.delete('/deletereview/:id', (req, res) => {
   const { id } = req.params;
@@ -356,24 +361,35 @@ app.get('/subs/:user', (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
+
 //add new sub
-app.post('/addsub/:user/:merchant', (req, res) => {
-  const { user, merchant } = req.params;
+app.post('/api/addsub', (req, res) => {
+  const { userid, merchantid } = req.body;
   Subs.findAll({
-    where: {user: user, merchant: merchant}
+    where: { userid, merchantid }
   })
     .then(results => {
+      console.log(results)
       if (!results.length) {
-        Subs.create({ user, merchant })
-          .then(Subs.findAll({
-            where: {}
-          })).then(data => res.send(data))
+        Subs.create({ UserId: userid, MerchantId: merchantid })
+          .then( () => {Users.findOne({
+            where: {id: userid},
+            include: {
+              model: Subs,
+              include: Merchants
+            }
+          }).then(data => {
+            console.log('this is the data', data);
+            res.send(data);
+          })
+          })
       } else {
         res.send(`${user} is already following ${merchant}`);
       }
     })
     .catch(err => res.send(err));
 });
+
 //delete sub
 app.delete('/deletesub/:id', (req, res) => {
   const { id } = req.params;

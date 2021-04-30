@@ -73,6 +73,7 @@ const App = () => {
   const [isLogged, setIsLogged] = useState(false);
   const [selectedMerchant, setSelectedMerchant ] = useState({name: '3', info: '2'});
   const [ merchData, setMerchData] = useState([{name: '3', info: '2'}]);
+  const [ userSubs, setUserSubs] = useState([{name: '3', info: '2'}]);
   //grab from database
   const getPops = () => {
     axios.get('/merchants')
@@ -81,6 +82,8 @@ const App = () => {
         setMerchData(response.data)
       })
   }
+
+  
 
   //{ myPops, setMyPops, user, setUser, sideBarDisplay, setSideBarDisplay, isLogged, setIsLogged, selectedMerchant, setSelectedMerchant }
   //check log in
@@ -102,7 +105,8 @@ const App = () => {
               picture: picture,
               id: addUser.data.id
             });
-          });
+          })
+          
       }
       else {
         setIsLogged(false);
@@ -112,7 +116,8 @@ const App = () => {
 }
 
   useEffect(() => logged(), []);
-  useState(() => getPops(), []);
+  useEffect(() => getPops(), []);
+ 
 
   return (
     <Router>
@@ -137,6 +142,8 @@ const App = () => {
             setSelectedMerchant={setSelectedMerchant}
             merchData={merchData}
             setMerchData={setMerchData}
+            userSubs={userSubs}
+            setUserSubs={setUserSubs}
            />}}/>
       <Route
         path="/login"
@@ -152,12 +159,25 @@ const Home = ({
   sideBarDisplay, setSideBarDisplay,
   isLogged, setIsLogged,
   selectedMerchant, setSelectedMerchant,
-  merchData, setMerchData }) => {
+  merchData, setMerchData, 
+  userSubs, setUserSubs
+}) => {
+
+  //grab user subs
+  const getSubs = () => {
+    axios.get(`/userid/${user.id}`)
+      .then((data => {
+        console.log(data)
+      }))
+      .catch(err => console.log(error))
+  }
+
+  //useEffect(() => getSubs(), []);
 
     return(
     <Well>
     <div>
-      <LogOutBtn href="/logout"> Logout </LogOutBtn>
+      {/* <LogOutBtn href="/logout"> Logout </LogOutBtn> */}
 
         <div className='sidebar-view'>
             <Welcome onClick={() => setSideBarDisplay(!sideBarDisplay)}>Pop^</Welcome>
@@ -203,6 +223,7 @@ const Home = ({
                     return <ListView
                       merchData={merchData}
                       selectMerchant={setSelectedMerchant}
+                      userSubs={userSubs}
                     />
                   }}
                 />
@@ -236,10 +257,15 @@ const Home = ({
                   render={(props => {
                     return (
                       <div>
-                        <ToggleSwitch merchant={selectedMerchant}/>
+                        <ToggleSwitch 
+                          merchant={selectedMerchant}
+                          user={user}
+                          setUserSubs={setUserSubs}
+                        />
                         <MerchantProfile 
                           merchant={selectedMerchant}
                           user={user}
+                          userSubs={userSubs}
                         />
                       </div>
                     )

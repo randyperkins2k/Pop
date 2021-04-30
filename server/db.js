@@ -97,14 +97,16 @@ const Subs = sequelize.define('Subs', {
     references: {
       model: Users,
       key: Users.id,
-    }
+    },
+    allowNull: false
   },
   MerchantId: {
     type: DataTypes.INTEGER,
     references: {
       model: Merchants,
       key: Merchants.id,
-    }
+    },
+    allowNull: false
   },
 });
 //Merchants.belongsToMany(Users, { through: Subs });

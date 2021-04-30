@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ToggleSwitch from '../ToggleSwitch.jsx'
 import { Link } from 'react-router-dom';
 
-const MerchantProfile = ({ merchant, user }) => {
+const MerchantProfile = ({ merchant, user, userSubs }) => {
 
   
   return (
@@ -16,7 +16,7 @@ const MerchantProfile = ({ merchant, user }) => {
           {merchant.info}
         </p>
       </div>
-      <button onClick={() => console.log(merchant.id, user)}>View Menu</button>
+      <button onClick={() => console.log(merchant.id, userSubs)}>View Menu</button>
       <button>Locate</button>
       <div>
         <h5>Picture Feed Will Go Here</h5>
