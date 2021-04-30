@@ -60,12 +60,12 @@ const seedMysql = () => {
         "\nDatabase (MySQL): 'Subs' table succesfully created!"
       )
     )
-    .then(() => console.log('hi')
-    //   Promise.all([
-    //     {user: 2, merchant: 1},
-    //     {user: 1, merchant: 2},
-    //   ].map((sub) => Subs.create(sub))
-    // )
+    .then(() =>
+      Promise.all([
+        {UserId: 2, MerchantId: 1},
+        {UserId: 1, MerchantId: 2},
+      ].map((sub) => Subs.create(sub))
+    )
   )
   .then(() => Admins.sync({ force: true }))
     .then(() =>
