@@ -61,7 +61,7 @@ const Slider = styled.span`
 // if toggled change follow to true
 
 
-const ToggleSwitch = () => {
+const ToggleSwitch = ({ selectedMerchant }) => {
 	const [toggled, setToggled] = useState(false);
 	const [subs, setSubs] = useState([]);
 	console.log('subs', subs)

@@ -16,8 +16,9 @@ import SideBar from './SideBarView/SideBar.jsx';
 import ListView from './ListView/ListView.jsx'
 import EditPopupProfile from './YourPopups/EditPopUp/EditPopupProfile.jsx';
 import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
-import * as butt from './openMerch.json';
-const merchData = butt.merchants;
+// import * as butt from './openMerch.json';
+// const merchData = butt.merchants;
+import ToggleSwitch from '../components/ToggleSwitch.jsx';
 import YourPopUps from './YourPopups/YourPopUps.jsx';
 import Login from './Login.jsx'
 import {
@@ -232,7 +233,18 @@ const Home = ({
                 />
                 <Route
                   path="/profile"
-                  render={(props => <MerchantProfile merchant={selectedMerchant}/>)}
+                  render={(props => {
+                    return (
+                      <div>
+                        <ToggleSwitch merchant={selectedMerchant}/>
+                        <MerchantProfile 
+                          merchant={selectedMerchant}
+                          user={user}
+                        />
+                      </div>
+                    )
+                  }
+                  )}
                 />
               </Switch>
             </div>

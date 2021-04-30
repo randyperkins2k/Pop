@@ -49,47 +49,47 @@ app.get('/logout', (req, res) => {
 
 ///////////////////////////
 ////////////////////////////
-///////////////////////////
-Users.belongsToMany(Merchants, { through: Subs });
-Merchants.belongsToMany(Users, { through: Subs });
+// ///////////////////////////
+// Users.belongsToMany(Merchants, { through: Subs });
+// Merchants.belongsToMany(Users, { through: Subs });
 
-// Users.belongsToMany(Merchants, { through: 'Ownership' });
-// Merchants.belongsToMany(Users, { through: 'Ownership' });
+// // Users.belongsToMany(Merchants, { through: 'Ownership' });
+// // Merchants.belongsToMany(Users, { through: 'Ownership' });
 
 
-app.get('/api/jointest/:userid', (req, res) => {
-  Users.findOne({id: req.params.userid})
-    .then(user => {
-      user.getMerchants()
-        .then(merchs => {
-          res.status(200).send(merchs)
-        })
-        .catch(err => console.log(err))
-    })
-});
+// app.get('/api/jointest/:userid', (req, res) => {
+//   Users.findOne({id: req.params.userid})
+//     .then(user => {
+//       user.getMerchants()
+//         .then(merchs => {
+//           res.status(200).send(merchs)
+//         })
+//         .catch(err => console.log(err))
+//     })
+// });
 
-app.post('/api/jointest', (req, res) => {
-  const { userid, merchantid } = req.body;
-  console.log('getting jointest request')
-  Users.findOne({ where: {id: userid}}).then(user=> {
-    Merchants.findOne({ where: {id: merchantid}})
-      .then((merch => {
-        user.setMerchants(merch)
-         .then(data => {
-           console.log(data)
-           res.status(201).send(data.data)
-         })
-          .catch(err => {
-            console.log(err)
-            res.status(500).send(err)
-          })
-      }))
-    .catch(err => {
-      console.log(err)
-      res.status(500).send(err)
-    });
- });
-});
+// app.post('/api/jointest', (req, res) => {
+//   const { userid, merchantid } = req.body;
+//   console.log('getting jointest request')
+//   Users.findOne({ where: {id: userid}}).then(user=> {
+//     Merchants.findOne({ where: {id: merchantid}})
+//       .then((merch => {
+//         user.setMerchants(merch)
+//          .then(data => {
+//            console.log(data)
+//            res.status(201).send(data.data)
+//          })
+//           .catch(err => {
+//             console.log(err)
+//             res.status(500).send(err)
+//           })
+//       }))
+//     .catch(err => {
+//       console.log(err)
+//       res.status(500).send(err)
+//     });
+//  });
+// });
 
 /////////////////////////////////
 //////////////////////////////////
@@ -208,18 +208,18 @@ app.get('/userid/:id', (req, res) => {
 
 
 //add new user
-app.post('/adduser/:name', (req, res) => {
-  const { name } = req.params;
+app.post('/adduser/:name/:email/', (req, res) => {
+  const { name, email } = req.params;
   Users.findAll({
-    where: {name: name}
+    where: {email: email}
   })
   .then(results => {
     if (!results.length) {
-      Users.create({ name })
+      Users.create({ name, email })
         .then(data => res.send(data))
     }
     else {
-      res.send(`${name} is already a registered user`)
+      res.send(results[0]);
     }
   })
     .catch(err => res.send(err));
