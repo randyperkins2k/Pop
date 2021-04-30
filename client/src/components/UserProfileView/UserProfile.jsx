@@ -23,6 +23,7 @@ const UserProfile = ({ user }) => {
       <img src={user.picture}/>
       <h5>{user.name}</h5>
       <h5>{user.email}</h5>
+      <h5>{user.id}</h5>
       <h5>Phone</h5>
       <EditProfileBtn onClick={() => setEditWindowOpen(true)}>Edit Your Profile</EditProfileBtn>
       {

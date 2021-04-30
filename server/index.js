@@ -60,8 +60,11 @@ app.get('/failed', (req, res) => {
   res.redirect('/');
 });
 
-/**
- * end authentication routes
+ //end authentication routes
+
+app.get('/login', (req, res) => {
+  res.send('<a href="/google"> Login </a>');
+});
 
 /**
  * Merchants
@@ -117,19 +120,41 @@ app.get('/users', (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
+
+//get user by email
+app.get('/user/:email', (req, res) => {
+  const { email } = req.params;
+  Users.findOne({
+    where: {email: email}
+  })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+
+//get user by id
+app.get('/userid/:id', (req, res) => {
+  const { id } = req.params;
+  Users.findOne({
+    where: {id: id}
+  })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+
+
 //add new user
-app.post('/adduser/:name', (req, res) => {
-  const { name } = req.params;
+app.post('/adduser/:name/:email/', (req, res) => {
+  const { name, email } = req.params;
   Users.findAll({
-    where: {name: name}
+    where: {email: email}
   })
   .then(results => {
     if (!results.length) {
-      Users.create({ name })
+      Users.create({ name, email })
         .then(data => res.send(data))
     }
     else {
-      res.send(`${name} is already a registered user`)
+      res.send(results[0]);
     }
   })
     .catch(err => res.send(err));
@@ -142,7 +167,8 @@ app.delete('/deleteuser/:id', (req, res) => {
   })
     .then(res.send(`user ${id} deleted`));
 });
-//delete all users
+//delete all user
+//add /apis for proper restful practicesapp.delete('api/users/deleteallusers', (req, res) => {
 app.delete('/deleteallusers', (req, res) => {
   Users.destroy({
     where: {}

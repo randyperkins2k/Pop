@@ -76,7 +76,7 @@ const App = () => {
   const getPops = () => {
     axios.get('/merchants')
       .then(response => {
-        console.log('reponse data', response.data)
+        //console.log('reponse data', response.data)
         setMerchData(response.data)
       })
   }
@@ -86,14 +86,22 @@ const App = () => {
   const logged = () => {
     axios.get('/testing')
     .then(results => {
-      console.log(results.data);
+      //console.log(results.data);
       if (results.data.displayName) {
+        const { displayName, email, picture } = results.data;
         setIsLogged(true);
-        setUser({
-          name: results.data.displayName,
-          email: results.data.email,
-          picture: results.data.picture
-        });
+        //console.log('before post', displayName, email, picture);
+        //i removed picture from the endpoint because the http was messing everything up
+        axios.post(`/adduser/${displayName}/${email}/`)
+          .then(addUser => {
+            console.log(addUser);
+            setUser({
+              name: displayName,
+              email: email,
+              picture: picture,
+              id: addUser.data.id
+            });
+          });
       }
       else {
         setIsLogged(false);
@@ -137,17 +145,17 @@ const App = () => {
   )
 };
 
-const Home = ({ 
-  myPops, setMyPops, 
-  user, setUser, 
-  sideBarDisplay, setSideBarDisplay, 
-  isLogged, setIsLogged, 
+const Home = ({
+  myPops, setMyPops,
+  user, setUser,
+  sideBarDisplay, setSideBarDisplay,
+  isLogged, setIsLogged,
   selectedMerchant, setSelectedMerchant,
   merchData, setMerchData }) => {
-  
+
     return(
     <Well>
-    <div onClick={() => console.log(merchData)}>
+    <div>
       <LogOutBtn href="/logout"> Logout </LogOutBtn>
 
         <div className='sidebar-view'>
