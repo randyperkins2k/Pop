@@ -89,15 +89,18 @@ const App = () => {
       if (results.data.displayName) {
         const { displayName, email, picture } = results.data;
         setIsLogged(true);
-        setUser({
-          name: displayName,
-          email: email,
-          picture: picture
-        });
         //console.log('before post', displayName, email, picture);
         //i removed picture from the endpoint because the http was messing everything up
         axios.post(`/adduser/${displayName}/${email}/`)
-          .then(addUser => console.log(addUser));
+          .then(addUser => {
+            console.log(addUser);
+            setUser({
+              name: displayName,
+              email: email,
+              picture: picture,
+              id: addUser.data.id
+            });
+          });
       }
       else {
         setIsLogged(false);

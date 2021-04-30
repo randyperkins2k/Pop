@@ -154,7 +154,7 @@ app.post('/adduser/:name/:email/', (req, res) => {
         .then(data => res.send(data))
     }
     else {
-      res.send(`${email} is already taken`)
+      res.send(results[0]);
     }
   })
     .catch(err => res.send(err));
