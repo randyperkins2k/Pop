@@ -118,18 +118,18 @@ app.get('/users', (req, res) => {
     .catch(err => res.send(err));
 });
 //add new user
-app.post('/adduser/:name', (req, res) => {
-  const { name } = req.params;
+app.post('/adduser/:name/:email/', (req, res) => {
+  const { name, email } = req.params;
   Users.findAll({
-    where: {name: name}
+    where: {email: email}
   })
   .then(results => {
     if (!results.length) {
-      Users.create({ name })
+      Users.create({ name, email })
         .then(data => res.send(data))
     }
     else {
-      res.send(`${name} is already a registered user`)
+      res.send(`${email} is already taken`)
     }
   })
     .catch(err => res.send(err));

@@ -87,12 +87,17 @@ const App = () => {
     .then(results => {
       console.log(results.data);
       if (results.data.displayName) {
+        const { displayName, email, picture } = results.data;
         setIsLogged(true);
         setUser({
-          name: results.data.displayName,
-          email: results.data.email,
-          picture: results.data.picture
+          name: displayName,
+          email: email,
+          picture: picture
         });
+        //console.log('before post', displayName, email, picture);
+        //i removed picture from the endpoint because the http was messing everything up
+        axios.post(`/adduser/${displayName}/${email}/`)
+          .then(addUser => console.log(addUser));
       }
       else {
         setIsLogged(false);
@@ -136,14 +141,14 @@ const App = () => {
   )
 };
 
-const Home = ({ 
-  myPops, setMyPops, 
-  user, setUser, 
-  sideBarDisplay, setSideBarDisplay, 
-  isLogged, setIsLogged, 
+const Home = ({
+  myPops, setMyPops,
+  user, setUser,
+  sideBarDisplay, setSideBarDisplay,
+  isLogged, setIsLogged,
   selectedMerchant, setSelectedMerchant,
   merchData, setMerchData }) => {
-  
+
     return(
     <Well>
     <div onClick={() => console.log(merchData)}>
