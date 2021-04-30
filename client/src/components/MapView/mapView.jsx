@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import mapStyles from './mapstyles'; 
-import { 
-  GoogleMap, 
+import mapStyles from './mapstyles';
+import {
+  GoogleMap,
   useLoadScript,
   Marker,
   InfoWindow
@@ -31,7 +31,7 @@ const Map = ({ merchData, selectMerchant }) => {
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries
   })
-  
+
   const mapMarkerClick = React.useCallback(()=>{
     setSelectedPopUp(merch)
   } , []);
@@ -39,14 +39,14 @@ const Map = ({ merchData, selectMerchant }) => {
   if (loadError) {
     return "error loading map"
   }
-  
+
   if (!isLoaded) {
     return "loading maps"
   }
 
 
   return (
-    <GoogleMap 
+    <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={12}
       center={center}
@@ -84,14 +84,14 @@ const Map = ({ merchData, selectMerchant }) => {
         selectedPopUp && (
           <InfoWindow
           position={{
-            lat: selectedPopUp.lat,
-            lng: selectedPopUp.lon
+            lat: +selectedPopUp.lat,
+            lng: +selectedPopUp.lon
           }}
           onCloseClick={()=>{
             setSelectedPopUp(null);
           }}
           >
-           <Window 
+           <Window
               merchant={selectedPopUp}
               selectMerchant={selectMerchant}
            />
@@ -100,7 +100,7 @@ const Map = ({ merchData, selectMerchant }) => {
       }
     </GoogleMap>
     // <GoogleMap
-    //   defaultZoom={13.5} 
+    //   defaultZoom={13.5}
     //   defaultCenter={{lat: 29.956124, lng: -90.090509}}
     // >
     //   {merchData.merchants.map(merch => {
