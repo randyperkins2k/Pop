@@ -78,11 +78,28 @@ const Reviews = sequelize.define('Reviews', {
     autoIncrement: true,
     unique: true,
   },
-  user: DataTypes.INTEGER, //references Users.id
-  merchant: DataTypes.INTEGER, //references Merchants.id
+  UserId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Users,
+      key: Users.id,
+    }
+  },
+  MerchantId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Merchants,
+      key: Merchants.id,
+    }
+  },
   rating: DataTypes.INTEGER,
   message: DataTypes.STRING,
 });
+
+Users.hasMany(Reviews);
+Reviews.belongsTo(Users);
+Merchants.hasMany(Reviews);
+Reviews.belongsTo(Merchants);
 
 const Subs = sequelize.define('Subs', {
   id: {
@@ -115,8 +132,6 @@ Subs.belongsTo(Users);
 Merchants.hasMany(Subs);
 Subs.belongsTo(Merchants);
 
-//user: DataTypes.INTEGER, //references Users.id
-//merchant: DataTypes.INTEGER, //references Merchants.id
 const Admins = sequelize.define('Admins', {
   id: {
     type: DataTypes.INTEGER,
@@ -125,9 +140,26 @@ const Admins = sequelize.define('Admins', {
     autoIncrement: true,
     unique: true,
   },
-  user: DataTypes.INTEGER, //references Users.id
-  merchant: DataTypes.INTEGER, //references Merchants.id
+  UserId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Users,
+      key: Users.id,
+    }
+  },
+  MerchantId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Merchants,
+      key: Merchants.id,
+    }
+  },
 });
+
+Users.hasMany(Admins);
+Admins.belongsTo(Users);
+Merchants.hasMany(Admins);
+Admins.belongsTo(Merchants);
 
 module.exports = {
   db: sequelize,

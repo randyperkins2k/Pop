@@ -335,7 +335,7 @@ app.delete('/deleteallsubs', (req, res) => {
 /**
  * Admins
  */
-//get all subs
+//get all admins
 app.get('/admins', (req, res) => {
   Admins.findAll({
     where: {}
@@ -343,7 +343,7 @@ app.get('/admins', (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
-//add new sub
+//add new admin
 app.post('/addadmin/:user/:merchant', (req, res) => {
   const { user, merchant } = req.params;
   Admins.findAll({
@@ -361,7 +361,7 @@ app.post('/addadmin/:user/:merchant', (req, res) => {
     })
     .catch(err => res.send(err));
 });
-//delete sub
+//delete admin
 app.delete('/deleteadmin/:id', (req, res) => {
   const { id } = req.params;
   Admins.destroy({
@@ -369,7 +369,7 @@ app.delete('/deleteadmin/:id', (req, res) => {
   })
     .then(res.send(`admin ${id} deleted`));
 });
-//delete all subs
+//delete all admins
 app.delete('/deletealladmins', (req, res) => {
   Admins.destroy({
     where: {}
