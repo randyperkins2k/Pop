@@ -75,7 +75,7 @@ const App = () => {
   const getPops = () => {
     axios.get('/merchants')
       .then(response => {
-        console.log('reponse data', response.data)
+        //console.log('reponse data', response.data)
         setMerchData(response.data)
       })
   }
@@ -85,7 +85,7 @@ const App = () => {
   const logged = () => {
     axios.get('/testing')
     .then(results => {
-      console.log(results.data);
+      //console.log(results.data);
       if (results.data.displayName) {
         const { displayName, email, picture } = results.data;
         setIsLogged(true);
@@ -151,7 +151,7 @@ const Home = ({
 
     return(
     <Well>
-    <div onClick={() => console.log(merchData)}>
+    <div>
       <LogOutBtn href="/logout"> Logout </LogOutBtn>
 
         <div className='sidebar-view'>

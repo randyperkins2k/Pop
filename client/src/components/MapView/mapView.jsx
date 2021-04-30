@@ -57,7 +57,9 @@ const Map = ({ merchData, selectMerchant }) => {
           lng: event.latLng.lng(),
           time: new Date()
         })
-        console.log(currentLocMarker)
+        console.log(currentLocMarker);
+        //why even bother with state right here?
+        //why not just call an end point with event.latLng.lat() and event.latLng.lng()?
       }}
     >
      {merchData.map(merch => {
