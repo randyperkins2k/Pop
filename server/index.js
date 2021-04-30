@@ -120,6 +120,28 @@ app.get('/users', (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
+
+//get user by email
+app.get('/user/:email', (req, res) => {
+  const { email } = req.params;
+  Users.findOne({
+    where: {email: email}
+  })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+
+//get user by id
+app.get('/userid/:id', (req, res) => {
+  const { id } = req.params;
+  Users.findOne({
+    where: {id: id}
+  })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+
+
 //add new user
 app.post('/adduser/:name/:email/', (req, res) => {
   const { name, email } = req.params;
