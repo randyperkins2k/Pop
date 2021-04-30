@@ -62,21 +62,12 @@ app.get('/failed', (req, res) => {
 
 /**
  * end authentication routes
- */
-
-// app.get('/login', (req, res) => {
-//   res.send('<a href="/google"> Login </a>');
-// })
-
-
-
 
 /**
  * Merchants
  */
-
 //get all merchants
- app.get('/merchants', (req, res) => {
+app.get('/merchants', (req, res) => {
   Merchants.findAll({
     where: {}
   })
@@ -92,9 +83,7 @@ app.post('/addmerchant/:name', (req, res) => {
     .then(results => {
       if (!results.length) {
         Merchants.create({ name })
-          .then(Merchants.findAll({
-            where: {}
-          })).then(data => res.send(data))
+          .then(data => res.send(data))
       } else {
         res.send(`${name} is already a pop-up`);
       }
@@ -117,11 +106,9 @@ app.delete('/deleteallmerchants', (req, res) => {
     .then(res.send('no more merchants'))
     .catch(err => res.send(err));
 });
-
 /**
  * Users
  */
-
 //get all users
 app.get('/users', (req, res) => {
   Users.findAll({
@@ -133,10 +120,18 @@ app.get('/users', (req, res) => {
 //add new user
 app.post('/adduser/:name', (req, res) => {
   const { name } = req.params;
-  Users.create({ name })
-    .then(Users.findAll({
-      where: {}
-    })).then(data => res.send(data))
+  Users.findAll({
+    where: {name: name}
+  })
+  .then(results => {
+    if (!results.length) {
+      Users.create({ name })
+        .then(data => res.send(data))
+    }
+    else {
+      res.send(`${name} is already a registered user`)
+    }
+  })
     .catch(err => res.send(err));
 });
 //delete user
@@ -155,11 +150,9 @@ app.delete('/deleteallusers', (req, res) => {
     .then(res.send('no more users'))
     .catch(err => res.send(err));
 });
-
 /**
  * Products
  */
-
 //get all products
 app.get('/products', (req, res) => {
   Products.findAll({
@@ -168,14 +161,41 @@ app.get('/products', (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
-//add new product
-app.post('/addproduct/:name', (req, res) => {
-  const { name } = req.params;
-  Products.create({ name })
-    .then(Products.findAll({
-      where: {}
-    })).then(data => res.send(data))
+//get all products associated with merchant
+app.get('/menu/:merchant', (req, res) => {
+  const { merchant } = req.params;
+  Products.findAll({
+    where: {merchant: merchant}
+  })
+    .then(data => res.send(data))
     .catch(err => res.send(err));
+});
+//add new product
+app.post('/addproduct/:name/:merchant', (req, res) => {
+  const { name, merchant } = req.params;
+  Products.create({ name, merchant })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+//change price of product
+app.put('/changeprice/:id/:price', (req, res) => {
+  const { id, price } = req.params;
+  Products.update(
+    {price: price},
+    {returning: true, where: {id: id}}
+  )
+  .then(() => res.send('price updated'))
+  .catch(err => res.send(err));
+});
+//change status of product
+app.put('/changestatus/:id/:status', (req, res) => {
+  const { id, status } = req.params;
+  Products.update(
+    {status: status},
+    {returning: true, where: {id: id}}
+  )
+  .then(() => res.send('status updated'))
+  .catch(err => res.send(err));
 });
 //delete product
 app.delete('/deleteproduct/:id', (req, res) => {
@@ -193,15 +213,13 @@ app.delete('/deleteallproducts', (req, res) => {
     .then(res.send('no more products'))
     .catch(err => res.send(err));
 });
-
 /**
  * Reviews
  */
-
-//get all reviews
-app.get('/reviews', (req, res) => {
+//get all reviews for merchant
+app.get('/reviews/:merchant', (req, res) => {
   Reviews.findAll({
-    where: {}
+    where: {merchant: req.params.merchant}
   })
     .then(data => res.send(data))
     .catch(err => res.send(err));
@@ -210,9 +228,7 @@ app.get('/reviews', (req, res) => {
 app.post('/addreview/:user/:merchant/:rating/:message', (req, res) => {
   const { user, merchant, rating, message } = req.params;
   Reviews.create({ user, merchant, rating, message })
-    .then(Reviews.findAll({
-      where: {}
-    })).then(data => res.send(data))
+    .then(data => res.send(data))
     .catch(err => res.send(err));
 });
 //delete review
@@ -231,15 +247,21 @@ app.delete('/deleteallreviews', (req, res) => {
     .then(res.send('no more reviews'))
     .catch(err => res.send(err));
 });
-
 /**
  * Subs
  */
-
 //get all subs
 app.get('/subs', (req, res) => {
   Subs.findAll({
     where: {}
+  })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+//get all users subs
+app.get('/subs/:user', (req, res) => {
+  Subs.findAll({
+    where: {user: req.params.user}
   })
     .then(data => res.send(data))
     .catch(err => res.send(err));
@@ -278,11 +300,9 @@ app.delete('/deleteallsubs', (req, res) => {
     .then(res.send('no more subs'))
     .catch(err => res.send(err));
 });
-
 /**
  * Admins
  */
-
 //get all subs
 app.get('/admins', (req, res) => {
   Admins.findAll({
@@ -329,3 +349,4 @@ app.delete('/deletealladmins', (req, res) => {
 app.listen(PORT, (() => {
   console.log(`Server listening at http://127.0.0.1:${PORT}`);
 }));
+

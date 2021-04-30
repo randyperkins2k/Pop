@@ -16,7 +16,7 @@ import SideBar from './SideBarView/SideBar.jsx';
 import ListView from './ListView/ListView.jsx'
 import EditPopupProfile from './YourPopups/EditPopUp/EditPopupProfile.jsx';
 import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
-import * as merchData from './openMerch.json';
+// import * as merchData from './openMerch.json';
 import YourPopUps from './YourPopups/YourPopUps.jsx';
 import Login from './Login.jsx'
 import {
@@ -69,13 +69,18 @@ const App = () => {
   const [user, setUser] = useState();
   const [sideBarDisplay, setSideBarDisplay] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
-  const [ selectedMerchant, setSelectedMerchant ] = useState();
+  const [selectedMerchant, setSelectedMerchant ] = useState({name: '3', info: '2'});
+  const [ merchData, setMerchData] = useState([{name: '3', info: '2'}]);
   //grab from database
   const getPops = () => {
     axios.get('/merchants')
-      .then(response => setMyPops(response.data))
+      .then(response => {
+        console.log('reponse data', response.data)
+        setMerchData(response.data)
+      })
   }
-  { myPops, setMyPops, user, setUser, sideBarDisplay, setSideBarDisplay, isLogged, setIsLogged, selectedMerchant, setSelectedMerchant }
+
+  //{ myPops, setMyPops, user, setUser, sideBarDisplay, setSideBarDisplay, isLogged, setIsLogged, selectedMerchant, setSelectedMerchant }
   //check log in
   const logged = () => {
     axios.get('/testing')
@@ -120,6 +125,8 @@ const App = () => {
             setIsLogged={setIsLogged}
             selectedMerchant={selectedMerchant}
             setSelectedMerchant={setSelectedMerchant}
+            merchData={merchData}
+            setMerchData={setMerchData}
            />}}/>
       <Route
         path="/login"
@@ -129,10 +136,17 @@ const App = () => {
   )
 };
 
-const Home = ({ myPops, setMyPops, user, setUser, sideBarDisplay, setSideBarDisplay, isLogged, setIsLogged, selectedMerchant, setSelectedMerchant }) => {
-  return(
+const Home = ({ 
+  myPops, setMyPops, 
+  user, setUser, 
+  sideBarDisplay, setSideBarDisplay, 
+  isLogged, setIsLogged, 
+  selectedMerchant, setSelectedMerchant,
+  merchData, setMerchData }) => {
+  
+    return(
     <Well>
-    <div>
+    <div onClick={() => console.log(merchData)}>
       <LogOutBtn href="/logout"> Logout </LogOutBtn>
 
         <div className='sidebar-view'>

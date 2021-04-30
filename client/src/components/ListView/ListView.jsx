@@ -28,7 +28,7 @@ const ListView= ({ merchData, selectMerchant }) => {
       <Favs>Your Favorites</Favs>
       <ul>
         {
-          merchData.merchants.map(merch => {
+          merchData.map(merch => {
             if (merch.isOpen) {
               return <MerchList 
               key={merch.id} 

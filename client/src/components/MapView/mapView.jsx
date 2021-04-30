@@ -60,13 +60,13 @@ const Map = ({ merchData, selectMerchant }) => {
         console.log(currentLocMarker)
       }}
     >
-     {merchData.merchants.map(merch => {
+     {merchData.map(merch => {
         if (merch.isOpen) {
           return <Marker
             key={merch.id}
             position={{
-              lat: merch.lat,
-              lng: merch.lon
+              lat: +merch.lat,
+              lng: +merch.lon
             }}
             // icon={{
             //   url: '../popup/foodmarker2.svg',

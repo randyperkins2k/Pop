@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 
 const MerchantProfile = ({ merchant }) => {
 
+  
   return (
+
     <div>
       <div>
         <h5>{merchant.name}</h5>
