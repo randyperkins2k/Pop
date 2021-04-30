@@ -16,7 +16,8 @@ import SideBar from './SideBarView/SideBar.jsx';
 import ListView from './ListView/ListView.jsx'
 import EditPopupProfile from './YourPopups/EditPopUp/EditPopupProfile.jsx';
 import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
-// import * as merchData from './openMerch.json';
+import * as butt from './openMerch.json';
+const merchData = butt.merchants;
 import YourPopUps from './YourPopups/YourPopUps.jsx';
 import Login from './Login.jsx'
 import {
@@ -102,7 +103,7 @@ const App = () => {
 }
 
   useEffect(() => logged(), []);
-  useState(() => getPops(), []);
+  //useState(() => getPops(), []);
 
   return (
     <Router>
