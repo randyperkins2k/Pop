@@ -111,7 +111,7 @@ const App = () => {
 }
 
   useEffect(() => logged(), []);
-  //useState(() => getPops(), []);
+  useState(() => getPops(), []);
 
   return (
     <Router>

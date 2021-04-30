@@ -92,8 +92,8 @@ const Subs = sequelize.define('Subs', {
     autoIncrement: true,
     unique: true,
   },
-  user: DataTypes.INTEGER, //references Users.id
-  merchant: DataTypes.INTEGER, //references Merchants.id
+  userid: DataTypes.INTEGER, //references Users.id
+  merchantid: DataTypes.INTEGER, //references Merchants.id
 });
 
 const Admins = sequelize.define('Admins', {
@@ -107,6 +107,7 @@ const Admins = sequelize.define('Admins', {
   user: DataTypes.INTEGER, //references Users.id
   merchant: DataTypes.INTEGER, //references Merchants.id
 });
+
 
 module.exports = {
   db: sequelize,
