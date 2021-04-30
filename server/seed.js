@@ -62,8 +62,8 @@ const seedMysql = () => {
     )
     .then(() =>
       Promise.all([
-        {user: 2, merchant: 1},
-        {user: 1, merchant: 2},
+        {UserId: 2, MerchantId: 1},
+        {UserId: 1, MerchantId: 2},
       ].map((sub) => Subs.create(sub))
     )
   )

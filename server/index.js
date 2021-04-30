@@ -42,6 +42,7 @@ app.get('/google/callback', passport.authenticate('google', { failureRedirect: '
 // Logout route
 app.get('/logout', (req, res) => {
   req.logout();
+  console.log('hello from logout');
   res.redirect('/');
 });
 
@@ -135,8 +136,13 @@ app.get('/user/:email', (req, res) => {
 app.get('/userid/:id', (req, res) => {
   const { id } = req.params;
   Users.findOne({
-    where: {id: id}
-  })
+    where: {id: id},
+    include: {
+      model: Subs,
+      include: Merchants
+    }
+  },
+  )
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });

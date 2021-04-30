@@ -92,10 +92,31 @@ const Subs = sequelize.define('Subs', {
     autoIncrement: true,
     unique: true,
   },
-  user: DataTypes.INTEGER, //references Users.id
-  merchant: DataTypes.INTEGER, //references Merchants.id
+  UserId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Users,
+      key: Users.id,
+    }
+  },
+  MerchantId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Merchants,
+      key: Merchants.id,
+    }
+  },
 });
+//Merchants.belongsToMany(Users, { through: Subs });
+//Users.belongsToMany(Merchants, { through: Subs });
 
+Users.hasMany(Subs);
+Subs.belongsTo(Users);
+Merchants.hasMany(Subs);
+Subs.belongsTo(Merchants);
+
+//user: DataTypes.INTEGER, //references Users.id
+//merchant: DataTypes.INTEGER, //references Merchants.id
 const Admins = sequelize.define('Admins', {
   id: {
     type: DataTypes.INTEGER,
