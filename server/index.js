@@ -167,7 +167,8 @@ app.delete('/deleteuser/:id', (req, res) => {
   })
     .then(res.send(`user ${id} deleted`));
 });
-//delete all users
+//delete all user
+//add /apis for proper restful practicesapp.delete('api/users/deleteallusers', (req, res) => {
 app.delete('/deleteallusers', (req, res) => {
   Users.destroy({
     where: {}
