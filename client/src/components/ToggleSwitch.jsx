@@ -106,8 +106,9 @@ const ToggleSwitch = ({ merchant, user, setUserSubs, userSubs }) => {
 				userid : user.id,
 				merchantid : merchant.id
 			})
-			.then(response => {
-				console.log(response);
+			.then(sub => {
+				console.log(sub);
+				setUserSubs(sub.data.Subs.map(Sub => Sub.Merchant));
 			});
 		}
 	};
