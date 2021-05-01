@@ -28,6 +28,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import styled from 'styled-components'
+import Stylingsomething from './Stylingsomething.jsx'
 
 // const MapView = withScriptjs(withGoogleMap(Map));
 
@@ -155,6 +156,7 @@ const Home = ({ myPops, setMyPops, user, setUser, sideBarDisplay, setSideBarDisp
             className='main'
             >
             <Link to='/'>
+            <Stylingsomething/>
               <MapViewButton >Map view</MapViewButton>
             </Link>
             <Link to='/listview'>
