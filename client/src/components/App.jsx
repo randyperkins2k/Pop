@@ -73,7 +73,7 @@ const App = () => {
   const [isLogged, setIsLogged] = useState(false);
   const [selectedMerchant, setSelectedMerchant ] = useState({name: '3', info: '2'});
   const [ merchData, setMerchData] = useState([{name: '3', info: '2'}]);
-  const [ userSubs, setUserSubs] = useState([{name: '3', info: '2'}]);
+  const [ userSubs, setUserSubs] = useState([]);
   //grab from database
   const getPops = () => {
     axios.get('/merchants')
@@ -82,8 +82,6 @@ const App = () => {
         setMerchData(response.data)
       })
   }
-
-  
 
   //{ myPops, setMyPops, user, setUser, sideBarDisplay, setSideBarDisplay, isLogged, setIsLogged, selectedMerchant, setSelectedMerchant }
   //check log in
@@ -97,16 +95,17 @@ const App = () => {
         //console.log('before post', displayName, email, picture);
         //i removed picture from the endpoint because the http was messing everything up
         axios.post(`/adduser/${displayName}/${email}/`)
-          .then(addUser => {
-            console.log(addUser);
+        .then(addUser => {
+          console.log(addUser);
+          let subs;
+          addUser.data.Subs ? setUserSubs(addUser.data.Subs.map(Sub => Sub.Merchant)) : setUserSubs([]);
             setUser({
               name: displayName,
               email: email,
               picture: picture,
-              id: addUser.data.id
+              id: addUser.data.id,
             });
           })
-          
       }
       else {
         setIsLogged(false);
@@ -117,7 +116,7 @@ const App = () => {
 
   useEffect(() => logged(), []);
   useEffect(() => getPops(), []);
- 
+
 
   return (
     <Router>
@@ -159,20 +158,9 @@ const Home = ({
   sideBarDisplay, setSideBarDisplay,
   isLogged, setIsLogged,
   selectedMerchant, setSelectedMerchant,
-  merchData, setMerchData, 
+  merchData, setMerchData,
   userSubs, setUserSubs
 }) => {
-
-  //grab user subs
-  const getSubs = () => {
-    axios.get(`/userid/${user.id}`)
-      .then((data => {
-        console.log(data)
-      }))
-      .catch(err => console.log(error))
-  }
-
-  //useEffect(() => getSubs(), []);
 
     return(
     <Well>
@@ -224,6 +212,7 @@ const Home = ({
                       merchData={merchData}
                       selectMerchant={setSelectedMerchant}
                       userSubs={userSubs}
+                      setUserSubs={setUserSubs}
                     />
                   }}
                 />
@@ -257,12 +246,13 @@ const Home = ({
                   render={(props => {
                     return (
                       <div>
-                        <ToggleSwitch 
+                        <ToggleSwitch
                           merchant={selectedMerchant}
                           user={user}
+                          userSubs={userSubs}
                           setUserSubs={setUserSubs}
                         />
-                        <MerchantProfile 
+                        <MerchantProfile
                           merchant={selectedMerchant}
                           user={user}
                           userSubs={userSubs}

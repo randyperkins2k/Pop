@@ -47,6 +47,11 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
+app.get('/login', (req, res) => {
+  res.send('<a href="/google"> Login </a>');
+})
+
+
 ///////////////////////////
 ////////////////////////////
 // ///////////////////////////
@@ -211,7 +216,11 @@ app.get('/userid/:id', (req, res) => {
 app.post('/adduser/:name/:email/', (req, res) => {
   const { name, email } = req.params;
   Users.findAll({
-    where: {email: email}
+    where: {email: email},
+    include: {
+      model: Subs,
+      include: Merchants
+    }
   })
   .then(results => {
     if (!results.length) {

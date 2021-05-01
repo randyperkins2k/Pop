@@ -30,7 +30,7 @@ const Search = styled.button`
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
 `
-const ListView= ({ merchData, selectMerchant, userSubs }) => {
+const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
   const [ openPopsView, setOpenPopsView ] = useState(true);
   const [ yourSubsView, setYourSubsView ] = useState(false);
   const [ searchPopsView, setSearchPopsView ] = useState(false);
@@ -41,19 +41,19 @@ const ListView= ({ merchData, selectMerchant, userSubs }) => {
       <Favs onClick={() => setOpenPopsView(false)}>Your Favorites</Favs>
       <Search>Look up Pop up</Search>
       <ul>
-        { openPopsView ? 
+        { openPopsView ?
           merchData.map(merch => {
             if (merch.isOpen) {
-              return <MerchList 
-              key={merch.id} 
+              return <MerchList
+              key={merch.id}
               merchant={merch}
               selectMerchant={selectMerchant}/>
             }
           })
           :
-          userSubs.map(merch => <MerchList 
-            key={merch.Merchant.id} 
-            merchant={merch.Merchant}
+          userSubs.map(merch => <MerchList
+            key={merch.id}
+            merchant={merch}
             selectMerchant={selectMerchant}
           />)
         }
