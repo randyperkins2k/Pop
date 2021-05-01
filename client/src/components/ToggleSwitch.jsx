@@ -61,15 +61,15 @@ const Slider = styled.span`
 // if toggled change follow to true
 
 
-const ToggleSwitch = () => {
+const ToggleSwitch = ({ merchant, user, setUserSubs, userSubs }) => {
 	const [toggled, setToggled] = useState(false);
 	const [subs, setSubs] = useState([]);
-	console.log('subs', subs)
+	//console.log('subs', subs)
 
 
 	const getSubs = async () => {
 		try {
-			const res = await axios.get('/subs')
+			const res = await axios.get('/api/subs')
 			const { data } = res;
 			console.log('subs data in call', data)
 			setSubs(data)
@@ -77,21 +77,68 @@ const ToggleSwitch = () => {
 			console.log('error in catch', e)
 		}
 	}
-//
-// logic for if the button is toggled on or off
+
+	const subscribe = () => {
+		let isSubscribed = false;
+		userSubs.forEach(sub => {
+			if (sub.id === merchant.id) {
+				isSubscribed = true;
+				//setUserSubs(userSubs.filter(sub => sub.id !== merchant.id));
+				axios.delete(`/api/deletesub/${user.id}/${merchant.id}`)
+				  .then((response) => {
+						setUserSubs(userSubs.filter(sub => sub.id !== merchant.id));
+						console.log(response);
+					})
+			}
+		})
+		if (!isSubscribed) {
+			// try {
+			// 	const sub = await axios.post('/api/addsub', {
+			// 		userid : user.id,
+			// 		merchantid : merchant.id
+			// 	})
+			// 	console.log(sub.data.Subs);
+			// 	setUserSubs(sub.data.Subs.map(Sub => Sub.Merchant));
+			// } catch (e) {
+			// 	console.log(e);
+			// }
+			axios.post('/api/addsub', {
+				userid : user.id,
+				merchantid : merchant.id
+			})
+			.then(sub => {
+				console.log(sub);
+				setUserSubs(sub.data.Subs.map(Sub => Sub.Merchant));
+			});
+		}
+	};
+	//
+	// logic for if the button is toggled on or off
 	const createSub = async () => {
 		const res = axios.post('/subs', {
 			toggled: true
 		})
 	}
+	const initiate = () => {
+		console.log('hello initiate');
+		console.log(userSubs);
+		console.log(merchant);
+		userSubs.forEach(sub => {
+			if (sub.id === merchant.id) {
+				setToggled(true);
+			}
+		})
+	};
+	useEffect(() => initiate(), []);
 
 
 	return (
 		<InputWrapper>
 			<Input
 			type="checkbox"
-			onClick={() => getSubs()}
-			onChange={(event) => setToggled(event.target.checked)}
+			onClick={() => subscribe()}
+			checked={toggled}
+			onChange={(event) => setToggled(!toggled)}
 			/>
 			<Slider />
 			<p style={{fontFamily: 'Ubuntu', fontSize: '11px', marginTop: '3px'}}>{toggled ? 'unfollow' : 'follow'}</p>
