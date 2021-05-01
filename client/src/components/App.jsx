@@ -16,7 +16,9 @@ import SideBar from './SideBarView/SideBar.jsx';
 import ListView from './ListView/ListView.jsx'
 import EditPopupProfile from './YourPopups/EditPopUp/EditPopupProfile.jsx';
 import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
-// import * as merchData from './openMerch.json';
+// import * as butt from './openMerch.json';
+// const merchData = butt.merchants;
+import ToggleSwitch from '../components/ToggleSwitch.jsx';
 import YourPopUps from './YourPopups/YourPopUps.jsx';
 import Login from './Login.jsx'
 import {
@@ -71,6 +73,7 @@ const App = () => {
   const [isLogged, setIsLogged] = useState(false);
   const [selectedMerchant, setSelectedMerchant ] = useState({name: '3', info: '2'});
   const [ merchData, setMerchData] = useState([{name: '3', info: '2'}]);
+  const [ userSubs, setUserSubs] = useState([{name: '3', info: '2'}]);
   //grab from database
   const getPops = () => {
     axios.get('/merchants')
@@ -79,6 +82,8 @@ const App = () => {
         setMerchData(response.data)
       })
   }
+
+  
 
   //{ myPops, setMyPops, user, setUser, sideBarDisplay, setSideBarDisplay, isLogged, setIsLogged, selectedMerchant, setSelectedMerchant }
   //check log in
@@ -100,7 +105,8 @@ const App = () => {
               picture: picture,
               id: addUser.data.id
             });
-          });
+          })
+          
       }
       else {
         setIsLogged(false);
@@ -110,7 +116,8 @@ const App = () => {
 }
 
   useEffect(() => logged(), []);
-  useState(() => getPops(), []);
+  useEffect(() => getPops(), []);
+ 
 
   return (
     <Router>
@@ -135,6 +142,8 @@ const App = () => {
             setSelectedMerchant={setSelectedMerchant}
             merchData={merchData}
             setMerchData={setMerchData}
+            userSubs={userSubs}
+            setUserSubs={setUserSubs}
            />}}/>
       <Route
         path="/login"
@@ -150,12 +159,25 @@ const Home = ({
   sideBarDisplay, setSideBarDisplay,
   isLogged, setIsLogged,
   selectedMerchant, setSelectedMerchant,
-  merchData, setMerchData }) => {
+  merchData, setMerchData, 
+  userSubs, setUserSubs
+}) => {
+
+  //grab user subs
+  const getSubs = () => {
+    axios.get(`/userid/${user.id}`)
+      .then((data => {
+        console.log(data)
+      }))
+      .catch(err => console.log(error))
+  }
+
+  //useEffect(() => getSubs(), []);
 
     return(
     <Well>
     <div>
-      <LogOutBtn href="/logout"> Logout </LogOutBtn>
+      {/* <LogOutBtn href="/logout"> Logout </LogOutBtn> */}
 
         <div className='sidebar-view'>
             <Welcome onClick={() => setSideBarDisplay(!sideBarDisplay)}>Pop^</Welcome>
@@ -201,6 +223,7 @@ const Home = ({
                     return <ListView
                       merchData={merchData}
                       selectMerchant={setSelectedMerchant}
+                      userSubs={userSubs}
                     />
                   }}
                 />
@@ -231,7 +254,23 @@ const Home = ({
                 />
                 <Route
                   path="/profile"
-                  render={(props => <MerchantProfile merchant={selectedMerchant}/>)}
+                  render={(props => {
+                    return (
+                      <div>
+                        <ToggleSwitch 
+                          merchant={selectedMerchant}
+                          user={user}
+                          setUserSubs={setUserSubs}
+                        />
+                        <MerchantProfile 
+                          merchant={selectedMerchant}
+                          user={user}
+                          userSubs={userSubs}
+                        />
+                      </div>
+                    )
+                  }
+                  )}
                 />
               </Switch>
             </div>

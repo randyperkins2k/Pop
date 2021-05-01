@@ -61,20 +61,33 @@ const Slider = styled.span`
 // if toggled change follow to true
 
 
-const ToggleSwitch = () => {
+const ToggleSwitch = ({ merchant, user, setUserSubs }) => {
 	const [toggled, setToggled] = useState(false);
 	const [subs, setSubs] = useState([]);
-	console.log('subs', subs)
+	//console.log('subs', subs)
 
 
 	const getSubs = async () => {
 		try {
-			const res = await axios.get('/subs')
+			const res = await axios.get('/api/subs')
 			const { data } = res;
 			console.log('subs data in call', data)
 			setSubs(data)
 		} catch (e) {
 			console.log('error in catch', e)
+		}
+	}
+
+	const subscribe = async () => {
+		try {
+			const sub = await axios.post('/api/addsub', {
+				userid : user.id,
+				merchantid : merchant.id
+			})
+			console.log(sub.data.Subs);
+			setUserSubs(sub.data.Subs);
+		} catch (e) {
+			console.log(e);
 		}
 	}
 //
@@ -90,7 +103,7 @@ const ToggleSwitch = () => {
 		<InputWrapper>
 			<Input
 			type="checkbox"
-			onClick={() => getSubs()}
+			onClick={() => subscribe()}
 			onChange={(event) => setToggled(event.target.checked)}
 			/>
 			<Slider />
