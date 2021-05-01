@@ -2,30 +2,48 @@ import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
 
-const LearnReact = styled.a`
-	color:white;
-	font-size: 36px;
-	color:${props => props.color ? props.color: 
-	'white'};
-	${props => props.primary && css`
-	font-size: 48px;
-	color: pink;
-
-	`}
-
-`
-
 const Body = styled.div`
 text-align: center;
 
 `
+const Heythere = styled.button`
+	color: pink;
+	font-family: 'Ubuntu';
+	padding: 6px 30px;
+	background-color: white;
+	font-size: 36px;
+	border-radius: 6px;
+	transition: ease 0.30s all;
+	${props => props.primary && css`
+	font-size: 38px;
+	opacity: .50;
+	`}
+	:hover {
+		font-size: 38px;
+		opacity: 0.5;
+	}
+`
+const Heyagain = styled(Heythere)`
+font size: 18px;
+color: white;
+`
+
 
 const Stylingsomething = () => {
-const [color, setColor] = useState('blue')
+// const [color, setColor] = useState('blue')
+const [primary, setPrimary] = useState(false)
 	return(
 
 	<Body>
-		<LearnReact primary src='https://dev.to/danicodes01/array-methods-5cnb'>LearnReact</LearnReact>
+		<div>
+		{/* <Heyagain>clickme</Heyagain> */}
+		<Heythere primary={primary} onClick={() => {
+			setPrimary(!primary)
+		}}
+		>
+			🧟‍♂️❤️</Heythere>
+
+		</div>
 	</Body>
 	)
 }
