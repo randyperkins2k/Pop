@@ -39,11 +39,66 @@ app.get('/google/callback', passport.authenticate('google', { failureRedirect: '
     res.redirect('/');
   }
 );
+
 // Logout route
 app.get('/logout', (req, res) => {
   req.logout();
+  console.log('hello from logout');
   res.redirect('/');
 });
+
+app.get('/login', (req, res) => {
+  res.send('<a href="/google"> Login </a>');
+})
+
+
+///////////////////////////
+////////////////////////////
+// ///////////////////////////
+// Users.belongsToMany(Merchants, { through: Subs });
+// Merchants.belongsToMany(Users, { through: Subs });
+
+// // Users.belongsToMany(Merchants, { through: 'Ownership' });
+// // Merchants.belongsToMany(Users, { through: 'Ownership' });
+
+
+// app.get('/api/jointest/:userid', (req, res) => {
+//   Users.findOne({id: req.params.userid})
+//     .then(user => {
+//       user.getMerchants()
+//         .then(merchs => {
+//           res.status(200).send(merchs)
+//         })
+//         .catch(err => console.log(err))
+//     })
+// });
+
+// app.post('/api/jointest', (req, res) => {
+//   const { userid, merchantid } = req.body;
+//   console.log('getting jointest request')
+//   Users.findOne({ where: {id: userid}}).then(user=> {
+//     Merchants.findOne({ where: {id: merchantid}})
+//       .then((merch => {
+//         user.setMerchants(merch)
+//          .then(data => {
+//            console.log(data)
+//            res.status(201).send(data.data)
+//          })
+//           .catch(err => {
+//             console.log(err)
+//             res.status(500).send(err)
+//           })
+//       }))
+//     .catch(err => {
+//       console.log(err)
+//       res.status(500).send(err)
+//     });
+//  });
+// });
+
+/////////////////////////////////
+//////////////////////////////////
+///////////////////////////////////
 
 //check to see if user is logged in
 app.get('/testing', (req, res)=>{
@@ -62,21 +117,12 @@ app.get('/failed', (req, res) => {
 
 /**
  * end authentication routes
- */
-
-// app.get('/login', (req, res) => {
-//   res.send('<a href="/google"> Login </a>');
-// })
-
-
-
 
 /**
  * Merchants
  */
-
 //get all merchants
- app.get('/merchants', (req, res) => {
+app.get('/merchants', (req, res) => {
   Merchants.findAll({
     where: {}
   })
@@ -92,15 +138,14 @@ app.post('/addmerchant/:name', (req, res) => {
     .then(results => {
       if (!results.length) {
         Merchants.create({ name })
-          .then(Merchants.findAll({
-            where: {}
-          })).then(data => res.send(data))
+          .then(data => res.send(data))
       } else {
         res.send(`${name} is already a pop-up`);
       }
     })
     .catch(err => res.send(err));
 });
+
 //delete merchant
 app.delete('/deletemerchant/:id', (req, res) => {
   const { id } = req.params;
@@ -118,10 +163,20 @@ app.delete('/deleteallmerchants', (req, res) => {
     .catch(err => res.send(err));
 });
 
+//close merchant
+app.put('/closemerchant/:id/', (req, res) => {
+  const { id } = req.params;
+  Merchants.update(
+    {isOpen: false},
+    {where: {id: id}}
+  )
+  .then(() => res.send('closed'))
+  .catch(err => res.send(err));
+});
+
 /**
  * Users
  */
-
 //get all users
 app.get('/users', (req, res) => {
   Users.findAll({
@@ -130,13 +185,52 @@ app.get('/users', (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
+
+//get user by email
+app.get('/user/:email', (req, res) => {
+  const { email } = req.params;
+  Users.findOne({
+    where: {email: email}
+  })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+
+//get user by id
+app.get('/userid/:id', (req, res) => {
+  const { id } = req.params;
+  Users.findOne({
+    where: {id: id},
+    include: {
+      model: Subs,
+      include: Merchants
+    }
+  },
+  )
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+
+//troubleshooting measure
 //add new user
-app.post('/adduser/:name', (req, res) => {
-  const { name } = req.params;
-  Users.create({ name })
-    .then(Users.findAll({
-      where: {}
-    })).then(data => res.send(data))
+app.post('/adduser/:name/:email/', (req, res) => {
+  const { name, email } = req.params;
+  Users.findAll({
+    where: {email: email},
+    include: {
+      model: Subs,
+      include: Merchants
+    }
+  })
+  .then(results => {
+    if (!results.length) {
+      Users.create({ name, email })
+        .then(data => res.send(data))
+    }
+    else {
+      res.send(results[0]);
+    }
+  })
     .catch(err => res.send(err));
 });
 //delete user
@@ -155,11 +249,9 @@ app.delete('/deleteallusers', (req, res) => {
     .then(res.send('no more users'))
     .catch(err => res.send(err));
 });
-
 /**
  * Products
  */
-
 //get all products
 app.get('/products', (req, res) => {
   Products.findAll({
@@ -168,14 +260,41 @@ app.get('/products', (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
-//add new product
-app.post('/addproduct/:name', (req, res) => {
-  const { name } = req.params;
-  Products.create({ name })
-    .then(Products.findAll({
-      where: {}
-    })).then(data => res.send(data))
+//get all products associated with merchant
+app.get('/menu/:merchant', (req, res) => {
+  const { merchant } = req.params;
+  Products.findAll({
+    where: {merchant: merchant}
+  })
+    .then(data => res.send(data))
     .catch(err => res.send(err));
+});
+//add new product
+app.post('/addproduct/:name/:merchant', (req, res) => {
+  const { name, merchant } = req.params;
+  Products.create({ name, merchant })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+//change price of product
+app.put('/changeprice/:id/:price', (req, res) => {
+  const { id, price } = req.params;
+  Products.update(
+    {price: price},
+    {returning: true, where: {id: id}}
+  )
+  .then(() => res.send('price updated'))
+  .catch(err => res.send(err));
+});
+//change status of product
+app.put('/changestatus/:id/:status', (req, res) => {
+  const { id, status } = req.params;
+  Products.update(
+    {status: status},
+    {returning: true, where: {id: id}}
+  )
+  .then(() => res.send('status updated'))
+  .catch(err => res.send(err));
 });
 //delete product
 app.delete('/deleteproduct/:id', (req, res) => {
@@ -194,27 +313,28 @@ app.delete('/deleteallproducts', (req, res) => {
     .catch(err => res.send(err));
 });
 
+
+
 /**
  * Reviews
  */
-
-//get all reviews
-app.get('/reviews', (req, res) => {
+//get all reviews for merchant
+app.get('/reviews/:merchant', (req, res) => {
   Reviews.findAll({
-    where: {}
+    where: {merchant: req.params.merchant}
   })
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
+
 //add new review
 app.post('/addreview/:user/:merchant/:rating/:message', (req, res) => {
   const { user, merchant, rating, message } = req.params;
   Reviews.create({ user, merchant, rating, message })
-    .then(Reviews.findAll({
-      where: {}
-    })).then(data => res.send(data))
+    .then(data => res.send(data))
     .catch(err => res.send(err));
 });
+
 //delete review
 app.delete('/deletereview/:id', (req, res) => {
   const { id } = req.params;
@@ -231,11 +351,9 @@ app.delete('/deleteallreviews', (req, res) => {
     .then(res.send('no more reviews'))
     .catch(err => res.send(err));
 });
-
 /**
  * Subs
  */
-
 //get all subs
 app.get('/subs', (req, res) => {
   Subs.findAll({
@@ -244,31 +362,50 @@ app.get('/subs', (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
-//add new sub
-app.post('/addsub/:user/:merchant', (req, res) => {
-  const { user, merchant } = req.params;
+//get all users subs
+app.get('/subs/:user', (req, res) => {
   Subs.findAll({
-    where: {user: user, merchant: merchant}
+    where: {user: req.params.user}
+  })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+
+//add new sub
+app.post('/api/addsub', (req, res) => {
+  const { userid, merchantid } = req.body;
+  Subs.findAll({
+    where: { userid, merchantid }
   })
     .then(results => {
+      console.log(results)
       if (!results.length) {
-        Subs.create({ user, merchant })
-          .then(Subs.findAll({
-            where: {}
-          })).then(data => res.send(data))
+        Subs.create({ UserId: userid, MerchantId: merchantid })
+          .then( () => {Users.findOne({
+            where: {id: userid},
+            include: {
+              model: Subs,
+              include: Merchants
+            }
+          }).then(data => {
+            console.log('this is the data', data);
+            res.send(data);
+          })
+          })
       } else {
         res.send(`${user} is already following ${merchant}`);
       }
     })
     .catch(err => res.send(err));
 });
+
 //delete sub
-app.delete('/deletesub/:id', (req, res) => {
-  const { id } = req.params;
+app.delete('/api/deletesub/:userId/:merchantId', (req, res) => {
+  const { userId, merchantId } = req.params;
   Subs.destroy({
-    where: {id: id}
+    where: {userId, merchantId}
   })
-    .then(res.send(`sub ${id} deleted`));
+    .then(res.send(`deleted`));
 });
 //delete all subs
 app.delete('/deleteallsubs', (req, res) => {
@@ -278,12 +415,10 @@ app.delete('/deleteallsubs', (req, res) => {
     .then(res.send('no more subs'))
     .catch(err => res.send(err));
 });
-
 /**
  * Admins
  */
-
-//get all subs
+//get all admins
 app.get('/admins', (req, res) => {
   Admins.findAll({
     where: {}
@@ -291,7 +426,7 @@ app.get('/admins', (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
-//add new sub
+//add new admin
 app.post('/addadmin/:user/:merchant', (req, res) => {
   const { user, merchant } = req.params;
   Admins.findAll({
@@ -309,7 +444,7 @@ app.post('/addadmin/:user/:merchant', (req, res) => {
     })
     .catch(err => res.send(err));
 });
-//delete sub
+//delete admin
 app.delete('/deleteadmin/:id', (req, res) => {
   const { id } = req.params;
   Admins.destroy({
@@ -317,7 +452,7 @@ app.delete('/deleteadmin/:id', (req, res) => {
   })
     .then(res.send(`admin ${id} deleted`));
 });
-//delete all subs
+//delete all admins
 app.delete('/deletealladmins', (req, res) => {
   Admins.destroy({
     where: {}
@@ -329,3 +464,4 @@ app.delete('/deletealladmins', (req, res) => {
 app.listen(PORT, (() => {
   console.log(`Server listening at http://127.0.0.1:${PORT}`);
 }));
+
