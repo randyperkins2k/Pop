@@ -400,12 +400,12 @@ app.post('/api/addsub', (req, res) => {
 });
 
 //delete sub
-app.delete('/deletesub/:id', (req, res) => {
-  const { id } = req.params;
+app.delete('/api/deletesub/:userId/:merchantId', (req, res) => {
+  const { userId, merchantId } = req.params;
   Subs.destroy({
-    where: {id: id}
+    where: {userId, merchantId}
   })
-    .then(res.send(`sub ${id} deleted`));
+    .then(res.send(`deleted`));
 });
 //delete all subs
 app.delete('/deleteallsubs', (req, res) => {
