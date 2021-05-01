@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import CreatePop from './CreatePop.jsx';
+import CreatePop from './YourPopups/CreatePop.jsx';
 import MyPops from './MyPops.jsx';
 import {
   GoogleMap,
@@ -20,7 +20,7 @@ import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
 // const merchData = butt.merchants;
 import ToggleSwitch from '../components/ToggleSwitch.jsx';
 import YourPopUps from './YourPopups/YourPopUps.jsx';
-import Login from './Login.jsx'
+import Login from './Login.jsx';
 import {
   HashRouter as Well,
   BrowserRouter as Router,
@@ -261,6 +261,12 @@ const Home = ({
                     )
                   }
                   )}
+                />
+                <Route
+                  path='/create'
+                  render={(props) => {
+                    return <CreatePop/>
+                  }}
                 />
               </Switch>
             </div>

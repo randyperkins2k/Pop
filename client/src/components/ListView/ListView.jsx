@@ -39,7 +39,7 @@ const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
     <div>
       <Open onClick={() => setOpenPopsView(true)}>Open Currently</Open>
       <Favs onClick={() => setOpenPopsView(false)}>Your Favorites</Favs>
-      <Search>Look up Pop up</Search>
+      <Search>Search</Search>
       <ul>
         { openPopsView ?
           merchData.map(merch => {
