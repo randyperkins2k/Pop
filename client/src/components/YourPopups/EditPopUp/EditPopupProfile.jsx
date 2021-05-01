@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import MerchantProfile from '../../MerchantProfileView/MerchantProfile.jsx';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 // import * as merchData from '../../openMerch.json';
 // const merchant = merchData.merchants[0];
 
 const EditPopupProfile = ({ merchant }) => {
+  const closeBusiness = () => {
+    axios.put(`/closemerchant/${merchant.id}`)
+      .catch(err => console.log('closing merchant error', err));
+  }
 
   return (
     <div>
@@ -18,7 +23,7 @@ const EditPopupProfile = ({ merchant }) => {
         <button>Upload a picture</button>
         <button>Edit Menu</button>
         <button>Add an owner</button>
-        <button></button>
+        <button onClick={() => closeBusiness()}>Close</button>
         <button></button>
         <button></button>
       </div>
