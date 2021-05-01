@@ -201,11 +201,15 @@ app.get('/userid/:id', (req, res) => {
   const { id } = req.params;
   Users.findOne({
     where: {id: id},
-    include: {
-      model: Subs,
-      include: Merchants
-    }
-  },
+    include:
+    [{
+      model: Admins,
+      include: Merchants,
+    },
+    {model: Subs,
+    include: Merchants}
+  ]
+  }
   )
     .then(data => res.send(data))
     .catch(err => res.send(err));
