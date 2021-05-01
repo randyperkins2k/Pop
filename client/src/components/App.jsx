@@ -74,6 +74,7 @@ const App = () => {
   const [selectedMerchant, setSelectedMerchant ] = useState({name: '3', info: '2'});
   const [ merchData, setMerchData] = useState([{name: '3', info: '2'}]);
   const [ userSubs, setUserSubs] = useState([]);
+  const [yourPopups, setYourPopups] = useState([]);
   //grab from database
   const getPops = () => {
     axios.get('/merchants')
@@ -98,7 +99,9 @@ const App = () => {
         .then(addUser => {
           console.log(addUser);
           let subs;
+          let yourPops;
           addUser.data.Subs ? setUserSubs(addUser.data.Subs.map(Sub => Sub.Merchant)) : setUserSubs([]);
+          addUser.data.Admins ? setYourPopups(addUser.data.Admins.map(Admin => Admin.Merchant)) : setYourPopups([]);
             setUser({
               name: displayName,
               email: email,
@@ -143,6 +146,8 @@ const App = () => {
             setMerchData={setMerchData}
             userSubs={userSubs}
             setUserSubs={setUserSubs}
+            yourPopups={yourPopups}
+            setYourPopups={setYourPopups}
            />}}/>
       <Route
         path="/login"
@@ -159,7 +164,7 @@ const Home = ({
   isLogged, setIsLogged,
   selectedMerchant, setSelectedMerchant,
   merchData, setMerchData,
-  userSubs, setUserSubs
+  userSubs, setUserSubs, yourPopups, setYourPopups
 }) => {
 
     return(
@@ -228,6 +233,8 @@ const Home = ({
                     return <YourPopUps
                       merchData={merchData}
                       selectMerch={setSelectedMerchant}
+                      yourPopups={yourPopups}
+                      setYourPopups={setYourPopups}
                       />
                   }}
                 />

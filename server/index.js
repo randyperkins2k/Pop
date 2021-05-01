@@ -221,10 +221,14 @@ app.post('/adduser/:name/:email/', (req, res) => {
   const { name, email } = req.params;
   Users.findAll({
     where: {email: email},
-    include: {
-      model: Subs,
-      include: Merchants
-    }
+    include:
+    [{
+      model: Admins,
+      include: Merchants,
+    },
+    {model: Subs,
+    include: Merchants}
+  ]
   })
   .then(results => {
     if (!results.length) {
@@ -434,11 +438,11 @@ app.get('/admins', (req, res) => {
 app.post('/addadmin/:user/:merchant', (req, res) => {
   const { user, merchant } = req.params;
   Admins.findAll({
-    where: {user: user, merchant: merchant}
+    where: {UserId: user, MerchantId: merchant}
   })
     .then(results => {
       if (!results.length) {
-        Admins.create({ user, merchant })
+        Admins.create({ UserId: user, MerchantId: merchant })
           .then(Admins.findAll({
             where: {}
           })).then(data => res.send(data))

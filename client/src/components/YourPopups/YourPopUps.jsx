@@ -14,9 +14,9 @@ const Create = styled.button`
   border-bottom-right-radius: 6px;
 `
 
-const YourPopUps = ({ merchData, selectMerch }) => {
-  const [ yourPopups, setYourPopups ] = useState();
-  const [ adminId, setAdminId] = useState(231);
+const YourPopUps = ({ yourPopups, setYourPopups, merchData, selectMerch, setSelectedMerchant }) => {
+  //const [ yourPopups, setYourPopups ] = useState();
+  //const [ adminId, setAdminId] = useState(231);
 
   // useEffect(() =>{
   //   setYourPopups(() => {
@@ -30,10 +30,10 @@ const YourPopUps = ({ merchData, selectMerch }) => {
       <Link to='/create'>
       <Create onClick={() => console.log(!!yourPopups)}>Create a Pop Up</Create>
       </Link>
-      { yourPopups ? 
+      { yourPopups ?
         yourPopups.map(merch => {
-          return <YourPopupView 
-            key={merch.id} 
+          return <YourPopupView
+            key={merch.id}
             merchant={merch}
             selectMerch={selectMerch}
             />
