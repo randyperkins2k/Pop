@@ -130,15 +130,18 @@ app.get('/merchants', (req, res) => {
     .catch(err => res.send(err));
 });
 //add new merchant
-app.post('/addmerchant/:name', (req, res) => {
-  const { name } = req.params;
+app.post('/api/merchant/add', (req, res) => {
+  const { name, category, info, website, adminId } = req.body;
   Merchants.findAll({
     where: {name: name}
   })
     .then(results => {
       if (!results.length) {
-        Merchants.create({ name })
-          .then(data => res.send(data))
+        Merchants.create({ name, category, info, website })
+          .then(newPopup => {
+            Admins.create({UserId: adminId, MerchantId: newPopup.id})
+            res.send(newPopup)
+          })
       } else {
         res.send(`${name} is already a pop-up`);
       }
@@ -147,7 +150,7 @@ app.post('/addmerchant/:name', (req, res) => {
 });
 
 //delete merchant
-app.delete('/deletemerchant/:id', (req, res) => {
+app.delete('/api/merchant/delete/:id', (req, res) => {
   const { id } = req.params;
   Merchants.destroy({
     where: {id: id}
