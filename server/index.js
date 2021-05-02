@@ -336,7 +336,7 @@ app.delete('/deleteallproducts', (req, res) => {
  */
 
 //get all reviews
-app.get('/api/reviews', (req, res) => {
+app.get('/api/reviews/getall', (req, res) => {
   Reviews.findAll({
     where: {}
   })
