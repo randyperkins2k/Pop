@@ -26,9 +26,6 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups }) => {
   const [ nameTakenBool, setNameTakenBool ] = useState(false);
   const [ pickCategoryBool, setPickCategoryBool ] = useState(false);
   const back = useHistory();
-  console.log(user.name);
-  console.log(user.id);
-  //console.log(user.id);
 
   const finalizeCreation =  async () => {
     try {
@@ -43,7 +40,6 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups }) => {
       if (!nameTakenBool && !pickCategoryBool) {
       //app.post('/api/merchant/add', (req, res) => {
         //const { name, category, info, website, adminId } = req.body;
-      console.log(user.id);
       const newPop = await axios.post('/api/merchant/add', {
         name: businessName,
         category: category,
@@ -51,8 +47,6 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups }) => {
         website: website,
         adminId: user.id
       })
-      console.log(newPop);
-      console.log(yourPopups);
       setYourPopups([newPop.data, ...yourPopups]);
       console.log('POP CREATED!')
       back.push('/yourpopups')
@@ -65,8 +59,7 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups }) => {
     }
   }
 
-
-  return (
+    return (
       <div>
         <h3>Business Name</h3>
         { nameTakenBool ? <h5 className='issue'>{`${businessName} is already taken!`}</h5> : ''}
