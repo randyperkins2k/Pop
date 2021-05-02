@@ -7,7 +7,7 @@ text-align: center;
 
 `
 const Heythere = styled.button`
-	color: pink;
+	color: #ffd1dc;
 	font-family: 'Ubuntu';
 	padding: 6px 30px;
 	background-color: white;

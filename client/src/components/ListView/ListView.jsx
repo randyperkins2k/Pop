@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components';
 const Open = styled.button`
   margin-top: 21px;
   margin-left: 36px;
+  margin-bottom: 2rem;
   color: black;
   font-family: 'Ubuntu';
   padding: 5px 16px;
@@ -17,7 +18,7 @@ const Open = styled.button`
 ${props => props.openPrimary && css`
 opacity: .5;
 color: black;
-background-color: pink;
+background-color: #ffd1dc;
 font-size: 11.25px;
 `}
 `
@@ -35,7 +36,7 @@ const Favs = styled.button`
   ${props => props.favPrimary && css`
 opacity: .5;
 color: black;
-background-color: pink;
+background-color: #ffd1dc;
 font-size: 11.25px;
 `}
 `
@@ -54,7 +55,7 @@ const Search = styled.button`
   ${props => props.sPUPrimary && css`
   opacity: .5;
   color: black;
-  background-color: pink;
+  background-color: #ffd1dc;
   font-size: 11.25px;
   `}
 `

@@ -51,7 +51,7 @@ transition: ease 0.01s all;
 ${props => props.lVPrimary && css`
 opacity: .5;
 color: black;
-background-color: pink;
+background-color: #ffd1dc;
 font-size: 14.25px;
 `}
 
@@ -71,7 +71,7 @@ transition: ease 0.01s all;
 ${props => props.mLPrimary && css`
 opacity: .5;
 color: black;
-background-color: pink;
+background-color: #ffd1dc;
 font-size: 14.25px;
 `}
 
