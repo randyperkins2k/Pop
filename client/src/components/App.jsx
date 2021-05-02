@@ -101,6 +101,7 @@ const App = () => {
           let subs;
           let yourPops;
           addUser.data.Subs ? setUserSubs(addUser.data.Subs.map(Sub => Sub.Merchant)) : setUserSubs([]);
+          console.log(addUser.data.Admins);
           addUser.data.Admins ? setYourPopups(addUser.data.Admins.map(Admin => Admin.Merchant)) : setYourPopups([]);
             setUser({
               name: displayName,
@@ -272,7 +273,12 @@ const Home = ({
                 <Route
                   path='/create'
                   render={(props) => {
-                    return <CreatePop/>
+                    return <CreatePop
+                      user={user}
+                      setUser={setUser}
+                      yourPopups={yourPopups}
+                      setYourPopups={setYourPopups}
+                    />
                   }}
                 />
               </Switch>

@@ -15,7 +15,7 @@ const Create = styled.button`
   border-bottom-right-radius: 6px;
 `
 
-const CreatePop = () => {
+const CreatePop = ({ user, setUser, yourPopups, setYourPopups }) => {
   const [ businessName, setBusinessName ] = useState('');
   const [ category, setCategory ] = useState();
   const [ info, setInfo ] = useState('');
@@ -26,11 +26,14 @@ const CreatePop = () => {
   const [ nameTakenBool, setNameTakenBool ] = useState(false);
   const [ pickCategoryBool, setPickCategoryBool ] = useState(false);
   const back = useHistory();
+  console.log(user.name);
+  console.log(user.id);
+  //console.log(user.id);
 
   const finalizeCreation =  async () => {
     try {
       const merchNames = await axios.get('/merchants');
-
+      //console.log(merchNames);
       !merchNames.data.filter(merch => businessName.toLowerCase() === merch.name.toLowerCase()).length ?
       console.log('there is no merchant with this name') :
       setNameTakenBool(true);
@@ -38,14 +41,27 @@ const CreatePop = () => {
       !category ? setPickCategoryBool(true) : setPickCategoryBool(false);
 
       if (!nameTakenBool && !pickCategoryBool) {
-      console.log('POP CREATED!') 
+      //app.post('/api/merchant/add', (req, res) => {
+        //const { name, category, info, website, adminId } = req.body;
+      console.log(user.id);
+      const newPop = await axios.post('/api/merchant/add', {
+        name: businessName,
+        category: category,
+        info: info,
+        website: website,
+        adminId: user.id
+      })
+      console.log(newPop);
+      console.log(yourPopups);
+      setYourPopups([newPop.data, ...yourPopups]);
+      console.log('POP CREATED!')
       back.push('/yourpopups')
       } else {
-        
+        console.log('choose category');
       }
 
     } catch (e) {
-      console.log(err);
+      console.log(e);
     }
   }
 
@@ -56,11 +72,12 @@ const CreatePop = () => {
         { nameTakenBool ? <h5 className='issue'>{`${businessName} is already taken!`}</h5> : ''}
         <input onChange={(e) => {
           setNameTakenBool(false);
+          console.log(e.target.value);
           setBusinessName(e.target.value);
           }}></input>
         <h3>Category</h3>
-        { 
-        pickCategoryBool ? 
+        {
+        pickCategoryBool ?
         <h5 className='issue'>{`You must pick a category!`}</h5>
         : ''}
         <select onChange={(e) => {
@@ -86,8 +103,8 @@ const CreatePop = () => {
         <h3></h3>
         <h3></h3>
         {
-          createConfirm ? 
-          <Confirmation 
+          createConfirm ?
+          <Confirmation
             text={`Create ${businessName}?`}
             yesContext={() => finalizeCreation()}
             noContext={() =>{
@@ -98,7 +115,7 @@ const CreatePop = () => {
           ''
         }
         {
-          cancelConfirm ? 
+          cancelConfirm ?
           <Confirmation
             text={'Cancel?'}
             yesContext={() => {
