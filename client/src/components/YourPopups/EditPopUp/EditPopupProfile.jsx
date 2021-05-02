@@ -5,14 +5,30 @@ import axios from 'axios';
 // import * as merchData from '../../openMerch.json';
 // const merchant = merchData.merchants[0];
 
-const EditPopupProfile = ({ merchant }) => {
+
+const EditPopupProfile = ({ merchant, merchData, setMerchData }) => {
+  const [openOrClosed, setOpenOrClosed] = useState('');
+
   const closeBusiness = () => {
     axios.put(`/closemerchant/${merchant.id}`)
+      .then(() => {
+        setOpenOrClosed(' is closed');
+        let merchants = merchData;
+        console.log(merchants);
+        console.log(merchant.id);
+        merchants.forEach(merch => {
+          if (merch.id === merchant.id) {
+            merch.isOpen = false;
+          }
+        })
+        setMerchData(merchants);
+      })
       .catch(err => console.log('closing merchant error', err));
   }
 
   const openBusiness = () => {
     axios.put(`/openmerchant/${merchant.id}`)
+      .then(() => setOpenOrClosed(' is open'))
       .catch(err => console.log('opening merchant error', err));
   }
 
@@ -31,7 +47,11 @@ const EditPopupProfile = ({ merchant }) => {
         <button onClick={() => closeBusiness()}>Close</button>
       </div>
       <div className='profilePreview'>
-        <MerchantProfile merchant={merchant}/>
+        <MerchantProfile
+          merchant={merchant}
+          openOrClosed={openOrClosed}
+          setOpenOrClosed={setOpenOrClosed}
+        />
       </div>
     </div>
   )

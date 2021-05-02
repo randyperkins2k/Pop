@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import ToggleSwitch from '../ToggleSwitch.jsx'
 import { Link } from 'react-router-dom';
 
-const MerchantProfile = ({ merchant, user, userSubs }) => {
+const MerchantProfile = ({ merchant, user, userSubs, openOrClosed, setOpenOrClosed }) => {
 
 
   return (
 
     <div>
       <div>
-        <h2>{merchant.name}</h2>
+        <h2>{merchant.name} {openOrClosed}</h2>
         <img/>
         <h2>Info</h2>
         <p>

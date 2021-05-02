@@ -290,7 +290,11 @@ const Home = ({
                 />
                 <Route
                   path='/edit'
-                  render={(props) => <EditPopupProfile merchant={selectedMerchant}/>}
+                  render={(props) => <EditPopupProfile
+                    merchant={selectedMerchant}
+                    merchData={merchData}
+                    setMerchData={setMerchData}
+                  />}
                 />
                 <Route
                   path="/profile"
