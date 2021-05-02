@@ -11,6 +11,11 @@ const EditPopupProfile = ({ merchant }) => {
       .catch(err => console.log('closing merchant error', err));
   }
 
+  const openBusiness = () => {
+    axios.put(`/openmerchant/${merchant.id}`)
+      .catch(err => console.log('opening merchant error', err));
+  }
+
   return (
     <div>
       <Link to='/yourpopups'>
@@ -18,7 +23,7 @@ const EditPopupProfile = ({ merchant }) => {
       </Link>
       <div className='controlPanel'>
         <h5>Control Panel</h5>
-        <button>Open for business</button>
+        <button onClick={() => openBusiness()}>Open for business</button>
         <button>Edit info</button>
         <button>Upload a picture</button>
         <button>Edit Menu</button>
