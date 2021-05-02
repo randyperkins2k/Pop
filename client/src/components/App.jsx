@@ -81,7 +81,7 @@ margin-top: 60px;
 font-family: 'Londrina Solid', cursive;
 color: #ffd1dc;
 text-align: center;
-margin-bottom: 4.5rem;
+margin-bottom: 2.6rem;
 `
 
 import axios from 'axios';
