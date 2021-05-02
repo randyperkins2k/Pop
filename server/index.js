@@ -124,7 +124,11 @@ app.get('/failed', (req, res) => {
 //get all merchants
 app.get('/merchants', (req, res) => {
   Merchants.findAll({
-    where: {}
+    where: {},
+    include: {
+      model: Reviews,
+      include: [Users]
+    }
   })
     .then(data => res.send(data))
     .catch(err => res.send(err));
@@ -330,18 +334,28 @@ app.delete('/deleteallproducts', (req, res) => {
 /**
  * Reviews
  */
-//get all reviews for merchant
-app.get('/reviews/:merchant', (req, res) => {
+
+//get all reviews
+app.get('/api/reviews', (req, res) => {
   Reviews.findAll({
-    where: {merchant: req.params.merchant}
+    where: {}
+  })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+
+//get all reviews for merchant
+app.get('api/reviews/:merchant', (req, res) => {
+  Reviews.findAll({
+    where: {MerchantId: req.params.merchant}
   })
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
 
 //add new review
-app.post('/addreview/:user/:merchant/:rating/:message', (req, res) => {
-  const { user, merchant, rating, message } = req.params;
+app.post('/api/reviews/addreview/', (req, res) => {
+  const { UserId, merchantId, rating, message } = req.body;
   Reviews.create({ user, merchant, rating, message })
     .then(data => res.send(data))
     .catch(err => res.send(err));
