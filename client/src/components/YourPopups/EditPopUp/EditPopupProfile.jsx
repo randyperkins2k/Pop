@@ -14,13 +14,11 @@ const EditPopupProfile = ({ merchant, merchData, setMerchData }) => {
       .then(() => {
         setOpenOrClosed(' is closed');
         let merchants = merchData;
-        console.log(merchants);
-        console.log(merchant.id);
         merchants.forEach(merch => {
           if (merch.id === merchant.id) {
             merch.isOpen = false;
           }
-        })
+        });
         setMerchData(merchants);
       })
       .catch(err => console.log('closing merchant error', err));
@@ -28,7 +26,16 @@ const EditPopupProfile = ({ merchant, merchData, setMerchData }) => {
 
   const openBusiness = () => {
     axios.put(`/openmerchant/${merchant.id}`)
-      .then(() => setOpenOrClosed(' is open'))
+      .then(() => {
+        setOpenOrClosed(' is open');
+        let merchants = merchData;
+        merchants.forEach(merch => {
+          if (merch.id === merchant.id) {
+            merch.isOpen = true;
+          }
+        });
+        setMerchData(merchants);
+      })
       .catch(err => console.log('opening merchant error', err));
   }
 
