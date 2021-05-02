@@ -3,28 +3,47 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const MerchantInfo = styled.button`
-  margin-left: 1px;
-  background-color: white;
-  border-style: solid;
-  border-width: 1px;
-  border-color: lightgray;
-  border-radius: 6px;
+  font-family: 'Ubuntu';
+  padding: 16px 80px;
+  font-size: 18px;
+  border-width: 0px;
+  margin-top: 5px;
+  border-color: transparent;
+  color: black;
+  border-radius: 100px;
+  background-color: transparent;
+
+`
+const Wrap = styled.div`
+  bacground-color: blue;
+`
+
+const Ul = styled.ul`
+margin-left:-54px;
+margin-top: 0px;
+background-color:#ffd1dc;
+
 `
 
 const MerchList = ({ merchant, selectMerchant }) => {
+  const { name } = merchant
 
   return (
+
+    <Wrap>
     <div className="merchant-listing">
-      <li>
+      <Ul>
         <img></img>
         <span></span>
-        <h2>{merchant.name}</h2>
-        <h2></h2>
+        <div></div>
         <Link to='/profile'>
-          <MerchantInfo onClick={() => selectMerchant(merchant)}>Merchant Info</MerchantInfo>
+          <MerchantInfo onClick={() => selectMerchant(merchant)}>{ name }</MerchantInfo>
         </Link>
-      </li>
+      </Ul>
     </div>
+
+    </Wrap>
+
   )
 };
 
