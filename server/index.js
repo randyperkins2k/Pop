@@ -130,15 +130,19 @@ app.get('/merchants', (req, res) => {
     .catch(err => res.send(err));
 });
 //add new merchant
-app.post('/addmerchant/:name', (req, res) => {
-  const { name } = req.params;
+app.post('/api/merchant/add', (req, res) => {
+  const { name, category, info, website, adminId, lat, lon } = req.body;
   Merchants.findAll({
     where: {name: name}
   })
     .then(results => {
       if (!results.length) {
-        Merchants.create({ name })
-          .then(data => res.send(data))
+        const isOpen = true;
+        Merchants.create({ name, category, info, website, lat, lon, isOpen })
+          .then(newPopup => {
+            Admins.create({UserId: adminId, MerchantId: newPopup.id})
+            res.send(newPopup)
+          })
       } else {
         res.send(`${name} is already a pop-up`);
       }
@@ -147,7 +151,7 @@ app.post('/addmerchant/:name', (req, res) => {
 });
 
 //delete merchant
-app.delete('/deletemerchant/:id', (req, res) => {
+app.delete('/api/merchant/delete/:id', (req, res) => {
   const { id } = req.params;
   Merchants.destroy({
     where: {id: id}
@@ -168,6 +172,17 @@ app.put('/closemerchant/:id/', (req, res) => {
   const { id } = req.params;
   Merchants.update(
     {isOpen: false},
+    {where: {id: id}}
+  )
+  .then(() => res.send('closed'))
+  .catch(err => res.send(err));
+});
+
+//open merchant
+app.put('/openmerchant/:id/', (req, res) => {
+  const { id } = req.params;
+  Merchants.update(
+    {isOpen: true},
     {where: {id: id}}
   )
   .then(() => res.send('closed'))
@@ -201,11 +216,15 @@ app.get('/userid/:id', (req, res) => {
   const { id } = req.params;
   Users.findOne({
     where: {id: id},
-    include: {
-      model: Subs,
-      include: Merchants
-    }
-  },
+    include:
+    [{
+      model: Admins,
+      include: Merchants,
+    },
+    {model: Subs,
+    include: Merchants}
+  ]
+  }
   )
     .then(data => res.send(data))
     .catch(err => res.send(err));
@@ -217,10 +236,14 @@ app.post('/adduser/:name/:email/', (req, res) => {
   const { name, email } = req.params;
   Users.findAll({
     where: {email: email},
-    include: {
-      model: Subs,
-      include: Merchants
-    }
+    include:
+    [{
+      model: Admins,
+      include: Merchants,
+    },
+    {model: Subs,
+    include: Merchants}
+  ]
   })
   .then(results => {
     if (!results.length) {
@@ -430,11 +453,11 @@ app.get('/admins', (req, res) => {
 app.post('/addadmin/:user/:merchant', (req, res) => {
   const { user, merchant } = req.params;
   Admins.findAll({
-    where: {user: user, merchant: merchant}
+    where: {UserId: user, MerchantId: merchant}
   })
     .then(results => {
       if (!results.length) {
-        Admins.create({ user, merchant })
+        Admins.create({ UserId: user, MerchantId: merchant })
           .then(Admins.findAll({
             where: {}
           })).then(data => res.send(data))

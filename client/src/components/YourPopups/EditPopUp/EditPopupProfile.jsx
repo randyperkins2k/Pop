@@ -24,8 +24,6 @@ const EditPopupProfile = ({ merchant }) => {
         <button>Edit Menu</button>
         <button>Add an owner</button>
         <button onClick={() => closeBusiness()}>Close</button>
-        <button></button>
-        <button></button>
       </div>
       <div className='profilePreview'>
         <MerchantProfile merchant={merchant}/>

@@ -69,6 +69,9 @@ const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
 
   return (
     <div>
+      <Open onClick={() => setOpenPopsView(true)}>Open Currently</Open>
+      <Favs onClick={() => setOpenPopsView(false)}>Your Favorites</Favs>
+      <Search>Search</Search>
       <Open
       openPrimary={openPrimary}
       onClick={() => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import CreatePop from './CreatePop.jsx';
+import CreatePop from './YourPopups/CreatePop.jsx';
 import MyPops from './MyPops.jsx';
 import {
   GoogleMap,
@@ -20,7 +20,7 @@ import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
 // const merchData = butt.merchants;
 import ToggleSwitch from '../components/ToggleSwitch.jsx';
 import YourPopUps from './YourPopups/YourPopUps.jsx';
-import Login from './Login.jsx'
+import Login from './Login.jsx';
 import {
   HashRouter as Well,
   BrowserRouter as Router,
@@ -94,6 +94,8 @@ const App = () => {
   const [selectedMerchant, setSelectedMerchant ] = useState({name: '3', info: '2'});
   const [ merchData, setMerchData] = useState([{name: '3', info: '2'}]);
   const [ userSubs, setUserSubs] = useState([]);
+  const [yourPopups, setYourPopups] = useState([]);
+  const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
   const [lVPrimary, setLVPrimary] = useState(false)
   const [mLPrimary, setMLPrimary] = useState(true)
   //grab from database
@@ -105,7 +107,7 @@ const App = () => {
       })
   }
 
-  //{ myPops, setMyPops, user, setUser, sideBarDisplay, setSideBarDisplay, isLogged, setIsLogged, selectedMerchant, setSelectedMerchant }
+
   //check log in
   const logged = () => {
     axios.get('/testing')
@@ -120,7 +122,10 @@ const App = () => {
         .then(addUser => {
           console.log(addUser);
           let subs;
+          let yourPops;
           addUser.data.Subs ? setUserSubs(addUser.data.Subs.map(Sub => Sub.Merchant)) : setUserSubs([]);
+          console.log(addUser.data.Admins);
+          addUser.data.Admins ? setYourPopups(addUser.data.Admins.map(Admin => Admin.Merchant)) : setYourPopups([]);
             setUser({
               name: displayName,
               email: email,
@@ -169,6 +174,10 @@ const App = () => {
             setMerchData={setMerchData}
             userSubs={userSubs}
             setUserSubs={setUserSubs}
+            yourPopups={yourPopups}
+            setYourPopups={setYourPopups}
+            currentLocMarker={currentLocMarker}
+            setCurrentLocMarker={setCurrentLocMarker}
            />}}/>
       <Route
         path="/login"
@@ -185,10 +194,11 @@ const Home = ({
   isLogged, setIsLogged,
   selectedMerchant, setSelectedMerchant,
   merchData, setMerchData,
-  userSubs, setUserSubs,
+  userSubs, setUserSubs, yourPopups, setYourPopups,
+  currentLocMarker, setCurrentLocMarker,
   lVPrimary, setLVPrimary,
   mLPrimary, setMLPrimary
-  
+
 }) => {
 
     return(
@@ -240,6 +250,8 @@ const Home = ({
                     mapElement={<div style={{height: '100%' }}/>}
                     merchData={merchData}
                     selectMerchant={setSelectedMerchant}
+                    currentLocMarker={currentLocMarker}
+                    setCurrentLocMarker={setCurrentLocMarker}
                     />
                 }}/>
                 <Route
@@ -265,6 +277,8 @@ const Home = ({
                     return <YourPopUps
                       merchData={merchData}
                       selectMerch={setSelectedMerchant}
+                      yourPopups={yourPopups}
+                      setYourPopups={setYourPopups}
                       />
                   }}
                 />
@@ -298,6 +312,21 @@ const Home = ({
                     )
                   }
                   )}
+                />
+                <Route
+                  path='/create'
+                  render={(props) => {
+                    return <CreatePop
+                      user={user}
+                      setUser={setUser}
+                      yourPopups={yourPopups}
+                      setYourPopups={setYourPopups}
+                      currentLocMarker={currentLocMarker}
+                      setCurrentLocMarker={setCurrentLocMarker}
+                      merchData={merchData}
+                      setMerchData={setMerchData}
+                    />
+                  }}
                 />
               </Switch>
             </div>

@@ -24,9 +24,9 @@ const options = {
   disableDefaultUI: true,
 }
 
-const Map = ({ merchData, selectMerchant }) => {
+const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker }) => {
   const [ selectedPopUp, setSelectedPopUp ] = useState(null);
-  const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
+  //const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries
@@ -46,6 +46,8 @@ const Map = ({ merchData, selectMerchant }) => {
 
 
   return (
+    <div>
+      <h5>Touch map to set location</h5>
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={12}
@@ -57,7 +59,8 @@ const Map = ({ merchData, selectMerchant }) => {
           lng: event.latLng.lng(),
           time: new Date()
         })
-        console.log(currentLocMarker);
+        alert('location saved');
+        //console.log(currentLocMarker);
         //why even bother with state right here?
         //why not just call an end point with event.latLng.lat() and event.latLng.lng()?
       }}
@@ -101,6 +104,7 @@ const Map = ({ merchData, selectMerchant }) => {
         )
       }
     </GoogleMap>
+    </div>
     // <GoogleMap
     //   defaultZoom={13.5}
     //   defaultCenter={{lat: 29.956124, lng: -90.090509}}
