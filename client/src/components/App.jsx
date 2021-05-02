@@ -85,7 +85,7 @@ const App = () => {
       })
   }
 
-  //{ myPops, setMyPops, user, setUser, sideBarDisplay, setSideBarDisplay, isLogged, setIsLogged, selectedMerchant, setSelectedMerchant }
+
   //check log in
   const logged = () => {
     axios.get('/testing')
