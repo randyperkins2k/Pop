@@ -7,10 +7,17 @@ import {
   InfoWindow
 } from '@react-google-maps/api';
 import Window from '../MapView/Window.jsx'
-
+import styled from 'styled-components'
 //import map from '../popup/foodmarker.png'
 
 const libraries = ["places"];
+
+const TouchMap = styled.div`
+font-family: 'Ubuntu';
+margin-left: 84px;
+margin-top: 30px;
+opacity: .5;
+`
 
 const mapContainerStyle = {
   width: '100vw',
@@ -24,7 +31,7 @@ const options = {
   disableDefaultUI: true,
 }
 
-const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker }) => {
+const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker, setMLPrimary }) => {
   const [ selectedPopUp, setSelectedPopUp ] = useState(null);
   //const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
   const {isLoaded, loadError} = useLoadScript({
@@ -47,7 +54,7 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker 
 
   return (
     <div>
-      <h5>Touch map to set location</h5>
+      <TouchMap>Touch map to set location</TouchMap>
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={12}
@@ -99,7 +106,8 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker 
            <Window
               merchant={selectedPopUp}
               selectMerchant={selectMerchant}
-           />
+              setMLPrimary={setMLPrimary}
+              />
           </InfoWindow>
         )
       }

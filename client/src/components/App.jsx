@@ -216,7 +216,12 @@ const Home = ({
               <Route
                 path='/'
                 render={(props) => {
-                  return <SideBar close={setSideBarDisplay}/>
+                  return <SideBar 
+                  lVPrimary={lVPrimary}
+                  setLVPrimary={setLVPrimary}
+                  mLPrimary={mLPrimary}
+                  setMLPrimary={setMLPrimary}
+                  close={setSideBarDisplay}/>
                 }}
               />
             }
@@ -252,6 +257,7 @@ const Home = ({
                     selectMerchant={setSelectedMerchant}
                     currentLocMarker={currentLocMarker}
                     setCurrentLocMarker={setCurrentLocMarker}
+                    setMLPrimary={setMLPrimary}
                     />
                 }}/>
                 <Route
@@ -298,6 +304,7 @@ const Home = ({
                     return (
                       <div>
                         <ToggleSwitch
+                          style={{marginLeft: '75px'}}
                           merchant={selectedMerchant}
                           user={user}
                           userSubs={userSubs}
