@@ -355,8 +355,8 @@ app.get('api/reviews/:merchant', (req, res) => {
 
 //add new review
 app.post('/api/reviews/addreview/', (req, res) => {
-  const { UserId, merchantId, rating, message } = req.body;
-  Reviews.create({ user, merchant, rating, message })
+  const { UserId, MerchantId, rating, message } = req.body;
+  Reviews.create({ UserId, MerchantId, rating, message })
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });

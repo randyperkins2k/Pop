@@ -1,9 +1,37 @@
 import React, { useState } from 'react';
 import ToggleSwitch from '../ToggleSwitch.jsx'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const MerchantProfile = ({ merchant, user, userSubs }) => {
+  const [reviews, setReviews] = useState(merchant.Reviews);
+  const [reviewText, setReviewText] = useState('');
 
+  const submitReview = () => {
+    console.log(reviewText);
+    /**
+     * //add new review
+       app.post('/api/reviews/addreview/', (req, res) => {
+       const { UserId, merchantId, rating, message } = req.body;
+       .then(data => res.send(data))
+        .catch(err => res.send(err));
+});
+     */
+    axios.post('/api/reviews/addReview', {
+      UserId: user.id,
+      MerchantId: merchant.id,
+      rating: 5,
+      message: reviewText
+    })
+    .then((results) => {
+      const newReview = results.data;
+      newReview.User = {};
+      newReview.User.name = user.name;
+      console.log(newReview);
+      setReviews([newReview, ...reviews]);
+    })
+    .catch(e => console.log(e));
+  };
 
   return (
 
@@ -24,13 +52,13 @@ const MerchantProfile = ({ merchant, user, userSubs }) => {
           e.preventDefault();
 
         }}>
-          <input type="text" maxlength="255"></input>
-          <button>Submit</button>
+          <input type="text" value={reviewText} onChange={(e)=>setReviewText(e.target.value)} maxlength="255"></input>
+          <button onClick={submitReview}>Submit</button>
         </form>
       </div>
       <div>
         <h5>Reviews:</h5>
-        {merchant.Reviews.map(review => <p><b>{review.User.name}</b>: {review.message}</p>)}
+        {reviews.map(review => <p><b>{review.User.name}</b>: {review.message}</p>)}
       </div>
     </div>
   )
