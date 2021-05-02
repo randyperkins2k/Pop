@@ -178,6 +178,17 @@ app.put('/closemerchant/:id/', (req, res) => {
   .catch(err => res.send(err));
 });
 
+//open merchant
+app.put('/openmerchant/:id/', (req, res) => {
+  const { id } = req.params;
+  Merchants.update(
+    {isOpen: true},
+    {where: {id: id}}
+  )
+  .then(() => res.send('closed'))
+  .catch(err => res.send(err));
+});
+
 /**
  * Users
  */
