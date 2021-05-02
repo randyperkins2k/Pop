@@ -15,7 +15,7 @@ const Create = styled.button`
   border-bottom-right-radius: 6px;
 `
 
-const CreatePop = ({ user, setUser, yourPopups, setYourPopups }) => {
+const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker, setCurrentLocMarker }) => {
   const [ businessName, setBusinessName ] = useState('');
   const [ category, setCategory ] = useState();
   const [ info, setInfo ] = useState('');
@@ -26,11 +26,11 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups }) => {
   const [ nameTakenBool, setNameTakenBool ] = useState(false);
   const [ pickCategoryBool, setPickCategoryBool ] = useState(false);
   const back = useHistory();
+  console.log(currentLocMarker);
 
   const finalizeCreation =  async () => {
     try {
       const merchNames = await axios.get('/merchants');
-      //console.log(merchNames);
       !merchNames.data.filter(merch => businessName.toLowerCase() === merch.name.toLowerCase()).length ?
       console.log('there is no merchant with this name') :
       setNameTakenBool(true);
@@ -45,7 +45,9 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups }) => {
         category: category,
         info: info,
         website: website,
-        adminId: user.id
+        adminId: user.id,
+        lat: currentLocMarker.lat,
+        lon: currentLocMarker.lng
       })
       setYourPopups([newPop.data, ...yourPopups]);
       console.log('POP CREATED!')

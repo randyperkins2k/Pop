@@ -75,6 +75,7 @@ const App = () => {
   const [ merchData, setMerchData] = useState([{name: '3', info: '2'}]);
   const [ userSubs, setUserSubs] = useState([]);
   const [yourPopups, setYourPopups] = useState([]);
+  const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
   //grab from database
   const getPops = () => {
     axios.get('/merchants')
@@ -149,6 +150,8 @@ const App = () => {
             setUserSubs={setUserSubs}
             yourPopups={yourPopups}
             setYourPopups={setYourPopups}
+            currentLocMarker={currentLocMarker}
+            setCurrentLocMarker={setCurrentLocMarker}
            />}}/>
       <Route
         path="/login"
@@ -165,7 +168,8 @@ const Home = ({
   isLogged, setIsLogged,
   selectedMerchant, setSelectedMerchant,
   merchData, setMerchData,
-  userSubs, setUserSubs, yourPopups, setYourPopups
+  userSubs, setUserSubs, yourPopups, setYourPopups,
+  currentLocMarker, setCurrentLocMarker
 }) => {
 
     return(
@@ -209,6 +213,8 @@ const Home = ({
                     mapElement={<div style={{height: '100%' }}/>}
                     merchData={merchData}
                     selectMerchant={setSelectedMerchant}
+                    currentLocMarker={currentLocMarker}
+                    setCurrentLocMarker={setCurrentLocMarker}
                     />
                 }}/>
                 <Route
@@ -278,6 +284,8 @@ const Home = ({
                       setUser={setUser}
                       yourPopups={yourPopups}
                       setYourPopups={setYourPopups}
+                      currentLocMarker={currentLocMarker}
+                      setCurrentLocMarker={setCurrentLocMarker}
                     />
                   }}
                 />

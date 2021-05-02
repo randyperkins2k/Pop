@@ -131,13 +131,14 @@ app.get('/merchants', (req, res) => {
 });
 //add new merchant
 app.post('/api/merchant/add', (req, res) => {
-  const { name, category, info, website, adminId } = req.body;
+  const { name, category, info, website, adminId, lat, lon } = req.body;
   Merchants.findAll({
     where: {name: name}
   })
     .then(results => {
       if (!results.length) {
-        Merchants.create({ name, category, info, website })
+        const isOpen = true;
+        Merchants.create({ name, category, info, website, lat, lon, isOpen })
           .then(newPopup => {
             Admins.create({UserId: adminId, MerchantId: newPopup.id})
             res.send(newPopup)
