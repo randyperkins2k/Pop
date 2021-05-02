@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 
 const MerchantProfile = ({ merchant, user, userSubs }) => {
 
-  
+
   return (
 
     <div>
       <div>
-        <h5>{merchant.name}</h5>
+        <h2>{merchant.name}</h2>
         <img/>
         <h2>Info</h2>
         <p>
