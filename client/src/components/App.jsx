@@ -286,6 +286,8 @@ const Home = ({
                       setYourPopups={setYourPopups}
                       currentLocMarker={currentLocMarker}
                       setCurrentLocMarker={setCurrentLocMarker}
+                      merchData={merchData}
+                      setMerchData={setMerchData}
                     />
                   }}
                 />

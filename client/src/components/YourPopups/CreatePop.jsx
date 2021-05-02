@@ -15,7 +15,7 @@ const Create = styled.button`
   border-bottom-right-radius: 6px;
 `
 
-const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker, setCurrentLocMarker }) => {
+const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker, setCurrentLocMarker, merchData, setMerchData }) => {
   const [ businessName, setBusinessName ] = useState('');
   const [ category, setCategory ] = useState();
   const [ info, setInfo ] = useState('');
@@ -50,6 +50,7 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
         lon: currentLocMarker.lng
       })
       setYourPopups([newPop.data, ...yourPopups]);
+      setMerchData([newPop.data, ...merchData]);
       console.log('POP CREATED!')
       back.push('/yourpopups')
       } else {
