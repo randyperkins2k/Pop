@@ -72,4 +72,6 @@ Gimp
 Cloudinary
 
 Webpack / DotEnv / Babel
+Github Actions
+
 [* more tech to be added in final two weeks.*]
