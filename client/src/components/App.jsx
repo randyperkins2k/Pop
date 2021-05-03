@@ -71,11 +71,11 @@ const App = () => {
   const [user, setUser] = useState();
   const [sideBarDisplay, setSideBarDisplay] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
-  const [selectedMerchant, setSelectedMerchant ] = useState({name: '3', info: '2'});
+  const [selectedMerchant, setSelectedMerchant ] = useState([null]);
   const [ merchData, setMerchData] = useState([{name: '3', info: '2'}]);
   const [ userSubs, setUserSubs] = useState([]);
   const [yourPopups, setYourPopups] = useState([]);
-  const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
+  const [ currentLocMarker, setCurrentLocMarker ] = useState([{lat: 29.956124, lon: -90.090509}]);
   //grab from database
   const getPops = () => {
     axios.get('/merchants')

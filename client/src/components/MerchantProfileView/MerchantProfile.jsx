@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ToggleSwitch from '../ToggleSwitch.jsx'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const MerchantProfile = ({ merchant, user, userSubs }) => {
-  const [reviews, setReviews] = useState(merchant.Reviews);
+  const [reviews, setReviews] = useState([]);
+  //const [reviews, setReviews] = useState(merchant.Reviews);
+  const findReviews = () => {
+    if (merchant.Reviews) {
+      setReviews(merchant.Reviews);
+    }
+  };
+  //useEffect(() => logged(), []);
+  useEffect(() =>findReviews(), []);
   const [reviewText, setReviewText] = useState('');
 
   const submitReview = () => {
