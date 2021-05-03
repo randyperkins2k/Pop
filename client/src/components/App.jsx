@@ -29,41 +29,61 @@ import {
   Link,
   Redirect,
 } from 'react-router-dom';
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import Stylingsomething from './Stylingsomething.jsx'
 
 // const MapView = withScriptjs(withGoogleMap(Map));
 
 const ListViewButton = styled.button`
-  margin-left: -1px;
-  background-color: white;
-  border-style: solid;
-  border-width: 1px;
-  border-color: lightgray;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
+margin-left: 0px;
+display: "flex";
+justify-content: center
+align-items: 'center';
+color: black;
+font-family: 'Ubuntu';
+padding: 6px 16px;
+background-color: white;
+font-size: 14px;
+border-radius: 6px;
+border-width: 1px;
+border-color: lightgray;
+transition: ease 0.01s all;
+${props => props.lVPrimary && css`
+opacity: .5;
+color: black;
+background-color: #ffd1dc;
+font-size: 14.25px;
+`}
+
 
 `
 const MapViewButton = styled.button`
-  margin-left: 98px;
-  background-color: white;
-  border-style: solid;
-  border-width: 1px;
-  border-color: lightgray;
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
+margin-left: 76px;
+color: black;
+font-family: 'Ubuntu';
+padding: 6px 16px;
+background-color: white;
+font-size: 14px;
+border-radius: 6px;
+border-width: 1px;
+border-color: lightgray;
+transition: ease 0.01s all;
+${props => props.mLPrimary && css`
+opacity: .5;
+color: black;
+background-color: #ffd1dc;
+font-size: 14.25px;
+`}
+
 `
 const Welcome = styled.h1`
+margin-top: 60px;
 font-family: 'Londrina Solid', cursive;
-text-align: center;
 color: #ffd1dc;
-margin-bottom: 4.5rem;
+text-align: center;
+margin-bottom: 2.6rem;
 `
 
-const LogOutBtn = styled.a`
-font-family: 'Londrina Outline', cursive;
-color: black;
-background-color: white;
-`
 import axios from 'axios';
 
 const App = () => {
@@ -74,6 +94,10 @@ const App = () => {
   const [selectedMerchant, setSelectedMerchant ] = useState({name: '3', info: '2'});
   const [ merchData, setMerchData] = useState([{name: '3', info: '2'}]);
   const [ userSubs, setUserSubs] = useState([]);
+  const [yourPopups, setYourPopups] = useState([]);
+  const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
+  const [lVPrimary, setLVPrimary] = useState(false)
+  const [mLPrimary, setMLPrimary] = useState(true)
   //grab from database
   const getPops = () => {
     axios.get('/merchants')
@@ -83,7 +107,7 @@ const App = () => {
       })
   }
 
-  //{ myPops, setMyPops, user, setUser, sideBarDisplay, setSideBarDisplay, isLogged, setIsLogged, selectedMerchant, setSelectedMerchant }
+
   //check log in
   const logged = () => {
     axios.get('/testing')
@@ -98,7 +122,10 @@ const App = () => {
         .then(addUser => {
           console.log(addUser);
           let subs;
+          let yourPops;
           addUser.data.Subs ? setUserSubs(addUser.data.Subs.map(Sub => Sub.Merchant)) : setUserSubs([]);
+          console.log(addUser.data.Admins);
+          addUser.data.Admins ? setYourPopups(addUser.data.Admins.map(Admin => Admin.Merchant)) : setYourPopups([]);
             setUser({
               name: displayName,
               email: email,
@@ -129,6 +156,10 @@ const App = () => {
         exact path="/"
         render={props => {
           return <Home
+            lVPrimary={lVPrimary}
+            setLVPrimary={setLVPrimary}
+            mLPrimary={mLPrimary}
+            setMLPrimary={setMLPrimary}
             myPops={myPops}
             setMyProps={setMyPops}
             user={user}
@@ -143,6 +174,10 @@ const App = () => {
             setMerchData={setMerchData}
             userSubs={userSubs}
             setUserSubs={setUserSubs}
+            yourPopups={yourPopups}
+            setYourPopups={setYourPopups}
+            currentLocMarker={currentLocMarker}
+            setCurrentLocMarker={setCurrentLocMarker}
            />}}/>
       <Route
         path="/login"
@@ -159,7 +194,11 @@ const Home = ({
   isLogged, setIsLogged,
   selectedMerchant, setSelectedMerchant,
   merchData, setMerchData,
-  userSubs, setUserSubs
+  userSubs, setUserSubs, yourPopups, setYourPopups,
+  currentLocMarker, setCurrentLocMarker,
+  lVPrimary, setLVPrimary,
+  mLPrimary, setMLPrimary
+
 }) => {
 
     return(
@@ -177,7 +216,12 @@ const Home = ({
               <Route
                 path='/'
                 render={(props) => {
-                  return <SideBar close={setSideBarDisplay}/>
+                  return <SideBar 
+                  lVPrimary={lVPrimary}
+                  setLVPrimary={setLVPrimary}
+                  mLPrimary={mLPrimary}
+                  setMLPrimary={setMLPrimary}
+                  close={setSideBarDisplay}/>
                 }}
               />
             }
@@ -187,10 +231,18 @@ const Home = ({
             className='main'
             >
             <Link to='/'>
-              <MapViewButton >Map view</MapViewButton>
+              <MapViewButton  mLPrimary={mLPrimary} onClick={() => {
+                    setMLPrimary(!mLPrimary)
+                    setLVPrimary(false)
+                  }}
+                    >MAP VIEW</MapViewButton>
             </Link>
             <Link to='/listview'>
-              <ListViewButton>List view</ListViewButton>
+              <ListViewButton lVPrimary={lVPrimary} onClick={() => {
+                    setLVPrimary(!lVPrimary)
+                    setMLPrimary(false)
+                  }}>
+                    LIST VIEW</ListViewButton>
             </Link>
               <Switch>
                 <Route
@@ -203,6 +255,9 @@ const Home = ({
                     mapElement={<div style={{height: '100%' }}/>}
                     merchData={merchData}
                     selectMerchant={setSelectedMerchant}
+                    currentLocMarker={currentLocMarker}
+                    setCurrentLocMarker={setCurrentLocMarker}
+                    setMLPrimary={setMLPrimary}
                     />
                 }}/>
                 <Route
@@ -228,6 +283,8 @@ const Home = ({
                     return <YourPopUps
                       merchData={merchData}
                       selectMerch={setSelectedMerchant}
+                      yourPopups={yourPopups}
+                      setYourPopups={setYourPopups}
                       />
                   }}
                 />
@@ -239,7 +296,11 @@ const Home = ({
                 />
                 <Route
                   path='/edit'
-                  render={(props) => <EditPopupProfile merchant={selectedMerchant}/>}
+                  render={(props) => <EditPopupProfile
+                    merchant={selectedMerchant}
+                    merchData={merchData}
+                    setMerchData={setMerchData}
+                  />}
                 />
                 <Route
                   path="/profile"
@@ -247,6 +308,7 @@ const Home = ({
                     return (
                       <div>
                         <ToggleSwitch
+                          style={{marginLeft: '75px'}}
                           merchant={selectedMerchant}
                           user={user}
                           userSubs={userSubs}
@@ -265,7 +327,16 @@ const Home = ({
                 <Route
                   path='/create'
                   render={(props) => {
-                    return <CreatePop/>
+                    return <CreatePop
+                      user={user}
+                      setUser={setUser}
+                      yourPopups={yourPopups}
+                      setYourPopups={setYourPopups}
+                      currentLocMarker={currentLocMarker}
+                      setCurrentLocMarker={setCurrentLocMarker}
+                      merchData={merchData}
+                      setMerchData={setMerchData}
+                    />
                   }}
                 />
               </Switch>
