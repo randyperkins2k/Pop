@@ -282,9 +282,12 @@ const Home = ({
                   render={(props) => {
                     return <YourPopUps
                       merchData={merchData}
+                      setMerchData={setMerchData}
                       selectMerch={setSelectedMerchant}
                       yourPopups={yourPopups}
                       setYourPopups={setYourPopups}
+                      userSubs={userSubs}
+                      setUserSubs={setUserSubs}
                       />
                   }}
                 />

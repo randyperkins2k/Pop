@@ -33,7 +33,7 @@ const YourPopWrap = styled.div`
   }
 `
 
-const YourPopUps = ({ yourPopups, setYourPopups, merchData, selectMerch, setSelectedMerchant }) => {
+const YourPopUps = ({ yourPopups, setYourPopups, merchData, setMerchData, selectMerch, setSelectedMerchant, userSubs, setUserSubs }) => {
   const [createPopUpPrimary, setCreatePopUpPrimary] = useState(false)
   //const [ yourPopups, setYourPopups ] = useState();
   //const [ adminId, setAdminId] = useState(231);
@@ -48,8 +48,8 @@ const YourPopUps = ({ yourPopups, setYourPopups, merchData, selectMerch, setSele
     <YourPopWrap>
       <h5>Your pop ups</h5>
       <Link to='/create'>
-      <Create 
-      createPopUpPrimary={createPopUpPrimary} 
+      <Create
+      createPopUpPrimary={createPopUpPrimary}
       onClick={() => {
         console.log(!!yourPopups)
         setCreatePopUpPrimary(!createPopUpPrimary)
@@ -62,7 +62,14 @@ const YourPopUps = ({ yourPopups, setYourPopups, merchData, selectMerch, setSele
               key={merch.id}
               merchant={merch}
               selectMerch={selectMerch}
-              />
+              merchData={merchData}
+              setMerchData={setMerchData}
+              selectMerch={setSelectedMerchant}
+              yourPopups={yourPopups}
+              setYourPopups={setYourPopups}
+              userSubs={userSubs}
+              setUserSubs={setUserSubs}
+          />
             })
             :
             <h3>You don't own any Pop Ups</h3>
