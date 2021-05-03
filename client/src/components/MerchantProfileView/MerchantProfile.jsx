@@ -56,7 +56,7 @@ margin-top: 30px;
 
 
 
-const MerchantProfile = ({ merchant, user, userSubs }) => {
+const MerchantProfile = ({ merchant, user, userSubs, openOrClosed, setOpenOrClosed }) => {
   const [ locatePrimary, setLocatePrimary ] = useState(false)
   const [ viewMenuPrimary, setViewMenuPrimary ] = useState(false)
   console.log('viewMenuPrimary', viewMenuPrimary)
@@ -67,14 +67,14 @@ const MerchantProfile = ({ merchant, user, userSubs }) => {
 
     <MerchantProWrap>
       <div>
-        <H2>{merchant.name}</H2>
+        <h2>{merchant.name} {openOrClosed}</h2>
         <img/>
         <H2>Info</H2>
         <p>
           {merchant.info}
         </p>
       </div>
-      <LocateBtn 
+      <LocateBtn
       locatePrimary={locatePrimary}
       onClick={() => {
         setLocatePrimary(!locatePrimary)
