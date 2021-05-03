@@ -20,28 +20,48 @@ const styles = {
   }
 }
 
-const SideBar = ({ close }) => {
+const SideBar = ({ close, setMLPrimary, setLVPrimary }) => {
 
   return (
     <div style={styles.main} className='sidebar'>
       <ul styles={styles.links}>
         <Link to='/' exact='true'>
-          <a onClick={() => close(false)}>PopUps</a> 
+          <a onClick={() => {
+            close(false)
+            setLVPrimary(false)
+            setMLPrimary(false)
+            }}>PopUps</a> 
         </Link>
         <br/>
         <Link to='/yourprofile'>
-          <a onClick={() => close(false)}>Your Profile</a> 
+          <a onClick={() => {
+            close(false)
+            setLVPrimary(false)
+            setMLPrimary(false)
+            }}>Your Profile</a> 
         </Link>
         <br/>
         <Link to='/yourpopups'>
-          <a onClick={() => close(false)}>Your PopUps</a> 
+          <a onClick={() => {
+            close(false)
+            setLVPrimary(false)
+            setMLPrimary(false)
+          }}>Your PopUps</a>
         </Link>
         <br/>
         <Link to='/settings'>
-          <a onClick={() => close(false)}>Settings</a> 
+          <a onClick={() => {
+            close(false)
+            setLVPrimary(false)
+            setMLPrimary(false)
+          }}>Settings</a>
         </Link>
         <br/>
-          <a href="/logout" onClick={() => close(false)}>Logout</a> 
+          <a href="/logout" onClick={() => {
+            close(false)
+            setLVPrimary(false)
+            setMLPrimary(false)
+            }}>Logout</a>
       </ul>
     </div>
   )
