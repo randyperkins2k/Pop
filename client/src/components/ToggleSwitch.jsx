@@ -5,6 +5,8 @@ import axios from 'axios';
 
 const InputWrapper = styled.label`
 	position: relative;
+	margin-left: 151px;
+	margin-top: 30px;
 
 `
 

@@ -1,20 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import YourPopupView from './YourPopupView.jsx';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import CreatePop from './CreatePop.jsx'
 
 const Create = styled.button`
-  margin-left: -1px;
+  color: black;
+  font-family: 'Ubuntu';
+  padding: 5px 16px;
   background-color: white;
-  border-style: solid;
+  font-size: 11px;
+  border-radius: 6px;
   border-width: 1px;
   border-color: lightgray;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
+  transition: ease 0.01s all;
+  ${props => props.createPopUpPrimary && css`
+  opacity: .5;
+  color: black;
+  background-color: #ffd1dc;
+  font-size: 11.25px;
+  `}
+`
+const YourPopWrap = styled.div`
+  margin-top: 60px;
+  text-align: center;
+  font-family: 'Ubuntu';
+  div {
+    margin-top: 30px;
+    margin-bottom:30px;
+    color: #ffd1dc;
+    margin-bottom: 30px:
+  }
 `
 
 const YourPopUps = ({ yourPopups, setYourPopups, merchData, selectMerch, setSelectedMerchant }) => {
+  const [createPopUpPrimary, setCreatePopUpPrimary] = useState(false)
   //const [ yourPopups, setYourPopups ] = useState();
   //const [ adminId, setAdminId] = useState(231);
 
@@ -25,23 +45,31 @@ const YourPopUps = ({ yourPopups, setYourPopups, merchData, selectMerch, setSele
   // },[])
 
   return (
-    <div>
-      <h5>Your popups page</h5>
+    <YourPopWrap>
+      <h5>Your pop ups</h5>
       <Link to='/create'>
-      <Create onClick={() => console.log(!!yourPopups)}>Create a Pop Up</Create>
+      <Create 
+      createPopUpPrimary={createPopUpPrimary} 
+      onClick={() => {
+        console.log(!!yourPopups)
+        setCreatePopUpPrimary(!createPopUpPrimary)
+      }}>Create a Pop Up</Create>
       </Link>
+        <div>
       { yourPopups ?
         yourPopups.map(merch => {
-          return <YourPopupView
-            key={merch.id}
-            merchant={merch}
-            selectMerch={selectMerch}
-            />
-          })
-          :
-          <h3>You don't own any Pop Ups</h3>
-        }
-    </div>
+            return <YourPopupView
+              key={merch.id}
+              merchant={merch}
+              selectMerch={selectMerch}
+              />
+            })
+            :
+            <h3>You don't own any Pop Ups</h3>
+          }
+
+          </div>
+    </YourPopWrap>
   )
 };
 

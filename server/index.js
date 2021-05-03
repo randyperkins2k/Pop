@@ -133,6 +133,15 @@ app.get('/merchants', (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
+//get merchant by id
+app.get('/merchant/:id', (req, res) => {
+  const { id } = req.params;
+  Merchants.findAll({
+    where: {id: id}
+  })
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
 //add new merchant
 app.post('/api/merchant/add', (req, res) => {
   const { name, category, info, website, adminId, lat, lon } = req.body;
@@ -179,6 +188,17 @@ app.put('/closemerchant/:id/', (req, res) => {
     {where: {id: id}}
   )
   .then(() => res.send('closed'))
+  .catch(err => res.send(err));
+});
+
+//open merchant
+app.put('/openmerchant/:id/', (req, res) => {
+  const { id } = req.params;
+  Merchants.update(
+    {isOpen: true},
+    {where: {id: id}}
+  )
+  .then(() => res.send('open'))
   .catch(err => res.send(err));
 });
 
