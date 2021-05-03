@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-// import popUpLogo from '.../popup/popUpLogo.jpg';
+
 
 const Wrap = styled.div`
   'margin': 0,
@@ -41,7 +41,8 @@ const Button = styled.button`
   width: 8em;
   display: block;
 `
-const SideBar = ({ close }) => {
+
+const SideBar = ({ close, setMLPrimary, setLVPrimary }) => {
 
   return (
     <div style={styles.main} className='sidebar'>
@@ -62,7 +63,44 @@ const SideBar = ({ close }) => {
           <Button><a onClick={() => close(false)}>Settings</a></ Button> 
         </Link>
         <br/>
+        <Link>
           <Button><a href="/logout" onClick={() => close(false)}>Logout</a></Button> 
+          <a onClick={() => {
+            close(false)
+            setLVPrimary(false)
+            setMLPrimary(false)
+            }}>PopUps</a> 
+        </Link>
+        <br/>
+        <Link to='/yourprofile'>
+          <a onClick={() => {
+            close(false)
+            setLVPrimary(false)
+            setMLPrimary(false)
+            }}>Your Profile</a> 
+        </Link>
+        <br/>
+        <Link to='/yourpopups'>
+          <a onClick={() => {
+            close(false)
+            setLVPrimary(false)
+            setMLPrimary(false)
+          }}>Your PopUps</a>
+        </Link>
+        <br/>
+        <Link to='/settings'>
+          <a onClick={() => {
+            close(false)
+            setLVPrimary(false)
+            setMLPrimary(false)
+          }}>Settings</a>
+        </Link>
+        <br/>
+          <a href="/logout" onClick={() => {
+            close(false)
+            setLVPrimary(false)
+            setMLPrimary(false)
+            }}>Logout</a>
       </ul>
     </div>
   )
