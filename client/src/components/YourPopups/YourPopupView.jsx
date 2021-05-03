@@ -19,7 +19,15 @@ transition: ease 0.01s all;
 margin-top:3px;
 `
 
-const YourPopupView = ({ merchant, selectMerch }) => {
+const YourPopupView = ({ merchant, selectMerch, yourPopups, setYourPopups, merchData, setMerchData, userSubs, setUserSubs }) => {
+
+  const deleteMerch = () => {
+    if (confirm(`Do you want to delete ${merchant.name}?`) === true) {
+      console.log('deleted');
+    } else {
+      console.log('not deleted');
+    }
+  };
 
   return (
     <div className="merchant-listing">
@@ -36,6 +44,10 @@ const YourPopupView = ({ merchant, selectMerch }) => {
             selectMerch(merchant)
             }}>Edit</EditMerchBtn>
         </Link>
+        <EditMerchBtn
+          onClick={() => {
+            deleteMerch(merchant)
+            }}>Delete</EditMerchBtn>
       </div>
     </div>
   )
