@@ -80,7 +80,7 @@ const App = () => {
   const getPops = () => {
     axios.get('/merchants')
       .then(response => {
-        //console.log('reponse data', response.data)
+        console.log('merchants', response.data)
         setMerchData(response.data)
       })
   }
@@ -102,7 +102,7 @@ const App = () => {
           let subs;
           let yourPops;
           addUser.data.Subs ? setUserSubs(addUser.data.Subs.map(Sub => Sub.Merchant)) : setUserSubs([]);
-          console.log(addUser.data.Admins);
+          console.log('subscriptions:', addUser.data.Subs);
           addUser.data.Admins ? setYourPopups(addUser.data.Admins.map(Admin => Admin.Merchant)) : setYourPopups([]);
             setUser({
               name: displayName,
@@ -270,6 +270,9 @@ const Home = ({
                           merchant={selectedMerchant}
                           user={user}
                           userSubs={userSubs}
+                          setUserSubs={setUserSubs}
+                          merchData={merchData}
+                          setMerchData={setMerchData}
                         />
                       </div>
                     )

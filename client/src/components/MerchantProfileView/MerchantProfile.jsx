@@ -3,7 +3,7 @@ import ToggleSwitch from '../ToggleSwitch.jsx'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const MerchantProfile = ({ merchant, user, userSubs }) => {
+const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, setMerchData }) => {
   const [reviews, setReviews] = useState([]);
   //const [reviews, setReviews] = useState(merchant.Reviews);
   const findReviews = () => {
@@ -37,6 +37,20 @@ const MerchantProfile = ({ merchant, user, userSubs }) => {
       newReview.User.name = user.name;
       console.log(newReview);
       setReviews([newReview, ...reviews]);
+      const merchantsCopy = merchData.slice();
+      merchantsCopy.forEach(merch => {
+        if (merch.id === merchant.id) {
+          merch.Reviews = [newReview, ...merch.Reviews];
+        }
+      });
+      setMerchData(merchantsCopy);
+      const subsCopy = userSubs.slice();
+      subsCopy.forEach(merch => {
+        if (merch.id === merchant.id) {
+          merch.Reviews = [newReview, ...merch.Reviews];
+        }
+      });
+      setUserData(subsCopy);
     })
     .catch(e => console.log(e));
   };

@@ -215,10 +215,15 @@ app.get('/userid/:id', (req, res) => {
       include: Merchants,
     },
     {model: Subs,
-    include: Merchants}
-  ]
+    include: {
+      model: Merchants,
+      include: {
+        model: Reviews,
+        include: Users
+    }
+   }
   }
-  )
+  ]})
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
@@ -235,9 +240,15 @@ app.post('/adduser/:name/:email/', (req, res) => {
       include: Merchants,
     },
     {model: Subs,
-    include: Merchants}
-  ]
-  })
+      include: {
+        model: Merchants,
+        include: {
+          model: Reviews,
+          include: Users
+      }
+     }
+    }
+  ]})
   .then(results => {
     if (!results.length) {
       Users.create({ name, email })
