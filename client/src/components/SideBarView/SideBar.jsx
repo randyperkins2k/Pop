@@ -2,31 +2,19 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-
-const Wrap = styled.div`
-  'margin': 0,
-  'padding': 0,
-  'width': '200px',
-  'backgroundColor': '#f1f1f1',
-  'position': 'absolute',
-  'height': '100%',
-  'overflow': 'auto',
-  'zIndex': 99
-`;
-
 const styles = {
   main:{'margin': 0,
     'padding': 0,
-    'width': '200px',
+    'width': '210px',
     'backgroundColor': '#f1f1f1',
     'position': 'absolute',
-    'height': '100%',
+    'height': '100vh',
     'overflow': 'auto',
     'zIndex': 99
   },
   links:{
     'display': 'block',
-    'color': 'black',
+    'color': 'white',
     'padding': '16px',
     'textDecoration': 'none'
   }
@@ -38,7 +26,7 @@ const Button = styled.button`
   border-color: #ffd1dc;
   margin: 0.5em 1em;
   padding: 0.25em 1em;
-  width: 8em;
+  width: 9em;
   display: block;
 `
 
@@ -47,60 +35,44 @@ const SideBar = ({ close, setMLPrimary, setLVPrimary }) => {
   return (
     <div style={styles.main} className='sidebar'>
       <ul styles={styles.links}>
-        <Link to='/' exact='true'>
-          <Button><a onClick={() => close(false)}>PopUps</a></Button>
-        </Link>
-        <br/>
-        <Link to='/yourprofile'>
-          <Button><a onClick={() => close(false)}>My Profile</a></Button> 
-        </Link>
-        <br/>
-        <Link to='/yourpopups'>
-          <Button><a onClick={() => close(false)}>My PopUps</a></Button>
-        </Link>
-        <br/>
-        <Link to='/settings'>
-          <Button><a onClick={() => close(false)}>Settings</a></ Button> 
-        </Link>
         <br/>
         <Link>
-          <Button><a href="/logout" onClick={() => close(false)}>Logout</a></Button> 
-          <a onClick={() => {
+          <Button><a onClick={() => {
             close(false)
             setLVPrimary(false)
             setMLPrimary(false)
-            }}>PopUps</a> 
+            }}>PopUps</a></Button> 
         </Link>
         <br/>
         <Link to='/yourprofile'>
-          <a onClick={() => {
+          <Button><a onClick={() => {
             close(false)
             setLVPrimary(false)
             setMLPrimary(false)
-            }}>Your Profile</a> 
+            }}>Your Profile</a></Button>
         </Link>
         <br/>
         <Link to='/yourpopups'>
-          <a onClick={() => {
+          <Button><a onClick={() => {
             close(false)
             setLVPrimary(false)
             setMLPrimary(false)
-          }}>Your PopUps</a>
+          }}>Your PopUps</a></Button>
         </Link>
         <br/>
         <Link to='/settings'>
-          <a onClick={() => {
+          <Button><a onClick={() => {
             close(false)
             setLVPrimary(false)
             setMLPrimary(false)
-          }}>Settings</a>
+          }}>Settings</a></Button>
         </Link>
         <br/>
-          <a href="/logout" onClick={() => {
+          <Button><a href="/logout" onClick={() => {
             close(false)
             setLVPrimary(false)
             setMLPrimary(false)
-            }}>Logout</a>
+            }}>Logout</a></Button>
       </ul>
     </div>
   )
