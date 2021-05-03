@@ -81,7 +81,7 @@ margin-top: 60px;
 font-family: 'Londrina Solid', cursive;
 color: #ffd1dc;
 text-align: center;
-margin-bottom: 4.5rem;
+margin-bottom: 2.6rem;
 `
 
 import axios from 'axios';
@@ -216,7 +216,12 @@ const Home = ({
               <Route
                 path='/'
                 render={(props) => {
-                  return <SideBar close={setSideBarDisplay}/>
+                  return <SideBar 
+                  lVPrimary={lVPrimary}
+                  setLVPrimary={setLVPrimary}
+                  mLPrimary={mLPrimary}
+                  setMLPrimary={setMLPrimary}
+                  close={setSideBarDisplay}/>
                 }}
               />
             }
@@ -252,6 +257,7 @@ const Home = ({
                     selectMerchant={setSelectedMerchant}
                     currentLocMarker={currentLocMarker}
                     setCurrentLocMarker={setCurrentLocMarker}
+                    setMLPrimary={setMLPrimary}
                     />
                 }}/>
                 <Route
@@ -302,6 +308,7 @@ const Home = ({
                     return (
                       <div>
                         <ToggleSwitch
+                          style={{marginLeft: '75px'}}
                           merchant={selectedMerchant}
                           user={user}
                           userSubs={userSubs}

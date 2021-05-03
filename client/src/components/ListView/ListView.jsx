@@ -69,6 +69,7 @@ const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
 
   return (
     <div>
+
       <Open
       openPrimary={openPrimary}
       onClick={() => {
