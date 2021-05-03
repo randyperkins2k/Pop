@@ -7,18 +7,6 @@ import ToggleOpenClose from '../../ToggleOpenClose.jsx'
 // import * as merchData from '../../openMerch.json';
 // const merchant = merchData.merchants[0];
 
-// const Create = styled.button`
-//   margin-left: -1px;
-//   color: black;
-//   font-family: 'Ubuntu';
-//   padding: 5px 16px;
-//   background-color: white;
-//   font-size: 11px;
-//   border-radius: 6px;
-//   border-width: 1px;
-//   border-color: lightgray;
-//   transition: ease 0.01s all;
-// `
 
 const EditYourPopUpWrap = styled.div`
 margin-top: 30px;
@@ -39,12 +27,7 @@ border-radius: 6px;
 border-width: 1px;
 border-color: lightgray;
 transition: ease 0.01s all;
-${props => props.openShopPrimary && css`
-opacity: .5;
-color: black;
-background-color: #ffd1dc;
-font-size: 11.25px;
-`}
+
 `
 const BackBtn = styled.button`
 color: black;
@@ -108,13 +91,38 @@ border-color: lightgray;
 `
 
 
-const EditPopupProfile = ({ merchant }) => {
-const [ openShopPrimary, setOpenShopPrimary ] = useState(false)
+const EditPopupProfile = ({ merchant, merchData, setMerchData }) => {
+  const [openOrClosed, setOpenOrClosed] = useState('');
 
 
   const closeBusiness = () => {
     axios.put(`/closemerchant/${merchant.id}`)
+      .then(() => {
+        setOpenOrClosed(' is closed');
+        let merchants = merchData;
+        merchants.forEach(merch => {
+          if (merch.id === merchant.id) {
+            merch.isOpen = false;
+          }
+        });
+        setMerchData(merchants);
+      })
       .catch(err => console.log('closing merchant error', err));
+  }
+
+  const openBusiness = () => {
+    axios.put(`/openmerchant/${merchant.id}`)
+      .then(() => {
+        setOpenOrClosed(' is open');
+        let merchants = merchData;
+        merchants.forEach(merch => {
+          if (merch.id === merchant.id) {
+            merch.isOpen = true;
+          }
+        });
+        setMerchData(merchants);
+      })
+      .catch(err => console.log('opening merchant error', err));
   }
 
   return (
@@ -128,19 +136,15 @@ const [ openShopPrimary, setOpenShopPrimary ] = useState(false)
         <UploadBtn>Upload photo</UploadBtn>
         <EditMenuBtn>Edit menu</EditMenuBtn>
         <EditOwnerBtn>Edit owner</EditOwnerBtn>
-        <OpenShopBtn
-         openShopPrimary={openShopPrimary}
-         onClick = {() => {
-           setOpenShopPrimary(!openShopPrimary)
-          }}
-         >Open shop</OpenShopBtn>
-          <CloseBusinessBtn
+        <OpenShopBtn onClick={() => openBusiness()}>Open shop</OpenShopBtn>
+        <CloseBusinessBtn
           onClick={() => closeBusiness()}
-          >Close</CloseBusinessBtn>
+          >Close
+        </CloseBusinessBtn>
       </div>
       <div className='profilePreview'>
         <ToggleOpenClose/>
-        <MerchantProfile merchant={merchant} style={{fontFamily: 'Ubuntu'}}/>
+        <MerchantProfile merchant={merchant} openOrClosed={openOrClosed} setOpenOrClosed={setOpenOrClosed} style={{fontFamily: 'Ubuntu'}}/>
       </div>
     </EditYourPopUpWrap >
   )
