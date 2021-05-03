@@ -20,7 +20,7 @@ margin-top:3px;
 `
 
 const YourPopupView = ({ merchant, selectMerch, yourPopups, setYourPopups, merchData, setMerchData, userSubs, setUserSubs }) => {
-
+  //lets get rid of some of these popups
   const deleteMerch = () => {
     if (confirm(`Do you want to delete ${merchant.name}?`) === true) {
       console.log('deleted');
