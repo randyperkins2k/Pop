@@ -69,16 +69,16 @@ const ToggleSwitch = ({ merchant, user, setUserSubs, userSubs }) => {
 	//console.log('subs', subs)
 
 
-	const getSubs = async () => {
-		try {
-			const res = await axios.get('/api/subs')
-			const { data } = res;
-			console.log('subs data in call', data)
-			setSubs(data)
-		} catch (e) {
-			console.log('error in catch', e)
-		}
-	}
+	// const getSubs = async () => {
+	// 	try {
+	// 		const res = await axios.get('/api/subs')
+	// 		const { data } = res;
+	// 		console.log('subs data in call', data)
+	// 		setSubs(data)
+	// 	} catch (e) {
+	// 		console.log('error in catch', e)
+	// 	}
+	// }
 
 	const subscribe = () => {
 		let isSubscribed = false;
@@ -116,11 +116,12 @@ const ToggleSwitch = ({ merchant, user, setUserSubs, userSubs }) => {
 	};
 	//
 	// logic for if the button is toggled on or off
-	const createSub = async () => {
-		const res = axios.post('/subs', {
-			toggled: true
-		})
-	}
+	// const createSub = async () => {
+	// 	const res = axios.post('/subs', {
+	// 		toggled: true
+	// 	})
+	// }
+
 	const initiate = () => {
 		console.log('hello initiate');
 		console.log(userSubs);
@@ -131,6 +132,7 @@ const ToggleSwitch = ({ merchant, user, setUserSubs, userSubs }) => {
 			}
 		})
 	};
+	
 	useEffect(() => initiate(), []);
 
 
