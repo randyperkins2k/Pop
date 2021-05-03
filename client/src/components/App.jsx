@@ -148,7 +148,7 @@ const App = () => {
         path="/login"
         render={props => <Login />}/>
       </Switch>
-      </Router>
+    </Router>
   )
 };
 
