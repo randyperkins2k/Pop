@@ -5,13 +5,15 @@ import styled, { css } from 'styled-components';
 import CreatePop from './CreatePop.jsx'
 
 const Create = styled.button`
-  margin-top: 30px;
+  color: black;
+  font-family: 'Ubuntu';
+  padding: 5px 16px;
   background-color: white;
-  border-style: solid;
+  font-size: 11px;
+  border-radius: 6px;
   border-width: 1px;
   border-color: lightgray;
-  border-radius: 6px;
-  transition: .01s;
+  transition: ease 0.01s all;
   ${props => props.createPopUpPrimary && css`
   opacity: .5;
   color: black;
@@ -25,10 +27,9 @@ const YourPopWrap = styled.div`
   font-family: 'Ubuntu';
   div {
     margin-top: 30px;
+    margin-bottom:30px;
     color: #ffd1dc;
     margin-bottom: 30px:
-    
-    
   }
 `
 

@@ -9,12 +9,14 @@ color: black;
 font-family: 'Ubuntu';
 padding: 6px 16px;
 background-color: white;
-font-size: 14px;
+font-size: 11px;
+
 border-radius: 6px;
 border-width: 1px;
 border-color: lightgray;
 transition: ease 0.01s all;
-margin-top:60px;
+
+margin-top:3px;
 `
 
 const YourPopupView = ({ merchant, selectMerch }) => {

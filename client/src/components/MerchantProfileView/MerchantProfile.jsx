@@ -3,10 +3,13 @@ import ToggleSwitch from '../ToggleSwitch.jsx'
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components'
 
+const MerchantProWrap = styled.div`
+text-align: center;
+`
 
 
 const ViewMenuBtn = styled.button`
-  margin-left:134px;
+  text-align: center;
   color: black;
   font-family: 'Ubuntu';
   padding: 5px 16px;
@@ -24,7 +27,7 @@ font-size: 11.25px;
 `}
 `
 const LocateBtn = styled.button`
-  margin-left: 145px;
+  text-align: center;
   color: black;
   font-family: 'Ubuntu';
   padding: 5px 16px;
@@ -62,7 +65,7 @@ const MerchantProfile = ({ merchant, user, userSubs }) => {
 
   return (
 
-    <div>
+    <MerchantProWrap>
       <div>
         <H2>{merchant.name}</H2>
         <img/>
@@ -87,7 +90,7 @@ const MerchantProfile = ({ merchant, user, userSubs }) => {
       <div>
         <P>Upload a photo</P>
       </div>
-    </div>
+    </MerchantProWrap>
   )
 };
 

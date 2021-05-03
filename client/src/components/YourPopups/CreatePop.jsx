@@ -7,12 +7,25 @@ import axios from 'axios';
 
 const Create = styled.button`
   margin-left: -1px;
+  color: black;
+  font-family: 'Ubuntu';
+  padding: 5px 16px;
   background-color: white;
-  border-style: solid;
+  font-size: 11px;
+  border-radius: 6px;
   border-width: 1px;
   border-color: lightgray;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
+  transition: ease 0.01s all;
+`
+
+const CreatePopUpWrap = styled.div`
+margin-top: 30px;
+text-align: center;
+font-family: 'Ubuntu';
+h6 {
+  margin-top: 30px;
+}
+
 `
 
 const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker, setCurrentLocMarker, merchData, setMerchData }) => {
@@ -63,15 +76,16 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
   }
 
     return (
-      <div>
-        <h3>Business Name</h3>
+
+      <CreatePopUpWrap>
+        <h6>Business Name</h6>
         { nameTakenBool ? <h5 className='issue'>{`${businessName} is already taken!`}</h5> : ''}
         <input onChange={(e) => {
           setNameTakenBool(false);
           console.log(e.target.value);
           setBusinessName(e.target.value);
           }}></input>
-        <h3>Category</h3>
+        <h6>Category</h6>
         {
         pickCategoryBool ?
         <h5 className='issue'>{`You must pick a category!`}</h5>
@@ -87,17 +101,17 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
           <option value={'arts'}>Arts/Craft</option>
           <option value={'produce'}>Market</option>
         </select>
-        <h3>Info</h3>
+        <h6>Info</h6>
         <form onSubmit={(e) => {
           e.preventDefault();
 
         }}>
           <input type="text" maxlength="255"></input>
         </form>
-        <h3>Website</h3>
+        <h6>Website</h6>
         <input onChange={(e) => setWebsite(e.target.value)}></input>
-        <h3></h3>
-        <h3></h3>
+        <h6></h6>
+        <h6></h6>
         {
           createConfirm ?
           <Confirmation
@@ -144,7 +158,7 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
           ''
         }
 
-      </div>
+      </CreatePopUpWrap>
   )
 }
 

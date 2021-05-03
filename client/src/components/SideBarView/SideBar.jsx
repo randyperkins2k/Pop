@@ -46,7 +46,7 @@ const SideBar = ({ close, setMLPrimary, setLVPrimary }) => {
             close(false)
             setLVPrimary(false)
             setMLPrimary(false)
-          }}>Your PopUps</a> 
+          }}>Your PopUps</a>
         </Link>
         <br/>
         <Link to='/settings'>
@@ -54,14 +54,14 @@ const SideBar = ({ close, setMLPrimary, setLVPrimary }) => {
             close(false)
             setLVPrimary(false)
             setMLPrimary(false)
-          }}>Settings</a> 
+          }}>Settings</a>
         </Link>
         <br/>
           <a href="/logout" onClick={() => {
             close(false)
             setLVPrimary(false)
             setMLPrimary(false)
-            }}>Logout</a> 
+            }}>Logout</a>
       </ul>
     </div>
   )
