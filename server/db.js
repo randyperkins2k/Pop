@@ -64,7 +64,7 @@ const Products = sequelize.define('Products', {
     allowNull: false
   },
   merchant: DataTypes.INTEGER, //reference to Merchants.id
-  price: DataTypes.DECIMAL(7, 5), //maybe change to string
+  price: DataTypes.DECIMAL(7, 2), //maybe change to string
   status: DataTypes.STRING,
 });
 

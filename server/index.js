@@ -317,7 +317,7 @@ app.delete('/deleteallusers', (req, res) => {
  * Products
  */
 //get all products
-app.get('/products', (req, res) => {
+app.get('/api/products', (req, res) => {
   Products.findAll({
     where: {}
   })
@@ -325,7 +325,7 @@ app.get('/products', (req, res) => {
     .catch(err => res.send(err));
 });
 //get all products associated with merchant
-app.get('/menu/:merchant', (req, res) => {
+app.get('/api/product/menu/:merchant', (req, res) => {
   const { merchant } = req.params;
   Products.findAll({
     where: {merchant: merchant}
@@ -334,9 +334,9 @@ app.get('/menu/:merchant', (req, res) => {
     .catch(err => res.send(err));
 });
 //add new product
-app.post('/addproduct/:name/:merchant', (req, res) => {
-  const { name, merchant } = req.params;
-  Products.create({ name, merchant })
+app.post('/api/product/addproduct/', (req, res) => {
+  const { name, merchant, price } = req.body;
+  Products.create({ name, merchant, price })
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });

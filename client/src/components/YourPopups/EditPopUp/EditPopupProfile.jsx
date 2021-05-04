@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MerchantProfile from '../../MerchantProfileView/MerchantProfile.jsx';
+import EditMenu from './EditMenu.jsx';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styled, { css } from 'styled-components'
@@ -134,7 +135,9 @@ const EditPopupProfile = ({ merchant, merchData, setMerchData }) => {
         <h6>Control panel</h6>
         <EditInfoBtn>Edit info</EditInfoBtn>
         <UploadBtn>Upload photo</UploadBtn>
-        <EditMenuBtn>Edit menu</EditMenuBtn>
+        <Link to='/editmenu'>
+          <EditMenuBtn>Edit menu</EditMenuBtn>
+        </Link>
         <EditOwnerBtn>Edit owner</EditOwnerBtn>
         <Link to='/openpopmap'>
         <OpenShopBtn>Open shop</OpenShopBtn>
