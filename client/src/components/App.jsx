@@ -17,6 +17,7 @@ import ListView from './ListView/ListView.jsx'
 import EditPopupProfile from './YourPopups/EditPopUp/EditPopupProfile.jsx';
 import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
 import EditMenu from './YourPopups/EditPopUp/EditMenu.jsx';
+import Menu from './MerchantProfileView/Menu.jsx';
 // import * as butt from './openMerch.json';
 // const merchData = butt.merchants;
 import ToggleSwitch from '../components/ToggleSwitch.jsx';
@@ -372,6 +373,14 @@ const Home = ({
                     />
                   }}
                 />
+                <Route
+                  path="/menu"
+                  render={() => {
+                    return <Menu
+                      merchant={selectedMerchant}
+                      selectMerchant={setSelectedMerchant}
+                    />
+                  }}/>
               </Switch>
             </div>
       </div>

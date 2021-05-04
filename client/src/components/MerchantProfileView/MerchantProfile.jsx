@@ -128,13 +128,16 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
         setLocatePrimary(!locatePrimary)
         setViewMenuPrimary(false)
       }}>Locate</LocateBtn><br/>
-      <ViewMenuBtn
-      viewMenuPrimary={viewMenuPrimary}
-      onClick={() => {
-        setViewMenuPrimary(!viewMenuPrimary)
-        setLocatePrimary(false)
-        console.log('hey there', merchant.id, userSubs)
-       }}>View Menu</ViewMenuBtn>
+      <Link to="/menu">
+        <ViewMenuBtn
+          viewMenuPrimary={viewMenuPrimary}
+          onClick={() => {
+            setViewMenuPrimary(!viewMenuPrimary)
+            setLocatePrimary(false)
+            console.log('hey there', merchant.id, userSubs)
+          }}>View Menu
+        </ViewMenuBtn>
+      </Link>
       <div>
       <h5>Leave a review:</h5>
         <form onSubmit={(e) => {
