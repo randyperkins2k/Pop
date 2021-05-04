@@ -24,6 +24,11 @@ const YourPopupView = ({ merchant, selectMerch }) => {
   return (
     <div className="merchant-listing">
       <div>
+        {
+          merchant.isOpen ? 
+          <h3>Open</h3> :
+          <h3>Closed</h3>
+        }
         <img></img>
         <span></span>
         <h2>{merchant.name}</h2>

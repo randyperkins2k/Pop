@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import mapStyles from './mapstyles';
+import React, { useEffect, useState } from 'react';
+import mapStyles from '../../MapView/mapstyles';
 import {
   GoogleMap,
   useLoadScript,
   Marker,
   InfoWindow
 } from '@react-google-maps/api';
-import Window from '../MapView/Window.jsx'
+//import Window from '../MapView/Window.jsx'
 import styled from 'styled-components'
+import ToggleOpenClose from '../../ToggleOpenClose.jsx';
+import Confirmation from '../../Confirmation.jsx';
+import { useHistory } from 'react-router-dom';
 //import map from '../popup/foodmarker.png'
 
 const libraries = ["places"];
@@ -24,15 +27,23 @@ const mapContainerStyle = {
   height: '100vh'
 }
 
-const center = {lat: 29.956124, lng: -90.090509};
-
 const options = {
   styles: mapStyles,
   disableDefaultUI: true,
 }
 
-const OpenPopupMap = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker, setMLPrimary }) => {
+const OpenPopupMap = ({ merchData, selectMerchant, 
+  currentLocMarker, setCurrentLocMarker, 
+  setMLPrimary, merchant, 
+  setMerchData, user,
+  setSubs, setYourPopups
+}) => {
   const [ selectedPopUp, setSelectedPopUp ] = useState(null);
+  const [ center, setCenter ] = useState({lat: 29.956124, lng: -90.090509});
+  const [ yourLocBool, setYourLocBool ] = useState(false);
+  const [ openOrClosed, setOpenOrClosed ] = useState('');
+  const [ cancelConfirm, setCancelConfirm ] = useState(false);
+  const back = useHistory();
   //const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
@@ -42,6 +53,32 @@ const OpenPopupMap = ({ merchData, selectMerchant, currentLocMarker, setCurrentL
   const mapMarkerClick = React.useCallback(()=>{
     setSelectedPopUp(merch)
   } , []);
+
+  const geoLocTest = async (result) => {
+    try {
+      await result;
+      console.log('geoLocTest', {
+        lat: result.coords.latitude,
+        lng: result.coords.longitude
+      })
+      setCenter({
+        lat: result.coords.latitude,
+        lng: result.coords.longitude
+      })
+      setYourLocBool(true)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  
+
+  const failed = () => {
+    console.log('location test failed');
+  }
+
+  useEffect(() => {
+      navigator.geolocation.getCurrentPosition(geoLocTest, failed);
+  },[])
 
   if (loadError) {
     return "error loading map"
@@ -54,6 +91,30 @@ const OpenPopupMap = ({ merchData, selectMerchant, currentLocMarker, setCurrentL
 
   return (
     <div>
+      <ToggleOpenClose 
+        merchant={merchant}
+        openOrClosed={openOrClosed}
+        setOpenOrClosed={setOpenOrClosed}
+        merchData={merchData}
+        setMerchData={setMerchData}
+        selectMerchant={selectMerchant}
+        center={center}
+        user={user}
+        setYourPopups={setYourPopups}
+        setSubs={setSubs}
+      />
+      <button onClick={() => {
+        setCancelConfirm(true);
+      }}>Cancel</button>
+      {
+        cancelConfirm ?
+        <Confirmation
+          text={`Cancel opening ${merchant.name}?`}
+          yesContext={() => back.push('/edit')}
+          noContext={() => setCancelConfirm(false)}
+        /> :
+        ''
+      }
       <TouchMap>Touch map to set location</TouchMap>
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
@@ -61,15 +122,30 @@ const OpenPopupMap = ({ merchData, selectMerchant, currentLocMarker, setCurrentL
       center={center}
       options={options}
       onClick={(event) =>{
-        setCurrentLocMarker({
+        setCenter({
           lat: event.latLng.lat(),
           lng: event.latLng.lng(),
           time: new Date()
         })
-        alert('location saved');
+        alert('location moved!');
       }}
     >
-     {merchData.map(merch => {
+      <Marker 
+        position={{
+          lat: +merchant.lat,
+          lng: +merchant.lon
+        }}
+      />
+      {
+      yourLocBool ?
+      <Marker
+        position={
+          center
+        }
+      /> :
+      ''
+    }
+     {/* {merchData.map(merch => {
         if (merch.isOpen) {
           return <Marker
             key={merch.id}
@@ -88,7 +164,7 @@ const OpenPopupMap = ({ merchData, selectMerchant, currentLocMarker, setCurrentL
             }}
           />
         }
-      })}
+      })} */}
       {
         selectedPopUp && (
           <InfoWindow

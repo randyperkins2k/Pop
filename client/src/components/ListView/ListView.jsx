@@ -104,7 +104,9 @@ const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
             }
           })
           :
-          userSubs.map(merch => <MerchList
+          userSubs.sort((a,b) => {
+            return (a.isOpen === b.isOpen) ? 0 : a.isOpen ? -1 : 1;
+          }).map(merch => <MerchList
             key={merch.id}
             merchant={merch}
             selectMerchant={selectMerchant}

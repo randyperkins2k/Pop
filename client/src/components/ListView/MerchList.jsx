@@ -26,7 +26,7 @@ background-color:#ffd1dc;
 `
 
 const MerchList = ({ merchant, selectMerchant }) => {
-  const { name } = merchant
+  const { name, isOpen } = merchant
 
   return (
 
@@ -34,6 +34,11 @@ const MerchList = ({ merchant, selectMerchant }) => {
     <div className="merchant-listing">
       <Ul>
         <img></img>
+        {
+          isOpen ? 
+          <h5>Open</h5> :
+          <h5>Closed</h5>
+        }
         <span></span>
         <div></div>
         <Link to='/profile'>

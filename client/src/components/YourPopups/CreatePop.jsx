@@ -59,8 +59,7 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
         info: info,
         website: website,
         adminId: user.id,
-        lat: currentLocMarker.lat,
-        lon: currentLocMarker.lng
+        isOpen : false
       })
       setYourPopups([newPop.data, ...yourPopups]);
       setMerchData([newPop.data, ...merchData]);
