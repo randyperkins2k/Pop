@@ -136,14 +136,15 @@ const EditPopupProfile = ({ merchant, merchData, setMerchData }) => {
         <UploadBtn>Upload photo</UploadBtn>
         <EditMenuBtn>Edit menu</EditMenuBtn>
         <EditOwnerBtn>Edit owner</EditOwnerBtn>
-        <OpenShopBtn onClick={() => openBusiness()}>Open shop</OpenShopBtn>
+        <Link to='/openpopmap'>
+        <OpenShopBtn>Open shop</OpenShopBtn>
+        </Link>
         <CloseBusinessBtn
           onClick={() => closeBusiness()}
           >Close
         </CloseBusinessBtn>
       </div>
       <div className='profilePreview'>
-        <ToggleOpenClose/>
         <MerchantProfile merchant={merchant} openOrClosed={openOrClosed} setOpenOrClosed={setOpenOrClosed} style={{fontFamily: 'Ubuntu'}}/>
       </div>
     </EditYourPopUpWrap >

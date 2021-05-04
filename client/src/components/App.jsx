@@ -21,6 +21,7 @@ import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
 import ToggleSwitch from '../components/ToggleSwitch.jsx';
 import YourPopUps from './YourPopups/YourPopUps.jsx';
 import Login from './Login.jsx';
+import OpenPopupMap from './YourPopups/EditPopUp/OpenPopMap.jsx';
 import {
   HashRouter as Well,
   BrowserRouter as Router,
@@ -120,7 +121,7 @@ const App = () => {
         //i removed picture from the endpoint because the http was messing everything up
         axios.post(`/adduser/${displayName}/${email}/`)
         .then(addUser => {
-          console.log(addUser);
+          console.log('this is add user', addUser);
           let subs;
           let yourPops;
           addUser.data.Subs ? setUserSubs(addUser.data.Subs.map(Sub => Sub.Merchant)) : setUserSubs([]);
@@ -183,7 +184,7 @@ const App = () => {
         path="/login"
         render={props => <Login />}/>
       </Switch>
-      </Router>
+    </Router>
   )
 };
 
@@ -336,6 +337,20 @@ const Home = ({
                       setCurrentLocMarker={setCurrentLocMarker}
                       merchData={merchData}
                       setMerchData={setMerchData}
+                    />
+                  }}
+                />
+                <Route
+                  path='/openpopmap'
+                  render={() => {
+                    return <OpenPopupMap
+                      merchant={selectedMerchant}
+                      selectMerchant={setSelectedMerchant}
+                      merchData={merchData}
+                      setMerchData={setMerchData}
+                      setSubs={setUserSubs}
+                      setYourPopups={setYourPopups}
+                      user={user}
                     />
                   }}
                 />

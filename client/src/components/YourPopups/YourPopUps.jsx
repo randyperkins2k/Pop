@@ -33,7 +33,7 @@ const YourPopWrap = styled.div`
   }
 `
 
-const YourPopUps = ({ yourPopups, setYourPopups, merchData, selectMerch, setSelectedMerchant }) => {
+const YourPopUps = ({ yourPopups, setYourPopups, merchData, selectMerch }) => {
   const [createPopUpPrimary, setCreatePopUpPrimary] = useState(false)
   //const [ yourPopups, setYourPopups ] = useState();
   //const [ adminId, setAdminId] = useState(231);
