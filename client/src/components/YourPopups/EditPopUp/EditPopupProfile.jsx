@@ -3,6 +3,7 @@ import MerchantProfile from '../../MerchantProfileView/MerchantProfile.jsx';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styled, { css } from 'styled-components'
+import UploadPic from './UploadPic.jsx';
 import ToggleOpenClose from '../../ToggleOpenClose.jsx'
 // import * as merchData from '../../openMerch.json';
 // const merchant = merchData.merchants[0];
@@ -93,6 +94,7 @@ border-color: lightgray;
 
 const EditPopupProfile = ({ merchant, merchData, setMerchData }) => {
   const [openOrClosed, setOpenOrClosed] = useState('');
+  const [ uploadPicWindow, setUploadPicWindow ] = useState(false);
 
 
   const closeBusiness = () => {
@@ -133,7 +135,9 @@ const EditPopupProfile = ({ merchant, merchData, setMerchData }) => {
       <div className='controlPanel'>
         <h6>Control panel</h6>
         <EditInfoBtn>Edit info</EditInfoBtn>
-        <UploadBtn>Upload photo</UploadBtn>
+        <UploadBtn
+          onClick={() => setUploadPicWindow(true)}
+        >Upload photo</UploadBtn>
         <EditMenuBtn>Edit menu</EditMenuBtn>
         <EditOwnerBtn>Edit owner</EditOwnerBtn>
         <Link to='/openpopmap'>
@@ -144,6 +148,13 @@ const EditPopupProfile = ({ merchant, merchData, setMerchData }) => {
           >Close
         </CloseBusinessBtn>
       </div>
+      {
+        uploadPicWindow ? 
+        <UploadPic
+          merchant={merchant}
+        /> :
+        ''
+      }
       <div className='profilePreview'>
         <MerchantProfile merchant={merchant} openOrClosed={openOrClosed} setOpenOrClosed={setOpenOrClosed} style={{fontFamily: 'Ubuntu'}}/>
       </div>
