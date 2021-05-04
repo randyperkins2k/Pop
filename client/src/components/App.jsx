@@ -285,6 +285,7 @@ const Home = ({
                     return <YourPopUps
                       merchData={merchData}
                       setMerchData={setMerchData}
+                      merchant={selectedMerchant}
                       selectMerch={setSelectedMerchant}
                       yourPopups={yourPopups}
                       setYourPopups={setYourPopups}
@@ -303,6 +304,7 @@ const Home = ({
                   path='/edit'
                   render={(props) => <EditPopupProfile
                     merchant={selectedMerchant}
+                    selectMerchant={setSelectedMerchant}
                     merchData={merchData}
                     setMerchData={setMerchData}
                   />}
@@ -364,7 +366,10 @@ const Home = ({
                 <Route
                   path="/editmenu"
                   render={() => {
-                    return <EditMenu/>
+                    return <EditMenu
+                      merchant={selectedMerchant}
+                      selectMerchant={setSelectedMerchant}
+                    />
                   }}
                 />
               </Switch>

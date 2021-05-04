@@ -92,7 +92,7 @@ border-color: lightgray;
 `
 
 
-const EditPopupProfile = ({ merchant, merchData, setMerchData }) => {
+const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData }) => {
   const [openOrClosed, setOpenOrClosed] = useState('');
 
 
@@ -136,7 +136,10 @@ const EditPopupProfile = ({ merchant, merchData, setMerchData }) => {
         <EditInfoBtn>Edit info</EditInfoBtn>
         <UploadBtn>Upload photo</UploadBtn>
         <Link to='/editmenu'>
-          <EditMenuBtn>Edit menu</EditMenuBtn>
+          <EditMenuBtn
+            onClick={() => {
+              selectMerchant(merchant)
+            }}>Edit menu</EditMenuBtn>
         </Link>
         <EditOwnerBtn>Edit owner</EditOwnerBtn>
         <Link to='/openpopmap'>
