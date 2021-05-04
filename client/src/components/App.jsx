@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import CreatePop from './YourPopups/CreatePop.jsx';
-import MyPops from './MyPops.jsx';
 import {
   GoogleMap,
   useLoadScript,

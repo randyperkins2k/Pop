@@ -19,6 +19,13 @@ require('./passport-setup');
 app.use(express.json());
 const cookieSession = require('cookie-session');
 
+/*Cloudinary 
+  routes
+*/
+const { images } = require('./cloudinary.js');
+app.use('/api/images', images);
+//cloudinary routes end
+
 app.use(cookieSession({
   name: 'tuto-session',
   keys: ['key1', 'key2']

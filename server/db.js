@@ -163,6 +163,30 @@ Admins.belongsTo(Users);
 Merchants.hasMany(Admins);
 Admins.belongsTo(Merchants);
 
+const Pictures = sequelize.define('Picture', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true,
+    unique: true,
+  },
+  MerchantId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Merchants,
+      key: Merchants.id,
+    }
+  },
+  image: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+});
+
+Pictures.sync();
+Merchants.hasMany(Pictures);
+
 module.exports = {
   db: sequelize,
   Users,
@@ -170,5 +194,6 @@ module.exports = {
   Products,
   Reviews,
   Subs,
-  Admins
+  Admins,
+  Pictures
 };

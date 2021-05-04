@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ToggleSwitch from '../ToggleSwitch.jsx'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import PictureFeed from './PictureFeed.jsx';
 
 import styled, { css } from 'styled-components'
 
@@ -58,9 +59,11 @@ margin-top: 30px;
 
 
 const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, setMerchData, openOrClosed, setOpenOrClosed, userData, setUserData }) => {
-  const [ locatePrimary, setLocatePrimary ] = useState(false)
-  const [ viewMenuPrimary, setViewMenuPrimary ] = useState(false)
-  const [reviews, setReviews] = useState([]);
+  const [ locatePrimary, setLocatePrimary ] = useState(false);
+  const [ viewMenuPrimary, setViewMenuPrimary ] = useState(false);
+  const [ reviews, setReviews ] = useState([]);
+  const [ pictureFeedView, setPictureFeedView ] = useState(true);
+  const [ reviewView, setReviewView ] = useState(false)
   //const [reviews, setReviews] = useState(merchant.Reviews);
   const findReviews = () => {
     if (merchant.Reviews) {
@@ -138,6 +141,35 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
           }}>View Menu
         </ViewMenuBtn>
       </Link>
+      <ViewMenuBtn
+      viewMenuPrimary={viewMenuPrimary}
+      onClick={() => {
+        // setViewMenuPrimary(!viewMenuPrimary)
+        // setLocatePrimary(false)
+        // console.log('hey there', merchant.id, userSubs)
+        setReviewView(false);
+        setPictureFeedView(false);
+       }}>View Menu</ViewMenuBtn>
+       <ViewMenuBtn
+        onClick={() => {
+          setPictureFeedView(false);
+          setReviewView(true);
+        }}
+       >Reviews</ViewMenuBtn>
+     {
+       pictureFeedView && !reviewView ?
+       <div>
+        {
+          pictureFeedView ?
+          <PictureFeed
+            merchant={merchant}
+          />
+          :
+          ''
+        }
+      </div> :
+      reviewView && !pictureFeedView ?
+      <div>
       <div>
       <h5>Leave a review:</h5>
         <form onSubmit={(e) => {
@@ -152,6 +184,12 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
         <h5>Reviews:</h5>
         {reviews.map(review => <p><b>{review.User.name}</b>: {review.message}</p>)}
       </div>
+    </div>
+      :
+    <div>
+      <h5>This is the menu view!!!</h5>
+    </div>
+      }
     </MerchantProWrap>
   )
 };
