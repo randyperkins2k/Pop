@@ -69,16 +69,16 @@ const ToggleSwitch = ({ merchant, user, setUserSubs, userSubs }) => {
 	//console.log('subs', subs)
 
 
-	const getSubs = async () => {
-		try {
-			const res = await axios.get('/api/subs')
-			const { data } = res;
-			console.log('subs data in call', data)
-			setSubs(data)
-		} catch (e) {
-			console.log('error in catch', e)
-		}
-	}
+	// const getSubs = async () => {
+	// 	try {
+	// 		const res = await axios.get('/api/subs')
+	// 		const { data } = res;
+	// 		console.log('subs data in call', data)
+	// 		setSubs(data)
+	// 	} catch (e) {
+	// 		console.log('error in catch', e)
+	// 	}
+	// }
 
 	const subscribe = () => {
 		let isSubscribed = false;
@@ -88,27 +88,19 @@ const ToggleSwitch = ({ merchant, user, setUserSubs, userSubs }) => {
 				//setUserSubs(userSubs.filter(sub => sub.id !== merchant.id));
 				axios.delete(`/api/deletesub/${user.id}/${merchant.id}`)
 				  .then((response) => {
+						console.log(response.data)
 						setUserSubs(userSubs.filter(sub => sub.id !== merchant.id));
 						console.log(response);
 					})
 			}
 		})
 		if (!isSubscribed) {
-			// try {
-			// 	const sub = await axios.post('/api/addsub', {
-			// 		userid : user.id,
-			// 		merchantid : merchant.id
-			// 	})
-			// 	console.log(sub.data.Subs);
-			// 	setUserSubs(sub.data.Subs.map(Sub => Sub.Merchant));
-			// } catch (e) {
-			// 	console.log(e);
-			// }
 			axios.post('/api/addsub', {
 				userid : user.id,
 				merchantid : merchant.id
 			})
 			.then(sub => {
+				//console.log(response.data)
 				console.log(sub);
 				setUserSubs(sub.data.Subs.map(Sub => Sub.Merchant));
 			});
@@ -116,21 +108,23 @@ const ToggleSwitch = ({ merchant, user, setUserSubs, userSubs }) => {
 	};
 	//
 	// logic for if the button is toggled on or off
-	const createSub = async () => {
-		const res = axios.post('/subs', {
-			toggled: true
-		})
-	}
+	// const createSub = async () => {
+	// 	const res = axios.post('/subs', {
+	// 		toggled: true
+	// 	})
+	// }
+
 	const initiate = () => {
-		console.log('hello initiate');
-		console.log(userSubs);
-		console.log(merchant);
+		// console.log('hello initiate');
+		// console.log(userSubs);
+		// console.log(merchant);
 		userSubs.forEach(sub => {
 			if (sub.id === merchant.id) {
 				setToggled(true);
 			}
 		})
 	};
+
 	useEffect(() => initiate(), []);
 
 

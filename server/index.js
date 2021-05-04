@@ -202,6 +202,23 @@ app.put('/openmerchant/:id/', (req, res) => {
   .catch(err => res.send(err));
 });
 
+app.put('/api/merchcoords/:merchid', (req, res) => {
+  const { merchid } = req.params;
+  const { lat, lng } = req.body;
+  Merchants.update(
+    {lat: lat,
+     lon: lng},
+     {where: {
+       id: merchid
+     }}
+     )
+    .then(() => res.sendStatus(201))
+    .catch((err) => {
+      res.sendStatus(500)
+      console.log('merchant coordinate error', err)
+    })
+})
+
 /**
  * Users
  */

@@ -36,7 +36,7 @@ const SideBar = ({ close, setMLPrimary, setLVPrimary }) => {
     <div style={styles.main} className='sidebar'>
       <ul styles={styles.links}>
         <br/>
-        <Link>
+        <Link to='/'>
           <Button><a onClick={() => {
             close(false)
             setLVPrimary(false)
