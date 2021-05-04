@@ -26,6 +26,19 @@ const seedMysql = () => {
       ].map((admin) => Admins.create(admin))
     )
   )
+  .then(() => Reviews.sync({ force: true }))
+    .then(() =>
+      console.log(
+        "\nDatabase (MySQL): 'Reviews' table succesfully created!"
+      )
+    )
+    .then(() =>
+      Promise.all([
+        {UserId: 2, MerchantId: 1, rating: 5, message: 'tastefully named jewelry'},
+        {UserId: 1, MerchantId: 2, rating: 5, message: 'i was looking for cheeseCAKE but close enough'},
+      ].map((rev) => Reviews.create(rev))
+    )
+  )
     .then(process.exit);
 };
 seedMysql();
