@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import mapStyles from './mapstyles';
 import {
   GoogleMap,
@@ -24,8 +24,6 @@ const mapContainerStyle = {
   height: '100vh'
 }
 
-const center = {lat: 29.956124, lng: -90.090509};
-
 const options = {
   styles: mapStyles,
   disableDefaultUI: true,
@@ -33,6 +31,8 @@ const options = {
 
 const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker, setMLPrimary }) => {
   const [ selectedPopUp, setSelectedPopUp ] = useState(null);
+  const [ center, setCenter ] = useState({lat: 29.956124, lng: -90.090509});
+  const [ yourLocBool, setYourLocBool] = useState(false);
   //const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
@@ -42,6 +42,32 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
   const mapMarkerClick = React.useCallback(()=>{
     setSelectedPopUp(merch)
   } , []);
+
+  const geoLocTest = async (result) => {
+    try {
+      await result;
+      console.log('geoLocTest', {
+        lat: result.coords.latitude,
+        lng: result.coords.longitude
+      })
+      setCenter({
+        lat: result.coords.latitude,
+        lng: result.coords.longitude
+      })
+      setYourLocBool(true)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  
+
+  const failed = () => {
+    console.log('location test failed');
+  }
+
+  useEffect(() => {
+      navigator.geolocation.getCurrentPosition(geoLocTest, failed);
+  },[])
 
   if (loadError) {
     return "error loading map"
@@ -61,17 +87,26 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
       center={center}
       options={options}
       onClick={(event) =>{
-        setCurrentLocMarker({
+        setCenter({
           lat: event.latLng.lat(),
           lng: event.latLng.lng(),
           time: new Date()
         })
-        alert('location saved');
+        alert('location moved!');
+        //console.log(currentLocMarker);
         //console.log(currentLocMarker);
         //why even bother with state right here?
         //why not just call an end point with event.latLng.lat() and event.latLng.lng()?
       }}
-    >
+    >{
+      yourLocBool ?
+      <Marker
+        position={
+          center
+        }
+      /> :
+      ''
+    }
      {merchData.map(merch => {
         if (merch.isOpen) {
           return <Marker
@@ -81,7 +116,7 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
               lng: +merch.lon
             }}
             // icon={{
-            //   url: '../popup/foodmarker2.svg',
+            //   url: './foodmarker.png',
             //   scaledSize: new window.google.maps.Size(30, 30),
             //   origin: new window.google.maps.Point(0, 0),
             //   anchor: new window.google.maps.Point(15, 0)
