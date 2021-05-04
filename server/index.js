@@ -361,7 +361,7 @@ app.put('/changestatus/:id/:status', (req, res) => {
   .catch(err => res.send(err));
 });
 //delete product
-app.delete('/deleteproduct/:id', (req, res) => {
+app.delete('/api/product/deleteproduct/:id', (req, res) => {
   const { id } = req.params;
   Products.destroy({
     where: {id: id}

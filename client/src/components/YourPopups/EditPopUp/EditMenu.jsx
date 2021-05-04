@@ -23,15 +23,7 @@ const EditMenu = ({ merchant, selectMerchant }) => {
       if (priceNum) {
         thePrice = priceNum;
       }
-      /**
-       * //add new product
-  app.post('/api/product/addproduct/', (req, res) => {
-    const { name, merchant, price } = req.body;
-    Products.create({ name, merchant, price })
-      .then(data => res.send(data))
-      .catch(err => res.send(err));
-  });
-       */
+
       axios.post('/api/product/addproduct', {
         name: nameText,
         merchant: merchant.id,
@@ -39,7 +31,7 @@ const EditMenu = ({ merchant, selectMerchant }) => {
       })
         .then(result => {
           console.log(result.data);
-          let newProductList = [result.data, ...products];
+          let newProductList = [...products, result.data];
           setProducts(newProductList);
           setNameText('');
           setPriceNum('');
@@ -48,12 +40,29 @@ const EditMenu = ({ merchant, selectMerchant }) => {
     }
   };
 
+  const deleteProduct = (product) => {
+    if (confirm(`Do you want to delete ${product.name}?`) === true) {
+      console.log('confirmed');
+      axios.delete(`/api/product/deleteproduct/${product.id}`)
+        .then(result => {
+          let newProductList = products.slice();
+          setProducts(newProductList.filter(prod => prod.id !== product.id));
+        })
+        .catch(err => console.log(err));
+    } else {
+      console.log('cancelled');
+    }
+  }
+
   return(
     <div>
       <div>
         <h3>{`${merchant.name}'s`} products: </h3>
         {products.map(product =>
-          <p>&emsp; &#8226; &nbsp;<b>{product.name}</b><small>(<i>${parseFloat(product.price).toFixed(2)}</i></small>)</p>
+          <p>&emsp; &#8226; &nbsp;<b>{product.name}</b><small>(<i>${parseFloat(product.price).toFixed(2)}</i></small>)
+          <button onClick={
+            ()=>{deleteProduct(product)}
+          }><small>x</small></button></p>
         )}
       </div>
       <div>
