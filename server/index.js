@@ -19,7 +19,7 @@ require('./passport-setup');
 app.use(express.json());
 const cookieSession = require('cookie-session');
 
-/*Cloudinary 
+/*Cloudinary
   routes
 */
 const { images } = require('./cloudinary.js');
@@ -225,6 +225,18 @@ app.put('/api/merchcoords/:merchid', (req, res) => {
       console.log('merchant coordinate error', err)
     })
 })
+
+app.put('/api/merchant/updateinfo', (req, res) => {
+  const {id, info} = req.body;
+  Merchants.update(
+    {info: info},
+    {where: {
+      id: id
+    }}
+  )
+  .then(data => res.send(data))
+  .catch(err => res.send(err));
+});
 
 /**
  * Users
