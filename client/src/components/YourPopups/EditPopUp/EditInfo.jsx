@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import MerchantProfile from '../../MerchantProfileView/MerchantProfile.jsx';
 import axios from 'axios';
 
 const EditInfo = ({ merchant, selectMerchant, yourPopups, setYourPopups, userSubs, setUserSubs, merchData, setMerchData }) => {
@@ -48,9 +49,15 @@ const EditInfo = ({ merchant, selectMerchant, yourPopups, setYourPopups, userSub
 
   return (
   <div>
-    <h3>edit {`${merchant.name}'s`} info: </h3>
-    <textarea value={text} onChange={(e) => setText(e.target.value) }></textarea>
-    <button onClick={ ()=> updateInfo()}>update info</button>
+    <div>
+      <h3>edit {`${merchant.name}'s`} info: </h3>
+      <textarea value={text} onChange={(e) => setText(e.target.value) }></textarea>
+      <button onClick={ ()=> updateInfo()}>update info</button>
+    </div>
+    <br></br>
+    <div>
+      <MerchantProfile merchant={merchant} style={{fontFamily: 'Ubuntu'}}/>
+    </div>
   </div>
   )
 };
