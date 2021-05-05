@@ -12,6 +12,35 @@ const EditInfo = ({ merchant, selectMerchant, yourPopups, setYourPopups, userSub
       })
       .then(result => {
         console.log(result.data)
+        const updatedMerchant = Object.assign({}, merchant);
+        updatedMerchant.info = text;
+        selectMerchant(updatedMerchant);
+        //update merch data
+        const updatedMerchData = merchData.slice();
+        updatedMerchData.forEach(merch => {
+          if (merch.id === merchant.id) {
+            merch.info = text;
+          }
+        });
+        setMerchData(updatedMerchData);
+        //update your popups
+        const updatedYourPopups = yourPopups.slice();
+        updatedYourPopups.forEach(merch => {
+          if (merch.id === merchant.id) {
+            merch.info = text;
+          }
+        });
+        setYourPopups(updatedYourPopups);
+        //update userSubs
+        const updatedSubs = userSubs.slice();
+        updatedSubs.forEach(merch => {
+          if (merch.id === merchant.id) {
+            merch.info = text;
+          }
+        });
+        setUserSubs(updatedSubs);
+        //clear text field
+        setText('');
       })
       .catch(err => console.log(err));
     }
