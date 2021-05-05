@@ -8,7 +8,9 @@ const { Merchants, Users, Products, Reviews, Subs, Admins } = require('./db.js')
 const app = express();
 const PORT = 8080;
 const CLIENT_PATH = path.resolve(__dirname, '../client/dist');
+const ASSETS_PATH = path.resolve(__dirname, 'assets');
 app.use(express.static(CLIENT_PATH));
+app.use('/assets', express.static(ASSETS_PATH));
 
 /**
  * start authentication routes

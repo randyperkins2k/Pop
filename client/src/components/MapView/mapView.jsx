@@ -59,7 +59,7 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
       console.log(err)
     }
   }
-  
+
 
   const failed = () => {
     console.log('location test failed');
@@ -123,6 +123,10 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
             // }}
              onClick={()=>{
               setSelectedPopUp(merch)
+            }}
+            icon={{
+              url: '/assets/foodmarker.png',
+              scaledSize: new google.maps.Size(40, 40)
             }}
           />
         }
