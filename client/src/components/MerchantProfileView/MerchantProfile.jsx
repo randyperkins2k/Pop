@@ -5,7 +5,7 @@ import axios from 'axios';
 import PictureFeed from './PictureFeed.jsx';
 
 import styled, { css } from 'styled-components'
-
+import { useTranslation } from 'react-i18next'
 const MerchantProWrap = styled.div`
 text-align: center;
 `
@@ -64,6 +64,7 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
   const [ reviews, setReviews ] = useState([]);
   const [ pictureFeedView, setPictureFeedView ] = useState(true);
   const [ reviewView, setReviewView ] = useState(false)
+  const {t} = useTranslation()
   //const [reviews, setReviews] = useState(merchant.Reviews);
   const findReviews = () => {
     if (merchant.Reviews) {
@@ -130,7 +131,7 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
       onClick={() => {
         setLocatePrimary(!locatePrimary)
         setViewMenuPrimary(false)
-      }}>Locate</LocateBtn><br/>
+      }}>{t("locateBtn")}</LocateBtn><br/>
       <Link to="/menu">
         <ViewMenuBtn
           viewMenuPrimary={viewMenuPrimary}
@@ -138,7 +139,7 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
             setViewMenuPrimary(!viewMenuPrimary)
             setLocatePrimary(false)
             console.log('hey there', merchant.id, userSubs)
-          }}>View Menu
+          }}>{t("viewMenuBtn")}
         </ViewMenuBtn>
       </Link>
       <ViewMenuBtn
@@ -155,7 +156,7 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
           setPictureFeedView(false);
           setReviewView(true);
         }}
-       >Reviews</ViewMenuBtn>
+       >{t("reviewsBtn")}</ViewMenuBtn>
      {
        pictureFeedView && !reviewView ?
        <div>
@@ -171,23 +172,23 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
       reviewView && !pictureFeedView ?
       <div>
       <div>
-      <h5>Leave a review:</h5>
+      <h5>{t("leaveAReviewTxt")}:</h5>
         <form onSubmit={(e) => {
           e.preventDefault();
 
         }}>
           <input type="text" value={reviewText} onChange={(e)=>setReviewText(e.target.value)} maxlength="255"></input>
-          <button onClick={submitReview}>Submit</button>
+          <button onClick={submitReview}>{t("submitBtn")}</button>
         </form>
       </div>
       <div>
-        <h5>Reviews:</h5>
+        <h5>{t("reviewsBtn")}:</h5>
         {reviews.map(review => <p><b>{review.User.name}</b>: {review.message}</p>)}
       </div>
     </div>
       :
     <div>
-      <h5>This is the menu view!!!</h5>
+      <h5>{t("leaveAReviewTxt")}</h5>
     </div>
       }
     </MerchantProWrap>

@@ -5,6 +5,9 @@ import axios from 'axios';
 import styled, { css } from 'styled-components'
 import UploadPic from './UploadPic.jsx';
 import ToggleOpenClose from '../../ToggleOpenClose.jsx'
+import { useTranslation } from 'react-i18next'
+
+
 // import * as merchData from '../../openMerch.json';
 // const merchant = merchData.merchants[0];
 
@@ -95,6 +98,7 @@ border-color: lightgray;
 const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData }) => {
   const [openOrClosed, setOpenOrClosed] = useState('');
   const [ uploadPicWindow, setUploadPicWindow ] = useState(false);
+  const { t } = useTranslation()
 
 
   const closeBusiness = () => {
@@ -130,26 +134,26 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
   return (
     <EditYourPopUpWrap >
       <Link to='/yourpopups'>
-       <BackBtn>Back</BackBtn>
+       <BackBtn>{t("backBtn")}</BackBtn>
       </Link>
       <div className='controlPanel'>
         <h6>Control panel</h6>
         <Link to="/editinfo">
-          <EditInfoBtn>Edit info</EditInfoBtn>
+          <EditInfoBtn>{t("editInfoBtn")}</EditInfoBtn>
         </Link>
         <UploadBtn
           onClick={() => setUploadPicWindow(true)}
         >Upload photo</UploadBtn>
         <Link to="/editmenu">
-          <EditMenuBtn>Edit menu</EditMenuBtn>
+          <EditMenuBtn>{t("editMenuBtn")}</EditMenuBtn>
         </Link>
-        <EditOwnerBtn>Edit owner</EditOwnerBtn>
+        <EditOwnerBtn>{t("editOwnerBtn")}</EditOwnerBtn>
         <Link to='/openpopmap'>
-        <OpenShopBtn>Open shop</OpenShopBtn>
+        <OpenShopBtn>{t("openShopBtn")}</OpenShopBtn>
         </Link>
         <CloseBusinessBtn
           onClick={() => closeBusiness()}
-          >Close
+          >{t("closeShopBtn")}
         </CloseBusinessBtn>
       </div>
       {

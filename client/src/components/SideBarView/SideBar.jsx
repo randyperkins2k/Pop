@@ -43,7 +43,7 @@ const {t} = useTranslation();
             close(false)
             setLVPrimary(false)
             setMLPrimary(false)
-            }}>PopUps</a></Button> 
+            }}>{t("popUpsBtn")}</a></Button> 
         </Link>
         <br/>
         <Link to='/yourprofile'>

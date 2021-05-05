@@ -28,5 +28,24 @@
 	"websiteTxt" : "Website",
 	"createBtn" : "Create",
 	"cancelBtn" : "Cancel",
-	"yesTxt" : "yes"
+	"yesTxt" : "yes",
+	"locateBtn" : "Location",
+	"viewMenuBtn" : "View menu",
+	"reviewsBtn" : "Reviews", 
+	"leaveAReviewTxt" : "Leave a Review",
+	"followBtn" : "follow",
+	"unfollowBtn" : "unfollow",
+	"pictureFeedTxt" : "picture Feed",
+	"submitBtn" : "Submit",
+	"backBtn" : "Back", 
+	"editInfoBtn" : "Edit Info",
+	"uploadPhotoBtn" : "Upload Photo",
+	"editMenuBtn" : "Edit Menu",
+	"editOwnerBtn" : "Edit Owner",
+	"openShopBtn" : "Open Shop",
+	"closeShopBtn" : "Close Shop",
+	"profileBtn" : "Profile", 
+	"popUpsBtn" : "PopUps"
+
+
 }

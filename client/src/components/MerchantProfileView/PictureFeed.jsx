@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Image } from 'cloudinary-react';
+import { useTranslation } from 'react-i18next'
 
 const PictureFeed = ({ merchant }) => {
   const [ imageIds, setImageIds ] = useState();
+  const { t } = useTranslation()
 
   const loadImages = async () => {
     try {
@@ -21,7 +23,7 @@ const PictureFeed = ({ merchant }) => {
 
   return (
     <div>
-      <h3>Picture Feed</h3>
+      <h3>{t("pictureFeedTxt")}</h3>
       {
         imageIds ? 
         imageIds.map((image, index) => {

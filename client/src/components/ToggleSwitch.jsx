@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import axios from 'axios';
-
+import { useTranslation } from 'react-i18next'
 
 const InputWrapper = styled.label`
 	position: relative;
@@ -66,6 +66,7 @@ const Slider = styled.span`
 const ToggleSwitch = ({ merchant, user, setUserSubs, userSubs }) => {
 	const [toggled, setToggled] = useState(false);
 	const [subs, setSubs] = useState([]);
+	const { t } = useTranslation()
 	//console.log('subs', subs)
 
 
@@ -137,7 +138,7 @@ const ToggleSwitch = ({ merchant, user, setUserSubs, userSubs }) => {
 			onChange={(event) => setToggled(!toggled)}
 			/>
 			<Slider />
-			<p style={{fontFamily: 'Ubuntu', fontSize: '11px', marginTop: '3px'}}>{toggled ? 'unfollow' : 'follow'}</p>
+			<p style={{fontFamily: 'Ubuntu', fontSize: '11px', marginTop: '3px'}}>{toggled ? `${t("unfollowBtn")}` : `${t("followBtn")}`}</p>
 		</InputWrapper>
 
 	)

@@ -28,6 +28,24 @@
 	"websiteTxt" : "Su página web",
 	"createBtn" : "Crear",
 	"cancelBtn" : "Cancelar",
-	"yesTxt" : "sip"
+	"yesTxt" : "sip",
+	"locateBtn" : "Ubicación",
+	"viewMenuBtn" : "Ve la Carta",
+	"reviewsBtn" : "Críticas",
+	"leaveAReviewTxt" : "Dejar un Comentario",
+	"followBtn" : "seguir",
+	"unfollowBtn" : "dejar de seguir",
+	"pictureFeedTxt" : "Alimentación de Imágenes",
+	"submitBtn" : "Enviar", 
+	"backBtn" : "Atrás",
+	"editInfoBtn" : "Editar su Info",
+	"uploadPhotoBtn" : "Upload Photo",
+	"editMenuBtn" : "Subir Foto",
+	"editOwnerBtn" : "Editar Propietario",
+	"openShopBtn" : "Abre su Negocio",
+	"closeShopBtn" : "Cierra su Negocio",
+	"profileBtn" : "Perfil",
+	"popUpsBtn" : "Puestos Callejeros"
+
 
 }
