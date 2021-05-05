@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import MerchantProfile from '../../MerchantProfileView/MerchantProfile.jsx';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next'
 
@@ -78,6 +79,9 @@ const EditMenu = ({ merchant, selectMerchant }) => {
           <input type="number" value={priceNum} onChange={(e) => setPriceNum(e.target.value)}></input><br></br>
         </form>
         <button onClick={() => {addProduct()}}>add product</button><br></br>
+      </div>
+      <div>
+        <MerchantProfile merchant={merchant} style={{fontFamily: 'Ubuntu'}}/>
       </div>
     </div>
   )
