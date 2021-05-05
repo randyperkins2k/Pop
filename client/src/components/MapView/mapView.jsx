@@ -125,7 +125,7 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
               setSelectedPopUp(merch)
             }}
             icon={{
-              url: '/assets/foodmarker.png',
+              url: '/assets/foodmarker.svg',
               scaledSize: new google.maps.Size(40, 40)
             }}
           />
