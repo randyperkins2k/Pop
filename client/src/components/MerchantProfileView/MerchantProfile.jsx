@@ -131,12 +131,16 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
         setLocatePrimary(!locatePrimary)
         setViewMenuPrimary(false)
       }}>Locate</LocateBtn><br/>
-      <ViewMenuBtn
-        onClick={() => {
-          setReviewView(false);
-          setPictureFeedView(true);
-        }}
-       >Pictures</ViewMenuBtn>
+      <Link to="/menu">
+        <ViewMenuBtn
+          viewMenuPrimary={viewMenuPrimary}
+          onClick={() => {
+            setViewMenuPrimary(!viewMenuPrimary)
+            setLocatePrimary(false)
+            console.log('hey there', merchant.id, userSubs)
+          }}>View Menu
+        </ViewMenuBtn>
+      </Link>
       <ViewMenuBtn
       viewMenuPrimary={viewMenuPrimary}
       onClick={() => {
@@ -153,7 +157,7 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
         }}
        >Reviews</ViewMenuBtn>
      {
-       pictureFeedView && !reviewView ? 
+       pictureFeedView && !reviewView ?
        <div>
         {
           pictureFeedView ?

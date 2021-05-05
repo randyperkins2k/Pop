@@ -15,6 +15,9 @@ import SideBar from './SideBarView/SideBar.jsx';
 import ListView from './ListView/ListView.jsx'
 import EditPopupProfile from './YourPopups/EditPopUp/EditPopupProfile.jsx';
 import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
+import EditMenu from './YourPopups/EditPopUp/EditMenu.jsx';
+import Menu from './MerchantProfileView/Menu.jsx';
+import EditInfo from './YourPopups/EditPopUp/EditInfo.jsx';
 // import * as butt from './openMerch.json';
 // const merchData = butt.merchants;
 import ToggleSwitch from '../components/ToggleSwitch.jsx';
@@ -283,6 +286,7 @@ const Home = ({
                     return <YourPopUps
                       merchData={merchData}
                       setMerchData={setMerchData}
+                      merchant={selectedMerchant}
                       selectMerch={setSelectedMerchant}
                       yourPopups={yourPopups}
                       setYourPopups={setYourPopups}
@@ -301,6 +305,7 @@ const Home = ({
                   path='/edit'
                   render={(props) => <EditPopupProfile
                     merchant={selectedMerchant}
+                    selectMerchant={setSelectedMerchant}
                     merchData={merchData}
                     setMerchData={setMerchData}
                   />}
@@ -356,6 +361,38 @@ const Home = ({
                       setSubs={setUserSubs}
                       setYourPopups={setYourPopups}
                       user={user}
+                    />
+                  }}
+                />
+                <Route
+                  path="/editmenu"
+                  render={() => {
+                    return <EditMenu
+                      merchant={selectedMerchant}
+                      selectMerchant={setSelectedMerchant}
+                    />
+                  }}
+                />
+                <Route
+                  path="/menu"
+                  render={() => {
+                    return <Menu
+                      merchant={selectedMerchant}
+                      selectMerchant={setSelectedMerchant}
+                    />
+                  }}/>
+                  <Route
+                  path="/editinfo"
+                  render={() => {
+                    return <EditInfo
+                      merchant={selectedMerchant}
+                      selectMerchant={setSelectedMerchant}
+                      yourPopups={yourPopups}
+                      setYourPopups={setYourPopups}
+                      userSubs={userSubs}
+                      setUserSubs={setUserSubs}
+                      merchData={merchData}
+                      setMerchData={setMerchData}
                     />
                   }}
                 />

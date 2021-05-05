@@ -92,7 +92,7 @@ border-color: lightgray;
 `
 
 
-const EditPopupProfile = ({ merchant, merchData, setMerchData }) => {
+const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData }) => {
   const [openOrClosed, setOpenOrClosed] = useState('');
   const [ uploadPicWindow, setUploadPicWindow ] = useState(false);
 
@@ -134,11 +134,15 @@ const EditPopupProfile = ({ merchant, merchData, setMerchData }) => {
       </Link>
       <div className='controlPanel'>
         <h6>Control panel</h6>
-        <EditInfoBtn>Edit info</EditInfoBtn>
+        <Link to="/editinfo">
+          <EditInfoBtn>Edit info</EditInfoBtn>
+        </Link>
         <UploadBtn
           onClick={() => setUploadPicWindow(true)}
         >Upload photo</UploadBtn>
-        <EditMenuBtn>Edit menu</EditMenuBtn>
+        <Link to="/editmenu">
+          <EditMenuBtn>Edit menu</EditMenuBtn>
+        </Link>
         <EditOwnerBtn>Edit owner</EditOwnerBtn>
         <Link to='/openpopmap'>
         <OpenShopBtn>Open shop</OpenShopBtn>
@@ -149,7 +153,7 @@ const EditPopupProfile = ({ merchant, merchData, setMerchData }) => {
         </CloseBusinessBtn>
       </div>
       {
-        uploadPicWindow ? 
+        uploadPicWindow ?
         <UploadPic
           merchant={merchant}
         /> :

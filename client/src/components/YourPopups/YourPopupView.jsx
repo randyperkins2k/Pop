@@ -22,6 +22,8 @@ margin-top:3px;
 
 const YourPopupView = ({ merchant, selectMerch, yourPopups, setYourPopups, merchData, setMerchData, userSubs, setUserSubs }) => {
   //lets get rid of some of these popups
+  console.log('hello from your popup');
+  console.log(merchant);
   const deleteMerch = () => {
     if (confirm(`Do you want to delete ${merchant.name}?`) === true) {
       console.log('deleted');
@@ -45,7 +47,7 @@ const YourPopupView = ({ merchant, selectMerch, yourPopups, setYourPopups, merch
     <div className="merchant-listing">
       <div>
         {
-          merchant.isOpen ? 
+          merchant.isOpen ?
           <h3>Open</h3> :
           <h3>Closed</h3>
         }
