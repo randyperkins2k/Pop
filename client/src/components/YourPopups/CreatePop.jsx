@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Confirmation from '../../components/Confirmation.jsx';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next'
 
 const Create = styled.button`
   margin-left: -1px;
@@ -38,6 +39,7 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
   const [ nameTakenBool, setNameTakenBool ] = useState(false);
   const [ pickCategoryBool, setPickCategoryBool ] = useState(false);
   const back = useHistory();
+  const {t} = useTranslation();
   console.log(currentLocMarker);
 
   const finalizeCreation =  async () => {
@@ -76,14 +78,14 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
     return (
 
       <CreatePopUpWrap>
-        <h6>Business Name</h6>
+        <h6>{t("businessNameTxt")}</h6>
         { nameTakenBool ? <h5 className='issue'>{`${businessName} is already taken!`}</h5> : ''}
         <input onChange={(e) => {
           setNameTakenBool(false);
           console.log(e.target.value);
           setBusinessName(e.target.value);
           }}></input>
-        <h6>Category</h6>
+        <h6>{t("categoryTxt")}</h6>
         {
         pickCategoryBool ?
         <h5 className='issue'>{`You must pick a category!`}</h5>
@@ -92,28 +94,28 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
           setPickCategoryBool(false);
           setCategory(e.target.value);
           }}>
-          <option value="" selected disabled hidden>Category</option>
+          <option value="" selected disabled hidden>{t("categoryTxt")}</option>
           <option value={'foodpopup'}>Food Pop</option>
           <option value={'foodtruck'}>Food Truck</option>
           <option value={'performer'}>Performer</option>
           <option value={'arts'}>Arts/Craft</option>
           <option value={'produce'}>Market</option>
         </select>
-        <h6>Info</h6>
+        <h6>{t("infoTxt")}</h6>
         <form onSubmit={(e) => {
           e.preventDefault();
 
         }}>
           <input type="text" maxlength="255"></input>
         </form>
-        <h6>Website</h6>
+        <h6>{t("websiteTxt")}</h6>
         <input onChange={(e) => setWebsite(e.target.value)}></input>
         <h6></h6>
         <h6></h6>
         {
           createConfirm ?
           <Confirmation
-            text={`Create ${businessName}?`}
+            text={`${t("createBtn")} ${businessName}?`}
             yesContext={() => finalizeCreation()}
             noContext={() =>{
               setAddCreateButtons(true)
@@ -144,13 +146,13 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
               setCreateConfirm(true);
               setAddCreateButtons(false);
             }}
-          >Create</Create>
+          >{t("createBtn")}</Create>
           <Create
             onClick={() => {
               setCancelConfirm(true);
               setAddCreateButtons(false);
             }}
-          >Cancel</Create>
+          >{t("cancelBtn")}</Create>
           </div>
           :
           ''

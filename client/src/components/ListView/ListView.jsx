@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import MerchList from './MerchList.jsx';
 import styled, { css } from 'styled-components';
+import { useTranslation } from 'react-i18next'
+
+const BtnWrapper = styled.div`
+text-align: center;
+`
 
 const Open = styled.button`
   margin-top: 21px;
-  margin-left: 36px;
   margin-bottom: 2rem;
   color: black;
   font-family: 'Ubuntu';
@@ -66,10 +70,11 @@ const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
   const [ openPrimary, setOpenPrimary ] = useState(true);
   const [ sPUPrimary, setSPUPrimary ] = useState(false);
   const [ favPrimary, setFavPrimary ] = useState(false);
+  const { t, i18n } = useTranslation();
 
   return (
     <div>
-
+<BtnWrapper>
       <Open
       openPrimary={openPrimary}
       onClick={() => {
@@ -77,12 +82,12 @@ const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
         setOpenPrimary(!openPrimary)
         setSPUPrimary(false)
         setFavPrimary(false)
-        }}>Open Now</Open>
+        }}>{t('openNowBtn')}</Open>
       <Search sPUPrimary={sPUPrimary} onClick={() => {
         setSPUPrimary(!sPUPrimary)
         setOpenPrimary(false)
         setFavPrimary(false)
-      }}>Search PopUps</Search>
+      }}>{t('searchPopUpsBtn')}</Search>
       <Favs
       favPrimary={favPrimary}
       onClick={() => {
@@ -92,7 +97,8 @@ const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
         setOpenPrimary(false)
         }}
         >
-          Favorites</Favs>
+          {t('favoritesBtn')}</Favs>
+          </BtnWrapper>
       <ul>
         { openPopsView ?
           merchData.map(merch => {
