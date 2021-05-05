@@ -203,13 +203,13 @@ app.get('/distance/:lat1/:lon1/:lat2/:lon2', (req, res) => {
 
 //add new merchant
 app.post('/api/merchant/add', (req, res) => {
-  const { name, category, info, website, adminId, lat, lon } = req.body;
+  const { name, category, info, website, adminId, lat, lon, isOpen } = req.body;
   Merchants.findAll({
     where: {name: name}
   })
     .then(results => {
       if (!results.length) {
-        const isOpen = true;
+        //const isOpen = true;
         Merchants.create({ name, category, info, website, lat, lon, isOpen })
           .then(newPopup => {
             Admins.create({UserId: adminId, MerchantId: newPopup.id})
