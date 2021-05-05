@@ -39,7 +39,6 @@ import styled, { css } from 'styled-components'
 const ListViewButton = styled.button`
 margin-left: 0px;
 display: "flex";
-justify-content: center
 align-items: 'center';
 color: black;
 font-family: 'Ubuntu';
