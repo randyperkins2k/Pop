@@ -153,7 +153,8 @@ app.get('/merchant/:id', (req, res) => {
 });
 
 //get merchants in given radius
-app.get('/api/merchant/radius/:km/:lat1/:lon1/:lat2/:lon2', (req, res) => {
+app.get('/api/merchant/radius/:km/:lat/:lon/', (req, res) => {
+  const {km, lat, lon} = req.params;
   Merchants.findAll({
     where: {}
   })
@@ -171,8 +172,10 @@ app.get('/api/merchant/radius/:km/:lat1/:lon1/:lat2/:lon2', (req, res) => {
         var d = R * c; // Distance in km
         return d;
       }
-
-      res.send(data);
+      let filteredMerchants = data.filter(merchant => {
+        return getDistanceFromLatLonInKm(lat, lon, merchant.lat, merchant.lon) <= km;
+      });
+      res.send(filteredMerchants);
     })
     .catch(err => res.send(err));
 });
