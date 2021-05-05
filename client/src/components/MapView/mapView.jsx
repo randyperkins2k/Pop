@@ -8,7 +8,10 @@ import {
 } from '@react-google-maps/api';
 import Window from '../MapView/Window.jsx'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 //import map from '../popup/foodmarker.png'
+
+
 
 const libraries = ["places"];
 
@@ -24,6 +27,22 @@ const mapContainerStyle = {
   height: '100vh'
 }
 
+const Nav = styled.nav`
+position: absolute;
+padding: '2rem 0';
+text-align: center;
+margin-top: -200px;
+margin-left: 60px;
+button {
+  background-color: transparent;
+  border-width: 1px;
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 10px;
+}
+`
+
+
 const options = {
   styles: mapStyles,
   disableDefaultUI: true,
@@ -34,6 +53,11 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
   const [ center, setCenter ] = useState({lat: 29.956124, lng: -90.090509});
   const [ yourLocBool, setYourLocBool] = useState(false);
   //const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
+  const { t, i18n } = useTranslation();
+
+  function getLang(lang) {
+    i18n.changeLanguage(lang);
+  }
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries
@@ -80,7 +104,14 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
 
   return (
     <div>
-      <TouchMap>Touch map to set location</TouchMap>
+      <Nav>
+      <button onClick={()=>getLang('en')}>English</button>
+      <button onClick={()=>getLang('sp')}>Spanish</button>
+      <button onClick={()=>getLang('ko')}>Korean</button>
+      <button onClick={()=>getLang('chi')}>Chinese</button>
+      </Nav>
+
+      <TouchMap>{t("touch")}</TouchMap>
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={12}

@@ -31,7 +31,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import styled, { css } from 'styled-components'
-import Stylingsomething from './Stylingsomething.jsx'
+
 
 // const MapView = withScriptjs(withGoogleMap(Map));
 
