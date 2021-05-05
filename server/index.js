@@ -179,8 +179,9 @@ app.get('/distance/:lat1/:lon1/:lat2/:lon2', (req, res) => {
     var d = R * c; // Distance in km
     return d;
   }
-  console.log(getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2))
-  res.send('check console');
+  console.log(getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2));
+  let result = getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2);
+  res.json(result);
 });
 
 //add new merchant
