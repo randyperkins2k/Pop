@@ -106,7 +106,7 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
           e.preventDefault();
 
         }}>
-          <input type="text" maxlength="255"></input>
+          <input type="text" maxlength="255" value={info}  onChange={(e) => {setInfo(e.target.value)}}></input>
         </form>
         <h6>{t("websiteTxt")}</h6>
         <input onChange={(e) => setWebsite(e.target.value)}></input>
