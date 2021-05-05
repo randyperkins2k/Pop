@@ -3,6 +3,7 @@ import EditPopupProfile from './EditPopUp/EditPopupProfile.jsx';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components'
 import axios from 'axios';
+import { useTranslation } from 'react-i18next'
 
 const EditMerchBtn = styled.button`
 
@@ -22,10 +23,11 @@ margin-top:3px;
 
 const YourPopupView = ({ merchant, selectMerch, yourPopups, setYourPopups, merchData, setMerchData, userSubs, setUserSubs }) => {
   //lets get rid of some of these popups
+  const {t} = useTranslation()
   console.log('hello from your popup');
   console.log(merchant);
   const deleteMerch = () => {
-    if (confirm(`Do you want to delete ${merchant.name}?`) === true) {
+    if (confirm(`${t("doYouWantToDelete")} ${merchant.name}?`) === true) {
       console.log('deleted');
       console.log(merchant.id, typeof merchant.id);
       axios.delete(`/api/merchant/delete/${merchant.id}`)
@@ -48,8 +50,8 @@ const YourPopupView = ({ merchant, selectMerch, yourPopups, setYourPopups, merch
       <div>
         {
           merchant.isOpen ?
-          <h3>Open</h3> :
-          <h3>Closed</h3>
+          <h3>{t('openTxt')}</h3> :
+          <h3>{t('closedTxt')}</h3>
         }
         <img></img>
         <span></span>
@@ -61,12 +63,12 @@ const YourPopupView = ({ merchant, selectMerch, yourPopups, setYourPopups, merch
           <EditMerchBtn
           onClick={() => {
             selectMerch(merchant)
-            }}>Edit</EditMerchBtn>
+            }}>{t('editBtn')}</EditMerchBtn>
         </Link>
         <EditMerchBtn
           onClick={() => {
             deleteMerch(merchant)
-            }}>Delete</EditMerchBtn>
+            }}>{t('deleteBtn')}</EditMerchBtn>
       </div>
     </div>
   )

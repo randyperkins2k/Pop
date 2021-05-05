@@ -1,5 +1,6 @@
 import React , { useState } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next'
 
 const Create = styled.button`
   margin-left: -1px;
@@ -12,7 +13,7 @@ const Create = styled.button`
 `
 
 const Confirmation = ({ text, yesContext, noContext }) => {
-
+const {t} = useTranslation()
   return (
     <div>
       <h2>{text}</h2>
@@ -20,7 +21,7 @@ const Confirmation = ({ text, yesContext, noContext }) => {
         onClick={() => {
           yesContext();
         }}
-      >Yes</Create>
+      >{t('yesTxt')}</Create>
       <Create
         onClick={() => {
           noContext();
