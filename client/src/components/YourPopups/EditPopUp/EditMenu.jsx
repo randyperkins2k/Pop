@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const EditMenu = ({ merchant, selectMerchant }) => {
+  console.log('hello from edit menu');
+  console.log(merchant);
   const [products, setProducts] = useState([]);
   const [nameText, setNameText] = useState('');
   const [priceNum, setPriceNum] = useState(null);

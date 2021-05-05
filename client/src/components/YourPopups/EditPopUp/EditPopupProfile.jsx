@@ -139,7 +139,9 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
         <UploadBtn
           onClick={() => setUploadPicWindow(true)}
         >Upload photo</UploadBtn>
-        <EditMenuBtn>Edit menu</EditMenuBtn>
+        <Link to="/editmenu">
+          <EditMenuBtn>Edit menu</EditMenuBtn>
+        </Link>
         <EditOwnerBtn>Edit owner</EditOwnerBtn>
         <Link to='/openpopmap'>
         <OpenShopBtn>Open shop</OpenShopBtn>
