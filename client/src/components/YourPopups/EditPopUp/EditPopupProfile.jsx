@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import MerchantProfile from '../../MerchantProfileView/MerchantProfile.jsx';
-import EditMenu from './EditMenu.jsx';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styled, { css } from 'styled-components'
@@ -135,7 +134,9 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
       </Link>
       <div className='controlPanel'>
         <h6>Control panel</h6>
-        <EditInfoBtn>Edit info</EditInfoBtn>
+        <Link to="/editinfo">
+          <EditInfoBtn>Edit info</EditInfoBtn>
+        </Link>
         <UploadBtn
           onClick={() => setUploadPicWindow(true)}
         >Upload photo</UploadBtn>
