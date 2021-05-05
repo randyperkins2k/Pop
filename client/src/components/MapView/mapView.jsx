@@ -32,7 +32,7 @@ position: absolute;
 padding: '2rem 0';
 text-align: center;
 margin-top: -200px;
-margin-left: 60px;
+margin-left: 120px;
 button {
   background-color: transparent;
   border-width: 1px;
@@ -107,8 +107,6 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
       <Nav>
       <button onClick={()=>getLang('en')}>English</button>
       <button onClick={()=>getLang('sp')}>Spanish</button>
-      <button onClick={()=>getLang('ko')}>Korean</button>
-      <button onClick={()=>getLang('chi')}>Chinese</button>
       </Nav>
 
       <TouchMap>{t("touch")}</TouchMap>
