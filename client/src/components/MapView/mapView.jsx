@@ -17,9 +17,9 @@ const libraries = ["places"];
 
 const TouchMap = styled.div`
 font-family: 'Ubuntu';
-margin-left: 84px;
 margin-top: 30px;
 opacity: .5;
+text-align: center;
 `
 
 const mapContainerStyle = {
@@ -102,14 +102,16 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
   }
 
 
+
+console.log(t("touch"))
   return (
     <div>
       <Nav>
-      <button onClick={()=>getLang('en')}>English</button>
-      <button onClick={()=>getLang('sp')}>Spanish</button>
+      <button onClick={()=>getLang('en')}>{t('englishBtn')}</button>
+      <button onClick={()=>getLang('sp')}>{t('spanishBtn')}</button>
       </Nav>
 
-      <TouchMap>{t("touch")}</TouchMap>
+      <TouchMap>{t("touchMap")}</TouchMap>
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={12}

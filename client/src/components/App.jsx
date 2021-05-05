@@ -32,12 +32,15 @@ import {
   Redirect,
 } from 'react-router-dom';
 import styled, { css } from 'styled-components'
+import { useTranslation } from 'react-i18next'
 
 
 // const MapView = withScriptjs(withGoogleMap(Map));
+const ButtonWrapper = styled.div`
+text-align: center;
 
+`
 const ListViewButton = styled.button`
-margin-left: 0px;
 display: "flex";
 align-items: 'center';
 color: black;
@@ -59,7 +62,6 @@ font-size: 14.25px;
 
 `
 const MapViewButton = styled.button`
-margin-left: 76px;
 color: black;
 font-family: 'Ubuntu';
 padding: 6px 16px;
@@ -201,7 +203,7 @@ const Home = ({
   mLPrimary, setMLPrimary
 
 }) => {
-
+  const { t, i18n } = useTranslation();
     return(
     <Well>
     <div>
@@ -231,20 +233,22 @@ const Home = ({
             onClick={() => setSideBarDisplay(false)}
             className='main'
             >
+              <ButtonWrapper>
             <Link to='/'>
               <MapViewButton  mLPrimary={mLPrimary} onClick={() => {
                     setMLPrimary(!mLPrimary)
                     setLVPrimary(false)
                   }}
-                    >MAP VIEW</MapViewButton>
+                    >{t('mapViewBtn')}</MapViewButton>
             </Link>
             <Link to='/listview'>
               <ListViewButton lVPrimary={lVPrimary} onClick={() => {
                     setLVPrimary(!lVPrimary)
                     setMLPrimary(false)
                   }}>
-                    LIST VIEW</ListViewButton>
+                    {t('listViewBtn')}</ListViewButton>
             </Link>
+                    </ButtonWrapper>
               <Switch>
                 <Route
                 path='/'

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next'
 
 const MerchantInfo = styled.button`
   font-family: 'Ubuntu';
@@ -27,6 +28,7 @@ background-color:#ffd1dc;
 
 const MerchList = ({ merchant, selectMerchant }) => {
   const { name, isOpen } = merchant
+  const {t} = useTranslation()
 
   return (
 
@@ -36,8 +38,8 @@ const MerchList = ({ merchant, selectMerchant }) => {
         <img></img>
         {
           isOpen ? 
-          <h5>Open</h5> :
-          <h5>Closed</h5>
+          <h5>{t('openTxt')}</h5> :
+          <h5>{t('closedTxt')}</h5>
         }
         <span></span>
         <div></div>

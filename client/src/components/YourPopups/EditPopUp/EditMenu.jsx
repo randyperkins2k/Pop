@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next'
 
 const EditMenu = ({ merchant, selectMerchant }) => {
+  const {t} = useTranslation()
   console.log('hello from edit menu');
   console.log(merchant);
   const [products, setProducts] = useState([]);

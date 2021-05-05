@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import YourPopupView from './YourPopupView.jsx';
 import styled, { css } from 'styled-components';
 import CreatePop from './CreatePop.jsx'
-
+import { useTranslation } from 'react-i18next'
 const Create = styled.button`
   color: black;
   font-family: 'Ubuntu';
@@ -35,6 +35,7 @@ const YourPopWrap = styled.div`
 
 const YourPopUps = ({ yourPopups, setYourPopups, merchData, setMerchData, merchant, selectMerch, userSubs, setUserSubs }) => {
   const [createPopUpPrimary, setCreatePopUpPrimary] = useState(false)
+  const {t} = useTranslation()
   //const [ yourPopups, setYourPopups ] = useState();
   //const [ adminId, setAdminId] = useState(231);
 
@@ -46,14 +47,14 @@ const YourPopUps = ({ yourPopups, setYourPopups, merchData, setMerchData, mercha
 
   return (
     <YourPopWrap>
-      <h5>Your pop ups</h5>
+      <h5>{t('yourPopUpsBtn')}</h5>
       <Link to='/create'>
       <Create
       createPopUpPrimary={createPopUpPrimary}
       onClick={() => {
         console.log(!!yourPopups)
         setCreatePopUpPrimary(!createPopUpPrimary)
-      }}>Create a Pop Up</Create>
+      }}>{t('createPopUpBtn')}</Create>
       </Link>
         <div>
       { yourPopups ?
