@@ -69,7 +69,7 @@ const Products = sequelize.define('Products', {
 });
 
 //join tables
-
+Products.sync();
 const Reviews = sequelize.define('Reviews', {
   id: {
     type: DataTypes.INTEGER,
