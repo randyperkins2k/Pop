@@ -130,6 +130,8 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
       })
       .catch(err => console.log('opening merchant error', err));
   }
+ 
+
 
   return (
     <EditYourPopUpWrap >

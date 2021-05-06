@@ -2,6 +2,40 @@ import React, { useState, useEffect } from 'react';
 import MerchantProfile from '../../MerchantProfileView/MerchantProfile.jsx';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next'
+import styled from 'styled-components'
+
+const Div = styled.div`
+text-align: center;
+font-family: 'Ubuntu';
+  p {
+    font-size: 11px;
+  },
+  button {
+    color: black;
+    font-family: 'Ubuntu';
+    padding: 5px 16px;
+    background-color: white;
+    font-size: 11px;
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: lightgray;
+  },
+
+`
+const Input = styled.div`
+  box-sizing:border-box;
+  margin-top: 4px;
+  margin-left: 31px;
+  margin-bottom: 8px;
+  background-color: #fafafa;
+  width:80%;
+  resize: vertical;
+  padding:21px;
+  border-radius:15px;
+  border:0;
+  box-shadow:4px 4px 10px;
+
+`
 
 const EditMenu = ({ merchant, selectMerchant }) => {
   const {t} = useTranslation()
@@ -60,9 +94,9 @@ const EditMenu = ({ merchant, selectMerchant }) => {
   }
 
   return(
-    <div>
+    <Div>
       <div>
-        <h3>{`${merchant.name}'s`} products: </h3>
+        <h5>{`${merchant.name}'s`} products: </h5>
         {products.map(product =>
           <p>&emsp; &#8226; &nbsp;<b>{product.name}</b><small>(<i>${parseFloat(product.price).toFixed(2)}</i></small>)
           <button onClick={
@@ -72,18 +106,18 @@ const EditMenu = ({ merchant, selectMerchant }) => {
       </div>
       <div>
         <form>
-          <h4>add new product:</h4>
+          <h5>add new product:</h5>
           <label><b>name:</b></label>
-          <input type="text" value={nameText} onChange={(e) => setNameText(e.target.value)}></input><br></br>
+          <Input type="text" value={nameText} onChange={(e) => setNameText(e.target.value)}></Input><br></br>
           <label><b>price:</b></label>
-          <input type="number" value={priceNum} onChange={(e) => setPriceNum(e.target.value)}></input><br></br>
+          <Input type="number" value={priceNum} onChange={(e) => setPriceNum(e.target.value)}></Input><br></br>
         </form>
         <button onClick={() => {addProduct()}}>add product</button><br></br>
       </div>
       <div>
         <MerchantProfile merchant={merchant} style={{fontFamily: 'Ubuntu'}}/>
       </div>
-    </div>
+    </Div>
   )
 
 }
