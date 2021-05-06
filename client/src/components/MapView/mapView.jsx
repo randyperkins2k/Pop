@@ -7,7 +7,7 @@ import {
   InfoWindow
 } from '@react-google-maps/api';
 import Window from '../MapView/Window.jsx'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useTranslation } from 'react-i18next'
 //import map from '../popup/foodmarker.png'
 
@@ -33,14 +33,35 @@ padding: '2rem 0';
 text-align: center;
 margin-top: -200px;
 margin-left: 120px;
-button {
+
+`
+const EnglishBtn = styled.button`
   background-color: transparent;
   border-width: 1px;
   border-radius: 6px;
   padding: 3px 10px;
   font-size: 10px;
-}
+  ${props => props.englishPrimary && css`
+opacity: .5;
+color: black;
+background-color: #ffd1dc;
+font-size: 10.25px;
+`}
 `
+const SpanishBtn = styled.button`
+  background-color: transparent;
+  border-width: 1px;
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 10px;
+  ${props => props.spanishPrimary && css`
+opacity: .5;
+color: black;
+background-color: #ffd1dc;
+font-size: 10.25px;
+`}
+`
+
 
 
 const options = {
@@ -52,6 +73,8 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
   const [ selectedPopUp, setSelectedPopUp ] = useState(null);
   const [ center, setCenter ] = useState({lat: 29.956124, lng: -90.090509});
   const [ yourLocBool, setYourLocBool] = useState(false);
+  const [englishPrimary, setEnglishPrimary] = useState(false)
+  const [spanishPrimary, setSpanishPrimary] = useState(false)
   //const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
   const { t, i18n } = useTranslation();
 
@@ -107,8 +130,24 @@ console.log(t("touch"))
   return (
     <div>
       <Nav>
-      <button onClick={()=>getLang('en')}>{t('englishBtn')}</button>
-      <button onClick={()=>getLang('sp')}>{t('spanishBtn')}</button>
+      <EnglishBtn 
+      englishPrimary={englishPrimary}
+      onClick={()=>{
+        getLang('en')
+        setEnglishPrimary(!englishPrimary)
+        setSpanishPrimary(false)
+      }}>
+        {t('englishBtn')}
+        </EnglishBtn>
+      <SpanishBtn 
+      spanishPrimary={spanishPrimary}
+      onClick={()=>{
+        setSpanishPrimary(!spanishPrimary)
+        setEnglishPrimary(false)
+        getLang('sp')
+        }}>
+          {t('spanishBtn')}
+          </SpanishBtn>
       </Nav>
 
       <TouchMap>{t("touchMap")}</TouchMap>
