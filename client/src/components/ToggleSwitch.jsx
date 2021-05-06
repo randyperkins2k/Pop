@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 const InputWrapper = styled.label`
 	position: relative;
-	margin-left: 151px;
+	margin-left: 10px;
 	margin-top: 30px;
 
 `

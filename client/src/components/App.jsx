@@ -41,6 +41,11 @@ const ButtonWrapper = styled.div`
 text-align: center;
 
 `
+const Div = styled.div`
+text-align: center;
+
+`
+
 const ListViewButton = styled.button`
 display: "flex";
 align-items: 'center';
@@ -82,6 +87,7 @@ font-size: 14.25px;
 `
 const Welcome = styled.h1`
 margin-top: 60px;
+margin-left: 11px;
 font-family: 'Londrina Solid', cursive;
 color: #ffd1dc;
 text-align: center;
@@ -207,7 +213,7 @@ const Home = ({
   const { t, i18n } = useTranslation();
     return(
     <Well>
-    <div>
+    <Div>
       {/* <LogOutBtn href="/logout"> Logout </LogOutBtn> */}
 
         <div className='sidebar-view'>
@@ -401,7 +407,7 @@ const Home = ({
                 />
               </Switch>
             </div>
-      </div>
+      </Div>
       </Well>
   )
 }

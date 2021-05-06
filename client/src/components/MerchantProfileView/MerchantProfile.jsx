@@ -6,6 +6,8 @@ import PictureFeed from './PictureFeed.jsx';
 
 import styled, { css } from 'styled-components'
 import { useTranslation } from 'react-i18next'
+
+
 const MerchantProWrap = styled.div`
 text-align: center;
 `
@@ -30,7 +32,6 @@ font-size: 11.25px;
 `}
 `
 const LocateBtn = styled.button`
-  text-align: center;
   color: black;
   font-family: 'Ubuntu';
   padding: 5px 16px;
@@ -131,7 +132,7 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
       onClick={() => {
         setLocatePrimary(!locatePrimary)
         setViewMenuPrimary(false)
-      }}>{t("locateBtn")}</LocateBtn><br/>
+      }}>{t("locateBtn")}</LocateBtn>
       <Link to="/menu">
         <ViewMenuBtn
           viewMenuPrimary={viewMenuPrimary}
