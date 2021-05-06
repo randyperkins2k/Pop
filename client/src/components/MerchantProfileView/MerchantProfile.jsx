@@ -85,7 +85,10 @@ margin-bottom: -17px;
 margin-top: 30px;
 font-famly: 'Ubuntu';
 `
-
+const Review = styled.h5`
+font-family: 'Ubuntu';
+margin-top: 50px;
+`
 
 const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, setMerchData, openOrClosed, setOpenOrClosed, userData, setUserData }) => {
   const [ locatePrimary, setLocatePrimary ] = useState(false);
@@ -211,13 +214,13 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
         </form>
       </div>
       <div>
-        <h5>{t("reviewsBtn")}:</h5>
+        <Review>{t("reviewsTxt")}:</Review>
         {reviews.map(review => <p><b>{review.User.name}</b>: {review.message}</p>)}
       </div>
     </div>
       :
     <div>
-      <h5>{t("leaveAReviewTxt")}</h5>
+      <LeaveAReview>{t("leaveAReviewTxt")}</LeaveAReview>
     </div>
       }
     </MerchantProWrap>
