@@ -23,7 +23,25 @@ border-width: 1px;
 border-color: lightgray;
 transition: ease 0.01s all;
 `
+const ReviewsBtn = styled.button`
+text-align: center;
+color: black;
+font-family: 'Ubuntu';
+padding: 5px 16px;
+background-color: white;
+font-size: 11px;
+border-radius: 6px;
+border-width: 1px;
+border-color: lightgray;
+transition: ease 0.01s all;
+${props => props.reviewBtnPrimary && css`
+opacity: .5;
+color: black;
+background-color: #ffd1dc;
+font-size: 11.25px;
+`}
 
+`
 const ViewMenuBtn = styled.button`
   text-align: center;
   color: black;
@@ -35,12 +53,7 @@ const ViewMenuBtn = styled.button`
   border-width: 1px;
   border-color: lightgray;
   transition: ease 0.01s all;
-  ${props => props.viewMenuPrimary && css`
-opacity: .5;
-color: black;
-background-color: #ffd1dc;
-font-size: 11.25px;
-`}
+
 `
 const LocateBtn = styled.button`
   color: black;
@@ -83,11 +96,13 @@ box-shadow:4px 4px 10px;
 const LeaveAReview = styled.div`
 margin-bottom: -17px;
 margin-top: 30px;
-font-famly: 'Ubuntu';
+font-family: 'Ubuntu';
 `
 const Review = styled.h5`
 font-family: 'Ubuntu';
 margin-top: 50px;
+font-color: green;
+
 `
 
 const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, setMerchData, openOrClosed, setOpenOrClosed, userData, setUserData }) => {
@@ -97,6 +112,7 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
   const [ pictureFeedView, setPictureFeedView ] = useState(true);
   const [ reviewView, setReviewView ] = useState(false)
   const {t} = useTranslation()
+  const [ reviewBtnPrimary, setReviewBtnPrimary ] = useState(false)
   //const [reviews, setReviews] = useState(merchant.Reviews);
   const findReviews = () => {
     if (merchant.Reviews) {
@@ -163,6 +179,8 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
       onClick={() => {
         setLocatePrimary(!locatePrimary)
         setViewMenuPrimary(false)
+        setReviewBtnPrimary(false)
+        setReviewView(false)
       }}>{t("locateBtn")}</LocateBtn>
       <Link to="/menu">
         <ViewMenuBtn
@@ -183,12 +201,15 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
         setReviewView(false);
         setPictureFeedView(false);
        }}>View Menu</ViewMenuBtn>
-       <ViewMenuBtn
+       <ReviewsBtn
+          reviewBtnPrimary={reviewBtnPrimary}
         onClick={() => {
           setPictureFeedView(false);
           setReviewView(true);
+          setReviewBtnPrimary(!reviewBtnPrimary)
+          setLocatePrimary(false)
         }}
-       >{t("reviewsBtn")}</ViewMenuBtn>
+       >{t("reviewsBtn")}</ReviewsBtn>
      {
        pictureFeedView && !reviewView ?
        <div>
