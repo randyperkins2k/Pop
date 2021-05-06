@@ -11,7 +11,18 @@ import { useTranslation } from 'react-i18next'
 const MerchantProWrap = styled.div`
 text-align: center;
 `
-
+const SubmitBtn = styled.button`
+text-align: center;
+color: black;
+font-family: 'Ubuntu';
+padding: 5px 16px;
+background-color: white;
+font-size: 11px;
+border-radius: 6px;
+border-width: 1px;
+border-color: lightgray;
+transition: ease 0.01s all;
+`
 
 const ViewMenuBtn = styled.button`
   text-align: center;
@@ -39,6 +50,7 @@ const LocateBtn = styled.button`
   font-size: 11px;
   border-radius: 6px;
   border-width: 1px;
+  margin-top: 25px;
   border-color: lightgray;
   transition: ease 0.01s all;
   ${props => props.locatePrimary && css`
@@ -56,6 +68,22 @@ const P = styled.div`
 font-family: 'Ubuntu';
 text-align: center;
 margin-top: 30px;
+`
+const Input = styled.input`
+box-sizing:border-box;
+margin:20px;
+background-color: #fafafa;
+width:80%;
+resize: vertical;
+padding:16px;
+border-radius:15px;
+border:0;
+box-shadow:4px 4px 10px;
+`
+const LeaveAReview = styled.div`
+margin-bottom: -17px;
+margin-top: 30px;
+font-famly: 'Ubuntu';
 `
 
 
@@ -122,7 +150,7 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
       <div>
         <h2>{merchant.name} {openOrClosed}</h2>
         <img/>
-        <H2>Info</H2>
+        <H2>{t("infoTxt")}</H2>
         <p>
           {merchant.info}
         </p>
@@ -173,13 +201,13 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
       reviewView && !pictureFeedView ?
       <div>
       <div>
-      <h5>{t("leaveAReviewTxt")}:</h5>
+      <LeaveAReview>{t("leaveAReviewTxt")}:</LeaveAReview>
         <form onSubmit={(e) => {
           e.preventDefault();
 
         }}>
-          <input type="text" value={reviewText} onChange={(e)=>setReviewText(e.target.value)} maxlength="255"></input>
-          <button onClick={submitReview}>{t("submitBtn")}</button>
+          <Input type="text" value={reviewText} onChange={(e)=>setReviewText(e.target.value)} maxlength="255"></Input>
+          <SubmitBtn onClick={submitReview}>{t("submitBtn")}</SubmitBtn>
         </form>
       </div>
       <div>

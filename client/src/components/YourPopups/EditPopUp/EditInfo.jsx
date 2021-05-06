@@ -50,7 +50,7 @@ const EditInfo = ({ merchant, selectMerchant, yourPopups, setYourPopups, userSub
   return (
   <div>
     <div>
-      <h3>edit {`${merchant.name}'s`} info: </h3>
+      <h3>edit {`${merchant.name}'s`} {t("infoTxt")}: </h3>
       <textarea value={text} onChange={(e) => setText(e.target.value) }></textarea>
       <button onClick={ ()=> updateInfo()}>update info</button>
     </div>

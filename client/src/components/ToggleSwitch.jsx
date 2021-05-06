@@ -34,6 +34,7 @@ const Input = styled.input`
 `;
 
 const Slider = styled.span`
+	margin-top: 21px;
 	display: flex;
 	cursor: pointer;
 	width: 50px;
