@@ -69,6 +69,7 @@ const Products = sequelize.define('Products', {
 });
 
 //join tables
+Products.sync();
 
 const Reviews = sequelize.define('Reviews', {
   id: {
@@ -125,6 +126,9 @@ const Subs = sequelize.define('Subs', {
     },
     allowNull: false
   },
+  subscriptionToken: {
+    type: DataTypes.STRING(2000)
+  }
 });
 //Merchants.belongsToMany(Users, { through: Subs });
 //Users.belongsToMany(Merchants, { through: Subs });

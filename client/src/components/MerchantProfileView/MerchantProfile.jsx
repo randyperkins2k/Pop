@@ -3,6 +3,7 @@ import ToggleSwitch from '../ToggleSwitch.jsx'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PictureFeed from './PictureFeed.jsx';
+import Menu from './Menu.jsx';
 
 import styled, { css } from 'styled-components'
 
@@ -131,16 +132,13 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
         setLocatePrimary(!locatePrimary)
         setViewMenuPrimary(false)
       }}>Locate</LocateBtn><br/>
-      <Link to="/menu">
         <ViewMenuBtn
           viewMenuPrimary={viewMenuPrimary}
           onClick={() => {
-            setViewMenuPrimary(!viewMenuPrimary)
-            setLocatePrimary(false)
-            console.log('hey there', merchant.id, userSubs)
-          }}>View Menu
+            setPictureFeedView(true)
+            setReviewView(false)
+          }}>Picture feed
         </ViewMenuBtn>
-      </Link>
       <ViewMenuBtn
       viewMenuPrimary={viewMenuPrimary}
       onClick={() => {
@@ -176,7 +174,7 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
           e.preventDefault();
 
         }}>
-          <input type="text" value={reviewText} onChange={(e)=>setReviewText(e.target.value)} maxlength="255"></input>
+          <input type="text" value={reviewText} onChange={(e)=>setReviewText(e.target.value)} maxLength="255"></input>
           <button onClick={submitReview}>Submit</button>
         </form>
       </div>
@@ -187,7 +185,9 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
     </div>
       :
     <div>
-      <h5>This is the menu view!!!</h5>
+      <Menu
+        merchant={merchant}
+      />
     </div>
       }
     </MerchantProWrap>

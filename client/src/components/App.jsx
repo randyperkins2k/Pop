@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 import CreatePop from './YourPopups/CreatePop.jsx';
 import {
   GoogleMap,
@@ -33,6 +34,7 @@ import {
 } from 'react-router-dom';
 import styled, { css } from 'styled-components'
 import Stylingsomething from './Stylingsomething.jsx'
+import { requestFirebaseNotifPermission } from '../firebaseinit';
 
 // const MapView = withScriptjs(withGoogleMap(Map));
 
@@ -145,9 +147,28 @@ const App = () => {
 
   useEffect(() => logged(), []);
   useEffect(() => getPops(), []);
+  // useEffect(() => requestFirebaseNotifPermission()
+  // .then((firebaseToken) => {
+  //   // eslint-disable-next-line no-console
+  //   console.log(firebaseToken);
+  // })
+  // .catch((err) => {
+  //   return err;
+  // }), [])
+  //useEffect(() => console.log(requestFirebaseNotifPermission), [])
+  requestFirebaseNotifPermission()
+  // .then((firebaseToken) => {
+  //   // eslint-disable-next-line no-console
+  //   console.log('this is the fb token', firebaseToken);
+  // })
+  // .catch((err) => {
+  //   return err;
+  // })
 
+  
 
   return (
+
     <Router>
       {isLogged === true
         ? (<Redirect to="/" />)
@@ -209,7 +230,11 @@ const Home = ({
       {/* <LogOutBtn href="/logout"> Logout </LogOutBtn> */}
 
         <div className='sidebar-view'>
-            <Welcome onClick={() => setSideBarDisplay(!sideBarDisplay)}>Pop^</Welcome>
+            <Welcome onClick={() => {
+               setSideBarDisplay(!sideBarDisplay)
+              //console.log(requestFirebaseNotifPermission)
+            }
+            }>Pop^</Welcome>
             {/* <ToggleSwitch /> */}
             {
               !sideBarDisplay ?
@@ -372,14 +397,14 @@ const Home = ({
                     />
                   }}
                 />
-                <Route
+                {/* <Route
                   path="/menu"
                   render={() => {
                     return <Menu
                       merchant={selectedMerchant}
                       selectMerchant={setSelectedMerchant}
                     />
-                  }}/>
+                  }}/> */}
               </Switch>
             </div>
       </div>
