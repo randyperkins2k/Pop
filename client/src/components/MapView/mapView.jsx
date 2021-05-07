@@ -7,22 +7,62 @@ import {
   InfoWindow
 } from '@react-google-maps/api';
 import Window from '../MapView/Window.jsx'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { useTranslation } from 'react-i18next'
 //import map from '../popup/foodmarker.png'
+
+
 
 const libraries = ["places"];
 
 const TouchMap = styled.div`
 font-family: 'Ubuntu';
-margin-left: 84px;
 margin-top: 30px;
 opacity: .5;
+text-align: center;
 `
 
 const mapContainerStyle = {
   width: '100vw',
   height: '100vh'
 }
+
+const Nav = styled.nav`
+position: absolute;
+padding: '2rem 0';
+text-align: center;
+margin-top: -200px;
+margin-left: 120px;
+
+`
+const EnglishBtn = styled.button`
+  background-color: transparent;
+  border-width: 1px;
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 10px;
+  ${props => props.englishPrimary && css`
+opacity: .5;
+color: black;
+background-color: #ffd1dc;
+font-size: 10.25px;
+`}
+`
+const SpanishBtn = styled.button`
+  background-color: transparent;
+  border-width: 1px;
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 10px;
+  ${props => props.spanishPrimary && css`
+opacity: .5;
+color: black;
+background-color: #ffd1dc;
+font-size: 10.25px;
+`}
+`
+
+
 
 const options = {
   styles: mapStyles,
@@ -33,7 +73,14 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
   const [ selectedPopUp, setSelectedPopUp ] = useState(null);
   const [ center, setCenter ] = useState({lat: 29.956124, lng: -90.090509});
   const [ yourLocBool, setYourLocBool] = useState(false);
+  const [englishPrimary, setEnglishPrimary] = useState(false)
+  const [spanishPrimary, setSpanishPrimary] = useState(false)
   //const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
+  const { t, i18n } = useTranslation();
+
+  function getLang(lang) {
+    i18n.changeLanguage(lang);
+  }
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries
@@ -59,7 +106,7 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
       console.log(err)
     }
   }
-  
+
 
   const failed = () => {
     console.log('location test failed');
@@ -78,9 +125,32 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
   }
 
 
+
+console.log(t("touch"))
   return (
     <div>
-      <TouchMap>Touch map to set location</TouchMap>
+      <Nav>
+      <EnglishBtn 
+      englishPrimary={englishPrimary}
+      onClick={()=>{
+        getLang('en')
+        setEnglishPrimary(!englishPrimary)
+        setSpanishPrimary(false)
+      }}>
+        {t('englishBtn')}
+        </EnglishBtn>
+      <SpanishBtn 
+      spanishPrimary={spanishPrimary}
+      onClick={()=>{
+        setSpanishPrimary(!spanishPrimary)
+        setEnglishPrimary(false)
+        getLang('sp')
+        }}>
+          {t('spanishBtn')}
+          </SpanishBtn>
+      </Nav>
+
+      <TouchMap>{t("touchMap")}</TouchMap>
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={12}
@@ -123,6 +193,10 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
             // }}
              onClick={()=>{
               setSelectedPopUp(merch)
+            }}
+            icon={{
+              url: '/assets/foodmarker.svg',
+              scaledSize: new google.maps.Size(40, 40)
             }}
           />
         }

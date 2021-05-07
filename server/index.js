@@ -8,7 +8,9 @@ const { Merchants, Users, Products, Reviews, Subs, Admins } = require('./db.js')
 const app = express();
 const PORT = 8080;
 const CLIENT_PATH = path.resolve(__dirname, '../client/dist');
+const ASSETS_PATH = path.resolve(__dirname, 'assets');
 app.use(express.static(CLIENT_PATH));
+app.use('/assets', express.static(ASSETS_PATH));
 
 /**
  * start authentication routes
@@ -19,7 +21,7 @@ require('./passport-setup');
 app.use(express.json());
 const cookieSession = require('cookie-session');
 
-/*Cloudinary 
+/*Cloudinary
   routes
 */
 const { images } = require('./cloudinary.js');
@@ -157,6 +159,39 @@ app.get('/merchant/:id', (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
+
+//get merchants in given radius
+app.get('/api/merchant/radius/:miles', (req, res) => {
+  Merchants.findAll({
+    where: {}
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => res.send(err));
+});
+
+app.get('/distance/:lat1/:lon1/:lat2/:lon2', (req, res) => {
+  const {lat1, lon1, lat2, lon2} = req.params;
+
+  function deg2rad(deg) {
+    return deg * (Math.PI/180)
+  }
+
+  function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+    var dLon = deg2rad(lon2-lon1);
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var d = R * c; // Distance in km
+    return d;
+  }
+  console.log(getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2));
+  let result = getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2);
+  res.json(result);
+});
+
 //add new merchant
 app.post('/api/merchant/add', (req, res) => {
   const { name, category, info, website, adminId, lat, lon } = req.body;
@@ -233,6 +268,18 @@ app.put('/api/merchcoords/:merchid', (req, res) => {
       console.log('merchant coordinate error', err)
     })
 })
+
+app.put('/api/merchant/updateinfo', (req, res) => {
+  const {id, info} = req.body;
+  Merchants.update(
+    {info: info},
+    {where: {
+      id: id
+    }}
+  )
+  .then(data => res.send(data))
+  .catch(err => res.send(err));
+});
 
 /**
  * Users

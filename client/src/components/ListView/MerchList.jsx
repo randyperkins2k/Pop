@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next'
 
 const MerchantInfo = styled.button`
   font-family: 'Ubuntu';
@@ -15,18 +16,35 @@ const MerchantInfo = styled.button`
 
 `
 const Wrap = styled.div`
-  bacground-color: blue;
+  text-align: center;
 `
 
 const Ul = styled.ul`
-margin-left:-54px;
+margin-left: -76px;
 margin-top: 0px;
 background-color:#ffd1dc;
 
 `
+const OpenTxt = styled.div`
+font-family: 'Ubuntu';
+color: white;
+font-weight: bold;
+font-size:20px;
+color: white;
+margin-bottom: -19px;
+
+`
+const ClosedTxt = styled.div`
+font-family: 'Ubuntu';
+font-weight: bold;
+font-size:20px;
+color: white;
+margin-bottom: -19px;
+`
 
 const MerchList = ({ merchant, selectMerchant }) => {
   const { name, isOpen } = merchant
+  const {t} = useTranslation()
 
   return (
 
@@ -36,8 +54,8 @@ const MerchList = ({ merchant, selectMerchant }) => {
         <img></img>
         {
           isOpen ? 
-          <h5>Open</h5> :
-          <h5>Closed</h5>
+          <OpenTxt>{t('openTxt')}</OpenTxt> :
+          <ClosedTxt>{t('closedTxt')}</ClosedTxt>
         }
         <span></span>
         <div></div>

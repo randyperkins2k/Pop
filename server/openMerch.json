@@ -1,11 +1,11 @@
 {
   "merchants": [
     {
-      "name": "Deez Nuts Jewelry",
+      "name": "Deez Shells Jewelry",
       "cloudinary_id": "",
       "lat": 29.959252736079804,
       "lon": -90.10501046009264,
-      "info": "Hi, me and my husband have been making and selling jewelry made from nuts",
+      "info": "Hi, me and my husband have been making and selling jewelry made from shells",
       "category": "arts",
       "website": "deeznuts.com",
       "isOpen": true,
@@ -77,7 +77,7 @@
       "cloudinary_id": "",
       "lat": 29.984813644336278,
       "lon": -90.07085508363026,
-      "info": "Apples, Oranges, WaterMelong, Grapefruit, Bananas, Sweet Potatos", 
+      "info": "Apples, Oranges, WaterMelong, Grapefruit, Bananas, Sweet Potatos",
       "category": "produce",
       "website": null,
       "isOpen": true,

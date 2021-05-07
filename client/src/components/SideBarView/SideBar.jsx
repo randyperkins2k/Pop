@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next'
+
 
 const styles = {
   main:{'margin': 0,
@@ -8,6 +10,7 @@ const styles = {
     'width': '210px',
     'backgroundColor': '#f1f1f1',
     'position': 'absolute',
+    'opacity': '.90',
     'height': '100vh',
     'overflow': 'auto',
     'zIndex': 99
@@ -31,7 +34,7 @@ const Button = styled.button`
 `
 
 const SideBar = ({ close, setMLPrimary, setLVPrimary }) => {
-
+const {t} = useTranslation();
   return (
     <div style={styles.main} className='sidebar'>
       <ul styles={styles.links}>
@@ -41,7 +44,7 @@ const SideBar = ({ close, setMLPrimary, setLVPrimary }) => {
             close(false)
             setLVPrimary(false)
             setMLPrimary(false)
-            }}>PopUps</a></Button> 
+            }}>{t("popUpsBtn")}</a></Button> 
         </Link>
         <br/>
         <Link to='/yourprofile'>
@@ -49,7 +52,7 @@ const SideBar = ({ close, setMLPrimary, setLVPrimary }) => {
             close(false)
             setLVPrimary(false)
             setMLPrimary(false)
-            }}>Your Profile</a></Button>
+            }}>{t('yourProfileBtn')}</a></Button>
         </Link>
         <br/>
         <Link to='/yourpopups'>
@@ -57,7 +60,7 @@ const SideBar = ({ close, setMLPrimary, setLVPrimary }) => {
             close(false)
             setLVPrimary(false)
             setMLPrimary(false)
-          }}>Your PopUps</a></Button>
+          }}>{t('yourPopUpsBtn')}</a></Button>
         </Link>
         <br/>
         <Link to='/settings'>
@@ -65,14 +68,14 @@ const SideBar = ({ close, setMLPrimary, setLVPrimary }) => {
             close(false)
             setLVPrimary(false)
             setMLPrimary(false)
-          }}>Settings</a></Button>
+          }}>{t('settingsBtn')}</a></Button>
         </Link>
         <br/>
           <Button><a href="/logout" onClick={() => {
             close(false)
             setLVPrimary(false)
             setMLPrimary(false)
-            }}>Logout</a></Button>
+            }}>{t('logoutBtn')}</a></Button>
       </ul>
     </div>
   )

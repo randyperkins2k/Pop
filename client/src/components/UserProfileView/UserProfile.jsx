@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import EditProfile from './EditProfile.jsx'
 import styled, { css } from 'styled-components';
-
+import { useTranslation } from 'react-i18next'
 
 const EditProfileBtn = styled.button`
   margin-left: 11px;
@@ -29,10 +29,11 @@ const ProfileWrap = styled.div`
 const UserProfile = ({ user }) => {
   const [editWindowOpen, setEditWindowOpen] = useState(false);
   const [editProfilePrimary, setEditProfilePrimary] = useState(false)
+  const {t} = useTranslation()
 console.log(user)
   return (
     <ProfileWrap>
-      <h5>User Profile</h5>
+      <h5>{t("userProfileTxt")}</h5>
       <img src={user.picture}/>
       <br/>
       <br/>
@@ -44,7 +45,7 @@ console.log(user)
        onClick={() => {
          setEditWindowOpen(true)
          setEditProfilePrimary(!editProfilePrimary)
-      }}>Edit Your Profile</EditProfileBtn>
+      }}>{t("editYourProfileBtn")}</EditProfileBtn>
       {
         editWindowOpen ?
         <EditProfile close={setEditWindowOpen}/>

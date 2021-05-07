@@ -18,6 +18,7 @@ import EditPopupProfile from './YourPopups/EditPopUp/EditPopupProfile.jsx';
 import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
 import EditMenu from './YourPopups/EditPopUp/EditMenu.jsx';
 import Menu from './MerchantProfileView/Menu.jsx';
+import EditInfo from './YourPopups/EditPopUp/EditInfo.jsx';
 // import * as butt from './openMerch.json';
 // const merchData = butt.merchants;
 import ToggleSwitch from '../components/ToggleSwitch.jsx';
@@ -35,13 +36,21 @@ import {
 import styled, { css } from 'styled-components'
 import Stylingsomething from './Stylingsomething.jsx'
 import { requestFirebaseNotifPermission } from '../firebaseinit';
+import { useTranslation } from 'react-i18next'
+
 
 // const MapView = withScriptjs(withGoogleMap(Map));
+const ButtonWrapper = styled.div`
+text-align: center;
+
+`
+const Div = styled.div`
+text-align: center;
+
+`
 
 const ListViewButton = styled.button`
-margin-left: 0px;
 display: "flex";
-justify-content: center
 align-items: 'center';
 color: black;
 font-family: 'Ubuntu';
@@ -62,7 +71,6 @@ font-size: 14.25px;
 
 `
 const MapViewButton = styled.button`
-margin-left: 76px;
 color: black;
 font-family: 'Ubuntu';
 padding: 6px 16px;
@@ -82,6 +90,7 @@ font-size: 14.25px;
 `
 const Welcome = styled.h1`
 margin-top: 60px;
+margin-left: 11px;
 font-family: 'Londrina Solid', cursive;
 color: #ffd1dc;
 text-align: center;
@@ -223,10 +232,10 @@ const Home = ({
   mLPrimary, setMLPrimary
 
 }) => {
-
+  const { t, i18n } = useTranslation();
     return(
     <Well>
-    <div>
+    <Div>
       {/* <LogOutBtn href="/logout"> Logout </LogOutBtn> */}
 
         <div className='sidebar-view'>
@@ -257,20 +266,22 @@ const Home = ({
             onClick={() => setSideBarDisplay(false)}
             className='main'
             >
+              <ButtonWrapper>
             <Link to='/'>
               <MapViewButton  mLPrimary={mLPrimary} onClick={() => {
                     setMLPrimary(!mLPrimary)
                     setLVPrimary(false)
                   }}
-                    >MAP VIEW</MapViewButton>
+                    >{t('mapViewBtn')}</MapViewButton>
             </Link>
             <Link to='/listview'>
               <ListViewButton lVPrimary={lVPrimary} onClick={() => {
                     setLVPrimary(!lVPrimary)
                     setMLPrimary(false)
                   }}>
-                    LIST VIEW</ListViewButton>
+                    {t('listViewBtn')}</ListViewButton>
             </Link>
+                    </ButtonWrapper>
               <Switch>
                 <Route
                 path='/'
@@ -397,17 +408,32 @@ const Home = ({
                     />
                   }}
                 />
-                {/* <Route
+                 <Route
                   path="/menu"
                   render={() => {
                     return <Menu
                       merchant={selectedMerchant}
                       selectMerchant={setSelectedMerchant}
                     />
-                  }}/> */}
+                  }}/>
+                  <Route
+                  path="/editinfo"
+                  render={() => {
+                    return <EditInfo
+                      merchant={selectedMerchant}
+                      selectMerchant={setSelectedMerchant}
+                      yourPopups={yourPopups}
+                      setYourPopups={setYourPopups}
+                      userSubs={userSubs}
+                      setUserSubs={setUserSubs}
+                      merchData={merchData}
+                      setMerchData={setMerchData}
+                    />
+                  }}
+                />
               </Switch>
             </div>
-      </div>
+      </Div>
       </Well>
   )
 }
