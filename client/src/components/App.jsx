@@ -34,8 +34,8 @@ import {
 } from 'react-router-dom';
 import { useTranslation } from 'react-i18next'
 
-// Styling Components
-import styled, { css, ThemeProvider } from 'styled-components'
+// Styling components, dark mode and otherwise.
+import styled, { css, ThemeProvider, createGlobalStyle } from 'styled-components';
 import darkTheme from '../components/Themes/darkMode.js';
 
 
@@ -62,18 +62,6 @@ const ListViewButton = styled.button`
     background-color: #ffd1dc;
     font-size: 14.25px;
   `}
-  ${props => props.darklV && css`
-    opacity: .5;
-    color: white;
-    background-color: darkgrey;
-    font-size: 14px;
-  `}
-  ${props => props.darklVPrimary && css`
-    opacity: .5;
-    color: white;
-    background-color: #ffd1dc;
-    font-size: 14.25px;
-  `}
 `;
 
 const MapViewButton = styled.button`
@@ -92,18 +80,6 @@ const MapViewButton = styled.button`
     background-color: #ffd1dc;
     font-size: 14.25px;
   `}
-  ${props => props.darkmL && css`
-      opacity: .5;
-      color: white;
-      background-color: darkgrey;
-      font-size: 14px;
-    `}
-  ${props => props.darkmLPrimary && css`
-    opacity: .5;
-    color: white;
-    background-color: green;
-    font-size: 14.25px;
-  `}
 `;
 
 const Welcome = styled.h1`
@@ -120,10 +96,16 @@ const Welcome = styled.h1`
     `}
 `;
 
+// Dark mode images (may move to a different file).
 const Moon = styled.svg`
   height: auto;
   width: 2.5rem;
   transition: all 0.7s linear;
+`;
+const Sun = styled.svg`
+ height: auto;
+ width: 2.5rem;
+ transition: all 0.7s linear;
 `;
 
 import axios from 'axios';
@@ -139,13 +121,13 @@ const App = () => {
   const [yourPopups, setYourPopups] = useState([]);
   const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
   const [lVPrimary, setLVPrimary] = useState(false);
-  const [darklVPrimary, setDarkLVPrimary] = useState(false);
   const [mLPrimary, setMLPrimary] = useState(true);
-  const [darkmLPrimary, setDarkmLPrimary] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(stored === 'true' ? true : false);
+  
+  // Dark mode hook, storing a boolean in local storage.
+  const [isDarkMode, setIsDarkMode] = useState(darkModeStore === 'true' ? true : false);
 
   // Storage for dark mode setting.
-  const stored = localStorage.getItem('isDarkMode');
+  const darkModeStore = localStorage.getItem('isDarkMode');
 
   // Fetches merchant data from database.
   const getPops = () => {
@@ -207,12 +189,9 @@ const App = () => {
           return <Home
             lVPrimary={lVPrimary}
             setLVPrimary={setLVPrimary}
-            darklVPrimary={darklVPrimary}
-            setDarkLVPrimary={setDarkLVPrimary}
+            
             mLPrimary={mLPrimary}
             setMLPrimary={setMLPrimary}
-            darkmLPrimary={darkmLPrimary}
-            setDarkmLPrimary={setDarkmLPrimary}
 
             myPops={myPops}
             setMyProps={setMyPops}
@@ -253,14 +232,13 @@ const Home = ({
   userSubs, setUserSubs, yourPopups, setYourPopups,
   currentLocMarker, setCurrentLocMarker,
   lVPrimary, setLVPrimary,
-  darklVPrimary, setDarkLVPrimary,
+ 
   mLPrimary, setMLPrimary,
-  darkmLPrimary, setDarkmLPrimary,
+  
   isDarkMode, setIsDarkMode
 }) => {
   const { t, i18n } = useTranslation();
-  const [darklV, setDarklV] = useState(false);
-  const [darkmL, setDarkmL] = useState(false);
+  
     return (
       <Well>
         <div>
@@ -268,21 +246,12 @@ const Home = ({
             <div className='sidebar-view'>
               {/* <ThemeProvider theme={darkTheme}> */}
               <button
-                mLPrimary={mLPrimary}
-                darkmLPrimary={darkmLPrimary}
                 onClick={() => {
-                  // If 'mapView' is selected (pink), change to 'darkmLPrimary' (pink w/ white letters),
-                  // and 'listView' to 'darklV'(darkgrey with white letters). Turn other modes to false.
-                  // If 'listView' is selected (pink), change to 'darkLVPrimary' (pink w/ white letters),
-                  // and 'mapView' to 'darkmV' (dark grey with white letters). Turn other modes to false.
                   if (mLPrimary) {
-                    alert('hi')
-                    setDarkmLPrimary(!darkmLPrimary);
                     setMLPrimary(false);
                     setLVPrimary(true);
                   }
-                  // mlPrimary ? setDarkmL(!darkmL); setMLPrimary(false); setDarkmLPrimary(false); setDarkLVPrimary(!darklVPrimary); setDarklV(false); setLVPrimary(false)
-                  //: setDarkmL(!darkmL); setMLPrimary(false); setDarkmLPrimary(false); setDarkLVPrimary(!darklVPrimary); setDarklV(false); setLVPrimary(false)
+                  
                   setIsDarkMode(!isDarkMode);
                   console.log(isDarkMode);
                   // Is this stateful or persistent?
@@ -319,24 +288,19 @@ const Home = ({
                 <ButtonWrapper>
                   <Link to='/'>
                     <MapViewButton
-                      isDarkMode={isDarkMode}
                       mLPrimary={mLPrimary}
-                      darklV={darklV}
+                      
                       onClick={() => {
-                        isDarkMode ? (setDarkLVPrimary(false), setDarklV(!darklv)) // add darkmLPrimary option
-                          : setMLPrimary(!mLPrimary); setLVPrimary(false)
+                        
                       }}
                     >{t('mapViewBtn')}</MapViewButton>
                   </Link>
                   <Link to='/listview'>
                     <ListViewButton
-                      isDarkMode={isDarkMode}
                       lVPrimary={lVPrimary}
-                      darklV={darklV}
-                      darklVPrimary={darklVPrimary}
+                      
                       onClick={() => {
-                        isDarkMode ? (setDarkLVPrimary(!darklVPrimary), console.log('hi'))
-                          : setLVPrimary(!lVPrimary); setMLPrimary(false)
+                        
                       }}
                     >{t('listViewBtn')}</ListViewButton>
                   </Link>
