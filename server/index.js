@@ -273,6 +273,18 @@ app.put('/api/merchant/updateinfo', (req, res) => {
   .catch(err => res.send(err));
 });
 
+app.get('/merchant/admins/:id', (req, res) => {
+  const { id } = req.params;
+  Merchants.findOne({
+    where: {id: id},
+    include: {
+      model: Admins,
+      include: Users
+    }
+  })
+    .then(data => res.send(data.Admins.map(Admin => Admin.User)))
+    .catch(err => res.send(err));
+});
 /**
  * Users
  */
