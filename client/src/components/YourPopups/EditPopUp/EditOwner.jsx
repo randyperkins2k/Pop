@@ -15,7 +15,17 @@ const EditOwner = ({ merchant, selectMerchant }) => {
   useEffect(() => getAdmins(), []);
   const addOwner = () => {
     console.log(text);
+    axios.post('/admin/addbyemail', {
+      email: text,
+      merchant: merchant.id
+    })
+    .then(result => {
+      console.log(result);
+      setOwners([...owners, result.data]);
+    })
+    .catch(err => console.log(err));
   };
+
   return (
   <div>
     <h4>Add Owner:</h4>

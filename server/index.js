@@ -601,6 +601,36 @@ app.delete('/deletealladmins', (req, res) => {
     .catch(err => res.send(err));
 });
 
+//add admin by email
+app.post('/admin/addbyemail', (req, res) => {
+  const { email, merchant } = req.body;
+  Users.findOne({
+    where: {email: email}
+  })
+  .then(userData => {
+    Admins.create({ UserId: userData.id, MerchantId: merchant })
+      .then(moon => console.log(moon))
+      .catch(err => res.send(err));
+    res.send(userData);
+  })
+  .catch(err => res.send(err));
+});
+
+//add delete by email
+app.delete('/admin/deletebyemail', (req, res) => {
+  const { email, merchant } = req.body;
+  Users.findOne({
+    where: {email: email}
+  })
+  .then(userData => {
+    Admins.destroy({where: { UserId: userData.id, MerchantId: merchant }})
+      .then(moon => console.log(moon))
+      .catch(err => res.send(err));
+    res.send(userData);
+  })
+  .catch(err => res.send(err));
+});
+
 app.listen(PORT, (() => {
   console.log(`Server listening at http://127.0.0.1:${PORT}`);
 }));
