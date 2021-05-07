@@ -104,7 +104,7 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
   if (!isLoaded) {
     return "loading maps"
   }
-console.log(t("touch"))
+// console.log(t("touch"))
   return (
     <div>
       <Nav>
