@@ -192,7 +192,7 @@ console.log(t("touch"))
            <Window
               merchant={selectedPopUp}
               selectMerchant={selectMerchant}
-              setMLPrimary={setMLPrimary}
+              //setMLPrimary={setMLPrimary}
               />
           </InfoWindow>
         )

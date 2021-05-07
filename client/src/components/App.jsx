@@ -62,10 +62,16 @@ const ListViewButton = styled.button`
     background-color: #ffd1dc;
     font-size: 14.25px;
   `}
-  ${props => props.dlV && css`
+  ${props => props.darklV && css`
     opacity: .5;
     color: white;
     background-color: darkgrey;
+    font-size: 14px;
+  `}
+  ${props => props.darklVPrimary && css`
+    opacity: .5;
+    color: white;
+    background-color: #ffd1dc;
     font-size: 14.25px;
   `}
 `;
@@ -86,12 +92,18 @@ const MapViewButton = styled.button`
     background-color: #ffd1dc;
     font-size: 14.25px;
   `}
-  ${props => props.dmL && css`
+  ${props => props.darkmL && css`
       opacity: .5;
       color: white;
       background-color: darkgrey;
-      font-size: 14.25px;
+      font-size: 14px;
     `}
+  ${props => props.darkmLPrimary && css`
+    opacity: .5;
+    color: white;
+    background-color: green;
+    font-size: 14.25px;
+  `}
 `;
 
 const Welcome = styled.h1`
@@ -127,7 +139,9 @@ const App = () => {
   const [yourPopups, setYourPopups] = useState([]);
   const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
   const [lVPrimary, setLVPrimary] = useState(false);
+  const [darklVPrimary, setDarkLVPrimary] = useState(false);
   const [mLPrimary, setMLPrimary] = useState(true);
+  const [darkmLPrimary, setDarkmLPrimary] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(stored === 'true' ? true : false);
 
   // Storage for dark mode setting.
@@ -193,8 +207,13 @@ const App = () => {
           return <Home
             lVPrimary={lVPrimary}
             setLVPrimary={setLVPrimary}
+            darklVPrimary={darklVPrimary}
+            setDarkLVPrimary={setDarkLVPrimary}
             mLPrimary={mLPrimary}
             setMLPrimary={setMLPrimary}
+            darkmLPrimary={darkmLPrimary}
+            setDarkmLPrimary={setDarkmLPrimary}
+
             myPops={myPops}
             setMyProps={setMyPops}
             user={user}
@@ -234,219 +253,249 @@ const Home = ({
   userSubs, setUserSubs, yourPopups, setYourPopups,
   currentLocMarker, setCurrentLocMarker,
   lVPrimary, setLVPrimary,
+  darklVPrimary, setDarkLVPrimary,
   mLPrimary, setMLPrimary,
+  darkmLPrimary, setDarkmLPrimary,
   isDarkMode, setIsDarkMode
 }) => {
   const { t, i18n } = useTranslation();
-  const [dlV, setdlV] = useState(false);
-    return(
-    <Well>
-    <div bgcolor= "#2E3440">
-      {/* <LogOutBtn href="/logout"> Logout </LogOutBtn> */}
-
-        <div className='sidebar-view' bgcolor= "#2E3440">
-          {/* <ThemeProvider theme={darkTheme}> */}
-            <button
-              onClick={() => {
-                setIsDarkMode(!isDarkMode);
-                console.log(isDarkMode);
-                setLVPrimary(false);
-                setdlV(!dlV);
-                localStorage.setItem('isDarkMode', !isDarkMode);
-              }}
-            ><Moon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path style={{ fill: "#F6C358" }} d="M10.719 2.082c-2.572 2.028-4.719 5.212-4.719 9.918 0 4.569 1.938 7.798 4.548 9.895-4.829-.705-8.548-4.874-8.548-9.895 0-5.08 3.808-9.288 8.719-9.918zm1.281-2.082c-6.617 0-12 5.383-12 12s5.383 12 12 12c1.894 0 3.87-.333 5.37-1.179-3.453-.613-9.37-3.367-9.37-10.821 0-7.555 6.422-10.317 9.37-10.821-1.74-.682-3.476-1.179-5.37-1.179zm0 10.999c1.437.438 2.562 1.564 2.999 3.001.44-1.437 1.565-2.562 3.001-3-1.436-.439-2.561-1.563-3.001-3-.437 1.436-1.562 2.561-2.999 2.999zm8.001.001c.958.293 1.707 1.042 2 2.001.291-.959 1.042-1.709 1.999-2.001-.957-.292-1.707-1.042-2-2-.293.958-1.042 1.708-1.999 2zm-1-9c-.437 1.437-1.563 2.562-2.998 3.001 1.438.44 2.561 1.564 3.001 3.002.437-1.438 1.563-2.563 2.996-3.002-1.433-.437-2.559-1.564-2.999-3.001z" /></Moon></button>
-          {/* </ThemeProvider> */}
-            <Welcome onClick={() => setSideBarDisplay(!sideBarDisplay)}>Pop^</Welcome>
-            {/* <ToggleSwitch /> */}
-            {
-              !sideBarDisplay ?
-              ''
-              :
-              <Route
-                path='/'
-                render={(props) => {
-                  return <SideBar
-                  lVPrimary={lVPrimary}
-                  setLVPrimary={setLVPrimary}
-                  mLPrimary={mLPrimary}
-                  setMLPrimary={setMLPrimary}
-                  close={setSideBarDisplay}/>
+  const [darklV, setDarklV] = useState(false);
+  const [darkmL, setDarkmL] = useState(false);
+    return (
+      <Well>
+        <div>
+          {/* <LogOutBtn href="/logout"> Logout </LogOutBtn> */}
+            <div className='sidebar-view'>
+              {/* <ThemeProvider theme={darkTheme}> */}
+              <button
+                mLPrimary={mLPrimary}
+                darkmLPrimary={darkmLPrimary}
+                onClick={() => {
+                  // If 'mapView' is selected (pink), change to 'darkmLPrimary' (pink w/ white letters),
+                  // and 'listView' to 'darklV'(darkgrey with white letters). Turn other modes to false.
+                  // If 'listView' is selected (pink), change to 'darkLVPrimary' (pink w/ white letters),
+                  // and 'mapView' to 'darkmV' (dark grey with white letters). Turn other modes to false.
+                  if (mLPrimary) {
+                    alert('hi')
+                    setDarkmLPrimary(!darkmLPrimary);
+                    setMLPrimary(false);
+                    setLVPrimary(true);
+                  }
+                  // mlPrimary ? setDarkmL(!darkmL); setMLPrimary(false); setDarkmLPrimary(false); setDarkLVPrimary(!darklVPrimary); setDarklV(false); setLVPrimary(false)
+                  //: setDarkmL(!darkmL); setMLPrimary(false); setDarkmLPrimary(false); setDarkLVPrimary(!darklVPrimary); setDarklV(false); setLVPrimary(false)
+                  setIsDarkMode(!isDarkMode);
+                  console.log(isDarkMode);
+                  // Is this stateful or persistent?
+                  localStorage.setItem('isDarkMode', !isDarkMode);
                 }}
-              />
-            }
-          </div>
-          <div
-            onClick={() => setSideBarDisplay(false)}
-            className='main'
-            >
-              <ButtonWrapper>
-            <Link to='/'>
-              <MapViewButton  mLPrimary={mLPrimary} onClick={() => {
-                    setMLPrimary(!mLPrimary)
-                    setLVPrimary(false)
-                  }}
+              ><Moon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path style={{ fill: "#F6C358" }} d="M10.719 2.082c-2.572 2.028-4.719 5.212-4.719 9.918 0 4.569 1.938 7.798 4.548 9.895-4.829-.705-8.548-4.874-8.548-9.895 0-5.08 3.808-9.288 8.719-9.918zm1.281-2.082c-6.617 0-12 5.383-12 12s5.383 12 12 12c1.894 0 3.87-.333 5.37-1.179-3.453-.613-9.37-3.367-9.37-10.821 0-7.555 6.422-10.317 9.37-10.821-1.74-.682-3.476-1.179-5.37-1.179zm0 10.999c1.437.438 2.562 1.564 2.999 3.001.44-1.437 1.565-2.562 3.001-3-1.436-.439-2.561-1.563-3.001-3-.437 1.436-1.562 2.561-2.999 2.999zm8.001.001c.958.293 1.707 1.042 2 2.001.291-.959 1.042-1.709 1.999-2.001-.957-.292-1.707-1.042-2-2-.293.958-1.042 1.708-1.999 2zm-1-9c-.437 1.437-1.563 2.562-2.998 3.001 1.438.44 2.561 1.564 3.001 3.002.437-1.438 1.563-2.563 2.996-3.002-1.433-.437-2.559-1.564-2.999-3.001z" /></Moon></button>
+              {/* </ThemeProvider> */}
+                <Welcome onClick={() => setSideBarDisplay(!sideBarDisplay)}>Pop^</Welcome>
+                {/* <ToggleSwitch /> */}
+                {
+                  !sideBarDisplay ?
+                  ''
+                  :
+                  <Route
+                    path='/'
+                    render={(props) => {
+                      return (
+                        <SideBar
+                          lVPrimary={lVPrimary}
+                          setLVPrimary={setLVPrimary}
+                          mLPrimary={mLPrimary}
+                          setMLPrimary={setMLPrimary}
+                          close={setSideBarDisplay}
+                        />
+                      )
+                    }}
+                  />
+                }
+            </div>
+              <div
+                onClick={() => setSideBarDisplay(false)}
+                className='main'
+              >
+                <ButtonWrapper>
+                  <Link to='/'>
+                    <MapViewButton
+                      isDarkMode={isDarkMode}
+                      mLPrimary={mLPrimary}
+                      darklV={darklV}
+                      onClick={() => {
+                        isDarkMode ? (setDarkLVPrimary(false), setDarklV(!darklv)) // add darkmLPrimary option
+                          : setMLPrimary(!mLPrimary); setLVPrimary(false)
+                      }}
                     >{t('mapViewBtn')}</MapViewButton>
-            </Link>
-            <Link to='/listview'>
-              <ListViewButton lVPrimary={lVPrimary} dlV={dlV} onClick={() => {
-                    setLVPrimary(!lVPrimary)
-                    setMLPrimary(false)
-                  }}>
-                    {t('listViewBtn')}</ListViewButton>
-            </Link>
-                    </ButtonWrapper>
-              <Switch>
-                <Route
-                path='/'
-                exact
-                render={(props) => {
-                  return <Map
-                    loadingElement={<div style={{height: '100%' }}/>}
-                    containerElement={<div style={{height: '100%' }}/>}
-                    mapElement={<div style={{height: '100%' }}/>}
-                    merchData={merchData}
-                    selectMerchant={setSelectedMerchant}
-                    currentLocMarker={currentLocMarker}
-                    setCurrentLocMarker={setCurrentLocMarker}
-                    setMLPrimary={setMLPrimary}
+                  </Link>
+                  <Link to='/listview'>
+                    <ListViewButton
+                      isDarkMode={isDarkMode}
+                      lVPrimary={lVPrimary}
+                      darklV={darklV}
+                      darklVPrimary={darklVPrimary}
+                      onClick={() => {
+                        isDarkMode ? (setDarkLVPrimary(!darklVPrimary), console.log('hi'))
+                          : setLVPrimary(!lVPrimary); setMLPrimary(false)
+                      }}
+                    >{t('listViewBtn')}</ListViewButton>
+                  </Link>
+                </ButtonWrapper>
+                  <Switch>
+                    <Route
+                      path='/'
+                      exact
+                      render={(props) => {
+                        return (
+                        <Map
+                          loadingElement={<div style={{height: '100%' }}/>}
+                          containerElement={<div style={{height: '100%' }}/>}
+                          mapElement={<div style={{height: '100%' }}/>}
+                          merchData={merchData}
+                          selectMerchant={setSelectedMerchant}
+                          currentLocMarker={currentLocMarker}
+                          setCurrentLocMarker={setCurrentLocMarker}
+                          setMLPrimary={setMLPrimary}
+                        />
+                        )
+                      }}
                     />
-                }}/>
-                <Route
-                  path='/listview'
-                  render={(props) => {
-                    return <ListView
-                      merchData={merchData}
-                      selectMerchant={setSelectedMerchant}
-                      userSubs={userSubs}
-                      setUserSubs={setUserSubs}
-                    />
-                  }}
-                />
-                <Route
-                  path='/yourprofile'
-                  render={(props) => {
-                    return <UserProfile user={user}/>
-                  }}
-                />
-                <Route
-                  path='/yourpopups'
-                  render={(props) => {
-                    return <YourPopUps
-                      merchData={merchData}
-                      setMerchData={setMerchData}
-                      merchant={selectedMerchant}
-                      selectMerch={setSelectedMerchant}
-                      yourPopups={yourPopups}
-                      setYourPopups={setYourPopups}
-                      userSubs={userSubs}
-                      setUserSubs={setUserSubs}
-                      />
-                  }}
-                />
-                <Route
-                  path='/settings'
-                  render={(props) => {
-                    return <SettingsView/>
-                  }}
-                />
-                <Route
-                  path='/edit'
-                  render={(props) => <EditPopupProfile
-                    merchant={selectedMerchant}
-                    selectMerchant={setSelectedMerchant}
-                    merchData={merchData}
-                    setMerchData={setMerchData}
-                  />}
-                />
-                <Route
-                  path="/profile"
-                  render={(props => {
-                    return (
-                      <div>
-                        <ToggleSwitch
-                          style={{marginLeft: '75px'}}
-                          merchant={selectedMerchant}
-                          user={user}
+                    <Route
+                      path='/listview'
+                      render={(props) => {
+                        return <ListView
+                          merchData={merchData}
+                          selectMerchant={setSelectedMerchant}
                           userSubs={userSubs}
                           setUserSubs={setUserSubs}
                         />
-                        <MerchantProfile
+                      }}
+                    />
+                    <Route
+                      path='/yourprofile'
+                      render={(props) => {
+                        return <UserProfile user={user}/>
+                      }}
+                    />
+                    <Route
+                      path='/yourpopups'
+                      render={(props) => {
+                        return <YourPopUps
+                          merchData={merchData}
+                          setMerchData={setMerchData}
                           merchant={selectedMerchant}
+                          selectMerch={setSelectedMerchant}
+                          yourPopups={yourPopups}
+                          setYourPopups={setYourPopups}
+                          userSubs={userSubs}
+                          setUserSubs={setUserSubs}
+                        />
+                      }}
+                    />
+                    <Route
+                      path='/settings'
+                      render={(props) => {
+                        return <SettingsView/>
+                      }}
+                    />
+                    <Route
+                      path='/edit'
+                      render={(props) => <EditPopupProfile
+                        merchant={selectedMerchant}
+                        selectMerchant={setSelectedMerchant}
+                        merchData={merchData}
+                        setMerchData={setMerchData}
+                      />}
+                    />
+                    <Route
+                      path="/profile"
+                      render={(props => {
+                        return (
+                          <div>
+                            <ToggleSwitch
+                              style={{marginLeft: '75px'}}
+                              merchant={selectedMerchant}
+                              user={user}
+                              userSubs={userSubs}
+                              setUserSubs={setUserSubs}
+                            />
+                            <MerchantProfile
+                              merchant={selectedMerchant}
+                              user={user}
+                              userSubs={userSubs}
+                              setUserSubs={setUserSubs}
+                              merchData={merchData}
+                              setMerchData={setMerchData}
+                            />
+                          </div>
+                        )
+                      }
+                      )}
+                    />
+                    <Route
+                      path='/create'
+                      render={(props) => {
+                        return <CreatePop
                           user={user}
+                          setUser={setUser}
+                          yourPopups={yourPopups}
+                          setYourPopups={setYourPopups}
+                          currentLocMarker={currentLocMarker}
+                          setCurrentLocMarker={setCurrentLocMarker}
+                          merchData={merchData}
+                          setMerchData={setMerchData}
+                        />
+                      }}
+                    />
+                    <Route
+                      path='/openpopmap'
+                      render={() => {
+                        return <OpenPopupMap
+                          merchant={selectedMerchant}
+                          selectMerchant={setSelectedMerchant}
+                          merchData={merchData}
+                          setMerchData={setMerchData}
+                          setSubs={setUserSubs}
+                          setYourPopups={setYourPopups}
+                          user={user}
+                        />
+                      }}
+                    />
+                    <Route
+                      path="/editmenu"
+                      render={() => {
+                        return <EditMenu
+                          merchant={selectedMerchant}
+                          selectMerchant={setSelectedMerchant}
+                        />
+                      }}
+                    />
+                    <Route
+                      path="/menu"
+                      render={() => {
+                        return <Menu
+                          merchant={selectedMerchant}
+                          selectMerchant={setSelectedMerchant}
+                        />
+                      }}/>
+                      <Route
+                      path="/editinfo"
+                      render={() => {
+                        return <EditInfo
+                          merchant={selectedMerchant}
+                          selectMerchant={setSelectedMerchant}
+                          yourPopups={yourPopups}
+                          setYourPopups={setYourPopups}
                           userSubs={userSubs}
                           setUserSubs={setUserSubs}
                           merchData={merchData}
                           setMerchData={setMerchData}
                         />
-                      </div>
-                    )
-                  }
-                  )}
-                />
-                <Route
-                  path='/create'
-                  render={(props) => {
-                    return <CreatePop
-                      user={user}
-                      setUser={setUser}
-                      yourPopups={yourPopups}
-                      setYourPopups={setYourPopups}
-                      currentLocMarker={currentLocMarker}
-                      setCurrentLocMarker={setCurrentLocMarker}
-                      merchData={merchData}
-                      setMerchData={setMerchData}
+                      }}
                     />
-                  }}
-                />
-                <Route
-                  path='/openpopmap'
-                  render={() => {
-                    return <OpenPopupMap
-                      merchant={selectedMerchant}
-                      selectMerchant={setSelectedMerchant}
-                      merchData={merchData}
-                      setMerchData={setMerchData}
-                      setSubs={setUserSubs}
-                      setYourPopups={setYourPopups}
-                      user={user}
-                    />
-                  }}
-                />
-                <Route
-                  path="/editmenu"
-                  render={() => {
-                    return <EditMenu
-                      merchant={selectedMerchant}
-                      selectMerchant={setSelectedMerchant}
-                    />
-                  }}
-                />
-                <Route
-                  path="/menu"
-                  render={() => {
-                    return <Menu
-                      merchant={selectedMerchant}
-                      selectMerchant={setSelectedMerchant}
-                    />
-                  }}/>
-                  <Route
-                  path="/editinfo"
-                  render={() => {
-                    return <EditInfo
-                      merchant={selectedMerchant}
-                      selectMerchant={setSelectedMerchant}
-                      yourPopups={yourPopups}
-                      setYourPopups={setYourPopups}
-                      userSubs={userSubs}
-                      setUserSubs={setUserSubs}
-                      merchData={merchData}
-                      setMerchData={setMerchData}
-                    />
-                  }}
-                />
-              </Switch>
-            </div>
-      </div>
+                  </Switch>
+                </div>
+        </div>
       </Well>
   )
 }
