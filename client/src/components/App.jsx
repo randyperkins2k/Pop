@@ -22,6 +22,7 @@ import OpenPopupMap from './YourPopups/EditPopUp/OpenPopMap.jsx';
 import { HashRouter as Well, BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled, { css, ThemeProvider, createGlobalStyle } from 'styled-components';
+import { ReactComponent as MoonPic } from '../popup/moonArt.svg'
 import darkTheme from '../components/Themes/darkMode.js';
 import lightTheme from '../components/Themes/lightMode.js';
 // import * as butt from './openMerch.json';
