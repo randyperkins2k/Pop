@@ -617,8 +617,8 @@ app.post('/admin/addbyemail', (req, res) => {
 });
 
 //add delete by email
-app.delete('/admin/deletebyemail', (req, res) => {
-  const { email, merchant } = req.body;
+app.delete('/admin/deletebyemail/:email/:merchant', (req, res) => {
+  const { email, merchant } = req.params;
   Users.findOne({
     where: {email: email}
   })
