@@ -28,6 +28,14 @@ const { images } = require('./cloudinary.js');
 app.use('/api/images', images);
 //cloudinary routes end
 
+/**
+ * Push notification route
+ * 
+ */
+const { notifs } = require('./notifs/pushnotifs.js');
+app.use('/api/notifs', notifs);
+//push notification routes end//
+
 app.use(cookieSession({
   name: 'tuto-session',
   keys: ['key1', 'key2']
