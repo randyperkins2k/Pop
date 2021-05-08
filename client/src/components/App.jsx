@@ -28,7 +28,7 @@ import lightTheme from '../components/Themes/lightMode.js';
 // import * as butt from './openMerch.json';
 // const merchData = butt.merchants;
 // const MapView = withScriptjs(withGoogleMap(Map));
-/*=============================== (End Imports) ===============================*/
+/*=============================== (End Imports) ===================================*/
 
 /*=============================== Styled Components ===============================*/
 const ButtonWrapper = styled.div`
@@ -89,6 +89,7 @@ const Sun = styled.svg`
 `;
 const DarkTest = styled.div`
   background-color: #2E3440;
+  margin: 0px;
   ${props => props.darkDiv && css`
     background-color: white;
   `}
