@@ -125,9 +125,6 @@ const Subs = sequelize.define('Subs', {
       key: Merchants.id,
     },
     allowNull: false
-  },
-  subscriptionToken: {
-    type: DataTypes.STRING(2000)
   }
 });
 //Merchants.belongsToMany(Users, { through: Subs });
