@@ -1,4 +1,18 @@
+import React,{useState} from 'react'
+import axios from 'axios'
 
+const SearchBar = ({ merchData }) => {
+console.log('heyo', merchData);
+	return (
+		<div>
+			<div>
+				<h1></h1>
+			</div>
+		</div>
+	)
+}
+
+export default SearchBar
 
 
 
