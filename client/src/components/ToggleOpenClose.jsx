@@ -65,14 +65,14 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
 		setMerchData, selectMerchant, 
 		center, user,
 		setSubs, setYourPopups,
-		openNotif
+		OpenNotifMessage
 	}) => {
 	const [toggled, setToggled] = useState(false);
 	
 	const initiate = () => {
-		console.log('hello initiate');
-		console.log(merchant);
-		console.log(merchant.isOpen);
+		// console.log('hello initiate');
+		// console.log(merchant);
+		// console.log(merchant.isOpen);
 		merchant.isOpen ? setToggled(true) : setToggled(false);
 	};
 
@@ -113,21 +113,16 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
 										setYourPopups(response.data.Admins.map(Sub => Sub.Merchant));
 									}))
 							})
+							.then(() => {
+								axios.post(`/api/notifs/open/${merchant.id}`, {
+									merchName: merchant.name,
+									message: OpenNotifMessage
+								})
+							})
 					})
 			})
 			.catch(err => console.log('opening merchant error', err));
   }
-
-	const sendOpenNotif = async () => {
-		try {
-			await axios.post(`/api/notifs/open/${merchant.id}`, {
-				merchName: merchant.name,
-				message: openNot
-			})
-		} catch(err) {
-
-		}
-	}
 	
 	useEffect(() => initiate(), []);
 

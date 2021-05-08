@@ -113,8 +113,8 @@ const OpenPopupMap = ({ merchData, selectMerchant,
         merchant={merchant}
         user={user}
         setOpenNotifMessage={setOpenNotifMessage}
+        OpenNotifMessage={OpenNotifMessage}
       />
-      <h2>HELLO HELLO HELLO</h2>
       <button onClick={() => {
         setCancelConfirm(true);
       }}>Cancel</button>

@@ -15,18 +15,34 @@ firebase.initializeApp(config)
 
 const messaging = firebase.messaging();
 
-export const requestFirebaseNotifPermission = () => {
-  new Promise((resolve, reject) => {
-    Notification
-      .requestPermission()
-      .then(() => messaging.getToken())
-      .then((firebaseToken) => {
-        console.log(firebaseToken);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  })
+export const requestFirebaseNotifPermission = async (callback) => {
+  // return new Promise((resolve, reject) => {
+  //   Notification
+  //     .requestPermission()
+  //     .then(() => messaging.getToken())
+  //     .then((firebaseToken) => {
+  //       console.log(firebaseToken);
+  //       return firebaseToken
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // })
+  try {
+    const firebaseToken = await Notification
+        .requestPermission()
+        .then(() => messaging.getToken())
+        .then((firebaseToken) => {
+          //console.log(firebaseToken);
+          return firebaseToken
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      return firebaseToken
+  } catch(e) {
+    console.log('firebase token error', e)
+  }
 }
 
 export const onMessageListener  = () => {
