@@ -34,7 +34,6 @@ import {
   Redirect,
 } from 'react-router-dom';
 import styled, { css } from 'styled-components'
-import Stylingsomething from './Stylingsomething.jsx'
 import { requestFirebaseNotifPermission } from '../firebaseinit';
 import { useTranslation } from 'react-i18next'
 import SearchBar from './searchbar/SearchBar.jsx'
