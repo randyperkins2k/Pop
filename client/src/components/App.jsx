@@ -411,7 +411,10 @@ const Home = ({
                   render={() => {
                     return <EditOwner
                       merchant={selectedMerchant}
-                      selectMerchant={setSelectedMerchant}/>
+                      selectMerchant={setSelectedMerchant}
+                      user={user}
+                      setUser={setUser}
+                      />
                   }}
                 />
               </Switch>

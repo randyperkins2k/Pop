@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
-const EditOwner = ({ merchant, selectMerchant }) => {
+const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
   const [owners, setOwners] = useState([]);
   const [text, setText] = useState('');
   const [users, setUsers] = useState([]);
@@ -83,7 +83,10 @@ const EditOwner = ({ merchant, selectMerchant }) => {
     {owners.map(owner =>
       <div key={owner.id}>
         <h6>{owner.name}</h6>
-        <button onClick={()=> {removeOwner(owner.email)}}><small>x</small></button>
+        {owners.length > 1
+          ? (<button onClick={()=> {removeOwner(owner.email)}}><small>x</small></button>)
+          : null
+        }
       </div>
     )}
   </div>)
@@ -91,3 +94,8 @@ const EditOwner = ({ merchant, selectMerchant }) => {
 }
 
 export default EditOwner;
+
+// {a == true
+//   ? (<Button/>)
+//   : null
+//  }
