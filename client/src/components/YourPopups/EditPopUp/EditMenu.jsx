@@ -7,34 +7,43 @@ import styled from 'styled-components'
 const Div = styled.div`
 text-align: center;
 font-family: 'Ubuntu';
-  p {
-    font-size: 11px;
-  },
-  button {
-    color: black;
-    font-family: 'Ubuntu';
-    padding: 5px 16px;
-    background-color: white;
-    font-size: 11px;
-    border-radius: 6px;
-    border-width: 1px;
-    border-color: lightgray;
-  },
-
 `
-const Input = styled.div`
+const Input = styled.input`
   box-sizing:border-box;
-  margin-top: 4px;
-  margin-left: 31px;
-  margin-bottom: 8px;
+  margin-top: 13px;
   background-color: #fafafa;
-  width:80%;
+  width:63%;
   resize: vertical;
-  padding:21px;
+  padding:1px;
   border-radius:15px;
   border:0;
   box-shadow:4px 4px 10px;
 
+`
+const ItemBtn = styled.button`
+color: black;
+font-family: 'Ubuntu';
+padding: 0px 11px 0px 11px;
+background-color: white;
+font-size: 20px;
+border-radius: 6px;
+border-width: 1px;
+border-color: lightgray;
+`
+
+const AddProductBtn = styled.button`
+font-family: 'Ubuntu';
+color: black;
+font-family: 'Ubuntu';
+padding: 5px 16px;
+background-color: white;
+font-size: 11px;
+border-radius: 6px;
+border-width: 1px;
+margin-top: 25px;
+border-color: lightgray;
+transition: ease 0.01s all;
+margin-bottom: 30px;
 `
 
 const EditMenu = ({ merchant, selectMerchant }) => {
@@ -99,9 +108,9 @@ const EditMenu = ({ merchant, selectMerchant }) => {
         <h5>{`${merchant.name}'s`} products: </h5>
         {products.map(product =>
           <p>&emsp; &#8226; &nbsp;<b>{product.name}</b><small>(<i>${parseFloat(product.price).toFixed(2)}</i></small>)
-          <button onClick={
+          <ItemBtn onClick={
             ()=>{deleteProduct(product)}
-          }><small>x</small></button></p>
+          }><small>x</small></ItemBtn></p>
         )}
       </div>
       <div>
@@ -112,7 +121,7 @@ const EditMenu = ({ merchant, selectMerchant }) => {
           <label><b>price:</b></label>
           <Input type="number" value={priceNum} onChange={(e) => setPriceNum(e.target.value)}></Input><br></br>
         </form>
-        <button onClick={() => {addProduct()}}>add product</button><br></br>
+        <AddProductBtn onClick={() => {addProduct()}}>add product</AddProductBtn><br></br>
       </div>
       <div>
         <MerchantProfile merchant={merchant} style={{fontFamily: 'Ubuntu'}}/>
