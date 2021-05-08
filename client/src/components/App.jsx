@@ -37,7 +37,7 @@ import styled, { css } from 'styled-components'
 import Stylingsomething from './Stylingsomething.jsx'
 import { requestFirebaseNotifPermission } from '../firebaseinit';
 import { useTranslation } from 'react-i18next'
-
+import SearchBar from './searchbar/SearchBar.jsx'
 
 // const MapView = withScriptjs(withGoogleMap(Map));
 const ButtonWrapper = styled.div`
@@ -253,10 +253,6 @@ const Home = ({
                 path='/'
                 render={(props) => {
                   return <SideBar
-                  lVPrimary={lVPrimary}
-                  setLVPrimary={setLVPrimary}
-                  mLPrimary={mLPrimary}
-                  setMLPrimary={setMLPrimary}
                   close={setSideBarDisplay}/>
                 }}
               />
@@ -268,18 +264,25 @@ const Home = ({
             >
               <ButtonWrapper>
             <Link to='/'>
-              <MapViewButton  mLPrimary={mLPrimary} onClick={() => {
+              <MapViewButton  
+              mLPrimary={mLPrimary} 
+              onClick={() => {
                     setMLPrimary(!mLPrimary)
                     setLVPrimary(false)
                   }}
                     >{t('mapViewBtn')}</MapViewButton>
             </Link>
             <Link to='/listview'>
-              <ListViewButton lVPrimary={lVPrimary} onClick={() => {
+              <ListViewButton 
+              lVPrimary={lVPrimary}
+              onClick={() => {
                     setLVPrimary(!lVPrimary)
                     setMLPrimary(false)
                   }}>
                     {t('listViewBtn')}</ListViewButton>
+                    <SearchBar 
+                    merchData={merchData}
+                    />
             </Link>
                     </ButtonWrapper>
               <Switch>
