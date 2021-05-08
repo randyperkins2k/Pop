@@ -11,6 +11,7 @@ import styled from 'styled-components'
 import ToggleOpenClose from '../../ToggleOpenClose.jsx';
 import Confirmation from '../../Confirmation.jsx';
 import { useHistory } from 'react-router-dom';
+import PushNotif from '../../MerchantProfileView/PushNotif.jsx';
 //import map from '../popup/foodmarker.png'
 
 const libraries = ["places"];
@@ -43,6 +44,7 @@ const OpenPopupMap = ({ merchData, selectMerchant,
   const [ yourLocBool, setYourLocBool ] = useState(false);
   const [ openOrClosed, setOpenOrClosed ] = useState('');
   const [ cancelConfirm, setCancelConfirm ] = useState(false);
+  const [ OpenNotifMessage, setOpenNotifMessage ] = useState('');
   const back = useHistory();
   //const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
   const {isLoaded, loadError} = useLoadScript({
@@ -71,6 +73,9 @@ const OpenPopupMap = ({ merchData, selectMerchant,
     }
   }
   
+  const sendOpenNotif = () => [
+
+  ]
 
   const failed = () => {
     console.log('location test failed');
@@ -102,6 +107,13 @@ const OpenPopupMap = ({ merchData, selectMerchant,
         user={user}
         setYourPopups={setYourPopups}
         setSubs={setSubs}
+        OpenNotifMessage={OpenNotifMessage}
+      />
+      <PushNotif
+        merchant={merchant}
+        user={user}
+        setOpenNotifMessage={setOpenNotifMessage}
+        OpenNotifMessage={OpenNotifMessage}
       />
       <button onClick={() => {
         setCancelConfirm(true);

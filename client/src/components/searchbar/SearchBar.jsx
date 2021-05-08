@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import axios from 'axios'
 
 const SearchBar = ({ merchData }) => {
-console.log('heyo', merchData);
+//console.log('heyo', merchData);
 	return (
 		<div>
 			<div>

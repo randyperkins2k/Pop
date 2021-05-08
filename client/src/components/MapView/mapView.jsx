@@ -94,10 +94,10 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
   const geoLocTest = async (result) => {
     try {
       await result;
-      console.log('geoLocTest', {
-        lat: result.coords.latitude,
-        lng: result.coords.longitude
-      })
+      // console.log('geoLocTest', {
+      //   lat: result.coords.latitude,
+      //   lng: result.coords.longitude
+      // })
       setCenter({
         lat: result.coords.latitude,
         lng: result.coords.longitude
@@ -127,7 +127,7 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
 
 
 
-console.log(t("touch"))
+// console.log(t("touch"))
   return (
     <div>
       <Nav>
