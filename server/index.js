@@ -30,7 +30,7 @@ app.use('/api/images', images);
 
 /**
  * Push notification route
- * 
+ *
  */
 const { notifs } = require('./notifs/pushnotifs.js');
 app.use('/api/notifs', notifs);
@@ -600,4 +600,4 @@ app.delete('/deletealladmins', (req, res) => {
 app.listen(PORT, (() => {
   console.log(`Server listening at http://127.0.0.1:${PORT}`);
 }));
-
+//comment push for dan troubleshoot thing
