@@ -130,7 +130,7 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
       })
       .catch(err => console.log('opening merchant error', err));
   }
- 
+
 
 
   return (
@@ -149,7 +149,9 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
         <Link to="/editmenu">
           <EditMenuBtn>{t("editMenuBtn")}</EditMenuBtn>
         </Link>
-        <EditOwnerBtn>{t("editOwnerBtn")}</EditOwnerBtn>
+        <Link to="/editowner">
+          <EditOwnerBtn>{t("editOwnerBtn")}</EditOwnerBtn>
+        </Link>
         <Link to='/openpopmap'>
         <OpenShopBtn>{t("openShopBtn")}</OpenShopBtn>
         </Link>
