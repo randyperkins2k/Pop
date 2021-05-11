@@ -32,8 +32,7 @@ app.use('/api/images', images);
  * Push notification route
  * 
  */
-const { notifs } = require('./notifs/pushnotifs.js');
-app.use('/api/notifs', notifs);
+
 //push notification routes end//
 
 app.use(cookieSession({

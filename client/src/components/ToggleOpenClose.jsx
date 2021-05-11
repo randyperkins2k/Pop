@@ -113,12 +113,6 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
 										setYourPopups(response.data.Admins.map(Sub => Sub.Merchant));
 									}))
 							})
-							.then(() => {
-								axios.post(`/api/notifs/open/${merchant.id}`, {
-									merchName: merchant.name,
-									message: OpenNotifMessage
-								})
-							})
 					})
 			})
 			.catch(err => console.log('opening merchant error', err));

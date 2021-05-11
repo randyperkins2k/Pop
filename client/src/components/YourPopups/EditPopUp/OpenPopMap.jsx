@@ -11,8 +11,8 @@ import styled from 'styled-components'
 import ToggleOpenClose from '../../ToggleOpenClose.jsx';
 import Confirmation from '../../Confirmation.jsx';
 import { useHistory } from 'react-router-dom';
-import PushNotif from '../../MerchantProfileView/PushNotif.jsx';
-//import map from '../popup/foodmarker.png'
+// import PushNotif from '../../MerchantProfileView/PushNotif.jsx';   
+// import map from '../popup/foodmarker.png'
 
 const libraries = ["places"];
 
@@ -107,12 +107,6 @@ const OpenPopupMap = ({ merchData, selectMerchant,
         user={user}
         setYourPopups={setYourPopups}
         setSubs={setSubs}
-        OpenNotifMessage={OpenNotifMessage}
-      />
-      <PushNotif
-        merchant={merchant}
-        user={user}
-        setOpenNotifMessage={setOpenNotifMessage}
         OpenNotifMessage={OpenNotifMessage}
       />
       <button onClick={() => {

@@ -34,7 +34,6 @@ import {
   Redirect,
 } from 'react-router-dom';
 import styled, { css } from 'styled-components'
-import { requestFirebaseNotifPermission } from '../firebaseinit';
 import { useTranslation } from 'react-i18next'
 import SearchBar from './searchbar/SearchBar.jsx'
 
@@ -234,18 +233,6 @@ const Home = ({
 }) => {
   const { t, i18n } = useTranslation();
 
-  useEffect( async () => {
-    const subToken = await requestFirebaseNotifPermission();
-    // console.log(user && subToken !== undefined)
-    // console.log(subToken)
-    if (user && subToken) {
-      try {
-        await axios.put(`/api/notifs/${user.id}`, {token: subToken})
-      } catch(e) {
-        console.log('login token save error!')
-      }
-    }
-  }, [user])
 
     return(
     <Well>

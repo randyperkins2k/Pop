@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
 import GlobalStyles from './components/styles/globalStyles.js';
-import { registerServiceWorker } from './serviceWorker'
 import './i18n.jsx';
 
 
@@ -16,4 +15,3 @@ ReactDOM.render(
  document.getElementById('app'));
 
  
- registerServiceWorker();
