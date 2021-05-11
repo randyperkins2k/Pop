@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const InputWrapper = styled.label`
 	position: relative;
-	
+
 	margin-top: 30px;
 
 `
@@ -60,9 +60,9 @@ const Slider = styled.span`
 	}
 `
 
-const ToggleOpenClose = ({ merchant, setOpenOrClosed, 
-		openOrClosed, merchData, 
-		setMerchData, selectMerchant, 
+const ToggleOpenClose = ({ merchant, setOpenOrClosed,
+		openOrClosed, merchData,
+		setMerchData, selectMerchant,
 		center, user,
 		setSubs, setYourPopups
 	}) => {
@@ -84,7 +84,7 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
 					setMerchData(response.data)
 				})
 				.then(() => {
-					axios.get(`/userid/${user.id}`)
+					axios.get(`/api/users/id/${user.id}`)
 						.then((response => {
 							setSubs(response.data.Subs.map(Sub => Sub.Merchant));
 							setYourPopups(response.data.Admins.map(Sub => Sub.Merchant));
@@ -106,7 +106,7 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
 		       			setMerchData(response.data)
 							})
 							.then(() => {
-								axios.get(`/userid/${user.id}`)
+								axios.get(`/api/users/id/${user.id}`)
 									.then((response => {
 										setSubs(response.data.Subs.map(Sub => Sub.Merchant));
 										setYourPopups(response.data.Admins.map(Sub => Sub.Merchant));
@@ -116,7 +116,7 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
 			})
 			.catch(err => console.log('opening merchant error', err));
   }
-	
+
 	useEffect(() => initiate(), []);
 
 	return (

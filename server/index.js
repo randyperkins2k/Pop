@@ -322,79 +322,79 @@ app.get('/merchant/admins/:id', (req, res) => {
 // });
 
 //get user by email
-app.get('/user/:email', (req, res) => {
-  const { email } = req.params;
-  Users.findOne({
-    where: {email: email}
-  })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
+// app.get('/user/:email', (req, res) => {
+//   const { email } = req.params;
+//   Users.findOne({
+//     where: {email: email}
+//   })
+//     .then(data => res.send(data))
+//     .catch(err => res.send(err));
+// });
 
 //get user by id
-app.get('/userid/:id', (req, res) => {
-  const { id } = req.params;
-  Users.findOne({
-    where: {id: id},
-    include:
-    [{
-      model: Admins,
-      include: Merchants,
-    },
-    {model: Subs,
-    include: {
-      model: Merchants,
-      include: {
-        model: Reviews,
-        include: Users
-    }
-   }
-  }
-  ]})
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
+// app.get('/userid/:id', (req, res) => {
+//   const { id } = req.params;
+//   Users.findOne({
+//     where: {id: id},
+//     include:
+//     [{
+//       model: Admins,
+//       include: Merchants,
+//     },
+//     {model: Subs,
+//     include: {
+//       model: Merchants,
+//       include: {
+//         model: Reviews,
+//         include: Users
+//     }
+//    }
+//   }
+//   ]})
+//     .then(data => res.send(data))
+//     .catch(err => res.send(err));
+// });
 
 //troubleshooting measure
 //add new user
-app.post('/adduser/:name/:email/', (req, res) => {
-  const { name, email } = req.params;
-  Users.findAll({
-    where: {email: email},
-    include:
-    [{
-      model: Admins,
-      include: Merchants,
-    },
-    {model: Subs,
-      include: {
-        model: Merchants,
-        include: {
-          model: Reviews,
-          include: Users
-      }
-     }
-    }
-  ]})
-  .then(results => {
-    if (!results.length) {
-      Users.create({ name, email })
-        .then(data => res.send(data))
-    }
-    else {
-      res.send(results[0]);
-    }
-  })
-    .catch(err => res.send(err));
-});
-//delete user
-app.delete('/deleteuser/:id', (req, res) => {
-  const { id } = req.params;
-  Users.destroy({
-    where: {id: id}
-  })
-    .then(res.send(`user ${id} deleted`));
-});
+// app.post('/adduser/:name/:email/', (req, res) => {
+//   const { name, email } = req.params;
+//   Users.findAll({
+//     where: {email: email},
+//     include:
+//     [{
+//       model: Admins,
+//       include: Merchants,
+//     },
+//     {model: Subs,
+//       include: {
+//         model: Merchants,
+//         include: {
+//           model: Reviews,
+//           include: Users
+//       }
+//      }
+//     }
+//   ]})
+//   .then(results => {
+//     if (!results.length) {
+//       Users.create({ name, email })
+//         .then(data => res.send(data))
+//     }
+//     else {
+//       res.send(results[0]);
+//     }
+//   })
+//     .catch(err => res.send(err));
+// });
+// //delete user
+// app.delete('/deleteuser/:id', (req, res) => {
+//   const { id } = req.params;
+//   Users.destroy({
+//     where: {id: id}
+//   })
+//     .then(res.send(`user ${id} deleted`));
+// });
 //delete all users
 app.delete('/deleteallusers', (req, res) => {
   Users.destroy({

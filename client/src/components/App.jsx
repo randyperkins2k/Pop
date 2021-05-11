@@ -133,7 +133,7 @@ const App = () => {
           setIsLogged(true);
           // console.log('before post', displayName, email, picture);
           // Picture removed from endpoint due to HTTP issue.
-          axios.post(`/adduser/${displayName}/${email}/`)
+          axios.post(`/api/users/adduser/${displayName}/${email}`)
             .then(addUser => {
               // console.log('this is add user', addUser);
               let subs, yourPops;
