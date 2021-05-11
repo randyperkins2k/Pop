@@ -11,6 +11,7 @@ cloudinary.config({
   api_secret: cloudSecret
 })
 
+
 images.post('/upload/:id', async (req, res) => {
   //console.log(req.body.image);
   const { id } = req.params;

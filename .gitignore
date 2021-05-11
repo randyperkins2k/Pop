@@ -2,4 +2,3 @@ node_modules
 node_modules
 .env
 bundle.js
-serviceAccountKey.json
