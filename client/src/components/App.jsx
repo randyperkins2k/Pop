@@ -18,6 +18,7 @@ import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
 import EditMenu from './YourPopups/EditPopUp/EditMenu.jsx';
 import Menu from './MerchantProfileView/Menu.jsx';
 import EditInfo from './YourPopups/EditPopUp/EditInfo.jsx';
+import EditOwner from './YourPopups/EditPopUp/EditOwner.jsx';
 // import * as butt from './openMerch.json';
 // const merchData = butt.merchants;
 import ToggleSwitch from '../components/ToggleSwitch.jsx';
@@ -394,8 +395,8 @@ const Home = ({
                     />
                   }}/>
                   <Route
-                  path="/editinfo"
-                  render={() => {
+                    path="/editinfo"
+                    render={() => {
                     return <EditInfo
                       merchant={selectedMerchant}
                       selectMerchant={setSelectedMerchant}
@@ -406,6 +407,17 @@ const Home = ({
                       merchData={merchData}
                       setMerchData={setMerchData}
                     />
+                  }}
+                />
+                <Route
+                  path="/editowner"
+                  render={() => {
+                    return <EditOwner
+                      merchant={selectedMerchant}
+                      selectMerchant={setSelectedMerchant}
+                      user={user}
+                      setUser={setUser}
+                      />
                   }}
                 />
               </Switch>
