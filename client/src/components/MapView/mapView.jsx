@@ -9,6 +9,7 @@ import {
 import Window from '../MapView/Window.jsx'
 import styled, { css } from 'styled-components'
 import { useTranslation } from 'react-i18next'
+//import SearchBar from './../searchbar/SearchBar.jsx'
 //import map from '../popup/foodmarker.png'
 const libraries = ["places"];
 const TouchMap = styled.div`
@@ -54,6 +55,9 @@ background-color: #ffd1dc;
 font-size: 10.25px;
 `}
 `
+
+
+
 const options = {
   styles: mapStyles,
   disableDefaultUI: true,

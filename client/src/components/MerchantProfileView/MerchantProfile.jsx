@@ -5,12 +5,43 @@ import axios from 'axios';
 import PictureFeed from './PictureFeed.jsx';
 
 import styled, { css } from 'styled-components'
+import { useTranslation } from 'react-i18next'
+
 
 const MerchantProWrap = styled.div`
 text-align: center;
 `
+const SubmitBtn = styled.button`
+text-align: center;
+color: black;
+font-family: 'Ubuntu';
+padding: 5px 16px;
+background-color: white;
+font-size: 11px;
+border-radius: 6px;
+border-width: 1px;
+border-color: lightgray;
+transition: ease 0.01s all;
+`
+const ReviewsBtn = styled.button`
+text-align: center;
+color: black;
+font-family: 'Ubuntu';
+padding: 5px 16px;
+background-color: white;
+font-size: 11px;
+border-radius: 6px;
+border-width: 1px;
+border-color: lightgray;
+transition: ease 0.01s all;
+${props => props.reviewBtnPrimary && css`
+opacity: .5;
+color: black;
+background-color: #ffd1dc;
+font-size: 11.25px;
+`}
 
-
+`
 const ViewMenuBtn = styled.button`
   text-align: center;
   color: black;
@@ -22,15 +53,9 @@ const ViewMenuBtn = styled.button`
   border-width: 1px;
   border-color: lightgray;
   transition: ease 0.01s all;
-  ${props => props.viewMenuPrimary && css`
-opacity: .5;
-color: black;
-background-color: #ffd1dc;
-font-size: 11.25px;
-`}
+
 `
 const LocateBtn = styled.button`
-  text-align: center;
   color: black;
   font-family: 'Ubuntu';
   padding: 5px 16px;
@@ -38,6 +63,7 @@ const LocateBtn = styled.button`
   font-size: 11px;
   border-radius: 6px;
   border-width: 1px;
+  margin-top: 25px;
   border-color: lightgray;
   transition: ease 0.01s all;
   ${props => props.locatePrimary && css`
@@ -56,7 +82,28 @@ font-family: 'Ubuntu';
 text-align: center;
 margin-top: 30px;
 `
+const Input = styled.input`
+box-sizing:border-box;
+margin:20px;
+background-color: #fafafa;
+width:80%;
+resize: vertical;
+padding:16px;
+border-radius:15px;
+border:0;
+box-shadow:4px 4px 10px;
+`
+const LeaveAReview = styled.div`
+margin-bottom: -17px;
+margin-top: 30px;
+font-family: 'Ubuntu';
+`
+const Review = styled.h5`
+font-family: 'Ubuntu';
+margin-top: 50px;
+font-color: green;
 
+`
 
 const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, setMerchData, openOrClosed, setOpenOrClosed, userData, setUserData }) => {
   const [ locatePrimary, setLocatePrimary ] = useState(false);
@@ -64,10 +111,14 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
   const [ reviews, setReviews ] = useState([]);
   const [ pictureFeedView, setPictureFeedView ] = useState(true);
   const [ reviewView, setReviewView ] = useState(false)
+  const {t} = useTranslation()
+  const [ reviewBtnPrimary, setReviewBtnPrimary ] = useState(false)
   //const [reviews, setReviews] = useState(merchant.Reviews);
   const findReviews = () => {
     if (merchant.Reviews) {
       setReviews(merchant.Reviews);
+      console.log('reviews: ')
+      console.log(merchant.Reviews);
     }
   };
   //useEffect(() => logged(), []);
@@ -91,9 +142,11 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
       message: reviewText
     })
     .then((results) => {
+      setReviewText('');
       const newReview = results.data;
       newReview.User = {};
       newReview.User.name = user.name;
+      newReview.User.id = user.id;
       console.log(newReview);
       setReviews([newReview, ...reviews]);
       const merchantsCopy = merchData.slice();
@@ -114,13 +167,27 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
     .catch(e => console.log(e));
   };
 
+  const deleteReview = (review) => {
+    console.log('hello from deleteReview');
+    console.log(review);
+    const { id } = review;
+    console.log(id);
+    axios.delete(`/deletereview/${id}`)
+      .then(response => {
+        console.log(response.data);
+        const updatedReviews = reviews.slice();
+        setReviews(updatedReviews.filter(oldReview => oldReview.id !== id));
+      })
+      .catch(err => console.log(err));
+  }
+
   return (
 
     <MerchantProWrap>
       <div>
         <h2>{merchant.name} {openOrClosed}</h2>
         <img/>
-        <H2>Info</H2>
+        <H2>{t("infoTxt")}</H2>
         <p>
           {merchant.info}
         </p>
@@ -130,7 +197,9 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
       onClick={() => {
         setLocatePrimary(!locatePrimary)
         setViewMenuPrimary(false)
-      }}>Locate</LocateBtn><br/>
+        setReviewBtnPrimary(false)
+        setReviewView(false)
+      }}>{t("locateBtn")}</LocateBtn>
       <Link to="/menu">
         <ViewMenuBtn
           viewMenuPrimary={viewMenuPrimary}
@@ -138,7 +207,7 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
             setViewMenuPrimary(!viewMenuPrimary)
             setLocatePrimary(false)
             console.log('hey there', merchant.id, userSubs)
-          }}>View Menu
+          }}>{t("viewMenuBtn")}
         </ViewMenuBtn>
       </Link>
       <ViewMenuBtn
@@ -150,12 +219,15 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
         setReviewView(false);
         setPictureFeedView(false);
        }}>View Menu</ViewMenuBtn>
-       <ViewMenuBtn
+       <ReviewsBtn
+          reviewBtnPrimary={reviewBtnPrimary}
         onClick={() => {
           setPictureFeedView(false);
           setReviewView(true);
+          setReviewBtnPrimary(!reviewBtnPrimary)
+          setLocatePrimary(false)
         }}
-       >Reviews</ViewMenuBtn>
+       >{t("reviewsBtn")}</ReviewsBtn>
      {
        pictureFeedView && !reviewView ?
        <div>
@@ -171,23 +243,33 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
       reviewView && !pictureFeedView ?
       <div>
       <div>
-      <h5>Leave a review:</h5>
+      <LeaveAReview>{t("leaveAReviewTxt")}:</LeaveAReview>
         <form onSubmit={(e) => {
           e.preventDefault();
 
         }}>
-          <input type="text" value={reviewText} onChange={(e)=>setReviewText(e.target.value)} maxlength="255"></input>
-          <button onClick={submitReview}>Submit</button>
+          <Input type="text" value={reviewText} onChange={(e)=>setReviewText(e.target.value)} maxlength="255"></Input>
+          <SubmitBtn onClick={submitReview}>{t("submitBtn")}</SubmitBtn>
         </form>
       </div>
       <div>
-        <h5>Reviews:</h5>
-        {reviews.map(review => <p><b>{review.User.name}</b>: {review.message}</p>)}
+        <Review>{t("reviewsTxt")}:</Review>
+        {reviews.map(review => <div key={review.id}>
+          <p>
+            <b>{review.User.name}</b>: {review.message}
+            {
+              review.User.id === user.id
+              ? (<button onClick={() => deleteReview(review)}><small>x</small></button>)
+              : null
+            }
+
+          </p>
+        </div>)}
       </div>
     </div>
       :
     <div>
-      <h5>This is the menu view!!!</h5>
+      <LeaveAReview>{t("leaveAReviewTxt")}</LeaveAReview>
     </div>
       }
     </MerchantProWrap>

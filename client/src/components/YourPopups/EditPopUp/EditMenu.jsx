@@ -2,6 +2,49 @@ import React, { useState, useEffect } from 'react';
 import MerchantProfile from '../../MerchantProfileView/MerchantProfile.jsx';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next'
+import styled from 'styled-components'
+
+const Div = styled.div`
+text-align: center;
+font-family: 'Ubuntu';
+`
+const Input = styled.input`
+  box-sizing:border-box;
+  margin-top: 13px;
+  background-color: #fafafa;
+  width:63%;
+  resize: vertical;
+  padding:1px;
+  border-radius:15px;
+  border:0;
+  box-shadow:4px 4px 10px;
+
+`
+const ItemBtn = styled.button`
+color: black;
+font-family: 'Ubuntu';
+padding: 0px 11px 0px 11px;
+background-color: white;
+font-size: 20px;
+border-radius: 6px;
+border-width: 1px;
+border-color: lightgray;
+`
+
+const AddProductBtn = styled.button`
+font-family: 'Ubuntu';
+color: black;
+font-family: 'Ubuntu';
+padding: 5px 16px;
+background-color: white;
+font-size: 11px;
+border-radius: 6px;
+border-width: 1px;
+margin-top: 25px;
+border-color: lightgray;
+transition: ease 0.01s all;
+margin-bottom: 30px;
+`
 
 const EditMenu = ({ merchant, selectMerchant }) => {
   const {t} = useTranslation()
@@ -60,30 +103,30 @@ const EditMenu = ({ merchant, selectMerchant }) => {
   }
 
   return(
-    <div>
+    <Div>
       <div>
-        <h3>{`${merchant.name}'s`} products: </h3>
+        <h5>{`${merchant.name}'s`} products: </h5>
         {products.map(product =>
           <p>&emsp; &#8226; &nbsp;<b>{product.name}</b><small>(<i>${parseFloat(product.price).toFixed(2)}</i></small>)
-          <button onClick={
+          <ItemBtn onClick={
             ()=>{deleteProduct(product)}
-          }><small>x</small></button></p>
+          }><small>x</small></ItemBtn></p>
         )}
       </div>
       <div>
         <form>
-          <h4>add new product:</h4>
+          <h5>add new product:</h5>
           <label><b>name:</b></label>
-          <input type="text" value={nameText} onChange={(e) => setNameText(e.target.value)}></input><br></br>
+          <Input type="text" value={nameText} onChange={(e) => setNameText(e.target.value)}></Input><br></br>
           <label><b>price:</b></label>
-          <input type="number" value={priceNum} onChange={(e) => setPriceNum(e.target.value)}></input><br></br>
+          <Input type="number" value={priceNum} onChange={(e) => setPriceNum(e.target.value)}></Input><br></br>
         </form>
-        <button onClick={() => {addProduct()}}>add product</button><br></br>
+        <AddProductBtn onClick={() => {addProduct()}}>add product</AddProductBtn><br></br>
       </div>
       <div>
         <MerchantProfile merchant={merchant} style={{fontFamily: 'Ubuntu'}}/>
       </div>
-    </div>
+    </Div>
   )
 
 }
