@@ -16,7 +16,7 @@ const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
   useEffect(() => getAdmins(), []);
 
   const getUsers = () => {
-    axios.get('/users')
+    axios.get('/api/users')
       .then(result => {
         console.log('hello from getUsers');
         console.log(result.data);

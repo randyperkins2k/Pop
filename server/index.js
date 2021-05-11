@@ -1,16 +1,23 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
+const users = require('./api/users.js');
 const Dotenv = require('dotenv-webpack');
 
 const { Merchants, Users, Products, Reviews, Subs, Admins } = require('./db.js');
 
 const app = express();
 const PORT = 8080;
+
+
+
+
 const CLIENT_PATH = path.resolve(__dirname, '../client/dist');
 const ASSETS_PATH = path.resolve(__dirname, 'assets');
+app.use(express.json());
 app.use(express.static(CLIENT_PATH));
 app.use('/assets', express.static(ASSETS_PATH));
+app.use('/api/users', users);
 
 /**
  * start authentication routes
@@ -18,11 +25,11 @@ app.use('/assets', express.static(ASSETS_PATH));
 
 const passport = require('passport');
 require('./passport-setup');
-app.use(express.json());
 const cookieSession = require('cookie-session');
 
 /*Cloudinary
-  routes
+
+routes
 */
 const { images } = require('./cloudinary.js');
 app.use('/api/images', images);
@@ -306,13 +313,13 @@ app.get('/merchant/admins/:id', (req, res) => {
  * Users
  */
 //get all users
-app.get('/users', (req, res) => {
-  Users.findAll({
-    where: {}
-  })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
+// app.get('/users', (req, res) => {
+//   Users.findAll({
+//     where: {}
+//   })
+//     .then(data => res.send(data))
+//     .catch(err => res.send(err));
+// });
 
 //get user by email
 app.get('/user/:email', (req, res) => {
@@ -648,7 +655,9 @@ app.delete('/admin/deletebyemail/:email/:merchant', (req, res) => {
   .catch(err => res.send(err));
 });
 
+
 app.listen(PORT, (() => {
   console.log(`Server listening at http://127.0.0.1:${PORT}`);
 }));
 //rest it up
+
