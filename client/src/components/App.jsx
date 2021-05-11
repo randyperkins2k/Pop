@@ -14,6 +14,7 @@ import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
 import EditMenu from './YourPopups/EditPopUp/EditMenu.jsx';
 import Menu from './MerchantProfileView/Menu.jsx';
 import EditInfo from './YourPopups/EditPopUp/EditInfo.jsx';
+import EditOwner from './YourPopups/EditPopUp/EditOwner.jsx';
 import ToggleSwitch from '../components/ToggleSwitch.jsx';
 import YourPopUps from './YourPopups/YourPopUps.jsx';
 import Login from './Login.jsx';
@@ -161,7 +162,7 @@ const App = () => {
       <Router>
         {isLogged === true ? <Redirect to="/" /> : <Redirect to="/login" />}
         <Switch>
-          
+
           <Route
             exact path="/"
             render={props => {
@@ -224,7 +225,7 @@ const Home = ({
   isDarkMode, setIsDarkMode
 }) => {
   const { t, i18n } = useTranslation();
-  
+
     return (
       <Well>
           {/* <LogOutBtn href="/logout"> Logout </LogOutBtn> */}
@@ -266,7 +267,7 @@ const Home = ({
                 <ButtonWrapper>
                   <Link to='/'>
                     <MapViewButton
-                      mLPrimary={mLPrimary} 
+                      mLPrimary={mLPrimary}
                       onClick={() => {
                         setMLPrimary(!mLPrimary);
                         setLVPrimary(false);
@@ -436,6 +437,17 @@ const Home = ({
                       />
                       }}
                     />
+                    <Route
+                  path="/editowner"
+                  render={() => {
+                    return <EditOwner
+                      merchant={selectedMerchant}
+                      selectMerchant={setSelectedMerchant}
+                      user={user}
+                      setUser={setUser}
+                      />
+                  }}
+                />
                   </Switch>
                 </div>
       </Well>
