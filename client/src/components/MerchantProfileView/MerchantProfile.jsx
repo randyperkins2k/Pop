@@ -117,6 +117,8 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
   const findReviews = () => {
     if (merchant.Reviews) {
       setReviews(merchant.Reviews);
+      console.log('reviews: ')
+      console.log(merchant.Reviews);
     }
   };
   //useEffect(() => logged(), []);
@@ -140,9 +142,11 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
       message: reviewText
     })
     .then((results) => {
+      setReviewText('');
       const newReview = results.data;
       newReview.User = {};
       newReview.User.name = user.name;
+      newReview.User.id = user.id;
       console.log(newReview);
       setReviews([newReview, ...reviews]);
       const merchantsCopy = merchData.slice();
@@ -162,6 +166,20 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
     })
     .catch(e => console.log(e));
   };
+
+  const deleteReview = (review) => {
+    console.log('hello from deleteReview');
+    console.log(review);
+    const { id } = review;
+    console.log(id);
+    axios.delete(`/deletereview/${id}`)
+      .then(response => {
+        console.log(response.data);
+        const updatedReviews = reviews.slice();
+        setReviews(updatedReviews.filter(oldReview => oldReview.id !== id));
+      })
+      .catch(err => console.log(err));
+  }
 
   return (
 
@@ -236,7 +254,17 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
       </div>
       <div>
         <Review>{t("reviewsTxt")}:</Review>
-        {reviews.map(review => <p><b>{review.User.name}</b>: {review.message}</p>)}
+        {reviews.map(review => <div key={review.id}>
+          <p>
+            <b>{review.User.name}</b>: {review.message}
+            {
+              review.User.id === user.id
+              ? (<button onClick={() => deleteReview(review)}><small>x</small></button>)
+              : null
+            }
+
+          </p>
+        </div>)}
       </div>
     </div>
       :

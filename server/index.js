@@ -290,6 +290,18 @@ app.put('/api/merchant/updateinfo', (req, res) => {
   .catch(err => res.send(err));
 });
 
+app.get('/merchant/admins/:id', (req, res) => {
+  const { id } = req.params;
+  Merchants.findOne({
+    where: {id: id},
+    include: {
+      model: Admins,
+      include: Users
+    }
+  })
+    .then(data => res.send(data.Admins.map(Admin => Admin.User)))
+    .catch(err => res.send(err));
+});
 /**
  * Users
  */
@@ -604,6 +616,36 @@ app.delete('/deletealladmins', (req, res) => {
   })
     .then(res.send('no more admins'))
     .catch(err => res.send(err));
+});
+
+//add admin by email
+app.post('/admin/addbyemail', (req, res) => {
+  const { email, merchant } = req.body;
+  Users.findOne({
+    where: {email: email}
+  })
+  .then(userData => {
+    Admins.create({ UserId: userData.id, MerchantId: merchant })
+      .then(moon => console.log(moon))
+      .catch(err => res.send(err));
+    res.send(userData);
+  })
+  .catch(err => res.send(err));
+});
+
+//add delete by email
+app.delete('/admin/deletebyemail/:email/:merchant', (req, res) => {
+  const { email, merchant } = req.params;
+  Users.findOne({
+    where: {email: email}
+  })
+  .then(userData => {
+    Admins.destroy({where: { UserId: userData.id, MerchantId: merchant }})
+      .then(moon => console.log(moon))
+      .catch(err => res.send(err));
+    res.send(userData);
+  })
+  .catch(err => res.send(err));
 });
 
 app.listen(PORT, (() => {
