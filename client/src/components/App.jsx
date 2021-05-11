@@ -34,13 +34,18 @@ import {
 } from 'react-router-dom';
 import styled, { css } from 'styled-components'
 import { useTranslation } from 'react-i18next'
-
+import SearchBar from './searchbar/SearchBar.jsx'
 
 // const MapView = withScriptjs(withGoogleMap(Map));
 const ButtonWrapper = styled.div`
 text-align: center;
 
 `
+const Div = styled.div`
+text-align: center;
+
+`
+
 const ListViewButton = styled.button`
 display: "flex";
 align-items: 'center';
@@ -82,6 +87,7 @@ font-size: 14.25px;
 `
 const Welcome = styled.h1`
 margin-top: 60px;
+margin-left: 11px;
 font-family: 'Londrina Solid', cursive;
 color: #ffd1dc;
 text-align: center;
@@ -207,7 +213,7 @@ const Home = ({
   const { t, i18n } = useTranslation();
     return(
     <Well>
-    <div>
+    <Div>
       {/* <LogOutBtn href="/logout"> Logout </LogOutBtn> */}
 
         <div className='sidebar-view'>
@@ -221,10 +227,6 @@ const Home = ({
                 path='/'
                 render={(props) => {
                   return <SideBar
-                  lVPrimary={lVPrimary}
-                  setLVPrimary={setLVPrimary}
-                  mLPrimary={mLPrimary}
-                  setMLPrimary={setMLPrimary}
                   close={setSideBarDisplay}/>
                 }}
               />
@@ -236,18 +238,25 @@ const Home = ({
             >
               <ButtonWrapper>
             <Link to='/'>
-              <MapViewButton  mLPrimary={mLPrimary} onClick={() => {
+              <MapViewButton  
+              mLPrimary={mLPrimary} 
+              onClick={() => {
                     setMLPrimary(!mLPrimary)
                     setLVPrimary(false)
                   }}
                     >{t('mapViewBtn')}</MapViewButton>
             </Link>
             <Link to='/listview'>
-              <ListViewButton lVPrimary={lVPrimary} onClick={() => {
+              <ListViewButton 
+              lVPrimary={lVPrimary}
+              onClick={() => {
                     setLVPrimary(!lVPrimary)
                     setMLPrimary(false)
                   }}>
                     {t('listViewBtn')}</ListViewButton>
+                    <SearchBar 
+                    merchData={merchData}
+                    />
             </Link>
                     </ButtonWrapper>
               <Switch>
@@ -401,7 +410,7 @@ const Home = ({
                 />
               </Switch>
             </div>
-      </div>
+      </Div>
       </Well>
   )
 }

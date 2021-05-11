@@ -19,6 +19,7 @@ const Open = styled.button`
   border-width: 1px;
   border-color: lightgray;
   transition: ease 0.01s all;
+
 ${props => props.openPrimary && css`
 opacity: .5;
 color: black;
@@ -63,6 +64,7 @@ const Search = styled.button`
   font-size: 11.25px;
   `}
 `
+
 const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
   const [ openPopsView, setOpenPopsView ] = useState(true);
   const [ yourSubsView, setYourSubsView ] = useState(false);

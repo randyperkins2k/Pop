@@ -10,6 +10,7 @@ const styles = {
     'width': '210px',
     'backgroundColor': '#f1f1f1',
     'position': 'absolute',
+    'opacity': '.90',
     'height': '100vh',
     'overflow': 'auto',
     'zIndex': 99
@@ -43,7 +44,7 @@ const {t} = useTranslation();
             close(false)
             setLVPrimary(false)
             setMLPrimary(false)
-            }}>PopUps</a></Button> 
+            }}>{t("popUpsBtn")}</a></Button> 
         </Link>
         <br/>
         <Link to='/yourprofile'>
