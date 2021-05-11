@@ -86,8 +86,6 @@ const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
         setFavPrimary(false)
         }}>{t('openNowBtn')}</Open>
       <Search sPUPrimary={sPUPrimary} onClick={() => {
-        setSearchPopsView(true)
-        setOpenPopsView(false)
         setSPUPrimary(!sPUPrimary)
         setOpenPrimary(false)
         setFavPrimary(false)
@@ -104,35 +102,24 @@ const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
           {t('favoritesBtn')}</Favs>
           </BtnWrapper>
       <ul>
-      {
-        !searchPopsView ?
-        <div>
-          {
-          openPopsView ?
-            merchData.map(merch => {
-              if (merch.isOpen) {
-                return <MerchList
-                key={merch.id}
-                merchant={merch}
-                selectMerchant={selectMerchant}/>
-              }
-            })
-           
-            :
-            userSubs.sort((a,b) => {
-              return (a.isOpen === b.isOpen) ? 0 : a.isOpen ? -1 : 1;
-            }).map(merch => <MerchList
+        { openPopsView ?
+          merchData.map(merch => {
+            if (merch.isOpen) {
+              return <MerchList
               key={merch.id}
               merchant={merch}
-              selectMerchant={selectMerchant}
-            />)
-          }   
-          </div>
-        :
-        <div>
-        <h5>search bar view</h5>
-        </div>
-      }
+              selectMerchant={selectMerchant}/>
+            }
+          })
+          :
+          userSubs.sort((a,b) => {
+            return (a.isOpen === b.isOpen) ? 0 : a.isOpen ? -1 : 1;
+          }).map(merch => <MerchList
+            key={merch.id}
+            merchant={merch}
+            selectMerchant={selectMerchant}
+          />)
+        }
       </ul>
     </div>
   );
