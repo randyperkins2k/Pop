@@ -9,6 +9,7 @@ import {
 import Window from '../MapView/Window.jsx'
 import styled, { css } from 'styled-components'
 import { useTranslation } from 'react-i18next'
+//import SearchBar from './../searchbar/SearchBar.jsx'
 //import map from '../popup/foodmarker.png'
 
 
