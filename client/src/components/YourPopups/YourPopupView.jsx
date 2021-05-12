@@ -30,7 +30,7 @@ const YourPopupView = ({ merchant, selectMerch, yourPopups, setYourPopups, merch
     if (confirm(`${t("doYouWantToDelete")} ${merchant.name}?`) === true) {
       console.log('deleted');
       console.log(merchant.id, typeof merchant.id);
-      axios.delete(`/api/merchant/delete/${merchant.id}`)
+      axios.delete(`/api/merchants/delete/${merchant.id}`)
         .then(results => {
           console.log(results.data);
           const yourPopupsCopy = yourPopups.slice();

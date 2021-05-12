@@ -45,7 +45,7 @@ const EditInfo = ({ merchant, selectMerchant, yourPopups, setYourPopups, userSub
   const updateInfo = () => {
     console.log(text);
     if (text) {
-      axios.put('/api/merchant/updateinfo', {
+      axios.put('/api/merchants/updateinfo', {
         id: merchant.id, info: text
       })
       .then(result => {
@@ -90,7 +90,7 @@ const EditInfo = ({ merchant, selectMerchant, yourPopups, setYourPopups, userSub
       <h3> {t("editTxt")} {`${merchant.name}'s`}: </h3>
       <input value={text} onChange={(e) => setText(e.target.value) }></input>
       <button
-      updateInfoPrimary={updateInfoPrimary} 
+      updateInfoPrimary={updateInfoPrimary}
       onClick={ ()=> updateInfo()}>{t("updateInfoBtn")}</button>
     </div>
     <br></br>
