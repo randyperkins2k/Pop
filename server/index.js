@@ -3,6 +3,7 @@ const path = require('path');
 const axios = require('axios');
 const users = require('./api/users.js');
 const merchants = require('./api/merchants.js');
+const products = require('./api/products.js');
 const Dotenv = require('dotenv-webpack');
 
 const { Merchants, Users, Products, Reviews, Subs, Admins } = require('./db.js');
@@ -20,6 +21,7 @@ app.use(express.static(CLIENT_PATH));
 app.use('/assets', express.static(ASSETS_PATH));
 app.use('/api/users', users);
 app.use('/api/merchants', merchants);
+app.use('/api/products', products);
 
 /**
  * start authentication routes
@@ -408,66 +410,66 @@ app.get('/distance/:lat1/:lon1/:lat2/:lon2', (req, res) => {
 /**
  * Products
  */
-//get all products
-app.get('/api/products', (req, res) => {
-  Products.findAll({
-    where: {}
-  })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
+// //get all products
+// app.get('/api/products', (req, res) => {
+//   Products.findAll({
+//     where: {}
+//   })
+//     .then(data => res.send(data))
+//     .catch(err => res.send(err));
+// });
 //get all products associated with merchant
-app.get('/api/product/menu/:merchant', (req, res) => {
-  const { merchant } = req.params;
-  Products.findAll({
-    where: {merchant: merchant}
-  })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
+// app.get('/api/product/menu/:merchant', (req, res) => {
+//   const { merchant } = req.params;
+//   Products.findAll({
+//     where: {merchant: merchant}
+//   })
+//     .then(data => res.send(data))
+//     .catch(err => res.send(err));
+// });
 //add new product
-app.post('/api/product/addproduct/', (req, res) => {
-  const { name, merchant, price } = req.body;
-  Products.create({ name, merchant, price })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
-//change price of product
-app.put('/changeprice/:id/:price', (req, res) => {
-  const { id, price } = req.params;
-  Products.update(
-    {price: price},
-    {returning: true, where: {id: id}}
-  )
-  .then(() => res.send('price updated'))
-  .catch(err => res.send(err));
-});
+// app.post('/api/product/addproduct', (req, res) => {
+//   const { name, merchant, price } = req.body;
+//   Products.create({ name, merchant, price })
+//     .then(data => res.send(data))
+//     .catch(err => res.send(err));
+// });
+// //change price of product
+// app.put('/changeprice/:id/:price', (req, res) => {
+//   const { id, price } = req.params;
+//   Products.update(
+//     {price: price},
+//     {returning: true, where: {id: id}}
+//   )
+//   .then(() => res.send('price updated'))
+//   .catch(err => res.send(err));
+// });
 //change status of product
-app.put('/changestatus/:id/:status', (req, res) => {
-  const { id, status } = req.params;
-  Products.update(
-    {status: status},
-    {returning: true, where: {id: id}}
-  )
-  .then(() => res.send('status updated'))
-  .catch(err => res.send(err));
-});
-//delete product
-app.delete('/api/product/deleteproduct/:id', (req, res) => {
-  const { id } = req.params;
-  Products.destroy({
-    where: {id: id}
-  })
-    .then(res.send(`product ${id} deleted`));
-});
+// app.put('/changestatus/:id/:status', (req, res) => {
+//   const { id, status } = req.params;
+//   Products.update(
+//     {status: status},
+//     {returning: true, where: {id: id}}
+//   )
+//   .then(() => res.send('status updated'))
+//   .catch(err => res.send(err));
+// });
+// //delete product
+// app.delete('/api/product/deleteproduct/:id', (req, res) => {
+//   const { id } = req.params;
+//   Products.destroy({
+//     where: {id: id}
+//   })
+//     .then(res.send(`product ${id} deleted`));
+// });
 //delete all products
-app.delete('/deleteallproducts', (req, res) => {
-  Products.destroy({
-    where: {}
-  })
-    .then(res.send('no more products'))
-    .catch(err => res.send(err));
-});
+// app.delete('/deleteallproducts', (req, res) => {
+//   Products.destroy({
+//     where: {}
+//   })
+//     .then(res.send('no more products'))
+//     .catch(err => res.send(err));
+// });
 
 
 
