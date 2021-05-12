@@ -529,13 +529,13 @@ app.get('/api/reviews/getall', (req, res) => {
  * Subs
  */
 //get all subs
-app.get('/subs', (req, res) => {
-  Subs.findAll({
-    where: {}
-  })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
+// app.get('/subs', (req, res) => {
+//   Subs.findAll({
+//     where: {}
+//   })
+//     .then(data => res.send(data))
+//     .catch(err => res.send(err));
+// });
 //get all users subs
 app.get('/subs/:user', (req, res) => {
   Subs.findAll({
@@ -545,50 +545,50 @@ app.get('/subs/:user', (req, res) => {
     .catch(err => res.send(err));
 });
 
-//add new sub
-app.post('/api/addsub', (req, res) => {
-  const { userid, merchantid } = req.body;
-  Subs.findAll({
-    where: { userid, merchantid }
-  })
-    .then(results => {
-      console.log(results)
-      if (!results.length) {
-        Subs.create({ UserId: userid, MerchantId: merchantid })
-          .then( () => {Users.findOne({
-            where: {id: userid},
-            include: {
-              model: Subs,
-              include: Merchants
-            }
-          }).then(data => {
-            console.log('this is the data', data);
-            res.send(data);
-          })
-          })
-      } else {
-        res.send(`${user} is already following ${merchant}`);
-      }
-    })
-    .catch(err => res.send(err));
-});
+// //add new sub
+// app.post('/api/addsub', (req, res) => {
+//   const { userid, merchantid } = req.body;
+//   Subs.findAll({
+//     where: { userid, merchantid }
+//   })
+//     .then(results => {
+//       console.log(results)
+//       if (!results.length) {
+//         Subs.create({ UserId: userid, MerchantId: merchantid })
+//           .then( () => {Users.findOne({
+//             where: {id: userid},
+//             include: {
+//               model: Subs,
+//               include: Merchants
+//             }
+//           }).then(data => {
+//             console.log('this is the data', data);
+//             res.send(data);
+//           })
+//           })
+//       } else {
+//         res.send(`${user} is already following ${merchant}`);
+//       }
+//     })
+//     .catch(err => res.send(err));
+// });
 
 //delete sub
-app.delete('/api/deletesub/:userId/:merchantId', (req, res) => {
-  const { userId, merchantId } = req.params;
-  Subs.destroy({
-    where: {userId, merchantId}
-  })
-    .then(res.send(`deleted`));
-});
+// app.delete('/api/deletesub/:userId/:merchantId', (req, res) => {
+//   const { userId, merchantId } = req.params;
+//   Subs.destroy({
+//     where: {userId, merchantId}
+//   })
+//     .then(res.send(`deleted`));
+// });
 //delete all subs
-app.delete('/deleteallsubs', (req, res) => {
-  Subs.destroy({
-    where: {}
-  })
-    .then(res.send('no more subs'))
-    .catch(err => res.send(err));
-});
+// app.delete('/deleteallsubs', (req, res) => {
+//   Subs.destroy({
+//     where: {}
+//   })
+//     .then(res.send('no more subs'))
+//     .catch(err => res.send(err));
+// });
 /**
  * Admins
  */
