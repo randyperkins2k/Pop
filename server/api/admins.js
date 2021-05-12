@@ -2,17 +2,6 @@ const { Merchants, Users, Products, Reviews, Subs, Admins } = require('../db.js'
 const { Router } = require('express');
 const admins = Router();
 
-admins.get('/test', (req, res) => {
-  res.send('yes, admins works');
-});
-
-admins.get('/', (req, res) => {
-  Admins.findAll({
-    where: {}
-  })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
 
 admins.post('/addadmin/:user/:merchant', (req, res) => {
   const { user, merchant } = req.params;
@@ -41,14 +30,6 @@ admins.delete('/deleteadmin/:id', (req, res) => {
     .then(res.send(`admin ${id} deleted`));
 });
 
-//delete all admins
-admins.delete('/deletealladmins', (req, res) => {
-  Admins.destroy({
-    where: {}
-  })
-    .then(res.send('no more admins'))
-    .catch(err => res.send(err));
-});
 
 //add admin by email
 admins.post('/addbyemail', (req, res) => {

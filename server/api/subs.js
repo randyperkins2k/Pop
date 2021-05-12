@@ -2,19 +2,6 @@ const { Merchants, Users, Products, Reviews, Subs, Admins } = require('../db.js'
 const { Router } = require('express');
 const subs = Router();
 
-subs.get('/test', (req, res) => {
-  res.send('yes, subs works');
-});
-
-//get all subs
-subs.get('/', (req, res) => {
-  Subs.findAll({
-    where: {}
-  })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
-
 //get all users subs
 subs.get('/user/:user', (req, res) => {
   Subs.findAll({
@@ -61,13 +48,5 @@ subs.delete('/deletesub/:userId/:merchantId', (req, res) => {
     .then(res.send(`deleted`));
 });
 
-//delete subs
-subs.delete('/deleteallsubs', (req, res) => {
-  Subs.destroy({
-    where: {}
-  })
-    .then(res.send('no more subs'))
-    .catch(err => res.send(err));
-});
 
 module.exports = subs;

@@ -2,18 +2,7 @@ const { Merchants, Users, Products, Reviews, Subs, Admins } = require('../db.js'
 const { Router } = require('express');
 const products = Router();
 
-products.get('/test', (req, res) => {
-  res.send('yes, products works');
-});
 
-//get all products
-products.get('/', (req, res) => {
-  Products.findAll({
-    where: {}
-  })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
 //get all products associated with merchant
 products.get('/menu/:merchant', (req, res) => {
   const { merchant } = req.params;
@@ -57,14 +46,6 @@ products.delete('/deleteproduct/:id', (req, res) => {
     where: {id: id}
   })
     .then(res.send(`product ${id} deleted`));
-});
-//delete all products
-products.delete('/deleteallproducts', (req, res) => {
-  Products.destroy({
-    where: {}
-  })
-    .then(res.send('no more products'))
-    .catch(err => res.send(err));
 });
 
 module.exports = products;

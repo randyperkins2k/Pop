@@ -2,10 +2,6 @@ const { Merchants, Users, Products, Reviews, Subs, Admins } = require('../db.js'
 const { Router } = require('express');
 const merchants = Router();
 
- merchants.get('/test', (req, res) => {
-  res.send('yes, merchants works');
-});
-
 //get all merchants
 merchants.get('/', (req, res) => {
   Merchants.findAll({
@@ -57,14 +53,6 @@ merchants.delete('/delete/:id', (req, res) => {
     where: {id: id}
   })
     .then(res.send(`merchant ${id} deleted`));
-});
-//delete all merchants
-merchants.delete('/deleteallmerchants', (req, res) => {
-  Merchants.destroy({
-    where: {}
-  })
-    .then(res.send('no more merchants'))
-    .catch(err => res.send(err));
 });
 
 merchants.put('/closemerchant/:id/', (req, res) => {
