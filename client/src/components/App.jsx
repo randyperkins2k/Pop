@@ -187,7 +187,6 @@ const App = () => {
       open={open}
       setOpen={setOpen}
     />
-    <Menu />
     <Router>
       {isLogged === true
         ? (<Redirect to="/" />)

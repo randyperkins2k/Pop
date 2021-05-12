@@ -20,7 +20,7 @@ const SidebarDiv = styled.div`
   margin: 0;
   padding: 0;
   width: 220px;
-  background-color: #f1f1f1;
+  background-color: #EFFFFA;
   position: absolute;
   opacity: .90;
   height: 100vh;
