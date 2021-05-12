@@ -48,7 +48,7 @@ const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
       }
     });
     if (isValidEmail) {
-      axios.post('/admin/addbyemail', {
+      axios.post('/api/admins/addbyemail', {
         email: text,
         merchant: merchant.id
       })
@@ -64,7 +64,7 @@ const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
     console.log('hello from remove owner');
     console.log(email);
     console.log(merchant.id);
-    axios.delete(`/admin/deletebyemail/${email}/${merchant.id}`)
+    axios.delete(`/api/admins/deletebyemail/${email}/${merchant.id}`)
       .then(result => {
         console.log(result.data);
         const updatedOwners = owners.slice();

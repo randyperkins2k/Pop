@@ -6,7 +6,8 @@ const users = require('./api/users.js');
 const merchants = require('./api/merchants.js');
 const products = require('./api/products.js');
 const reviews = require('./api/reviews.js');
-const subs = require('./api/subs.js')
+const subs = require('./api/subs.js');
+const admins = require('./api/admins.js');
 
 const Dotenv = require('dotenv-webpack');
 
@@ -28,6 +29,7 @@ app.use('/api/merchants', merchants);
 app.use('/api/products', products);
 app.use('/api/reviews', reviews);
 app.use('/api/subs', subs);
+app.use('/api/admins', admins);
 
 /**
  * start authentication routes
@@ -593,39 +595,39 @@ app.get('/subs/:user', (req, res) => {
  * Admins
  */
 //get all admins
-app.get('/admins', (req, res) => {
-  Admins.findAll({
-    where: {}
-  })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
+// app.get('/admins', (req, res) => {
+//   Admins.findAll({
+//     where: {}
+//   })
+//     .then(data => res.send(data))
+//     .catch(err => res.send(err));
+// });
 //add new admin
-app.post('/addadmin/:user/:merchant', (req, res) => {
-  const { user, merchant } = req.params;
-  Admins.findAll({
-    where: {UserId: user, MerchantId: merchant}
-  })
-    .then(results => {
-      if (!results.length) {
-        Admins.create({ UserId: user, MerchantId: merchant })
-          .then(Admins.findAll({
-            where: {}
-          })).then(data => res.send(data))
-      } else {
-        res.send(`${user} is already administrating ${merchant}`);
-      }
-    })
-    .catch(err => res.send(err));
-});
-//delete admin
-app.delete('/deleteadmin/:id', (req, res) => {
-  const { id } = req.params;
-  Admins.destroy({
-    where: {id: id}
-  })
-    .then(res.send(`admin ${id} deleted`));
-});
+// app.post('/addadmin/:user/:merchant', (req, res) => {
+//   const { user, merchant } = req.params;
+//   Admins.findAll({
+//     where: {UserId: user, MerchantId: merchant}
+//   })
+//     .then(results => {
+//       if (!results.length) {
+//         Admins.create({ UserId: user, MerchantId: merchant })
+//           .then(Admins.findAll({
+//             where: {}
+//           })).then(data => res.send(data))
+//       } else {
+//         res.send(`${user} is already administrating ${merchant}`);
+//       }
+//     })
+//     .catch(err => res.send(err));
+// });
+// //delete admin
+// app.delete('/deleteadmin/:id', (req, res) => {
+//   const { id } = req.params;
+//   Admins.destroy({
+//     where: {id: id}
+//   })
+//     .then(res.send(`admin ${id} deleted`));
+// });
 //delete all admins
 app.delete('/deletealladmins', (req, res) => {
   Admins.destroy({
@@ -636,34 +638,34 @@ app.delete('/deletealladmins', (req, res) => {
 });
 
 //add admin by email
-app.post('/admin/addbyemail', (req, res) => {
-  const { email, merchant } = req.body;
-  Users.findOne({
-    where: {email: email}
-  })
-  .then(userData => {
-    Admins.create({ UserId: userData.id, MerchantId: merchant })
-      .then(moon => console.log(moon))
-      .catch(err => res.send(err));
-    res.send(userData);
-  })
-  .catch(err => res.send(err));
-});
+// app.post('/admin/addbyemail', (req, res) => {
+//   const { email, merchant } = req.body;
+//   Users.findOne({
+//     where: {email: email}
+//   })
+//   .then(userData => {
+//     Admins.create({ UserId: userData.id, MerchantId: merchant })
+//       .then(moon => console.log(moon))
+//       .catch(err => res.send(err));
+//     res.send(userData);
+//   })
+//   .catch(err => res.send(err));
+// });
 
 //add delete by email
-app.delete('/admin/deletebyemail/:email/:merchant', (req, res) => {
-  const { email, merchant } = req.params;
-  Users.findOne({
-    where: {email: email}
-  })
-  .then(userData => {
-    Admins.destroy({where: { UserId: userData.id, MerchantId: merchant }})
-      .then(moon => console.log(moon))
-      .catch(err => res.send(err));
-    res.send(userData);
-  })
-  .catch(err => res.send(err));
-});
+// app.delete('/admin/deletebyemail/:email/:merchant', (req, res) => {
+//   const { email, merchant } = req.params;
+//   Users.findOne({
+//     where: {email: email}
+//   })
+//   .then(userData => {
+//     Admins.destroy({where: { UserId: userData.id, MerchantId: merchant }})
+//       .then(moon => console.log(moon))
+//       .catch(err => res.send(err));
+//     res.send(userData);
+//   })
+//   .catch(err => res.send(err));
+// });
 
 
 app.listen(PORT, (() => {
