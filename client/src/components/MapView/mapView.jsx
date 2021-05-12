@@ -62,9 +62,8 @@ const options = {
   styles: mapStyles,
   disableDefaultUI: true,
 }
-const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker, setMLPrimary }) => {
+const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrentLocMarker, setMLPrimary , center, setCenter}) => {
   const [ selectedPopUp, setSelectedPopUp ] = useState(null);
-  const [ center, setCenter ] = useState({lat: 29.956124, lng: -90.090509});
   const [ yourLocBool, setYourLocBool] = useState(false);
   const [englishPrimary, setEnglishPrimary] = useState(false)
   const [spanishPrimary, setSpanishPrimary] = useState(false)
@@ -112,7 +111,7 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
   return (
     <div>
       <Nav>
-      <EnglishBtn 
+      <EnglishBtn
       englishPrimary={englishPrimary}
       onClick={()=>{
         getLang('en')
@@ -121,7 +120,7 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
       }}>
         {t('englishBtn')}
         </EnglishBtn>
-      <SpanishBtn 
+      <SpanishBtn
       spanishPrimary={spanishPrimary}
       onClick={()=>{
         setSpanishPrimary(!spanishPrimary)

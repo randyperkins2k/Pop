@@ -185,14 +185,17 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
           {merchant.info}
         </p>
       </div>
-      <LocateBtn
-      locatePrimary={locatePrimary}
-      onClick={() => {
-        setLocatePrimary(!locatePrimary)
-        setViewMenuPrimary(false)
-        setReviewBtnPrimary(false)
-        setReviewView(false)
-      }}>{t("locateBtn")}</LocateBtn>
+      <Link to="/locate">
+        <LocateBtn
+          locatePrimary={locatePrimary}
+          onClick={() => {
+          setLocatePrimary(!locatePrimary)
+          setViewMenuPrimary(false)
+          setReviewBtnPrimary(false)
+          setReviewView(false)
+          }}>{t("locateBtn")}
+        </LocateBtn>
+      </Link>
       <Link to="/menu">
         <ViewMenuBtn
           viewMenuPrimary={viewMenuPrimary}
