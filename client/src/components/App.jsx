@@ -117,7 +117,7 @@ const App = () => {
   const darkModeStore = localStorage.getItem('isDarkMode');
   // Function which fetches merchant data from database.
   const getPops = () => {
-    axios.get('/merchants')
+    axios.get('/api/merchants')
       .then(response => {
         // console.log('merchants', response.data);
         setMerchData(response.data);

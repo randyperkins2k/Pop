@@ -76,9 +76,9 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
 	};
 
 	const closeBusiness = () => {
-    axios.put(`/closemerchant/${merchant.id}`)
+    axios.put(`/api/merchants/closemerchant/${merchant.id}`)
       .then(() => {
-        axios.get('/merchants')
+        axios.get('/api/merchants')
 				.then(response => {
 					response.data.forEach(merch => merch.id === merchant.id ? selectMerchant(merch) : null)
 					setMerchData(response.data)
@@ -95,12 +95,12 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
   }
 
   const openBusiness = () => {
-		axios.put(`/api/merchcoords/${merchant.id}`, {lat: center.lat, lng: center.lng})
+		axios.put(`/api/merchants/merchcoords/${merchant.id}`, {lat: center.lat, lng: center.lng})
 			.then(() => {
-				axios.put(`/openmerchant/${merchant.id}`)
+				axios.put(`/api/merchants/openmerchant/${merchant.id}`)
 					.then(() => {
 						setOpenOrClosed( 'is open')
-						axios.get('/merchants')
+						axios.get('/api/merchants')
 							.then(response => {
 								response.data.forEach(merch => merch.id === merchant.id ? selectMerchant(merch) : null)
 		       			setMerchData(response.data)

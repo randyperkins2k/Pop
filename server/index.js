@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const axios = require('axios');
 const users = require('./api/users.js');
+const merchants = require('./api/merchants.js');
 const Dotenv = require('dotenv-webpack');
 
 const { Merchants, Users, Products, Reviews, Subs, Admins } = require('./db.js');
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.static(CLIENT_PATH));
 app.use('/assets', express.static(ASSETS_PATH));
 app.use('/api/users', users);
+app.use('/api/merchants', merchants);
 
 /**
  * start authentication routes
@@ -138,54 +140,54 @@ app.get('/failed', (req, res) => {
  * Merchants
  */
 //get all merchants
-app.get('/merchants', (req, res) => {
-  Merchants.findAll({
-    where: {},
-    include: {
-      model: Reviews,
-      include: [Users]
-    }
-  })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
+// app.get('/merchants', (req, res) => {
+//   Merchants.findAll({
+//     where: {},
+//     include: {
+//       model: Reviews,
+//       include: [Users]
+//     }
+//   })
+//     .then(data => res.send(data))
+//     .catch(err => res.send(err));
+// });
 //get merchant by id
-app.get('/merchant/:id', (req, res) => {
-  const { id } = req.params;
-  Merchants.findAll({
-    where: {id: id}
-  })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
+// app.get('/merchant/:id', (req, res) => {
+//   const { id } = req.params;
+//   Merchants.findAll({
+//     where: {id: id}
+//   })
+//     .then(data => res.send(data))
+//     .catch(err => res.send(err));
+// });
 
 //get merchants in given radius
-app.get('/api/merchant/radius/:km/:lat/:lon/', (req, res) => {
-  const {km, lat, lon} = req.params;
-  Merchants.findAll({
-    where: {}
-  })
-    .then(data => {
-      function deg2rad(deg) {
-        return deg * (Math.PI/180)
-      }
+// app.get('/api/merchant/radius/:km/:lat/:lon/', (req, res) => {
+//   const {km, lat, lon} = req.params;
+//   Merchants.findAll({
+//     where: {}
+//   })
+//     .then(data => {
+//       function deg2rad(deg) {
+//         return deg * (Math.PI/180)
+//       }
 
-      function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-        var R = 6371; // Radius of the earth in km
-        var dLat = deg2rad(lat2-lat1);  // deg2rad below
-        var dLon = deg2rad(lon2-lon1);
-        var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        var d = R * c; // Distance in km
-        return d;
-      }
-      let filteredMerchants = data.filter(merchant => {
-        return getDistanceFromLatLonInKm(lat, lon, merchant.lat, merchant.lon) <= km;
-      });
-      res.send(filteredMerchants);
-    })
-    .catch(err => res.send(err));
-});
+//       function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+//         var R = 6371; // Radius of the earth in km
+//         var dLat = deg2rad(lat2-lat1);  // deg2rad below
+//         var dLon = deg2rad(lon2-lon1);
+//         var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+//         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+//         var d = R * c; // Distance in km
+//         return d;
+//       }
+//       let filteredMerchants = data.filter(merchant => {
+//         return getDistanceFromLatLonInKm(lat, lon, merchant.lat, merchant.lon) <= km;
+//       });
+//       res.send(filteredMerchants);
+//     })
+//     .catch(err => res.send(err));
+// });
 
 app.get('/distance/:lat1/:lon1/:lat2/:lon2', (req, res) => {
   const {lat1, lon1, lat2, lon2} = req.params;
@@ -208,107 +210,107 @@ app.get('/distance/:lat1/:lon1/:lat2/:lon2', (req, res) => {
   res.json(result);
 });
 
-//add new merchant
-app.post('/api/merchant/add', (req, res) => {
-  const { name, category, info, website, adminId, lat, lon, isOpen } = req.body;
-  Merchants.findAll({
-    where: {name: name}
-  })
-    .then(results => {
-      if (!results.length) {
-        //const isOpen = true;
-        Merchants.create({ name, category, info, website, lat, lon, isOpen })
-          .then(newPopup => {
-            Admins.create({UserId: adminId, MerchantId: newPopup.id})
-            res.send(newPopup)
-          })
-      } else {
-        res.send(`${name} is already a pop-up`);
-      }
-    })
-    .catch(err => res.send(err));
-});
+// //add new merchant
+// app.post('/api/merchant/add', (req, res) => {
+//   const { name, category, info, website, adminId, lat, lon, isOpen } = req.body;
+//   Merchants.findAll({
+//     where: {name: name}
+//   })
+//     .then(results => {
+//       if (!results.length) {
+//         //const isOpen = true;
+//         Merchants.create({ name, category, info, website, lat, lon, isOpen })
+//           .then(newPopup => {
+//             Admins.create({UserId: adminId, MerchantId: newPopup.id})
+//             res.send(newPopup)
+//           })
+//       } else {
+//         res.send(`${name} is already a pop-up`);
+//       }
+//     })
+//     .catch(err => res.send(err));
+// });
 
 //delete merchant
-app.delete('/api/merchant/delete/:id', (req, res) => {
-  const { id } = req.params;
-  Merchants.destroy({
-    where: {id: id}
-  })
-    .then(res.send(`merchant ${id} deleted`));
-});
-//delete all merchants
-app.delete('/deleteallmerchants', (req, res) => {
-  Merchants.destroy({
-    where: {}
-  })
-    .then(res.send('no more merchants'))
-    .catch(err => res.send(err));
-});
+// app.delete('/api/merchant/delete/:id', (req, res) => {
+//   const { id } = req.params;
+//   Merchants.destroy({
+//     where: {id: id}
+//   })
+//     .then(res.send(`merchant ${id} deleted`));
+// });
+// //delete all merchants
+// app.delete('/deleteallmerchants', (req, res) => {
+//   Merchants.destroy({
+//     where: {}
+//   })
+//     .then(res.send('no more merchants'))
+//     .catch(err => res.send(err));
+// });
 
 //close merchant
-app.put('/closemerchant/:id/', (req, res) => {
-  const { id } = req.params;
-  Merchants.update(
-    {isOpen: false},
-    {where: {id: id}}
-  )
-  .then(() => res.send('closed'))
-  .catch(err => res.send(err));
-});
+// app.put('/closemerchant/:id/', (req, res) => {
+//   const { id } = req.params;
+//   Merchants.update(
+//     {isOpen: false},
+//     {where: {id: id}}
+//   )
+//   .then(() => res.send('closed'))
+//   .catch(err => res.send(err));
+// });
 
 //open merchant
-app.put('/openmerchant/:id/', (req, res) => {
-  const { id } = req.params;
-  Merchants.update(
-    {isOpen: true},
-    {where: {id: id}}
-  )
-  .then(() => res.send('open'))
-  .catch(err => res.send(err));
-});
+// app.put('/openmerchant/:id/', (req, res) => {
+//   const { id } = req.params;
+//   Merchants.update(
+//     {isOpen: true},
+//     {where: {id: id}}
+//   )
+//   .then(() => res.send('open'))
+//   .catch(err => res.send(err));
+// });
 
-app.put('/api/merchcoords/:merchid', (req, res) => {
-  const { merchid } = req.params;
-  const { lat, lng } = req.body;
-  Merchants.update(
-    {lat: lat,
-     lon: lng},
-     {where: {
-       id: merchid
-     }}
-     )
-    .then(() => res.sendStatus(201))
-    .catch((err) => {
-      res.sendStatus(500)
-      console.log('merchant coordinate error', err)
-    })
-})
+// app.put('/api/merchcoords/:merchid', (req, res) => {
+//   const { merchid } = req.params;
+//   const { lat, lng } = req.body;
+//   Merchants.update(
+//     {lat: lat,
+//      lon: lng},
+//      {where: {
+//        id: merchid
+//      }}
+//      )
+//     .then(() => res.sendStatus(201))
+//     .catch((err) => {
+//       res.sendStatus(500)
+//       console.log('merchant coordinate error', err)
+//     })
+// })
 
-app.put('/api/merchant/updateinfo', (req, res) => {
-  const {id, info} = req.body;
-  Merchants.update(
-    {info: info},
-    {where: {
-      id: id
-    }}
-  )
-  .then(data => res.send(data))
-  .catch(err => res.send(err));
-});
+// app.put('/api/merchant/updateinfo', (req, res) => {
+//   const {id, info} = req.body;
+//   Merchants.update(
+//     {info: info},
+//     {where: {
+//       id: id
+//     }}
+//   )
+//   .then(data => res.send(data))
+//   .catch(err => res.send(err));
+// });
 
-app.get('/merchant/admins/:id', (req, res) => {
-  const { id } = req.params;
-  Merchants.findOne({
-    where: {id: id},
-    include: {
-      model: Admins,
-      include: Users
-    }
-  })
-    .then(data => res.send(data.Admins.map(Admin => Admin.User)))
-    .catch(err => res.send(err));
-});
+// app.get('/merchant/admins/:id', (req, res) => {
+//   const { id } = req.params;
+//   Merchants.findOne({
+//     where: {id: id},
+//     include: {
+//       model: Admins,
+//       include: Users
+//     }
+//   })
+//     .then(data => res.send(data.Admins.map(Admin => Admin.User)))
+//     .catch(err => res.send(err));
+// });
 /**
  * Users
  */
@@ -396,13 +398,13 @@ app.get('/merchant/admins/:id', (req, res) => {
 //     .then(res.send(`user ${id} deleted`));
 // });
 //delete all users
-app.delete('/deleteallusers', (req, res) => {
-  Users.destroy({
-    where: {}
-  })
-    .then(res.send('no more users'))
-    .catch(err => res.send(err));
-});
+// app.delete('/deleteallusers', (req, res) => {
+//   Users.destroy({
+//     where: {}
+//   })
+//     .then(res.send('no more users'))
+//     .catch(err => res.send(err));
+// });
 /**
  * Products
  */

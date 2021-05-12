@@ -5,7 +5,7 @@ const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
   const [text, setText] = useState('');
   const [users, setUsers] = useState([]);
   const getAdmins = () => {
-    axios.get(`/merchant/admins/${merchant.id}`)
+    axios.get(`/api/merchants/admins/${merchant.id}`)
       .then(res => {
         const { data } =res;
         console.log(data);
