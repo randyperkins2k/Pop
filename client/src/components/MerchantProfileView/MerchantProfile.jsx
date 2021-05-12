@@ -3,6 +3,7 @@ import ToggleSwitch from '../ToggleSwitch.jsx'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PictureFeed from './PictureFeed.jsx';
+import Menu from './Menu.jsx';
 
 import styled, { css } from 'styled-components'
 import { useTranslation } from 'react-i18next'
@@ -187,7 +188,7 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
       <div>
         <h2>{merchant.name} {openOrClosed}</h2>
         <img/>
-        <H2>{t("infoTxt")}</H2>
+        <H2>Info</H2>
         <p>
           {merchant.info}
         </p>
@@ -197,19 +198,14 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
       onClick={() => {
         setLocatePrimary(!locatePrimary)
         setViewMenuPrimary(false)
-        setReviewBtnPrimary(false)
-        setReviewView(false)
-      }}>{t("locateBtn")}</LocateBtn>
-      <Link to="/menu">
+      }}>Locate</LocateBtn><br/>
         <ViewMenuBtn
           viewMenuPrimary={viewMenuPrimary}
           onClick={() => {
-            setViewMenuPrimary(!viewMenuPrimary)
-            setLocatePrimary(false)
-            console.log('hey there', merchant.id, userSubs)
-          }}>{t("viewMenuBtn")}
+            setPictureFeedView(true)
+            setReviewView(false)
+          }}>Picture feed
         </ViewMenuBtn>
-      </Link>
       <ViewMenuBtn
       viewMenuPrimary={viewMenuPrimary}
       onClick={() => {
@@ -219,15 +215,12 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
         setReviewView(false);
         setPictureFeedView(false);
        }}>View Menu</ViewMenuBtn>
-       <ReviewsBtn
-          reviewBtnPrimary={reviewBtnPrimary}
+       <ViewMenuBtn
         onClick={() => {
           setPictureFeedView(false);
           setReviewView(true);
-          setReviewBtnPrimary(!reviewBtnPrimary)
-          setLocatePrimary(false)
         }}
-       >{t("reviewsBtn")}</ReviewsBtn>
+       >Reviews</ViewMenuBtn>
      {
        pictureFeedView && !reviewView ?
        <div>
@@ -269,7 +262,9 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
     </div>
       :
     <div>
-      <LeaveAReview>{t("leaveAReviewTxt")}</LeaveAReview>
+      <Menu
+        merchant={merchant}
+      />
     </div>
       }
     </MerchantProWrap>

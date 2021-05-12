@@ -117,18 +117,6 @@ const updateSearch = (e) => {
 :
 null
 }
-        <ul>
-        {merchData.filter(merch => merch.name.toLowerCase().indexOf(search) !== -1
-        || merch.info.toLowerCase().indexOf(search) !== -1)
-        .map(merch => {
-            return <MerchList
-            key={merch.id}
-            merchant={merch}
-            selectMerchant={selectMerchant}/>
-          }
-)
-        }
-        </ul>
           </BtnWrapper>
       <ul>
       {
@@ -156,7 +144,18 @@ null
           </div>
         :
         <div>
-        <h5>search bar view</h5>
+        <ul>
+        {merchData.filter(merch => merch.name.toLowerCase().indexOf(search) !== -1
+        || merch.info.toLowerCase().indexOf(search) !== -1)
+        .map(merch => {
+            return <MerchList
+            key={merch.id}
+            merchant={merch}
+            selectMerchant={selectMerchant}/>
+          }
+)
+        }
+        </ul>
         </div>
       }
       </ul>
