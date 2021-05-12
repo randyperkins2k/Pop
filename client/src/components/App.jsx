@@ -12,12 +12,16 @@ import {
 import Map from './MapView/mapView.jsx';
 import UserProfile from './UserProfileView/UserProfile.jsx';
 import SettingsView from './SettingsView/SettingsView.jsx';
+
 import SideBar from './SideBarView/SideBar.jsx';
+import Burger from './SideBarView/Burger.js';
+import Menu from './SideBarView/Menu.js';
+
 import ListView from './ListView/ListView.jsx'
 import EditPopupProfile from './YourPopups/EditPopUp/EditPopupProfile.jsx';
 import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
 import EditMenu from './YourPopups/EditPopUp/EditMenu.jsx';
-import Menu from './MerchantProfileView/Menu.jsx';
+// import Menu from './MerchantProfileView/Menu.jsx';
 import EditInfo from './YourPopups/EditPopUp/EditInfo.jsx';
 // import * as butt from './openMerch.json';
 // const merchData = butt.merchants;
@@ -108,8 +112,9 @@ const App = () => {
   const [ userSubs, setUserSubs] = useState([]);
   const [yourPopups, setYourPopups] = useState([]);
   const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
-  const [lVPrimary, setLVPrimary] = useState(false)
-  const [mLPrimary, setMLPrimary] = useState(true)
+  const [lVPrimary, setLVPrimary] = useState(false);
+  const [mLPrimary, setMLPrimary] = useState(true);
+  const [open, setOpen] = useState(false);
   //grab from database
   const getPops = () => {
     axios.get('/merchants')
@@ -177,7 +182,12 @@ const App = () => {
   
 
   return (
-
+    <div>
+    <Burger
+      open={open}
+      setOpen={setOpen}
+    />
+    <Menu />
     <Router>
       {isLogged === true
         ? (<Redirect to="/" />)
@@ -210,12 +220,15 @@ const App = () => {
             setYourPopups={setYourPopups}
             currentLocMarker={currentLocMarker}
             setCurrentLocMarker={setCurrentLocMarker}
+            open={open}
+            setOpen={setOpen}
            />}}/>
       <Route
         path="/login"
         render={props => <Login />}/>
       </Switch>
     </Router>
+    </div>
   )
 };
 
@@ -229,8 +242,8 @@ const Home = ({
   userSubs, setUserSubs, yourPopups, setYourPopups,
   currentLocMarker, setCurrentLocMarker,
   lVPrimary, setLVPrimary,
-  mLPrimary, setMLPrimary
-
+  mLPrimary, setMLPrimary,
+  open, setOpen
 }) => {
   const { t, i18n } = useTranslation();
 
@@ -266,8 +279,13 @@ const Home = ({
               <Route
                 path='/'
                 render={(props) => {
-                  return <SideBar
-                  close={setSideBarDisplay}/>
+                  return (
+                  <SideBar
+                    open={open}
+                    setOpen={setOpen}
+                    close={setSideBarDisplay}
+                  />
+                  )
                 }}
               />
             }
