@@ -1,9 +1,13 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
+
 const users = require('./api/users.js');
 const merchants = require('./api/merchants.js');
 const products = require('./api/products.js');
+const reviews = require('./api/reviews.js');
+const subs = require('./api/subs.js')
+
 const Dotenv = require('dotenv-webpack');
 
 const { Merchants, Users, Products, Reviews, Subs, Admins } = require('./db.js');
@@ -22,6 +26,8 @@ app.use('/assets', express.static(ASSETS_PATH));
 app.use('/api/users', users);
 app.use('/api/merchants', merchants);
 app.use('/api/products', products);
+app.use('/api/reviews', reviews);
+app.use('/api/subs', subs);
 
 /**
  * start authentication routes
@@ -487,38 +493,38 @@ app.get('/api/reviews/getall', (req, res) => {
 });
 
 //get all reviews for merchant
-app.get('api/reviews/:merchant', (req, res) => {
-  Reviews.findAll({
-    where: {MerchantId: req.params.merchant}
-  })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
+// app.get('api/reviews/:merchant', (req, res) => {
+//   Reviews.findAll({
+//     where: {MerchantId: req.params.merchant}
+//   })
+//     .then(data => res.send(data))
+//     .catch(err => res.send(err));
+// });
 
-//add new review
-app.post('/api/reviews/addreview/', (req, res) => {
-  const { UserId, MerchantId, rating, message } = req.body;
-  Reviews.create({ UserId, MerchantId, rating, message })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
+// //add new review
+// app.post('/api/reviews/addreview/', (req, res) => {
+//   const { UserId, MerchantId, rating, message } = req.body;
+//   Reviews.create({ UserId, MerchantId, rating, message })
+//     .then(data => res.send(data))
+//     .catch(err => res.send(err));
+// });
 
 //delete review
-app.delete('/deletereview/:id', (req, res) => {
-  const { id } = req.params;
-  Reviews.destroy({
-    where: {id: id}
-  })
-    .then(res.send(`review ${id} deleted`));
-});
+// app.delete('/deletereview/:id', (req, res) => {
+//   const { id } = req.params;
+//   Reviews.destroy({
+//     where: {id: id}
+//   })
+//     .then(res.send(`review ${id} deleted`));
+// });
 //delete all reviews
-app.delete('/deleteallreviews', (req, res) => {
-  Reviews.destroy({
-    where: {}
-  })
-    .then(res.send('no more reviews'))
-    .catch(err => res.send(err));
-});
+// app.delete('/deleteallreviews', (req, res) => {
+//   Reviews.destroy({
+//     where: {}
+//   })
+//     .then(res.send('no more reviews'))
+//     .catch(err => res.send(err));
+// });
 /**
  * Subs
  */
