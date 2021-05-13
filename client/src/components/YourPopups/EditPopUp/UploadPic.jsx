@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 
-const UploadPic = ({ merchant }) => {
+const UploadPic = ({ merchant, setUploadPicWindow }) => {
   const [ fileInputState, setFileInputState ] = useState('');
   const [ selectedFile, setSelectedFile ] = useState('');
   const [ previewSource, setPreviewSource ] = useState('');
@@ -20,7 +20,7 @@ const UploadPic = ({ merchant }) => {
   }
 
   const handleSubmitFile = (e) => {
-    console.log('submitting')
+    //console.log('submitting')
     e.preventDefault();
     if (!previewSource) {
       return
@@ -33,7 +33,8 @@ const UploadPic = ({ merchant }) => {
   const uploadImage = async (base64EncodedImage) => {
     try {
       const response = await axios.post(`/api/images/upload/${merchant.id}`, {image: base64EncodedImage})
-      console.log(response.data)
+      alert(response.data)
+      setUploadPicWindow(false)
     } catch(err) {
       console.log(err)
     }

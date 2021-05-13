@@ -44,7 +44,7 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
 
   const finalizeCreation =  async () => {
     try {
-      const merchNames = await axios.get('/merchants');
+      const merchNames = await axios.get('/api/merchants');
       !merchNames.data.filter(merch => businessName.toLowerCase() === merch.name.toLowerCase()).length ?
       console.log('there is no merchant with this name') :
       setNameTakenBool(true);
@@ -52,9 +52,8 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
       !category ? setPickCategoryBool(true) : setPickCategoryBool(false);
 
       if (!nameTakenBool && !pickCategoryBool) {
-      //app.post('/api/merchant/add', (req, res) => {
-        //const { name, category, info, website, adminId } = req.body;
-      const newPop = await axios.post('/api/merchant/add', {
+
+      const newPop = await axios.post('/api/merchants/add', {
         name: businessName,
         category: category,
         info: info,
@@ -106,7 +105,7 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
           e.preventDefault();
 
         }}>
-          <input type="text" maxlength="255"></input>
+          <input type="text" maxlength="255" value={info}  onChange={(e) => {setInfo(e.target.value)}}></input>
         </form>
         <h6>{t("websiteTxt")}</h6>
         <input onChange={(e) => setWebsite(e.target.value)}></input>
