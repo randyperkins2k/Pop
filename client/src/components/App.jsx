@@ -26,6 +26,7 @@ import styled, { css, ThemeProvider, createGlobalStyle } from 'styled-components
 import { ReactComponent as MoonPic } from '../popup/moonArt.svg'
 import darkTheme from '../components/Themes/darkMode.js';
 import lightTheme from '../components/Themes/lightMode.js';
+import Picture from './MerchantProfileView/Picture.jsx';
 // import * as butt from './openMerch.json';
 // const merchData = butt.merchants;
 // const MapView = withScriptjs(withGoogleMap(Map));
