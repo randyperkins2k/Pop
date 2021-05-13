@@ -96,6 +96,7 @@ const updateSearch = (e) => {
         setFavPrimary(!favPrimary)
         setSPUPrimary(false)
         setOpenPrimary(false)
+        setSearchPopsView(false)
         }}
         >
           {t('favoritesBtn')}</Favs>
@@ -107,6 +108,7 @@ const updateSearch = (e) => {
         setSPUPrimary(!sPUPrimary)
         setOpenPrimary(false)
         setFavPrimary(false)
+        setSearchPopsView(true)
       }}>{t('searchPopUpsBtn')}</Search>
       { inputView ?
         <input
@@ -144,7 +146,7 @@ null
           </div>
         :
         <div>
-        <ul>
+          <ul>
         {merchData.filter(merch => merch.name.toLowerCase().indexOf(search) !== -1
         || merch.info.toLowerCase().indexOf(search) !== -1)
         .map(merch => {

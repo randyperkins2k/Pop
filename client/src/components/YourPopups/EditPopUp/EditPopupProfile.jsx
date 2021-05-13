@@ -96,7 +96,7 @@ border-color: lightgray;
 
 
 const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData }) => {
-  const [openOrClosed, setOpenOrClosed] = useState('');
+  const [ openOrClosed, setOpenOrClosed] = useState('');
   const [ uploadPicWindow, setUploadPicWindow ] = useState(false);
   const { t } = useTranslation()
 
@@ -164,6 +164,7 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
         uploadPicWindow ?
         <UploadPic
           merchant={merchant}
+          setUploadPicWindow={setUploadPicWindow}
         /> :
         ''
       }

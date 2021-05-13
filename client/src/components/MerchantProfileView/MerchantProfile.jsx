@@ -187,7 +187,13 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
     <MerchantProWrap>
       <div>
         <h2>{merchant.name} {openOrClosed}</h2>
-        <img/>
+        <Image
+            key={index}
+            cloudName="opsparkpopup"
+            publicId={image.image}
+            width="300"
+            crop="scale"
+          />
         <H2>Info</H2>
         <p>
           {merchant.info}
