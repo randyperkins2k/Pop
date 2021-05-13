@@ -109,7 +109,11 @@ const App = () => {
   useEffect(() => getPops(), []);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider 
+    theme={theme}
+    onClick={() => 
+      setSideBarDisplay(!sideBarDisplay)}
+    >
       <GlobalStyles/>
       <button
                 onClick={(e) => 
