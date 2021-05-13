@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 
 
-const Window = ({ merchant, selectMerchant, setMLPrimary }) => {
+const Window = ({ merchant, selectMerchant }) => {
   const { t } = useTranslation()
-console.log('hey whats up', setMLPrimary)
+
   return (
     <div>
       <span></span>
@@ -15,7 +15,6 @@ console.log('hey whats up', setMLPrimary)
       <Link to='/profile'>
         <button onClick={() => {
           selectMerchant(merchant)
-          setMLPrimary(false)
         }}>{t("profileBtn")}</button>
       </Link>
     </div>

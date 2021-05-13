@@ -33,7 +33,7 @@ const Button = styled.button`
   display: block;
 `
 
-const SideBar = ({ close, setMLPrimary, setLVPrimary }) => {
+const SideBar = ({ close }) => {
 const {t} = useTranslation();
   return (
     <div style={styles.main} className='sidebar'>
@@ -42,39 +42,29 @@ const {t} = useTranslation();
         <Link to='/'>
           <Button><a onClick={() => {
             close(false)
-            setLVPrimary(false)
-            setMLPrimary(false)
             }}>{t("popUpsBtn")}</a></Button> 
         </Link>
         <br/>
         <Link to='/yourprofile'>
           <Button><a onClick={() => {
             close(false)
-            setLVPrimary(false)
-            setMLPrimary(false)
             }}>{t('yourProfileBtn')}</a></Button>
         </Link>
         <br/>
         <Link to='/yourpopups'>
           <Button><a onClick={() => {
             close(false)
-            setLVPrimary(false)
-            setMLPrimary(false)
           }}>{t('yourPopUpsBtn')}</a></Button>
         </Link>
         <br/>
         <Link to='/settings'>
           <Button><a onClick={() => {
             close(false)
-            setLVPrimary(false)
-            setMLPrimary(false)
           }}>{t('settingsBtn')}</a></Button>
         </Link>
         <br/>
           <Button><a href="/logout" onClick={() => {
             close(false)
-            setLVPrimary(false)
-            setMLPrimary(false)
             }}>{t('logoutBtn')}</a></Button>
       </ul>
     </div>

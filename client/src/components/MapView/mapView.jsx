@@ -36,12 +36,12 @@ const mapContainerStyle = {
 const libraries = ["places"];
 
 const options = {
-    styles: mapStyles,
-    disableDefaultUI: true,
+  styles: mapStyles,
+  disableDefaultUI: true,
+  gestureHandling: 'greedy'
 }
-const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker, setMLPrimary }) => {
+const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrentLocMarker, center, setCenter, isLocater, zoomLevel}) => {
   const [ selectedPopUp, setSelectedPopUp ] = useState(null);
-  const [ center, setCenter ] = useState({lat: 29.956124, lng: -90.090509});
   const [ yourLocBool, setYourLocBool] = useState(false);
   const { t, i18n } = useTranslation();
   //const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
@@ -64,7 +64,9 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
         lat: result.coords.latitude,
         lng: result.coords.longitude
       })
-      setYourLocBool(true)
+      if (!isLocater) {
+        setYourLocBool(true)
+      }
     } catch (err) {
       console.log(err)
     }
@@ -72,15 +74,17 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
   const failed = () => {
     console.log('location test failed');
   }
-  useEffect(() => {
-      navigator.geolocation.getCurrentPosition(geoLocTest, failed);
-  },[])
-  if (loadError) {
-    return "error loading map"
-  }
-  if (!isLoaded) {
-    return "loading maps"
-  }
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(geoLocTest, failed);
+    },[])
+    if (loadError) {
+      return "error loading map"
+    }
+    if (!isLoaded) {
+      return "loading maps"
+    }
+
 // console.log(t("touch"))
   return (
     <div>
@@ -88,7 +92,7 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
       <div>{t("touchMap")}</div>
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
-      zoom={12}
+      zoom={zoomLevel}
       center={center}
       options={options}
       onClick={(event) =>{
@@ -150,7 +154,7 @@ const Map = ({ merchData, selectMerchant, currentLocMarker, setCurrentLocMarker,
            <Window
               merchant={selectedPopUp}
               selectMerchant={selectMerchant}
-              //setMLPrimary={setMLPrimary}
+
               />
           </InfoWindow>
         )

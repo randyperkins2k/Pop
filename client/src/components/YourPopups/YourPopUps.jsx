@@ -34,7 +34,6 @@ import { useTranslation } from 'react-i18next'
 // `
 
 const YourPopUps = ({ yourPopups, setYourPopups, merchData, setMerchData, merchant, selectMerch, userSubs, setUserSubs }) => {
-  const [createPopUpPrimary, setCreatePopUpPrimary] = useState(false)
   const {t} = useTranslation()
   //const [ yourPopups, setYourPopups ] = useState();
   //const [ adminId, setAdminId] = useState(231);
@@ -51,10 +50,8 @@ const YourPopUps = ({ yourPopups, setYourPopups, merchData, setMerchData, mercha
       <h5>{t('yourPopUpsBtn')}</h5>
       <Link to='/create'>
       <button
-      createPopUpPrimary={createPopUpPrimary}
       onClick={() => {
         console.log(!!yourPopups)
-        setCreatePopUpPrimary(!createPopUpPrimary)
       }}>{t('createPopUpBtn')}</button>
       </Link>
       { yourPopups ?

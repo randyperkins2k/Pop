@@ -7,7 +7,6 @@ import styled from 'styled-components'
 
 const EditInfo = ({ merchant, selectMerchant, yourPopups, setYourPopups, userSubs, setUserSubs, merchData, setMerchData }) => {
   //console.log(merchant.info);
-  const [ updateInfoPrimary, setUpdateInfoPrimary ] = useState(false)
   const { t } = useTranslation()
   const [text, setText] = useState(merchant.info);
   const updateInfo = () => {
@@ -58,7 +57,6 @@ const EditInfo = ({ merchant, selectMerchant, yourPopups, setYourPopups, userSub
       <h3> {t("editTxt")} {`${merchant.name}'s`}: </h3>
       <input value={text} onChange={(e) => setText(e.target.value) }></input>
       <button
-      updateInfoPrimary={updateInfoPrimary}
       onClick={ ()=> updateInfo()}>{t("updateInfoBtn")}</button>
     </div>
     <br></br>

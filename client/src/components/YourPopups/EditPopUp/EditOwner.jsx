@@ -43,7 +43,7 @@ const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
       if (text.toLowerCase() === owner.email) {
         alert(`${owner.name} is already an admin`);
         isValidEmail = false;
-        setText('');
+        //setText('');
         return;
       }
     });
@@ -58,6 +58,7 @@ const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
       })
       .catch(err => console.log(err));
     }
+    setText('');
   };
 
   const removeOwner = (email) => {

@@ -3,54 +3,41 @@ import MerchList from './MerchList.jsx';
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next'
 
-const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
+const ListView = ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
   const [ openPopsView, setOpenPopsView ] = useState(true);
   const [ yourSubsView, setYourSubsView ] = useState(false);
   const [ searchPopsView, setSearchPopsView ] = useState(false);
-  const [ openPrimary, setOpenPrimary ] = useState(true);
-  const [ sPUPrimary, setSPUPrimary ] = useState(false);
-  const [ favPrimary, setFavPrimary ] = useState(false);
   const [ inputView, setInputView ] = useState(false)
   const [ search, setSearch ] = useState('')
   const { t, i18n } = useTranslation();
   const { name } = merchData[0];
+
 const updateSearch = (e) => {
   setSearch(e.target.value.substr(0, 40))
-}
+} 
+
   return (
     <div>
 
       <button
       inputView={inputView}
-      openPrimary={openPrimary}
       onClick={() => {
         setInputView(false)
         setOpenPopsView(true)
-        setOpenPrimary(!openPrimary)
-        setSPUPrimary(false)
-        setFavPrimary(false)
         }}>{t('openNowBtn')}</button>
       <button
       inputView={inputView}
-      favPrimary={favPrimary}
       onClick={() => {
         setInputView(false)
         setOpenPopsView(false)
-        setFavPrimary(!favPrimary)
-        setSPUPrimary(false)
-        setOpenPrimary(false)
         setSearchPopsView(false)
         }}
         >
           {t('favoritesBtn')}</button>
       <button
        inputView={inputView}
-       sPUPrimary={sPUPrimary}
        onClick={() => {
         setInputView(!inputView)
-        setSPUPrimary(!sPUPrimary)
-        setOpenPrimary(false)
-        setFavPrimary(false)
         setSearchPopsView(true)
       }}>{t('searchPopUpsBtn')}</button>
       { inputView ?

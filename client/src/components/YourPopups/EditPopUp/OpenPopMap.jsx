@@ -33,8 +33,7 @@ const options = {
 }
 
 const OpenPopupMap = ({ merchData, selectMerchant, 
-  currentLocMarker, setCurrentLocMarker, 
-  setMLPrimary, merchant, 
+  currentLocMarker, setCurrentLocMarker, merchant, 
   setMerchData, user,
   setSubs, setYourPopups
 }) => {
@@ -179,7 +178,6 @@ const OpenPopupMap = ({ merchData, selectMerchant,
            <Window
               merchant={selectedPopUp}
               selectMerchant={selectMerchant}
-              setMLPrimary={setMLPrimary}
               />
           </InfoWindow>
         )

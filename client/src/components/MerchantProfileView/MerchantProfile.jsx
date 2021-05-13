@@ -99,13 +99,10 @@ import { useTranslation } from 'react-i18next'
 
 
 const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, setMerchData, openOrClosed, setOpenOrClosed, userData, setUserData }) => {
-  const [ locatePrimary, setLocatePrimary ] = useState(false);
-  const [ viewMenuPrimary, setViewMenuPrimary ] = useState(false);
   const [ reviews, setReviews ] = useState([]);
   const [ pictureFeedView, setPictureFeedView ] = useState(true);
   const [ reviewView, setReviewView ] = useState(false)
   const {t} = useTranslation()
-  const [ reviewBtnPrimary, setReviewBtnPrimary ] = useState(false)
   //const [reviews, setReviews] = useState(merchant.Reviews);
   const findReviews = () => {
     if (merchant.Reviews) {
@@ -178,35 +175,24 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
           {merchant.info}
         </p>
       </div>
+      <Link to="/locate">
       <button
-      locatePrimary={locatePrimary}
       onClick={() => {
-        setLocatePrimary(!locatePrimary)
-        setViewMenuPrimary(false)
-        setReviewBtnPrimary(false)
-        setReviewView(false)
       }}>{t("locateBtn")}</button>
+      </Link>
       <Link to="/menu">
         <button
-          viewMenuPrimary={viewMenuPrimary}
           onClick={() => {
-            setViewMenuPrimary(!viewMenuPrimary)
-            setLocatePrimary(false)
             console.log('hey there', merchant.id, userSubs)
           }}>{t("viewMenuBtn")}
         </button>
       </Link>
       <button
-      viewMenuPrimary={viewMenuPrimary}
       onClick={() => {
-        // setViewMenuPrimary(!viewMenuPrimary)
-        // setLocatePrimary(false)
-        // console.log('hey there', merchant.id, userSubs)
         setReviewView(false);
         setPictureFeedView(false);
        }}>View Menu</button>
        <button
-          reviewBtnPrimary={reviewBtnPrimary}
         onClick={() => {
           setPictureFeedView(false);
           setReviewView(true);
@@ -260,6 +246,7 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
     </div>
       }
     </div>
+   
   )
 };
 

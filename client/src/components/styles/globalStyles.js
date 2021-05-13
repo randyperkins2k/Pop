@@ -1,13 +1,14 @@
 import { createGlobalStyle, css } from 'styled-components';
-
 export default createGlobalStyle`
+
   * {
     margin: 0;
     text-align: center;
   }
   body {
     font-family: 'Ubuntu';
-    background-color: #2E3440;
+    background-color: ${props => props.theme.mode === 'dark' ? '#3B4252' : '#fff'};
+    color: ${props => props.theme.mode === 'dark' ? '#fff' : '#000'};
   }
   nav {
     position: absolute;
@@ -64,12 +65,12 @@ export default createGlobalStyle`
     box-shadow: 0px 2px 2px lightgray;
     margin: 1px;
     transition: ease background-color 250ms;
-    ${props => props.lVPrimary && css`
+    :active {
         opacity: .5;
         color: black;
         background-color: #ffd1dc;
-        padding: 6px 16px
-      `}
+        padding: 6.25px 16.25px
+    }
   }
   
 

@@ -28,7 +28,6 @@ import { useTranslation } from 'react-i18next'
 
 const UserProfile = ({ user }) => {
   const [editWindowOpen, setEditWindowOpen] = useState(false);
-  const [editProfilePrimary, setEditProfilePrimary] = useState(false)
   const {t} = useTranslation()
 console.log(user)
   return (
@@ -41,10 +40,8 @@ console.log(user)
       <br/>
       <h5>{user.email}</h5>
       <button 
-      editProfilePrimary={editProfilePrimary}
        onClick={() => {
          setEditWindowOpen(true)
-         setEditProfilePrimary(!editProfilePrimary)
       }}>{t("editYourProfileBtn")}</button>
       {
         editWindowOpen ?
