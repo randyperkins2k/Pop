@@ -20,10 +20,10 @@ images.post('/upload/:id', async (req, res) => {
     const uploadedResponse = await cloudinary.uploader.upload( fileStr, {
       upload_preset: 'pop_up'
     })
-    //console.log(uploadedResponse);
+    console.log(uploadedResponse);
     await Pictures.create({
       MerchantId: id,
-      image: uploadedResponse.public_id
+      image: uploadedResponse.secure_url
     })
     res.status(201). send('picture uploaded!');
   } catch(err) {
@@ -47,7 +47,7 @@ images.get('/getimages/:id', async (req, res) => {
 const { id } = req.params;
 
 try {
-  const picData = await Pictures.findAll({where:{MerchantId: id}}); 
+  const picData = await Pictures.findAll({where:{MerchantId: id}});
   res.status(200).send(picData)
 } catch(err) {
   console.log(err)

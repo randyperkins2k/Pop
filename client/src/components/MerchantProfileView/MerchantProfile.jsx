@@ -106,14 +106,38 @@ font-color: green;
 
 `
 
-const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, setMerchData, openOrClosed, setOpenOrClosed, userData, setUserData }) => {
+const BigPic = styled.div`
+  width: 90%;
+  height: 90vw;
+  align-self: center;
+  position: absolute;
+  z-index: 10;
+  margin-left: 5%;
+`
+const close = styled.span`
+  
+`
+const Imagee = styled.img`
+  display: block;
+  width: 100%;
+  height: 100%;
+`
+
+const MerchantProfile = ({
+   merchant, user, 
+   userSubs, setUserSubs, 
+   merchData, setMerchData, 
+   openOrClosed, setOpenOrClosed, 
+   userData, setUserData }) => {
   const [ locatePrimary, setLocatePrimary ] = useState(false);
   const [ viewMenuPrimary, setViewMenuPrimary ] = useState(false);
   const [ reviews, setReviews ] = useState([]);
   const [ pictureFeedView, setPictureFeedView ] = useState(true);
-  const [ reviewView, setReviewView ] = useState(false)
-  const {t} = useTranslation()
-  const [ reviewBtnPrimary, setReviewBtnPrimary ] = useState(false)
+  const [ reviewView, setReviewView ] = useState(false);
+  const {t} = useTranslation();
+  const [ reviewBtnPrimary, setReviewBtnPrimary ] = useState(false);
+  const [ bigPic, setBigPic ] = useState(false);
+  const [ selectedImage, setSelectedImage ] = useState('');
   //const [reviews, setReviews] = useState(merchant.Reviews);
   const findReviews = () => {
     if (merchant.Reviews) {
@@ -179,6 +203,16 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
 
     <MerchantProWrap>
       <div>
+        {
+          bigPic ? 
+          
+          <BigPic>
+            <a onClick={() => setBigPic(false)}>X</a>
+            <Imagee src={selectedImage}></Imagee>
+          </BigPic>
+          :
+          ''
+        }
         <h2>{merchant.name} {openOrClosed}</h2>
         {/* <Image
             cloudName="opsparkpopup"
@@ -191,12 +225,17 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
           {merchant.info}
         </p>
       </div>
-      <LocateBtn
-      locatePrimary={locatePrimary}
-      onClick={() => {
-        setLocatePrimary(!locatePrimary)
-        setViewMenuPrimary(false)
-      }}>Locate</LocateBtn><br/>
+      <Link to="/locate">
+        <LocateBtn
+          locatePrimary={locatePrimary}
+          onClick={() => {
+          setLocatePrimary(!locatePrimary)
+          setViewMenuPrimary(false)
+          setReviewBtnPrimary(false)
+          setReviewView(false)
+          }}>{t("locateBtn")}
+        </LocateBtn>
+      </Link>
         <ViewMenuBtn
           viewMenuPrimary={viewMenuPrimary}
           onClick={() => {
@@ -225,6 +264,8 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
         {
           pictureFeedView ?
           <PictureFeed
+            setSelectedImage={setSelectedImage}
+            setBigPic={setBigPic}
             merchant={merchant}
           />
           :
