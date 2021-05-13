@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+
 const Button = styled.button`
   background: lightgrey;
   border-radius: 10px;
@@ -46,39 +47,29 @@ const SideBar = ({ open, close, setMLPrimary, setLVPrimary }) => {
           <Link to='/'>
             <Button><a onClick={() => {
               close(false)
-              setLVPrimary(false)
-              setMLPrimary(false)
               }}>{t("popUpsBtn")}</a></Button> 
           </Link>
         <br/>
           <Link to='/yourprofile'>
             <Button><a onClick={() => {
               close(false)
-              setLVPrimary(false)
-              setMLPrimary(false)
               }}>{t('yourProfileBtn')}</a></Button>
           </Link>
         <br/>
           <Link to='/yourpopups'>
             <Button><a onClick={() => {
               close(false)
-              setLVPrimary(false)
-              setMLPrimary(false)
             }}>{t('yourPopUpsBtn')}</a></Button>
           </Link>
         <br/>
           <Link to='/settings'>
             <Button><a onClick={() => {
               close(false)
-              setLVPrimary(false)
-              setMLPrimary(false)
             }}>{t('settingsBtn')}</a></Button>
           </Link>
         <br/>
           <Button><a href="/logout" onClick={() => {
             close(false)
-            setLVPrimary(false)
-            setMLPrimary(false)
             }}>{t('logoutBtn')}</a></Button>
       </SidebarUl>
     </SidebarDiv>

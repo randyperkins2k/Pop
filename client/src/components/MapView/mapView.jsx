@@ -9,70 +9,43 @@ import {
 import Window from '../MapView/Window.jsx'
 import styled, { css } from 'styled-components'
 import { useTranslation } from 'react-i18next'
+
 //import SearchBar from './../searchbar/SearchBar.jsx'
 //import map from '../popup/foodmarker.png'
-const libraries = ["places"];
-const TouchMap = styled.div`
-font-family: 'Ubuntu';
-margin-top: 30px;
-opacity: .5;
-text-align: center;
-`
+
+// const TouchMap = styled.div`
+// font-family: 'Ubuntu';
+// margin-top: 30px;
+// opacity: .5;
+// text-align: center;
+// `
+// const Nav = styled.nav`
+// position: absolute;
+// padding: '2rem 0';
+// text-align: center;
+// margin-top: -200px;
+// margin-left: 120px;
+// `
+
+
 const mapContainerStyle = {
-  width: '100vw',
-  height: '100vh'
-}
-const Nav = styled.nav`
-position: absolute;
-padding: '2rem 0';
-text-align: center;
-margin-top: -200px;
-margin-left: 120px;
-`
-const EnglishBtn = styled.button`
-  background-color: transparent;
-  border-width: 1px;
-  border-radius: 6px;
-  padding: 3px 10px;
-  font-size: 10px;
-  ${props => props.englishPrimary && css`
-opacity: .5;
-color: black;
-background-color: #ffd1dc;
-font-size: 10.25px;
-`}
-`
-const SpanishBtn = styled.button`
-  background-color: transparent;
-  border-width: 1px;
-  border-radius: 6px;
-  padding: 3px 10px;
-  font-size: 10px;
-  ${props => props.spanishPrimary && css`
-opacity: .5;
-color: black;
-background-color: #ffd1dc;
-font-size: 10.25px;
-`}
-`
+    width: '100vw',
+    height: '100vh'
+  }
 
-
+const libraries = ["places"];
 
 const options = {
   styles: mapStyles,
   disableDefaultUI: true,
   gestureHandling: 'greedy'
 }
-const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrentLocMarker, setMLPrimary , center, setCenter, isLocater, zoomLevel}) => {
+const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrentLocMarker, center, setCenter, isLocater, zoomLevel}) => {
   const [ selectedPopUp, setSelectedPopUp ] = useState(null);
   const [ yourLocBool, setYourLocBool] = useState(false);
-  const [englishPrimary, setEnglishPrimary] = useState(false)
-  const [spanishPrimary, setSpanishPrimary] = useState(false)
-  //const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
   const { t, i18n } = useTranslation();
-  function getLang(lang) {
-    i18n.changeLanguage(lang);
-  }
+  //const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
+ 
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries
@@ -115,27 +88,8 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
 // console.log(t("touch"))
   return (
     <div>
-      <Nav>
-      <EnglishBtn
-      englishPrimary={englishPrimary}
-      onClick={()=>{
-        getLang('en')
-        setEnglishPrimary(!englishPrimary)
-        setSpanishPrimary(false)
-      }}>
-        {t('englishBtn')}
-        </EnglishBtn>
-      <SpanishBtn
-      spanishPrimary={spanishPrimary}
-      onClick={()=>{
-        setSpanishPrimary(!spanishPrimary)
-        setEnglishPrimary(false)
-        getLang('sp')
-        }}>
-          {t('spanishBtn')}
-          </SpanishBtn>
-      </Nav>
-      <TouchMap>{t("touchMap")}</TouchMap>
+      
+      <div>{t("touchMap")}</div>
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={zoomLevel}
@@ -200,7 +154,7 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
            <Window
               merchant={selectedPopUp}
               selectMerchant={selectMerchant}
-              //setMLPrimary={setMLPrimary}
+
               />
           </InfoWindow>
         )

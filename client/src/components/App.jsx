@@ -3,12 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CreatePop from './YourPopups/CreatePop.jsx';
+import Burger from './SideBarView/Burger.js';
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import Map from './MapView/mapView.jsx';
 import UserProfile from './UserProfileView/UserProfile.jsx';
 import SettingsView from './SettingsView/SettingsView.jsx';
 import SideBar from './SideBarView/SideBar.jsx';
-import Burger from './SideBarView/Burger.js';
 import ListView from './ListView/ListView.jsx'
 import EditPopupProfile from './YourPopups/EditPopUp/EditPopupProfile.jsx';
 import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
@@ -25,54 +25,20 @@ import { HashRouter as Well, BrowserRouter as Router, Route, Switch, Link, Redir
 import { useTranslation } from 'react-i18next';
 import styled, { css, ThemeProvider, createGlobalStyle } from 'styled-components';
 import { ReactComponent as MoonPic } from '../popup/moonArt.svg'
-import darkTheme from '../components/Themes/darkMode.js';
-import lightTheme from '../components/Themes/lightMode.js';
 import Picture from './MerchantProfileView/Picture.jsx';
+//import { ThemeProvider } from 'styled-components'
+import GlobalStyles from './styles/globalStyles.js'
+
+
 // import * as butt from './openMerch.json';
 // const merchData = butt.merchants;
 // const MapView = withScriptjs(withGoogleMap(Map));
 /*=============================== (End Imports) ===================================*/
 
 /*=============================== Styled Components ===============================*/
-const ButtonWrapper = styled.div`
-  text-align: center;
-`;
-const ListViewButton = styled.button`
-  display: "flex";
-  align-items: 'center';
-  color: black;
-  font-family: 'Ubuntu';
-  padding: 6px 16px;
-  background-color: white;
-  font-size: 14px;
-  border-radius: 6px;
-  border-width: 1px;
-  border-color: lightgray;
-  transition: ease 0.01s all;
-  ${props => props.lVPrimary && css`
-    opacity: .5;
-    color: black;
-    background-color: #ffd1dc;
-    font-size: 14.25px;
-  `}
-`;
-const MapViewButton = styled.button`
-  color: black;
-  font-family: 'Ubuntu';
-  padding: 6px 16px;
-  background-color: white;
-  font-size: 14px;
-  border-radius: 6px;
-  border-width: 1px;
-  border-color: lightgray;
-  transition: ease 0.01s all;
-  ${props => props.mLPrimary && css`
-    opacity: .5;
-    color: black;
-    background-color: #ffd1dc;
-    font-size: 14.25px;
-  `}
-`;
+
+
+
 const Welcome = styled.h1`
   margin-top: 60px;
   font-family: 'Londrina Solid', cursive;
@@ -80,23 +46,8 @@ const Welcome = styled.h1`
   text-align: center;
   margin-bottom: 2.6rem;
 `;
-const Moon = styled.svg`
-  height: auto;
-  width: 2.5rem;
-  transition: all 0.7s linear;
-`;
-const Sun = styled.svg`
- height: auto;
- width: 2.5rem;
- transition: all 0.7s linear;
-`;
-const DarkTest = styled.div`
-  background-color: #2E3440;
-  margin: 0px;
-  ${props => props.darkDiv && css`
-    background-color: white;
-  `}
-`;
+
+
 /*============================ (End Styled Components) ==============================*/
 
 /*================================= App Component ===================================*/
@@ -110,15 +61,11 @@ const App = () => {
   const [userSubs, setUserSubs] = useState([]);
   const [yourPopups, setYourPopups] = useState([]);
   const [currentLocMarker, setCurrentLocMarker] = useState(null);
-  const [lVPrimary, setLVPrimary] = useState(false);
-  const [mLPrimary, setMLPrimary] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(darkModeStore === 'true' ? true : false);
-  const [darkDiv, setDarkDiv] = useState(false);
-  const [open, setOpen] = useState(false);
+  const { t, i18n } = useTranslation();
   const [ center, setCenter ] = useState({lat: 29.956124, lng: -90.090509});
+  const [theme, setTheme] = useState({ mode: 'light' })
+  const [open, setOpen] = useState(false);
 
-  // Storage for dark mode setting.
-  const darkModeStore = localStorage.getItem('isDarkMode');
   // Function which fetches merchant data from database.
   const getPops = () => {
     axios.get('/api/merchants')
@@ -162,7 +109,21 @@ const App = () => {
   useEffect(() => getPops(), []);
 
   return (
-    <DarkTest darkDiv={isDarkMode ? false : true}>
+    <ThemeProvider 
+    theme={theme}
+    onClick={() => 
+      setSideBarDisplay(!sideBarDisplay)}
+    >
+      <GlobalStyles/>
+      <button
+                onClick={(e) => 
+                  setTheme(
+                    theme.mode === 'dark'
+                    ? {mode:'light'} 
+                    : {mode:'dark'}
+                    )
+                  }
+                  ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path style={{ fill: "#F6C358" }} d="M10.719 2.082c-2.572 2.028-4.719 5.212-4.719 9.918 0 4.569 1.938 7.798 4.548 9.895-4.829-.705-8.548-4.874-8.548-9.895 0-5.08 3.808-9.288 8.719-9.918zm1.281-2.082c-6.617 0-12 5.383-12 12s5.383 12 12 12c1.894 0 3.87-.333 5.37-1.179-3.453-.613-9.37-3.367-9.37-10.821 0-7.555 6.422-10.317 9.37-10.821-1.74-.682-3.476-1.179-5.37-1.179zm0 10.999c1.437.438 2.562 1.564 2.999 3.001.44-1.437 1.565-2.562 3.001-3-1.436-.439-2.561-1.563-3.001-3-.437 1.436-1.562 2.561-2.999 2.999zm8.001.001c.958.293 1.707 1.042 2 2.001.291-.959 1.042-1.709 1.999-2.001-.957-.292-1.707-1.042-2-2-.293.958-1.042 1.708-1.999 2zm-1-9c-.437 1.437-1.563 2.562-2.998 3.001 1.438.44 2.561 1.564 3.001 3.002.437-1.438 1.563-2.563 2.996-3.002-1.433-.437-2.559-1.564-2.999-3.001z" /></svg></button>
       <Router>
         {isLogged === true ? <Redirect to="/" /> : <Redirect to="/login" />}
         <Switch>
@@ -172,12 +133,7 @@ const App = () => {
             render={props => {
               return (
                   <Home
-                    lVPrimary={lVPrimary}
-                    setLVPrimary={setLVPrimary}
-                    mLPrimary={mLPrimary}
-                    setMLPrimary={setMLPrimary}
-                    darkDiv={darkDiv}
-                    setDarkDiv={setDarkDiv}
+
                     myPops={myPops}
                     setMyProps={setMyPops}
                     user={user}
@@ -196,12 +152,10 @@ const App = () => {
                     setYourPopups={setYourPopups}
                     currentLocMarker={currentLocMarker}
                     setCurrentLocMarker={setCurrentLocMarker}
-                    isDarkMode={isDarkMode}
-                    setIsDarkMode={setIsDarkMode}
-                    open={open}
-                    setOpen={setOpen}
                     center={center}
                     setCenter={setCenter}
+                    open={open}
+                    setOpen={setOpen}
                   />
               )
             }}
@@ -212,7 +166,7 @@ const App = () => {
           />
         </Switch>
       </Router>
-    </DarkTest>
+    </ThemeProvider>
   )
 };
 /*================================ (End App Component) ==================================*/
@@ -227,16 +181,19 @@ const Home = ({
   merchData, setMerchData,
   userSubs, setUserSubs, yourPopups, setYourPopups,
   currentLocMarker, setCurrentLocMarker,
-  lVPrimary, setLVPrimary,
-  mLPrimary, setMLPrimary,
-  darkDiv, setDarkDiv,
-  isDarkMode, setIsDarkMode,
-  open, setOpen,
-  center, setCenter
+  center, setCenter, open, setOpen
 }) => {
+  const [buttonBackground, setButtonBackground] = useState("#ffd1dc")
+  const [active, setActive] = useState(false)
+
+
+  function getLang(lang) {
+    i18n.changeLanguage(lang);
+  }
   const { t, i18n } = useTranslation();
 
     return (
+
       <Well>
           {/* <LogOutBtn href="/logout"> Logout </LogOutBtn> */}
             <div className='sidebar-view'>
@@ -249,15 +206,11 @@ const Home = ({
               //   setSideBarDisplay(!sideBarDisplay)
               //   }}
             />
-              <button
-                onClick={() => {
-                  setIsDarkMode(!isDarkMode);
-                  setDarkDiv(true);
-                  console.log(isDarkMode);
-                  localStorage.setItem('isDarkMode', !isDarkMode);
-                }}
-              ><Moon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path style={{ fill: "#F6C358" }} d="M10.719 2.082c-2.572 2.028-4.719 5.212-4.719 9.918 0 4.569 1.938 7.798 4.548 9.895-4.829-.705-8.548-4.874-8.548-9.895 0-5.08 3.808-9.288 8.719-9.918zm1.281-2.082c-6.617 0-12 5.383-12 12s5.383 12 12 12c1.894 0 3.87-.333 5.37-1.179-3.453-.613-9.37-3.367-9.37-10.821 0-7.555 6.422-10.317 9.37-10.821-1.74-.682-3.476-1.179-5.37-1.179zm0 10.999c1.437.438 2.562 1.564 2.999 3.001.44-1.437 1.565-2.562 3.001-3-1.436-.439-2.561-1.563-3.001-3-.437 1.436-1.562 2.561-2.999 2.999zm8.001.001c.958.293 1.707 1.042 2 2.001.291-.959 1.042-1.709 1.999-2.001-.957-.292-1.707-1.042-2-2-.293.958-1.042 1.708-1.999 2zm-1-9c-.437 1.437-1.563 2.562-2.998 3.001 1.438.44 2.561 1.564 3.001 3.002.437-1.438 1.563-2.563 2.996-3.002-1.433-.437-2.559-1.564-2.999-3.001z" /></Moon></button>
-                <Welcome onClick={() => setSideBarDisplay(!sideBarDisplay)}>Pop^</Welcome>
+              <br/>
+             
+                <br/>
+
+                <h1>Pop^</h1>
                 {/* <ToggleSwitch /> */}
                 {
                   !sideBarDisplay ?
@@ -268,13 +221,9 @@ const Home = ({
                     render={(props) => {
                       return (
                         <SideBar
+                          close={setSideBarDisplay}
                           open={open}
                           setOpen={setOpen}
-                          lVPrimary={lVPrimary}
-                          setLVPrimary={setLVPrimary}
-                          mLPrimary={mLPrimary}
-                          setMLPrimary={setMLPrimary}
-                          close={setSideBarDisplay}
                         />
                       )
                     }}
@@ -285,26 +234,21 @@ const Home = ({
                 onClick={() => setSideBarDisplay(false)}
                 className='main'
               >
-                <ButtonWrapper>
                   <Link to='/'>
-                    <MapViewButton
-                      mLPrimary={mLPrimary}
+                    <button 
                       onClick={() => {
-                        setMLPrimary(!mLPrimary);
-                        setLVPrimary(false);
+                        setActive(!active)
                       }}
-                    >{t('mapViewBtn')}</MapViewButton>
+                    >{t('mapViewBtn')}</button>
                   </Link>
                   <Link to='/listview'>
-                    <ListViewButton
-                      lVPrimary={lVPrimary}
+                    <button
                       onClick={() => {
-                        setLVPrimary(!lVPrimary);
-                        setMLPrimary(false);
+                        setActive(true)
                       }}
-                    >{t('listViewBtn')}</ListViewButton>
+                    >{t('listViewBtn')}</button>
                   </Link>
-                </ButtonWrapper>
+               
                   <Switch>
                     <Route
                       path='/'
@@ -320,7 +264,6 @@ const Home = ({
                             selectMerchant={setSelectedMerchant}
                             currentLocMarker={currentLocMarker}
                             setCurrentLocMarker={setCurrentLocMarker}
-                            setMLPrimary={setMLPrimary}
                             center={center}
                             setCenter={setCenter}
                             isLocater={false}
@@ -345,7 +288,6 @@ const Home = ({
                             setCenter={()=>{}}
                             currentLocMarker={currentLocMarker}
                             setCurrentLocMarker={setCurrentLocMarker}
-                            setMLPrimary={setMLPrimary}
                             isLocater={true}
                             zoomLevel={18}
                           />
@@ -505,3 +447,56 @@ const Home = ({
 /*=================================== (End Home Component) ====================================*/
 
 export default App;
+
+
+
+//  const ButtonWrapper = styled.div`
+//    text-align: center;
+//  `;
+// const ListViewButton = styled.button`
+//   display: "flex";
+//   align-items: 'center';
+//   color: black;
+//   font-family: 'Ubuntu';
+  
+//   background-color: white;
+//   font-size: 14px;
+//   border-radius: 6px;
+//   border-width: 1px;
+//   border-color: lightgray;
+//   transition: ease 0.01s all;
+//   ${props => props.lVPrimary && css`
+//     opacity: .5;
+//     color: black;
+//     background-color: #ffd1dc;
+//     font-size: 14.25px;
+//   `}
+// `;
+// const MapViewButton = styled.button`
+//   color: black;
+//   font-family: 'Ubuntu';
+//   padding: 6px 16px;
+//   background-color: white;
+//   font-size: 14px;
+//   border-radius: 6px;
+//   border-width: 1px;
+//   border-color: lightgray;
+//   transition: ease 0.01s all;
+//   ${props => props.mLPrimary && css`
+//     opacity: .5;
+//     color: black;
+//     background-color: #ffd1dc;
+//     font-size: 14.25px;
+//   `}
+// `;
+
+// const Moon = styled.svg`
+//   height: auto;
+//   width: 2.5rem;
+//   transition: all 0.7s linear;
+// `;
+// const Sun = styled.svg`
+//  height: auto;
+//  width: 2.5rem;
+//  transition: all 0.7s linear;
+// `;
