@@ -96,13 +96,13 @@ import { useTranslation } from 'react-i18next'
 
 
 const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData }) => {
-  const [openOrClosed, setOpenOrClosed] = useState('');
+  const [ openOrClosed, setOpenOrClosed] = useState('');
   const [ uploadPicWindow, setUploadPicWindow ] = useState(false);
   const { t } = useTranslation()
 
 
   const closeBusiness = () => {
-    axios.put(`/closemerchant/${merchant.id}`)
+    axios.put(`/api/merchants/closemerchant/${merchant.id}`)
       .then(() => {
         setOpenOrClosed(' is closed');
         let merchants = merchData;
@@ -117,7 +117,7 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
   }
 
   const openBusiness = () => {
-    axios.put(`/openmerchant/${merchant.id}`)
+    axios.put(`/api/merchants/openmerchant/${merchant.id}`)
       .then(() => {
         setOpenOrClosed(' is open');
         let merchants = merchData;
@@ -164,6 +164,7 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
         uploadPicWindow ?
         <UploadPic
           merchant={merchant}
+          setUploadPicWindow={setUploadPicWindow}
         /> :
         ''
       }

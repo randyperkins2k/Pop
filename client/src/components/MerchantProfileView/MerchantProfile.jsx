@@ -3,6 +3,7 @@ import ToggleSwitch from '../ToggleSwitch.jsx'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PictureFeed from './PictureFeed.jsx';
+import Menu from './Menu.jsx';
 
 import styled, { css } from 'styled-components'
 import { useTranslation } from 'react-i18next'
@@ -119,14 +120,7 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
 
   const submitReview = () => {
     console.log(reviewText);
-    /**
-     * //add new review
-       app.post('/api/reviews/addreview/', (req, res) => {
-       const { UserId, merchantId, rating, message } = req.body;
-       .then(data => res.send(data))
-        .catch(err => res.send(err));
-});
-     */
+
     axios.post('/api/reviews/addReview', {
       UserId: user.id,
       MerchantId: merchant.id,
@@ -164,7 +158,7 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
     console.log(review);
     const { id } = review;
     console.log(id);
-    axios.delete(`/deletereview/${id}`)
+    axios.delete(`/api/reviews/deletereview/${id}`)
       .then(response => {
         console.log(response.data);
         const updatedReviews = reviews.slice();
@@ -216,8 +210,6 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
         onClick={() => {
           setPictureFeedView(false);
           setReviewView(true);
-          setReviewBtnPrimary(!reviewBtnPrimary)
-          setLocatePrimary(false)
         }}
        >{t("reviewsBtn")}</button>
      {
@@ -262,6 +254,9 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
       :
     <div>
       <div>{t("leaveAReviewTxt")}</div>
+      <Menu
+        merchant={merchant}
+      />
     </div>
       }
     </div>

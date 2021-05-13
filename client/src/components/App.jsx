@@ -26,7 +26,7 @@ import styled, { css, ThemeProvider, createGlobalStyle } from 'styled-components
 import { ReactComponent as MoonPic } from '../popup/moonArt.svg'
 import darkTheme from '../components/Themes/darkMode.js';
 import lightTheme from '../components/Themes/lightMode.js';
-
+import Picture from './MerchantProfileView/Picture.jsx';
 // import * as butt from './openMerch.json';
 // const merchData = butt.merchants;
 // const MapView = withScriptjs(withGoogleMap(Map));
@@ -151,7 +151,7 @@ const App = () => {
   const darkModeStore = localStorage.getItem('isDarkMode');
   // Function which fetches merchant data from database.
   const getPops = () => {
-    axios.get('/merchants')
+    axios.get('/api/merchants')
       .then(response => {
         // console.log('merchants', response.data);
         setMerchData(response.data);
@@ -167,7 +167,7 @@ const App = () => {
           setIsLogged(true);
           // console.log('before post', displayName, email, picture);
           // Picture removed from endpoint due to HTTP issue.
-          axios.post(`/adduser/${displayName}/${email}/`)
+          axios.post(`/api/users/adduser/${displayName}/${email}`)
             .then(addUser => {
               // console.log('this is add user', addUser);
               let subs, yourPops;

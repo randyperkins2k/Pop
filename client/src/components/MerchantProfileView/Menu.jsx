@@ -5,7 +5,7 @@ const Menu = ({ merchant, selectMerchant }) => {
   const [products, setProducts] = useState([]);
 
   const getProducts = () => {
-    axios.get(`/api/product/menu/${merchant.id}`)
+    axios.get(`/api/products/menu/${merchant.id}`)
       .then(result => {
         setProducts(result.data);
       })

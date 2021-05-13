@@ -54,7 +54,7 @@ const EditMenu = ({ merchant, selectMerchant }) => {
   const [nameText, setNameText] = useState('');
   const [priceNum, setPriceNum] = useState(null);
   const getProducts = () => {
-    axios.get(`/api/product/menu/${merchant.id}`)
+    axios.get(`/api/products/menu/${merchant.id}`)
       .then(results => {
         console.log(results.data);
         setProducts(results.data);
@@ -72,7 +72,7 @@ const EditMenu = ({ merchant, selectMerchant }) => {
         thePrice = priceNum;
       }
 
-      axios.post('/api/product/addproduct', {
+      axios.post('/api/products/addproduct', {
         name: nameText,
         merchant: merchant.id,
         price: thePrice,
@@ -91,7 +91,7 @@ const EditMenu = ({ merchant, selectMerchant }) => {
   const deleteProduct = (product) => {
     if (confirm(`Do you want to delete ${product.name}?`) === true) {
       console.log('confirmed');
-      axios.delete(`/api/product/deleteproduct/${product.id}`)
+      axios.delete(`/api/products/deleteproduct/${product.id}`)
         .then(result => {
           let newProductList = products.slice();
           setProducts(newProductList.filter(prod => prod.id !== product.id));
