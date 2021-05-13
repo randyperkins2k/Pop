@@ -113,6 +113,7 @@ const App = () => {
   const [mLPrimary, setMLPrimary] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(darkModeStore === 'true' ? true : false);
   const [darkDiv, setDarkDiv] = useState(false);
+  const [ center, setCenter ] = useState({lat: 29.956124, lng: -90.090509});
 
   // Storage for dark mode setting.
   const darkModeStore = localStorage.getItem('isDarkMode');
@@ -195,6 +196,8 @@ const App = () => {
                     setCurrentLocMarker={setCurrentLocMarker}
                     isDarkMode={isDarkMode}
                     setIsDarkMode={setIsDarkMode}
+                    center={center}
+                    setCenter={setCenter}
                   />
               )
             }}
@@ -223,7 +226,7 @@ const Home = ({
   lVPrimary, setLVPrimary,
   mLPrimary, setMLPrimary,
   darkDiv, setDarkDiv,
-  isDarkMode, setIsDarkMode
+  isDarkMode, setIsDarkMode, center, setCenter
 }) => {
   const { t, i18n } = useTranslation();
 
@@ -296,10 +299,38 @@ const Home = ({
                             containerElement={<div style={{height: '100%' }}/>}
                             mapElement={<div style={{height: '100%' }}/>}
                             merchData={merchData}
+                            merchant={selectedMerchant}
                             selectMerchant={setSelectedMerchant}
                             currentLocMarker={currentLocMarker}
                             setCurrentLocMarker={setCurrentLocMarker}
                             setMLPrimary={setMLPrimary}
+                            center={center}
+                            setCenter={setCenter}
+                            isLocater={false}
+                            zoomLevel={12}
+                          />
+                        )
+                      }}
+                    />
+                    <Route
+                      path='/locate'
+                      exact
+                      render={(props) => {
+                        return (
+                          <Map
+                            loadingElement={<div style={{height: '100%' }}/>}
+                            containerElement={<div style={{height: '100%' }}/>}
+                            mapElement={<div style={{height: '100%' }}/>}
+                            merchData={merchData}
+                            merchant={selectedMerchant}
+                            selectMerchant={setSelectedMerchant}
+                            center={{lat: +selectedMerchant.lat, lng: +selectedMerchant.lon}}
+                            setCenter={()=>{}}
+                            currentLocMarker={currentLocMarker}
+                            setCurrentLocMarker={setCurrentLocMarker}
+                            setMLPrimary={setMLPrimary}
+                            isLocater={true}
+                            zoomLevel={18}
                           />
                         )
                       }}

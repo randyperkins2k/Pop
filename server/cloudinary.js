@@ -2,6 +2,7 @@ const express = require('express');
 const images = express.Router();
 const cloudinary = require('cloudinary').v2;
 const { Pictures } = require('./db.js');
+require('dotenv').config();
 const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
 const cloudAPI = process.env.CLOUDINARY_API_KEY;
 const cloudSecret = process.env.CLOUDINARY_API_SECRET;
@@ -41,7 +42,7 @@ images.get('/getimages/:id', async (req, res) => {
 const { id } = req.params;
 
 try {
-  const picData = await Pictures.findAll({where:{MerchantId: id}}); 
+  const picData = await Pictures.findAll({where:{MerchantId: id}});
   res.status(200).send(picData)
 } catch(err) {
   console.log(err)
