@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import Burger from './Burger';
-import Menu from './Menu';
 
 const Button = styled.button`
   background: lightgrey;
@@ -16,16 +14,21 @@ const Button = styled.button`
   display: block;
 `;
 
-const SidebarDiv = styled.div`
-  margin: 0;
-  padding: 0;
-  width: 220px;
-  background-color: #EFFFFA;
-  position: absolute;
-  opacity: .90;
-  height: 100vh;
+const SidebarDiv = styled.nav`
   overflow: auto;
   z-index: 99;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #004d80;
+  height: 150vh;
+  text-align: left;
+  padding: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s ease-in-out;
+  transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
 `;
 
 const SidebarUl = styled.ul`
@@ -35,12 +38,11 @@ const SidebarUl = styled.ul`
   text-decoration: none;
 `;
 
-const SideBar = ({ close, setMLPrimary, setLVPrimary }) => {
+const SideBar = ({ open, close, setMLPrimary, setLVPrimary }) => {
   const {t} = useTranslation();
   return (
-    <SidebarDiv>
+    <SidebarDiv open={open}>
       <SidebarUl>
-        <Menu/>
         <br/>
           <Link to='/'>
             <Button><a onClick={() => {

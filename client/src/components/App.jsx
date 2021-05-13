@@ -12,16 +12,13 @@ import {
 import Map from './MapView/mapView.jsx';
 import UserProfile from './UserProfileView/UserProfile.jsx';
 import SettingsView from './SettingsView/SettingsView.jsx';
-
 import SideBar from './SideBarView/SideBar.jsx';
 import Burger from './SideBarView/Burger.js';
-import Menu from './SideBarView/Menu.js';
-
 import ListView from './ListView/ListView.jsx'
 import EditPopupProfile from './YourPopups/EditPopUp/EditPopupProfile.jsx';
 import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
 import EditMenu from './YourPopups/EditPopUp/EditMenu.jsx';
-// import Menu from './MerchantProfileView/Menu.jsx';
+import Menu from './MerchantProfileView/Menu.jsx';
 import EditInfo from './YourPopups/EditPopUp/EditInfo.jsx';
 // import * as butt from './openMerch.json';
 // const merchData = butt.merchants;
@@ -183,10 +180,7 @@ const App = () => {
 
   return (
     <div>
-    <Burger
-      open={open}
-      setOpen={setOpen}
-    />
+    
     <Router>
       {isLogged === true
         ? (<Redirect to="/" />)
@@ -265,17 +259,28 @@ const Home = ({
       {/* <LogOutBtn href="/logout"> Logout </LogOutBtn> */}
 
         <div className='sidebar-view'>
-            <Welcome onClick={() => {
-               setSideBarDisplay(!sideBarDisplay)
+            <Burger
+              open={open}
+              setOpen={setOpen}
+              sideBarDisplay={sideBarDisplay}
+              setSideBarDisplay={setSideBarDisplay}
+              // onClick={() => {
+              //   setSideBarDisplay(!sideBarDisplay)
+              //   }}
+            />
+            <Welcome 
               //console.log(requestFirebaseNotifPermission)
-            }
-            }>Pop^</Welcome>
+              // onClick={() => {
+              //   setSideBarDisplay(!sideBarDisplay)
+              //   }}
+            >Pop^</Welcome>
             {/* <ToggleSwitch /> */}
             {
               !sideBarDisplay ?
               ''
               :
               <Route
+                
                 path='/'
                 render={(props) => {
                   return (
