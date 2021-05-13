@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 export default createGlobalStyle`
   * {
@@ -7,7 +7,7 @@ export default createGlobalStyle`
   }
   body {
     font-family: 'Ubuntu';
-    background-color: blue;
+    background-color: #2E3440;
   }
   nav {
     position: absolute;
@@ -30,6 +30,13 @@ export default createGlobalStyle`
   }
   h2 {
 
+  }
+  hr {
+    border: 1px solid lightgray;
+    border-radius: 1px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
   }
   input {
     box-sizing:border-box;
@@ -57,12 +64,12 @@ export default createGlobalStyle`
     box-shadow: 0px 2px 2px lightgray;
     margin: 1px;
     transition: ease background-color 250ms;
-    /* ${props => props.lVPrimary && css`
+    ${props => props.lVPrimary && css`
         opacity: .5;
         color: black;
         background-color: #ffd1dc;
         padding: 6px 16px
-      `} */
+      `}
   }
   
 

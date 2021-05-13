@@ -3,6 +3,40 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next'
 
+
+const MerchList = ({ merchant, selectMerchant }) => {
+  const { name, isOpen } = merchant
+  const {t} = useTranslation()
+
+  return (
+
+   
+    <div className="merchant-listing">
+      <ul>
+        <img></img>
+        {
+          isOpen ? 
+          <div>{t('openTxt')}</div> :
+          <div>{t('closedTxt')}</div>
+        }
+        <span></span>
+        <div></div>
+        <Link to='/profile'>
+          <button onClick={() => selectMerchant(merchant)}>{ name }</button>
+        </Link>
+      </ul>
+    </div>
+
+
+
+  )
+};
+
+export default MerchList;
+
+
+
+
 // const MerchantInfo = styled.button`
 //   font-family: 'Ubuntu';
 //   padding: 16px 80px;
@@ -41,33 +75,3 @@ import { useTranslation } from 'react-i18next'
 // color: white;
 // margin-bottom: -19px;
 // `
-
-const MerchList = ({ merchant, selectMerchant }) => {
-  const { name, isOpen } = merchant
-  const {t} = useTranslation()
-
-  return (
-
-   
-    <div className="merchant-listing">
-      <ul>
-        <img></img>
-        {
-          isOpen ? 
-          <div>{t('openTxt')}</div> :
-          <div>{t('closedTxt')}</div>
-        }
-        <span></span>
-        <div></div>
-        <Link to='/profile'>
-          <button onClick={() => selectMerchant(merchant)}>{ name }</button>
-        </Link>
-      </ul>
-    </div>
-
-
-
-  )
-};
-
-export default MerchList;

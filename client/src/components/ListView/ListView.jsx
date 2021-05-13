@@ -3,6 +3,125 @@ import MerchList from './MerchList.jsx';
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next'
 
+const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
+  const [ openPopsView, setOpenPopsView ] = useState(true);
+  const [ yourSubsView, setYourSubsView ] = useState(false);
+  const [ searchPopsView, setSearchPopsView ] = useState(false);
+  const [ openPrimary, setOpenPrimary ] = useState(true);
+  const [ sPUPrimary, setSPUPrimary ] = useState(false);
+  const [ favPrimary, setFavPrimary ] = useState(false);
+  const [ inputView, setInputView ] = useState(false)
+  const [ search, setSearch ] = useState('')
+  const { t, i18n } = useTranslation();
+  const { name } = merchData[0];
+const updateSearch = (e) => {
+  setSearch(e.target.value.substr(0, 40))
+}
+  return (
+    <div>
+
+      <button
+      inputView={inputView}
+      openPrimary={openPrimary}
+      onClick={() => {
+        setInputView(false)
+        setOpenPopsView(true)
+        setOpenPrimary(!openPrimary)
+        setSPUPrimary(false)
+        setFavPrimary(false)
+        }}>{t('openNowBtn')}</button>
+      <button
+      inputView={inputView}
+      favPrimary={favPrimary}
+      onClick={() => {
+        setInputView(false)
+        setOpenPopsView(false)
+        setFavPrimary(!favPrimary)
+        setSPUPrimary(false)
+        setOpenPrimary(false)
+        setSearchPopsView(false)
+        }}
+        >
+          {t('favoritesBtn')}</button>
+      <button
+       inputView={inputView}
+       sPUPrimary={sPUPrimary}
+       onClick={() => {
+        setInputView(!inputView)
+        setSPUPrimary(!sPUPrimary)
+        setOpenPrimary(false)
+        setFavPrimary(false)
+        setSearchPopsView(true)
+      }}>{t('searchPopUpsBtn')}</button>
+      { inputView ?
+        <input
+        type='text'
+        value={search} //                                            value comes from useplacesautocomplete hook
+        onChange={updateSearch}
+/>
+:
+null
+}
+      <ul>
+      {
+        !searchPopsView ?
+        <div>
+          {
+          openPopsView ?
+            merchData.map(merch => {
+              if (merch.isOpen) {
+                return <MerchList
+                key={merch.id}
+                merchant={merch}
+                selectMerchant={selectMerchant}/>
+              }
+            })
+            :
+            userSubs.sort((a,b) => {
+              return (a.isOpen === b.isOpen) ? 0 : a.isOpen ? -1 : 1;
+            }).map(merch => <MerchList
+              key={merch.id}
+              merchant={merch}
+              selectMerchant={selectMerchant}
+            />)
+          }
+          </div>
+        :
+
+        <div>
+        {merchData.filter(merch => merch.name.toLowerCase().indexOf(search) !== -1
+        || merch.info.toLowerCase().indexOf(search) !== -1)
+        .map(merch => {
+            return <MerchList
+            key={merch.id}
+            merchant={merch}
+            selectMerchant={selectMerchant}/>
+          }) 
+        }
+
+        </div>
+
+      }
+      </ul>
+    </div>
+  );
+}
+export default ListView;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // const BtnWrapper = styled.div`
 // text-align: center;
 // `
@@ -64,110 +183,3 @@ import { useTranslation } from 'react-i18next'
 // const Wrap = styled.div`
 // margin-left: 100px;
 // `
-const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
-  const [ openPopsView, setOpenPopsView ] = useState(true);
-  const [ yourSubsView, setYourSubsView ] = useState(false);
-  const [ searchPopsView, setSearchPopsView ] = useState(false);
-  const [ openPrimary, setOpenPrimary ] = useState(true);
-  const [ sPUPrimary, setSPUPrimary ] = useState(false);
-  const [ favPrimary, setFavPrimary ] = useState(false);
-  const [ inputView, setInputView ] = useState(false)
-  const [ search, setSearch ] = useState('')
-  const { t, i18n } = useTranslation();
-  const { name } = merchData[0];
-const updateSearch = (e) => {
-  setSearch(e.target.value.substr(0, 40))
-}
-  return (
-    <div>
-
-      <button
-      inputView={inputView}
-      openPrimary={openPrimary}
-      onClick={() => {
-        setInputView(false)
-        setOpenPopsView(true)
-        setOpenPrimary(!openPrimary)
-        setSPUPrimary(false)
-        setFavPrimary(false)
-        }}>{t('openNowBtn')}</button>
-      <button
-       inputView={inputView}
-       sPUPrimary={sPUPrimary}
-       onClick={() => {
-        setInputView(!inputView)
-        setSPUPrimary(!sPUPrimary)
-        setOpenPrimary(false)
-        setFavPrimary(false)
-        setSearchPopsView(true)
-      }}>{t('searchPopUpsBtn')}</button>
-      <button
-      inputView={inputView}
-      favPrimary={favPrimary}
-      onClick={() => {
-        setInputView(false)
-        setOpenPopsView(false)
-        setFavPrimary(!favPrimary)
-        setSPUPrimary(false)
-        setOpenPrimary(false)
-        setSearchPopsView(false)
-        }}
-        >
-          {t('favoritesBtn')}</button>
-      { inputView ?
-        <input
-        type='text'
-        value={search} //                                            value comes from useplacesautocomplete hook
-        onChange={updateSearch}
-/>
-:
-null
-}
-         
-
-
-      <ul>
-      {
-        !searchPopsView ?
-        <div>
-          {
-          openPopsView ?
-            merchData.map(merch => {
-              if (merch.isOpen) {
-                return <MerchList
-                key={merch.id}
-                merchant={merch}
-                selectMerchant={selectMerchant}/>
-              }
-            })
-            :
-            userSubs.sort((a,b) => {
-              return (a.isOpen === b.isOpen) ? 0 : a.isOpen ? -1 : 1;
-            }).map(merch => <MerchList
-              key={merch.id}
-              merchant={merch}
-              selectMerchant={selectMerchant}
-            />)
-          }
-          </div>
-        :
-
-        <div>
-        {merchData.filter(merch => merch.name.toLowerCase().indexOf(search) !== -1
-        || merch.info.toLowerCase().indexOf(search) !== -1)
-        .map(merch => {
-            return <MerchList
-            key={merch.id}
-            merchant={merch}
-            selectMerchant={selectMerchant}/>
-          })
-        }
-
-        </div>
-
-      }
-      </ul>
-    </div>
-  );
-}
-export default ListView;
