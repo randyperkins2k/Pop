@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const InputWrapper = styled.label`
 	position: relative;
-	
+
 	margin-top: 30px;
 
 `
@@ -60,32 +60,31 @@ const Slider = styled.span`
 	}
 `
 
-const ToggleOpenClose = ({ merchant, setOpenOrClosed, 
-		openOrClosed, merchData, 
-		setMerchData, selectMerchant, 
+const ToggleOpenClose = ({ merchant, setOpenOrClosed,
+		openOrClosed, merchData,
+		setMerchData, selectMerchant,
 		center, user,
-		setSubs, setYourPopups,
-		OpenNotifMessage
+		setSubs, setYourPopups
 	}) => {
 	const [toggled, setToggled] = useState(false);
-	
+
 	const initiate = () => {
-		// console.log('hello initiate');
-		// console.log(merchant);
-		// console.log(merchant.isOpen);
+		console.log('hello initiate');
+		console.log(merchant);
+		console.log(merchant.isOpen);
 		merchant.isOpen ? setToggled(true) : setToggled(false);
 	};
 
 	const closeBusiness = () => {
-    axios.put(`/closemerchant/${merchant.id}`)
+    axios.put(`/api/merchants/closemerchant/${merchant.id}`)
       .then(() => {
-        axios.get('/merchants')
+        axios.get('/api/merchants')
 				.then(response => {
 					response.data.forEach(merch => merch.id === merchant.id ? selectMerchant(merch) : null)
 					setMerchData(response.data)
 				})
 				.then(() => {
-					axios.get(`/userid/${user.id}`)
+					axios.get(`/api/users/id/${user.id}`)
 						.then((response => {
 							setSubs(response.data.Subs.map(Sub => Sub.Merchant));
 							setYourPopups(response.data.Admins.map(Sub => Sub.Merchant));
@@ -96,34 +95,28 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
   }
 
   const openBusiness = () => {
-		axios.put(`/api/merchcoords/${merchant.id}`, {lat: center.lat, lng: center.lng})
+		axios.put(`/api/merchants/merchcoords/${merchant.id}`, {lat: center.lat, lng: center.lng})
 			.then(() => {
-				axios.put(`/openmerchant/${merchant.id}`)
+				axios.put(`/api/merchants/openmerchant/${merchant.id}`)
 					.then(() => {
 						setOpenOrClosed( 'is open')
-						axios.get('/merchants')
+						axios.get('/api/merchants')
 							.then(response => {
 								response.data.forEach(merch => merch.id === merchant.id ? selectMerchant(merch) : null)
 		       			setMerchData(response.data)
 							})
 							.then(() => {
-								axios.get(`/userid/${user.id}`)
+								axios.get(`/api/users/id/${user.id}`)
 									.then((response => {
 										setSubs(response.data.Subs.map(Sub => Sub.Merchant));
 										setYourPopups(response.data.Admins.map(Sub => Sub.Merchant));
 									}))
 							})
-							.then(() => {
-								axios.post(`/api/notifs/open/${merchant.id}`, {
-									merchName: merchant.name,
-									message: OpenNotifMessage
-								})
-							})
 					})
 			})
 			.catch(err => console.log('opening merchant error', err));
   }
-	
+
 	useEffect(() => initiate(), []);
 
 	return (
