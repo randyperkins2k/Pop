@@ -71,16 +71,7 @@ const ToggleSwitch = ({ merchant, user, setUserSubs, userSubs }) => {
 	//console.log('subs', subs)
 
 
-	// const getSubs = async () => {
-	// 	try {
-	// 		const res = await axios.get('/api/subs')
-	// 		const { data } = res;
-	// 		console.log('subs data in call', data)
-	// 		setSubs(data)
-	// 	} catch (e) {
-	// 		console.log('error in catch', e)
-	// 	}
-	// }
+
 
 	const subscribe = () => {
 		let isSubscribed = false;
@@ -88,7 +79,7 @@ const ToggleSwitch = ({ merchant, user, setUserSubs, userSubs }) => {
 			if (sub.id === merchant.id) {
 				isSubscribed = true;
 				//setUserSubs(userSubs.filter(sub => sub.id !== merchant.id));
-				axios.delete(`/api/deletesub/${user.id}/${merchant.id}`)
+				axios.delete(`/api/subs/deletesub/${user.id}/${merchant.id}`)
 				  .then((response) => {
 						console.log(response.data)
 						setUserSubs(userSubs.filter(sub => sub.id !== merchant.id));
@@ -97,7 +88,7 @@ const ToggleSwitch = ({ merchant, user, setUserSubs, userSubs }) => {
 			}
 		})
 		if (!isSubscribed) {
-			axios.post('/api/addsub', {
+			axios.post('/api/subs/addsub', {
 				userid : user.id,
 				merchantid : merchant.id
 			})
@@ -109,12 +100,7 @@ const ToggleSwitch = ({ merchant, user, setUserSubs, userSubs }) => {
 		}
 	};
 	//
-	// logic for if the button is toggled on or off
-	// const createSub = async () => {
-	// 	const res = axios.post('/subs', {
-	// 		toggled: true
-	// 	})
-	// }
+
 
 	const initiate = () => {
 		// console.log('hello initiate');

@@ -102,7 +102,7 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
 
 
   const closeBusiness = () => {
-    axios.put(`/closemerchant/${merchant.id}`)
+    axios.put(`/api/merchants/closemerchant/${merchant.id}`)
       .then(() => {
         setOpenOrClosed(' is closed');
         let merchants = merchData;
@@ -117,7 +117,7 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
   }
 
   const openBusiness = () => {
-    axios.put(`/openmerchant/${merchant.id}`)
+    axios.put(`/api/merchants/openmerchant/${merchant.id}`)
       .then(() => {
         setOpenOrClosed(' is open');
         let merchants = merchData;

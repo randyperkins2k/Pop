@@ -60,6 +60,9 @@ const Search = styled.button`
   font-size: 11.25px;
   `}
 `
+const Wrap = styled.div`
+margin-left: 100px;
+`
 const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
   const [ openPopsView, setOpenPopsView ] = useState(true);
   const [ yourSubsView, setYourSubsView ] = useState(false);
@@ -87,6 +90,16 @@ const updateSearch = (e) => {
         setSPUPrimary(false)
         setFavPrimary(false)
         }}>{t('openNowBtn')}</Open>
+      <Search
+       inputView={inputView}
+       sPUPrimary={sPUPrimary}
+       onClick={() => {
+        setInputView(!inputView)
+        setSPUPrimary(!sPUPrimary)
+        setOpenPrimary(false)
+        setFavPrimary(false)
+        setSearchPopsView(true)
+      }}>{t('searchPopUpsBtn')}</Search>
       <Favs
       inputView={inputView}
       favPrimary={favPrimary}
@@ -100,16 +113,6 @@ const updateSearch = (e) => {
         }}
         >
           {t('favoritesBtn')}</Favs>
-      <Search
-       inputView={inputView}
-       sPUPrimary={sPUPrimary}
-       onClick={() => {
-        setInputView(!inputView)
-        setSPUPrimary(!sPUPrimary)
-        setOpenPrimary(false)
-        setFavPrimary(false)
-        setSearchPopsView(true)
-      }}>{t('searchPopUpsBtn')}</Search>
       { inputView ?
         <input
         type='text'
@@ -120,6 +123,8 @@ const updateSearch = (e) => {
 null
 }
           </BtnWrapper>
+
+
       <ul>
       {
         !searchPopsView ?
@@ -145,8 +150,8 @@ null
           }
           </div>
         :
+
         <div>
-          <ul>
         {merchData.filter(merch => merch.name.toLowerCase().indexOf(search) !== -1
         || merch.info.toLowerCase().indexOf(search) !== -1)
         .map(merch => {
@@ -154,11 +159,11 @@ null
             key={merch.id}
             merchant={merch}
             selectMerchant={selectMerchant}/>
-          }
-)
+          })
         }
-        </ul>
+
         </div>
+
       }
       </ul>
     </div>
