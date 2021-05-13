@@ -454,6 +454,5 @@ const Home = ({
       </Well>
   )
 }
-/*=================================== (End Home Component) ====================================*/
 
 export default App;

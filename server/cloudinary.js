@@ -2,6 +2,7 @@ const express = require('express');
 const images = express.Router();
 const cloudinary = require('cloudinary').v2;
 const { Pictures } = require('./db.js');
+require('dotenv').config();
 const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
 const cloudAPI = process.env.CLOUDINARY_API_KEY;
 const cloudSecret = process.env.CLOUDINARY_API_SECRET;
@@ -10,7 +11,6 @@ cloudinary.config({
   api_key: cloudAPI,
   api_secret: cloudSecret
 })
-
 
 images.post('/upload/:id', async (req, res) => {
   //console.log(req.body.image);
@@ -27,9 +27,15 @@ images.post('/upload/:id', async (req, res) => {
     })
     res.status(201). send('picture uploaded!');
   } catch(err) {
-    console.log(err);
+    console.log('this data error', err);
   }
 });
+
+console.log({
+  cloud_name: cloudName,
+  api_key: cloudAPI,
+  api_secret: cloudSecret
+})
 
 images.get('/getimages/:id', async (req, res) => {
   // const { resources } = await cloudinary.search.expression('folder:pop_up')
