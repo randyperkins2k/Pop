@@ -305,6 +305,8 @@ const Home = ({
                             setMLPrimary={setMLPrimary}
                             center={center}
                             setCenter={setCenter}
+                            isLocater={false}
+                            zoomLevel={12}
                           />
                         )
                       }}
@@ -322,10 +324,12 @@ const Home = ({
                             merchant={selectedMerchant}
                             selectMerchant={setSelectedMerchant}
                             center={{lat: +selectedMerchant.lat, lng: +selectedMerchant.lon}}
-                            setCenter={setCenter}
+                            setCenter={()=>{}}
                             currentLocMarker={currentLocMarker}
                             setCurrentLocMarker={setCurrentLocMarker}
                             setMLPrimary={setMLPrimary}
+                            isLocater={true}
+                            zoomLevel={18}
                           />
                         )
                       }}

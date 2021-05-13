@@ -61,8 +61,9 @@ font-size: 10.25px;
 const options = {
   styles: mapStyles,
   disableDefaultUI: true,
+  gestureHandling: 'greedy'
 }
-const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrentLocMarker, setMLPrimary , center, setCenter}) => {
+const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrentLocMarker, setMLPrimary , center, setCenter, isLocater, zoomLevel}) => {
   const [ selectedPopUp, setSelectedPopUp ] = useState(null);
   const [ yourLocBool, setYourLocBool] = useState(false);
   const [englishPrimary, setEnglishPrimary] = useState(false)
@@ -90,7 +91,9 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
         lat: result.coords.latitude,
         lng: result.coords.longitude
       })
-      setYourLocBool(true)
+      if (!isLocater) {
+        setYourLocBool(true)
+      }
     } catch (err) {
       console.log(err)
     }
@@ -98,15 +101,17 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
   const failed = () => {
     console.log('location test failed');
   }
-  useEffect(() => {
-      navigator.geolocation.getCurrentPosition(geoLocTest, failed);
-  },[])
-  if (loadError) {
-    return "error loading map"
-  }
-  if (!isLoaded) {
-    return "loading maps"
-  }
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(geoLocTest, failed);
+    },[])
+    if (loadError) {
+      return "error loading map"
+    }
+    if (!isLoaded) {
+      return "loading maps"
+    }
+
 // console.log(t("touch"))
   return (
     <div>
@@ -133,7 +138,7 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
       <TouchMap>{t("touchMap")}</TouchMap>
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
-      zoom={12}
+      zoom={zoomLevel}
       center={center}
       options={options}
       onClick={(event) =>{
