@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CreatePop from './YourPopups/CreatePop.jsx';
+import Burger from './SideBarView/Burger.js';
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import Map from './MapView/mapView.jsx';
 import UserProfile from './UserProfileView/UserProfile.jsx';
@@ -63,6 +64,7 @@ const App = () => {
   const { t, i18n } = useTranslation();
   const [ center, setCenter ] = useState({lat: 29.956124, lng: -90.090509});
   const [theme, setTheme] = useState({ mode: 'light' })
+  const [open, setOpen] = useState(false);
 
   // Function which fetches merchant data from database.
   const getPops = () => {
@@ -148,6 +150,8 @@ const App = () => {
                     setCurrentLocMarker={setCurrentLocMarker}
                     center={center}
                     setCenter={setCenter}
+                    open={open}
+                    setOpen={setOpen}
                   />
               )
             }}
@@ -173,7 +177,7 @@ const Home = ({
   merchData, setMerchData,
   userSubs, setUserSubs, yourPopups, setYourPopups,
   currentLocMarker, setCurrentLocMarker,
-  center, setCenter
+  center, setCenter, open, setOpen
 }) => {
   const [buttonBackground, setButtonBackground] = useState("#ffd1dc")
   const [active, setActive] = useState(false)
@@ -189,11 +193,20 @@ const Home = ({
       <Well>
           {/* <LogOutBtn href="/logout"> Logout </LogOutBtn> */}
             <div className='sidebar-view'>
+            <Burger
+              open={open}
+              setOpen={setOpen}
+              sideBarDisplay={sideBarDisplay}
+              setSideBarDisplay={setSideBarDisplay}
+              // onClick={() => {
+              //   setSideBarDisplay(!sideBarDisplay)
+              //   }}
+            />
               <br/>
              
                 <br/>
 
-                <h1 onClick={() => setSideBarDisplay(!sideBarDisplay)}>Pop^</h1>
+                <h1>Pop^</h1>
                 {/* <ToggleSwitch /> */}
                 {
                   !sideBarDisplay ?
@@ -205,6 +218,8 @@ const Home = ({
                       return (
                         <SideBar
                           close={setSideBarDisplay}
+                          open={open}
+                          setOpen={setOpen}
                         />
                       )
                     }}
