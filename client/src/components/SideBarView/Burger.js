@@ -50,8 +50,8 @@ const Burger = ({open, setOpen, sideBarDisplay, setSideBarDisplay}) => {
     <StyledBurger
       open={open}
       onClick={() => {
+        setSideBarDisplay(!sideBarDisplay)
         setOpen(!open);
-        //setSideBarDisplay(!sideBarDisplay)
       }}
     >
       <div />

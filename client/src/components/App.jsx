@@ -264,6 +264,8 @@ const Home = ({
                     render={(props) => {
                       return (
                         <SideBar
+                          open={open}
+                          setOpen={setOpen}
                           lVPrimary={lVPrimary}
                           setLVPrimary={setLVPrimary}
                           mLPrimary={mLPrimary}
