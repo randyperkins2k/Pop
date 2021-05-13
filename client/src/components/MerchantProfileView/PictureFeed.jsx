@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
 
 
-const PictureFeedTxt = styled.div`
-font-family: 'Ubuntu';
-text-align: center;
-`
+// const PictureFeedTxt = styled.div`
+// font-family: 'Ubuntu';
+// text-align: center;
+// `
 
 const PictureFeed = ({ merchant }) => {
   const [ imageIds, setImageIds ] = useState();
@@ -30,7 +30,7 @@ const PictureFeed = ({ merchant }) => {
 
   return (
     <div>
-      <PictureFeedTxt>{t("pictureFeedTxt")}</PictureFeedTxt>
+      <div>{t("pictureFeedTxt")}</div>
       {
         imageIds ? 
         imageIds.map((image, index) => {

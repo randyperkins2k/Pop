@@ -2,67 +2,68 @@ import React, { useState, useEffect } from 'react';
 import MerchList from './MerchList.jsx';
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next'
-const BtnWrapper = styled.div`
-text-align: center;
-`
-const Open = styled.button`
-  margin-top: 21px;
-  margin-bottom: 2rem;
-  color: black;
-  font-family: 'Ubuntu';
-  padding: 5px 16px;
-  background-color: white;
-  font-size: 11px;
-  border-radius: 6px;
-  border-width: 1px;
-  border-color: lightgray;
-  transition: ease 0.01s all;
-${props => props.openPrimary && css`
-opacity: .5;
-color: black;
-background-color: #FFD1DC;
-font-size: 11.25px;
-`}
-`
-const Favs = styled.button`
-  margin-left: 6px;
-  color: black;
-  font-family: 'Ubuntu';
-  padding: 5px 16px;
-  background-color: white;
-  font-size: 11px;
-  border-radius: 6px;
-  border-width: 1px;
-  border-color: lightgray;
-  transition: ease 0.01s all;
-  ${props => props.favPrimary && css`
-opacity: .5;
-color: black;
-background-color: #FFD1DC;
-font-size: 11.25px;
-`}
-`
-const Search = styled.button`
-  margin-left: 6px;
-  color: black;
-  font-family: 'Ubuntu';
-  padding: 5px 16px;
-  background-color: white;
-  font-size: 11px;
-  border-radius: 6px;
-  border-width: 1px;
-  border-color: lightgray;
-  transition: ease 0.01s all;
-  ${props => props.sPUPrimary && css`
-  opacity: .5;
-  color: black;
-  background-color: #FFD1DC;
-  font-size: 11.25px;
-  `}
-`
-const Wrap = styled.div`
-margin-left: 100px;
-`
+
+// const BtnWrapper = styled.div`
+// text-align: center;
+// `
+// const Open = styled.button`
+//   margin-top: 21px;
+//   margin-bottom: 2rem;
+//   color: black;
+//   font-family: 'Ubuntu';
+//   padding: 5px 16px;
+//   background-color: white;
+//   font-size: 11px;
+//   border-radius: 6px;
+//   border-width: 1px;
+//   border-color: lightgray;
+//   transition: ease 0.01s all;
+// ${props => props.openPrimary && css`
+// opacity: .5;
+// color: black;
+// background-color: #FFD1DC;
+// font-size: 11.25px;
+// `}
+// `
+// const Favs = styled.button`
+//   margin-left: 6px;
+//   color: black;
+//   font-family: 'Ubuntu';
+//   padding: 5px 16px;
+//   background-color: white;
+//   font-size: 11px;
+//   border-radius: 6px;
+//   border-width: 1px;
+//   border-color: lightgray;
+//   transition: ease 0.01s all;
+//   ${props => props.favPrimary && css`
+// opacity: .5;
+// color: black;
+// background-color: #FFD1DC;
+// font-size: 11.25px;
+// `}
+// `
+// const Search = styled.button`
+//   margin-left: 6px;
+//   color: black;
+//   font-family: 'Ubuntu';
+//   padding: 5px 16px;
+//   background-color: white;
+//   font-size: 11px;
+//   border-radius: 6px;
+//   border-width: 1px;
+//   border-color: lightgray;
+//   transition: ease 0.01s all;
+//   ${props => props.sPUPrimary && css`
+//   opacity: .5;
+//   color: black;
+//   background-color: #FFD1DC;
+//   font-size: 11.25px;
+//   `}
+// `
+// const Wrap = styled.div`
+// margin-left: 100px;
+// `
 const ListView= ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
   const [ openPopsView, setOpenPopsView ] = useState(true);
   const [ yourSubsView, setYourSubsView ] = useState(false);
@@ -79,8 +80,8 @@ const updateSearch = (e) => {
 }
   return (
     <div>
-<BtnWrapper>
-      <Open
+
+      <button
       inputView={inputView}
       openPrimary={openPrimary}
       onClick={() => {
@@ -89,8 +90,8 @@ const updateSearch = (e) => {
         setOpenPrimary(!openPrimary)
         setSPUPrimary(false)
         setFavPrimary(false)
-        }}>{t('openNowBtn')}</Open>
-      <Search
+        }}>{t('openNowBtn')}</button>
+      <button
        inputView={inputView}
        sPUPrimary={sPUPrimary}
        onClick={() => {
@@ -99,8 +100,8 @@ const updateSearch = (e) => {
         setOpenPrimary(false)
         setFavPrimary(false)
         setSearchPopsView(true)
-      }}>{t('searchPopUpsBtn')}</Search>
-      <Favs
+      }}>{t('searchPopUpsBtn')}</button>
+      <button
       inputView={inputView}
       favPrimary={favPrimary}
       onClick={() => {
@@ -112,7 +113,7 @@ const updateSearch = (e) => {
         setSearchPopsView(false)
         }}
         >
-          {t('favoritesBtn')}</Favs>
+          {t('favoritesBtn')}</button>
       { inputView ?
         <input
         type='text'
@@ -122,7 +123,7 @@ const updateSearch = (e) => {
 :
 null
 }
-          </BtnWrapper>
+         
 
 
       <ul>

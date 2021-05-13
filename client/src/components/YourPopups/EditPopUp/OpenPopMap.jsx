@@ -13,14 +13,14 @@ import Confirmation from '../../Confirmation.jsx';
 import { useHistory } from 'react-router-dom';
 //import map from '../popup/foodmarker.png'
 
-const libraries = ["places"];
 
-const TouchMap = styled.div`
-font-family: 'Ubuntu';
-margin-left: 84px;
-margin-top: 30px;
-opacity: .5;
-`
+// const TouchMap = styled.div`
+// font-family: 'Ubuntu';
+// margin-left: 84px;
+// margin-top: 30px;
+// opacity: .5;
+// `
+const libraries = ["places"];
 
 const mapContainerStyle = {
   width: '100vw',
@@ -115,7 +115,7 @@ const OpenPopupMap = ({ merchData, selectMerchant,
         /> :
         ''
       }
-      <TouchMap>Touch map to set location</TouchMap>
+      <div>Touch map to set location</div>
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={12}

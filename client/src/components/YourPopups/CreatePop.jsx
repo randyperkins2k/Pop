@@ -5,28 +5,28 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next'
 
-const Create = styled.button`
-  margin-left: -1px;
-  color: black;
-  font-family: 'Ubuntu';
-  padding: 5px 16px;
-  background-color: white;
-  font-size: 11px;
-  border-radius: 6px;
-  border-width: 1px;
-  border-color: lightgray;
-  transition: ease 0.01s all;
-`
+// const Create = styled.button`
+//   margin-left: -1px;
+//   color: black;
+//   font-family: 'Ubuntu';
+//   padding: 5px 16px;
+//   background-color: white;
+//   font-size: 11px;
+//   border-radius: 6px;
+//   border-width: 1px;
+//   border-color: lightgray;
+//   transition: ease 0.01s all;
+// `
 
-const CreatePopUpWrap = styled.div`
-margin-top: 30px;
-text-align: center;
-font-family: 'Ubuntu';
-h6 {
-  margin-top: 30px;
-}
+// const CreatePopUpWrap = styled.div`
+// margin-top: 30px;
+// text-align: center;
+// font-family: 'Ubuntu';
+// h6 {
+//   margin-top: 30px;
+// }
 
-`
+// `
 
 const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker, setCurrentLocMarker, merchData, setMerchData }) => {
   const [ businessName, setBusinessName ] = useState('');
@@ -77,7 +77,7 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
 
     return (
 
-      <CreatePopUpWrap>
+      <div>
         <h6>{t("businessNameTxt")}</h6>
         { nameTakenBool ? <h5 className='issue'>{`${businessName} is already taken!`}</h5> : ''}
         <input onChange={(e) => {
@@ -141,24 +141,24 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
         {
           addCreateButtons ?
         <div>
-          <Create
+          <button
             onClick={() => {
               setCreateConfirm(true);
               setAddCreateButtons(false);
             }}
-          >{t("createBtn")}</Create>
-          <Create
+          >{t("createBtn")}</button>
+          <button
             onClick={() => {
               setCancelConfirm(true);
               setAddCreateButtons(false);
             }}
-          >{t("cancelBtn")}</Create>
+          >{t("cancelBtn")}</button>
           </div>
           :
           ''
         }
 
-      </CreatePopUpWrap>
+      </div>
   )
 }
 

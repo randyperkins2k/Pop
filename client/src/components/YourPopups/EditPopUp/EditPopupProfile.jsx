@@ -12,87 +12,87 @@ import { useTranslation } from 'react-i18next'
 // const merchant = merchData.merchants[0];
 
 
-const EditYourPopUpWrap = styled.div`
-margin-top: 30px;
-text-align: center;
-font-family: 'Ubuntu';
-h6 {
-  margin-top: 30px;
-  font-family: 'helvetica';
-}
-`
-const OpenShopBtn = styled.button`
-color: black;
-font-family: 'Ubuntu';
-padding: 5px 16px;
-background-color: white;
-font-size: 11px;
-border-radius: 6px;
-border-width: 1px;
-border-color: lightgray;
-transition: ease 0.01s all;
+// const EditYourPopUpWrap = styled.div`
+// margin-top: 30px;
+// text-align: center;
+// font-family: 'Ubuntu';
+// h6 {
+//   margin-top: 30px;
+//   font-family: 'helvetica';
+// }
+// `
+// const OpenShopBtn = styled.button`
+// color: black;
+// font-family: 'Ubuntu';
+// padding: 5px 16px;
+// background-color: white;
+// font-size: 11px;
+// border-radius: 6px;
+// border-width: 1px;
+// border-color: lightgray;
+// transition: ease 0.01s all;
 
-`
-const BackBtn = styled.button`
-color: black;
-font-family: 'Ubuntu';
-padding: 5px 16px;
-background-color: white;
-font-size: 11px;
-border-radius: 6px;
-border-width: 1px;
-border-color: lightgray;
-`
-const EditInfoBtn = styled.button`
-color: black;
-font-family: 'Ubuntu';
-padding: 5px 16px;
-background-color: white;
-font-size: 11px;
-border-radius: 6px;
-border-width: 1px;
-border-color: lightgray;
-`
-const UploadBtn = styled.button`
-color: black;
-font-family: 'Ubuntu';
-padding: 5px 16px;
-background-color: white;
-font-size: 11px;
-border-radius: 6px;
-border-width: 1px;
-border-color: lightgray;
-`
-const EditMenuBtn = styled.button`
-color: black;
-font-family: 'Ubuntu';
-padding: 5px 16px;
-background-color: white;
-font-size: 11px;
-border-radius: 6px;
-border-width: 1px;
-border-color: lightgray;
-`
-const EditOwnerBtn = styled.button`
-color: black;
-font-family: 'Ubuntu';
-padding: 5px 16px;
-background-color: white;
-font-size: 11px;
-border-radius: 6px;
-border-width: 1px;
-border-color: lightgray;
-`
-const CloseBusinessBtn = styled.button`
-color: black;
-font-family: 'Ubuntu';
-padding: 5px 16px;
-background-color: white;
-font-size: 11px;
-border-radius: 6px;
-border-width: 1px;
-border-color: lightgray;
-`
+// `
+// const BackBtn = styled.button`
+// color: black;
+// font-family: 'Ubuntu';
+// padding: 5px 16px;
+// background-color: white;
+// font-size: 11px;
+// border-radius: 6px;
+// border-width: 1px;
+// border-color: lightgray;
+// `
+// const EditInfoBtn = styled.button`
+// color: black;
+// font-family: 'Ubuntu';
+// padding: 5px 16px;
+// background-color: white;
+// font-size: 11px;
+// border-radius: 6px;
+// border-width: 1px;
+// border-color: lightgray;
+// `
+// const UploadBtn = styled.button`
+// color: black;
+// font-family: 'Ubuntu';
+// padding: 5px 16px;
+// background-color: white;
+// font-size: 11px;
+// border-radius: 6px;
+// border-width: 1px;
+// border-color: lightgray;
+// `
+// const EditMenuBtn = styled.button`
+// color: black;
+// font-family: 'Ubuntu';
+// padding: 5px 16px;
+// background-color: white;
+// font-size: 11px;
+// border-radius: 6px;
+// border-width: 1px;
+// border-color: lightgray;
+// `
+// const EditOwnerBtn = styled.button`
+// color: black;
+// font-family: 'Ubuntu';
+// padding: 5px 16px;
+// background-color: white;
+// font-size: 11px;
+// border-radius: 6px;
+// border-width: 1px;
+// border-color: lightgray;
+// `
+// const CloseBusinessBtn = styled.button`
+// color: black;
+// font-family: 'Ubuntu';
+// padding: 5px 16px;
+// background-color: white;
+// font-size: 11px;
+// border-radius: 6px;
+// border-width: 1px;
+// border-color: lightgray;
+// `
 
 
 const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData }) => {
@@ -134,31 +134,31 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
 
 
   return (
-    <EditYourPopUpWrap >
+    <div >
       <Link to='/yourpopups'>
-       <BackBtn>{t("backBtn")}</BackBtn>
+       <button>{t("backBtn")}</button>
       </Link>
       <div className='controlPanel'>
         <h6>Control panel</h6>
         <Link to="/editinfo">
-          <EditInfoBtn>{t("editInfoBtn")}</EditInfoBtn>
+          <button>{t("editInfoBtn")}</button>
         </Link>
-        <UploadBtn
+        <button
           onClick={() => setUploadPicWindow(true)}
-        >Upload photo</UploadBtn>
+        >Upload photo</button>
         <Link to="/editmenu">
-          <EditMenuBtn>{t("editMenuBtn")}</EditMenuBtn>
+          <button>{t("editMenuBtn")}</button>
         </Link>
         <Link to="/editowner">
-          <EditOwnerBtn>{t("editOwnerBtn")}</EditOwnerBtn>
+          <button>{t("editOwnerBtn")}</button>
         </Link>
         <Link to='/openpopmap'>
-        <OpenShopBtn>{t("openShopBtn")}</OpenShopBtn>
+        <button>{t("openShopBtn")}</button>
         </Link>
-        <CloseBusinessBtn
+        <button
           onClick={() => closeBusiness()}
           >{t("closeShopBtn")}
-        </CloseBusinessBtn>
+        </button>
       </div>
       {
         uploadPicWindow ?
@@ -170,7 +170,7 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
       <div className='profilePreview'>
         <MerchantProfile merchant={merchant} openOrClosed={openOrClosed} setOpenOrClosed={setOpenOrClosed} style={{fontFamily: 'Ubuntu'}}/>
       </div>
-    </EditYourPopUpWrap >
+    </div >
   )
 };
 

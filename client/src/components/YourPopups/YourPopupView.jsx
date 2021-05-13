@@ -5,21 +5,21 @@ import styled, { css } from 'styled-components'
 import axios from 'axios';
 import { useTranslation } from 'react-i18next'
 
-const EditMerchBtn = styled.button`
+// const EditMerchBtn = styled.button`
 
-color: black;
-font-family: 'Ubuntu';
-padding: 6px 16px;
-background-color: white;
-font-size: 11px;
+// color: black;
+// font-family: 'Ubuntu';
+// padding: 6px 16px;
+// background-color: white;
+// font-size: 11px;
 
-border-radius: 6px;
-border-width: 1px;
-border-color: lightgray;
-transition: ease 0.01s all;
+// border-radius: 6px;
+// border-width: 1px;
+// border-color: lightgray;
+// transition: ease 0.01s all;
 
-margin-top:3px;
-`
+// margin-top:3px;
+// `
 
 const YourPopupView = ({ merchant, selectMerch, yourPopups, setYourPopups, merchData, setMerchData, userSubs, setUserSubs }) => {
   //lets get rid of some of these popups
@@ -60,15 +60,15 @@ const YourPopupView = ({ merchant, selectMerch, yourPopups, setYourPopups, merch
         <Link
           to={`/edit`}
         >
-          <EditMerchBtn
+          <button
           onClick={() => {
             selectMerch(merchant)
-            }}>{t('editBtn')}</EditMerchBtn>
+            }}>{t('editBtn')}</button>
         </Link>
-        <EditMerchBtn
+        <button
           onClick={() => {
             deleteMerch(merchant)
-            }}>{t('deleteBtn')}</EditMerchBtn>
+            }}>{t('deleteBtn')}</button>
       </div>
     </div>
   )
