@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-
 const Button = styled.button`
   background: lightgrey;
   border-radius: 10px;
@@ -21,7 +20,7 @@ const SidebarDiv = styled.nav`
   flex-direction: column;
   justify-content: center;
   background: #004d80;
-  height: 150vh;
+  height: 100vh;
   text-align: left;
   padding: 2rem;
   position: absolute;

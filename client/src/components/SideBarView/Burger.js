@@ -51,7 +51,7 @@ const Burger = ({open, setOpen, sideBarDisplay, setSideBarDisplay}) => {
       open={open}
       onClick={() => {
         setOpen(!open);
-        setSideBarDisplay(!sideBarDisplay)
+        //setSideBarDisplay(!sideBarDisplay)
       }}
     >
       <div />

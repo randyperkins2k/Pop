@@ -270,9 +270,9 @@ const Home = ({
             />
             <Welcome 
               //console.log(requestFirebaseNotifPermission)
-              // onClick={() => {
-              //   setSideBarDisplay(!sideBarDisplay)
-              //   }}
+              onClick={() => {
+                setSideBarDisplay(!sideBarDisplay)
+                }}
             >Pop^</Welcome>
             {/* <ToggleSwitch /> */}
             {
