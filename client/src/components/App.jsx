@@ -8,6 +8,7 @@ import Map from './MapView/mapView.jsx';
 import UserProfile from './UserProfileView/UserProfile.jsx';
 import SettingsView from './SettingsView/SettingsView.jsx';
 import SideBar from './SideBarView/SideBar.jsx';
+import Burger from './SideBarView/Burger.js';
 import ListView from './ListView/ListView.jsx'
 import EditPopupProfile from './YourPopups/EditPopUp/EditPopupProfile.jsx';
 import MerchantProfile from './MerchantProfileView/MerchantProfile.jsx';
@@ -113,6 +114,7 @@ const App = () => {
   const [mLPrimary, setMLPrimary] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(darkModeStore === 'true' ? true : false);
   const [darkDiv, setDarkDiv] = useState(false);
+  const [open, setOpen] = useState(false);
   const [ center, setCenter ] = useState({lat: 29.956124, lng: -90.090509});
 
   // Storage for dark mode setting.
@@ -196,6 +198,8 @@ const App = () => {
                     setCurrentLocMarker={setCurrentLocMarker}
                     isDarkMode={isDarkMode}
                     setIsDarkMode={setIsDarkMode}
+                    open={open}
+                    setOpen={setOpen}
                     center={center}
                     setCenter={setCenter}
                   />
@@ -226,7 +230,9 @@ const Home = ({
   lVPrimary, setLVPrimary,
   mLPrimary, setMLPrimary,
   darkDiv, setDarkDiv,
-  isDarkMode, setIsDarkMode, center, setCenter
+  isDarkMode, setIsDarkMode,
+  open, setOpen,
+  center, setCenter
 }) => {
   const { t, i18n } = useTranslation();
 
@@ -234,6 +240,15 @@ const Home = ({
       <Well>
           {/* <LogOutBtn href="/logout"> Logout </LogOutBtn> */}
             <div className='sidebar-view'>
+            <Burger
+              open={open}
+              setOpen={setOpen}
+              sideBarDisplay={sideBarDisplay}
+              setSideBarDisplay={setSideBarDisplay}
+              // onClick={() => {
+              //   setSideBarDisplay(!sideBarDisplay)
+              //   }}
+            />
               <button
                 onClick={() => {
                   setIsDarkMode(!isDarkMode);
@@ -253,6 +268,8 @@ const Home = ({
                     render={(props) => {
                       return (
                         <SideBar
+                          open={open}
+                          setOpen={setOpen}
                           lVPrimary={lVPrimary}
                           setLVPrimary={setLVPrimary}
                           mLPrimary={mLPrimary}
