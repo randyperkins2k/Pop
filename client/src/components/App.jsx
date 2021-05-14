@@ -58,6 +58,7 @@ const App = () => {
   const [ center, setCenter ] = useState({lat: 29.956124, lng: -90.090509});
   const [theme, setTheme] = useState({ mode: 'light' })
   const [open, setOpen] = useState(false);
+  const [buttonPink, setButtonPink] = useState(false)
 
   // Function which fetches merchant data from database.
   const getPops = () => {
@@ -104,9 +105,9 @@ const App = () => {
   return (
     <ThemeProvider 
     theme={theme}
-    
     >
-      <GlobalStyles/>
+      <GlobalStyles
+      />
       <button
                 onClick={(e) => 
                   setTheme(
@@ -125,7 +126,8 @@ const App = () => {
             render={props => {
               return (
                   <Home
-
+                    setButtonPink={setButtonPink}
+                    buttonPink={buttonPink}
                     myPops={myPops}
                     setMyProps={setMyPops}
                     user={user}
@@ -174,9 +176,8 @@ const Home = ({
   userSubs, setUserSubs, yourPopups, setYourPopups,
   currentLocMarker, setCurrentLocMarker,
   open, setOpen,
-  center, setCenter,
+  center, setCenter, buttonPink, setButtonPink
 }) => {
-  const [buttonBackground, setButtonBackground] = useState("#ffd1dc")
   const [ zindex, setZindex ] = useState(-1)
   
   function getLang(lang) {
@@ -239,15 +240,17 @@ useEffect(() => {
                 >
                   <Link to='/'>
                     <button 
+                    buttonPink={buttonPink}
+                    setButtonPink={setButtonPink}
                       onClick={() => {
-                        setActive(!active)
+                        setButtonPink(!buttonPink)
                       }}
                     >{t('mapViewBtn')}</button>
                   </Link>
                   <Link to='/listview'>
                     <button
                       onClick={() => {
-                        setActive(true)
+                      
                       }}
                     >{t('listViewBtn')}</button>
                   </Link>
