@@ -190,6 +190,16 @@ const Home = ({
 
   useEffect(async () =>  user ? setLanguage() : null, [user]);
 
+  function setLightOrDark() {
+    if (user.dark) {
+      setTheme({mode: 'dark'});
+    } else {
+      setTheme({mode: 'light'});
+    }
+  }
+
+  useEffect(async () =>  user ? setLightOrDark() : null, [user]);
+
   const Overlay = styled.div`
     position: absolute;
     width: 100%;
