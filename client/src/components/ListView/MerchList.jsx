@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next'
 
+const Ul = styled.ul`
+background-color: pink;
+`
 
 const MerchList = ({ merchant, selectMerchant }) => {
   const { name, isOpen } = merchant
@@ -12,7 +15,7 @@ const MerchList = ({ merchant, selectMerchant }) => {
 
    
     <div className="merchant-listing">
-      <ul>
+      <Ul>
         <img></img>
         {
           isOpen ? 
@@ -24,7 +27,7 @@ const MerchList = ({ merchant, selectMerchant }) => {
         <Link to='/profile'>
           <button onClick={() => selectMerchant(merchant)}>{ name }</button>
         </Link>
-      </ul>
+      </Ul>
     </div>
 
 

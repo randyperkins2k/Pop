@@ -180,8 +180,6 @@ const Home = ({
   const [buttonBackground, setButtonBackground] = useState("#ffd1dc")
   const [ zindex, setZindex ] = useState(-1)
   
-
-
   function getLang(lang) {
     i18n.changeLanguage(lang);
   }

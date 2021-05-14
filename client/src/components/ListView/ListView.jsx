@@ -3,6 +3,11 @@ import MerchList from './MerchList.jsx';
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next'
 
+const Ul = styled.ul`
+background-color: pink;
+`
+
+
 const ListView = ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
   const [ openPopsView, setOpenPopsView ] = useState(true);
   const [ yourSubsView, setYourSubsView ] = useState(false);
@@ -49,7 +54,7 @@ const updateSearch = (e) => {
 :
 null
 }
-      <ul>
+      <Ul>
       {
         !searchPopsView ?
         <div>
@@ -89,7 +94,7 @@ null
         </div>
 
       }
-      </ul>
+      </Ul>
     </div>
   );
 }
