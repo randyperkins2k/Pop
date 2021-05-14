@@ -1,7 +1,7 @@
 const express = require('express');
 const images = express.Router();
 const cloudinary = require('cloudinary').v2;
-const { Pictures } = require('./db.js');
+const { Pictures, Merchants } = require('./db.js');
 require('dotenv').config();
 const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
 const cloudAPI = process.env.CLOUDINARY_API_KEY;
@@ -26,6 +26,25 @@ images.post('/upload/:id', async (req, res) => {
       image: uploadedResponse.secure_url
     })
     res.status(201). send('picture uploaded!');
+  } catch(err) {
+    console.log('this data error', err);
+  }
+});
+
+images.post('/profilepic/:id', async (req, res) => {
+  //console.log(req.body.image);
+  const { id } = req.params;
+  try {
+    const fileStr = req.body.image;
+    const uploadedResponse = await cloudinary.uploader.upload( fileStr, {
+      upload_preset: 'pop_up'
+    })
+    console.log(uploadedResponse);
+    await Merchants.update({
+      picture: uploadedResponse.secure_url
+    },
+    {where: {id: id}})
+    res.status(201). send('profile picture updated! uploaded!');
   } catch(err) {
     console.log('this data error', err);
   }

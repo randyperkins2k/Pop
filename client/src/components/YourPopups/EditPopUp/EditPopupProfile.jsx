@@ -165,6 +165,7 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
         <UploadPic
           merchant={merchant}
           setUploadPicWindow={setUploadPicWindow}
+          
         /> :
         ''
       }

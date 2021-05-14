@@ -5,6 +5,7 @@ const UploadPic = ({ merchant, setUploadPicWindow }) => {
   const [ fileInputState, setFileInputState ] = useState('');
   const [ selectedFile, setSelectedFile ] = useState('');
   const [ previewSource, setPreviewSource ] = useState('');
+  const [ profileOrFeed, setProfileOrFeed ] = useState('upload');
   
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
@@ -32,9 +33,12 @@ const UploadPic = ({ merchant, setUploadPicWindow }) => {
 
   const uploadImage = async (base64EncodedImage) => {
     try {
-      const response = await axios.post(`/api/images/upload/${merchant.id}`, {image: base64EncodedImage})
+      const response = await axios.post(`/api/images/${profileOrFeed}/${merchant.id}`, {image: base64EncodedImage})
       alert(response.data)
-      setUploadPicWindow(false)
+      if (profileOrFeed === 'profilepic') {
+        
+      }
+      setUploadPicWindow(false) 
     } catch(err) {
       console.log(err)
     }
@@ -43,6 +47,10 @@ const UploadPic = ({ merchant, setUploadPicWindow }) => {
   return (
     <div>
       <h1>Upload</h1>
+      <select onChange={(e) => setProfileOrFeed(e.target.value)}>
+        <option value={'upload'} >picture feed</option>
+        <option value={'profilepic'}>profile</option>
+      </select>
       <form onSubmit={handleSubmitFile}>
         <input
           type="file" name="image" onChange={handleFileInputChange} value={fileInputState} className="form-input"

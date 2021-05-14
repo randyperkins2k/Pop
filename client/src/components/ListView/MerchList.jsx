@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next'
 
+const Thumbnail = styled.img`
+  display: block;
+  height: 90%;
+  width: 90vw;
+  position: fixed;
+`
 
 const MerchList = ({ merchant, selectMerchant }) => {
   const { name, isOpen } = merchant
@@ -11,20 +17,18 @@ const MerchList = ({ merchant, selectMerchant }) => {
   return (
 
    
-    <div className="merchant-listing">
-      <ul>
-        <img></img>
+    <div style={{paddingBlock: "2%"}}className="merchant-listing">
+        <Thumbnail src={merchant.picture}/>
         {
           isOpen ? 
           <div>{t('openTxt')}</div> :
           <div>{t('closedTxt')}</div>
         }
         <span></span>
-        <div></div>
+        <div><Thumbnail src={merchant.picture}/></div>
         <Link to='/profile'>
           <button onClick={() => selectMerchant(merchant)}>{ name }</button>
         </Link>
-      </ul>
     </div>
 
 

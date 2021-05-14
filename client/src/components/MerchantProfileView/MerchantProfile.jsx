@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PictureFeed from './PictureFeed.jsx';
 import Menu from './Menu.jsx';
-
+import { Image } from 'cloudinary-react'
 import styled, { css } from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
@@ -114,12 +114,24 @@ const BigPic = styled.div`
   z-index: 10;
   margin-left: 5%;
 `
+const ProfilePic = styled.div`
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+`
 const close = styled.span`
 `
 const Imagee = styled.img`
   display: block;
-  width: 100%;
   height: 100%;
+  width:100%;
+
+`
+const Imager = styled.img`
+  display: block;
+  height: 100%;
+  width:100%;
 `
 
 const MerchantProfile = ({
@@ -137,6 +149,7 @@ const MerchantProfile = ({
   const [ reviewBtnPrimary, setReviewBtnPrimary ] = useState(false);
   const [ bigPic, setBigPic ] = useState(false);
   const [ selectedImage, setSelectedImage ] = useState('');
+  const [ profilePic, setProfilePic ] = useState(merchant.picture)
   //const [reviews, setReviews] = useState(merchant.Reviews);
   const findReviews = () => {
     if (merchant.Reviews) {
@@ -213,6 +226,10 @@ const MerchantProfile = ({
           ''
         }
         <h2>{merchant.name} {openOrClosed}</h2>
+        <ProfilePic>
+          <Imager src={profilePic}></Imager>
+        </ProfilePic>
+        
         {/* <Image
             cloudName="opsparkpopup"
             publicId={image.image}
