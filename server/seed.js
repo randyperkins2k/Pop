@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise');
 
-const { Merchants, Users, Products, Reviews, Subs, Admins,  db } = require('./db.js');
+const { Merchants, Users, Products, Reviews, Subs, Admins, Pictures, db } = require('./db.js');
 const dummyData = require('./openMerch.json').merchants;
 //const data = JSON.parse(dummyData);
 
@@ -18,7 +18,7 @@ const seedMysql = () => {
         "\nDatabase (MySQL): 'pop' succesfully created!"
       )
     )
-    .then(() => Merchants.sync({ force: true }))
+    .then(() => Merchants.sync({ force: false }))
     .then(() =>
       console.log(
         "\nDatabase (MySQL): 'Merchants' table succesfully created!"
@@ -28,7 +28,7 @@ const seedMysql = () => {
       Promise.all(dummyData.map((pop) => Merchants.create(pop))
     )
   )
-  .then(() => Users.sync({ force: true }))
+  .then(() => Users.sync({ force: false }))
     .then(() =>
       console.log(
         "\nDatabase (MySQL): 'Users' table succesfully created!"
@@ -41,7 +41,7 @@ const seedMysql = () => {
       ].map((user) => Users.create(user))
     )
   )
-  .then(() => Reviews.sync({ force: true }))
+  .then(() => Reviews.sync({ force: false }))
     .then(() =>
       console.log(
         "\nDatabase (MySQL): 'Reviews' table succesfully created!"
@@ -54,7 +54,7 @@ const seedMysql = () => {
       ].map((rev) => Reviews.create(rev))
     )
   )
-  .then(() => Subs.sync({ force: true }))
+  .then(() => Subs.sync({ force: false }))
     .then(() =>
       console.log(
         "\nDatabase (MySQL): 'Subs' table succesfully created!"
@@ -67,7 +67,7 @@ const seedMysql = () => {
       ].map((sub) => Subs.create(sub))
     )
   )
-  .then(() => Admins.sync({ force: true }))
+  .then(() => Admins.sync({ force: false }))
     .then(() =>
       console.log(
         "\nDatabase (MySQL): 'Admins' table succesfully created!"
@@ -87,6 +87,8 @@ const seedMysql = () => {
       '\x1b[37m'
     )
   )
+  .then(() => Pictures.sync())
+  .then(() => Products.sync())
   .then(process.exit);
 };
 

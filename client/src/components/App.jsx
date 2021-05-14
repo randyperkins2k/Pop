@@ -27,6 +27,7 @@ import { ReactComponent as MoonPic } from '../popup/moonArt.svg'
 import Picture from './MerchantProfileView/Picture.jsx';
 //import { ThemeProvider } from 'styled-components'
 import GlobalStyles from './styles/globalStyles.js'
+//import { overlap } from 'sequelize/types/lib/operators';
 
 
 // import * as butt from './openMerch.json';
@@ -38,13 +39,7 @@ import GlobalStyles from './styles/globalStyles.js'
 
 
 
-const Welcome = styled.h1`
-  margin-top: 60px;
-  font-family: 'Londrina Solid', cursive;
-  color: #ffd1dc;
-  text-align: center;
-  margin-bottom: 2.6rem;
-`;
+
 
 
 /*============================ (End Styled Components) ==============================*/
@@ -110,8 +105,7 @@ const App = () => {
   return (
     <ThemeProvider 
     theme={theme}
-    onClick={() => 
-      setSideBarDisplay(!sideBarDisplay)}
+    
     >
       <GlobalStyles/>
       <button
@@ -180,15 +174,12 @@ const Home = ({
   merchData, setMerchData,
   userSubs, setUserSubs, yourPopups, setYourPopups,
   currentLocMarker, setCurrentLocMarker,
-  lVPrimary, setLVPrimary,
-  mLPrimary, setMLPrimary,
-  darkDiv, setDarkDiv,
-  isDarkMode, setIsDarkMode,
   open, setOpen,
   center, setCenter,
 }) => {
   const [buttonBackground, setButtonBackground] = useState("#ffd1dc")
-  const [active, setActive] = useState(false)
+  const [ zindex, setZindex ] = useState(-1)
+  
 
 
   function getLang(lang) {
@@ -196,6 +187,21 @@ const Home = ({
   }
   const { t, i18n } = useTranslation();
 
+  const Overlay = styled.div`
+    position: absolute;
+    width: 100%;
+    height: 5000px;
+    z-index: ${zindex};
+    background-color: transparent;
+    opacity: .5;
+  ` 
+useEffect(() => {
+  if(sideBarDisplay) {
+    setZindex(98) 
+  } else if(!sideBarDisplay) {
+    setZindex(-1)
+  }
+},[sideBarDisplay])
     return (
 
       <Well>
@@ -211,30 +217,29 @@ const Home = ({
               //   }}
             />
              
-                <Welcome >Pop^</Welcome>
+                <h1>Pop^</h1>
                 {/* <ToggleSwitch /> */}
                 {
                   !sideBarDisplay ?
                   ''
                   :
-                  <Route
-                    path='/'
-                    render={(props) => {
-                      return (
-                        <SideBar
-                          close={setSideBarDisplay}
-                          open={open}
-                          setOpen={setOpen}
-                        />
-                      )
-                    }}
-                  />
+                 
+                      <SideBar
+                      setSideBarDisplay={setSideBarDisplay}
+                      open={open}
+                      setOpen={setOpen}
+                      />
+                      
+                    
+                  
                 }
+              
             </div>
+            <Overlay></Overlay>
               <div
                 onClick={() => setSideBarDisplay(false)}
                 className='main'
-              >
+                >
                   <Link to='/'>
                     <button 
                       onClick={() => {
@@ -445,6 +450,7 @@ const Home = ({
                 />
                   </Switch>
                 </div>
+          
       </Well>
   )
 }
