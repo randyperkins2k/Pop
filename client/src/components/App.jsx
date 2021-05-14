@@ -90,6 +90,8 @@ const App = () => {
                   email: email,
                   picture: picture,
                   id: addUser.data.id,
+                  spanish: addUser.data.spanish,
+                  dark: addUser.data.dark
                 });
             })
         } else {
@@ -103,7 +105,7 @@ const App = () => {
   useEffect(() => getPops(), []);
 
   return (
-    <ThemeProvider 
+    <ThemeProvider
     theme={theme}
     >
       <GlobalStyles
@@ -150,6 +152,8 @@ const App = () => {
                     setCenter={setCenter}
                     open={open}
                     setOpen={setOpen}
+                    theme={theme}
+                    setTheme={setTheme}
                   />
               )
             }}
@@ -182,8 +186,30 @@ const Home = ({
   
   function getLang(lang) {
     i18n.changeLanguage(lang);
-  }
   const { t, i18n } = useTranslation();
+
+
+
+  function setLanguage() {
+    if (user.spanish) {
+      i18n.changeLanguage('sp');
+    }
+    else {
+      i18n.changeLanguage('en');
+    }
+  }
+
+  useEffect(async () =>  user ? setLanguage() : null, [user]);
+
+  function setLightOrDark() {
+    if (user.dark) {
+      setTheme({mode: 'dark'});
+    } else {
+      setTheme({mode: 'light'});
+    }
+  }
+
+  useEffect(async () =>  user ? setLightOrDark() : null, [user]);
 
   const Overlay = styled.div`
     position: absolute;
@@ -192,10 +218,10 @@ const Home = ({
     z-index: ${zindex};
     background-color: transparent;
     opacity: .5;
-  ` 
+  `
 useEffect(() => {
   if(sideBarDisplay) {
-    setZindex(98) 
+    setZindex(98)
   } else if(!sideBarDisplay) {
     setZindex(-1)
   }
@@ -214,24 +240,24 @@ useEffect(() => {
               //   setSideBarDisplay(!sideBarDisplay)
               //   }}
             />
-             
+
                 <h1>Pop^</h1>
                 {/* <ToggleSwitch /> */}
                 {
                   !sideBarDisplay ?
                   ''
                   :
-                 
+
                       <SideBar
                       setSideBarDisplay={setSideBarDisplay}
                       open={open}
                       setOpen={setOpen}
                       />
-                      
-                    
-                  
+
+
+
                 }
-              
+
             </div>
             <Overlay></Overlay>
               <div
@@ -254,7 +280,7 @@ useEffect(() => {
                       }}
                     >{t('listViewBtn')}</button>
                   </Link>
-               
+
                   <Switch>
                     <Route
                       path='/'
@@ -337,7 +363,12 @@ useEffect(() => {
                     <Route
                       path='/settings'
                       render={(props) => {
-                        return <SettingsView/>
+                        return <SettingsView
+                        user={user}
+                        setUser={setUser}
+                        theme={theme}
+                        setTheme={setTheme}
+                      />
                       }}
                     />
                     <Route
@@ -368,7 +399,7 @@ useEffect(() => {
                               setUserSubs={setUserSubs}
                               merchData={merchData}
                               setMerchData={setMerchData}
-                          
+
                             />
                           </div>
                         )
@@ -450,7 +481,7 @@ useEffect(() => {
                 />
                   </Switch>
                 </div>
-          
+
       </Well>
   )
 }
@@ -468,7 +499,7 @@ export default App;
 //   align-items: 'center';
 //   color: black;
 //   font-family: 'Ubuntu';
-  
+
 //   background-color: white;
 //   font-size: 14px;
 //   border-radius: 6px;
