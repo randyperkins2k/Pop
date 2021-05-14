@@ -153,12 +153,8 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
           <button>{t("editOwnerBtn")}</button>
         </Link>
         <Link to='/openpopmap'>
-        <button>{t("openShopBtn")}</button>
+          {merchant.isOpen ? (<button>Close</button>) : (<button>Open</button>)}
         </Link>
-        <button
-          onClick={() => closeBusiness()}
-          >{t("closeShopBtn")}
-        </button>
       </div>
       {
         uploadPicWindow ?
