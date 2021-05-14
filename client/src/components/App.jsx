@@ -1,5 +1,4 @@
 
-/*=============================== Imports ===============================*/
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CreatePop from './YourPopups/CreatePop.jsx';
@@ -181,7 +180,12 @@ const Home = ({
   merchData, setMerchData,
   userSubs, setUserSubs, yourPopups, setYourPopups,
   currentLocMarker, setCurrentLocMarker,
-  center, setCenter, open, setOpen
+  lVPrimary, setLVPrimary,
+  mLPrimary, setMLPrimary,
+  darkDiv, setDarkDiv,
+  isDarkMode, setIsDarkMode,
+  open, setOpen,
+  center, setCenter,
 }) => {
   const [buttonBackground, setButtonBackground] = useState("#ffd1dc")
   const [active, setActive] = useState(false)
@@ -206,11 +210,8 @@ const Home = ({
               //   setSideBarDisplay(!sideBarDisplay)
               //   }}
             />
-              <br/>
              
-                <br/>
-
-                <h1>Pop^</h1>
+                <Welcome >Pop^</Welcome>
                 {/* <ToggleSwitch /> */}
                 {
                   !sideBarDisplay ?
@@ -277,6 +278,7 @@ const Home = ({
                       exact
                       render={(props) => {
                         return (
+                          <div>
                           <Map
                             loadingElement={<div style={{height: '100%' }}/>}
                             containerElement={<div style={{height: '100%' }}/>}
@@ -291,6 +293,7 @@ const Home = ({
                             isLocater={true}
                             zoomLevel={18}
                           />
+                          </div>
                         )
                       }}
                     />
@@ -360,6 +363,7 @@ const Home = ({
                               setUserSubs={setUserSubs}
                               merchData={merchData}
                               setMerchData={setMerchData}
+                          
                             />
                           </div>
                         )

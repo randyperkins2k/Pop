@@ -12,7 +12,6 @@ cloudinary.config({
   api_secret: cloudSecret
 })
 
-
 images.post('/upload/:id', async (req, res) => {
   //console.log(req.body.image);
   const { id } = req.params;
@@ -21,16 +20,22 @@ images.post('/upload/:id', async (req, res) => {
     const uploadedResponse = await cloudinary.uploader.upload( fileStr, {
       upload_preset: 'pop_up'
     })
-    //console.log(uploadedResponse);
+    console.log(uploadedResponse);
     await Pictures.create({
       MerchantId: id,
-      image: uploadedResponse.public_id
+      image: uploadedResponse.secure_url
     })
     res.status(201). send('picture uploaded!');
   } catch(err) {
-    console.log(err);
+    console.log('this data error', err);
   }
 });
+
+console.log({
+  cloud_name: cloudName,
+  api_key: cloudAPI,
+  api_secret: cloudSecret
+})
 
 images.get('/getimages/:id', async (req, res) => {
   // const { resources } = await cloudinary.search.expression('folder:pop_up')

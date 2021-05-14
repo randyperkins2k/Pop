@@ -9,100 +9,134 @@ import styled, { css } from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
 
-// const MerchantProWrap = styled.div`
-// text-align: center;
-// `
-// const SubmitBtn = styled.button`
-// text-align: center;
-// color: black;
-// font-family: 'Ubuntu';
-// padding: 5px 16px;
-// background-color: white;
-// font-size: 11px;
-// border-radius: 6px;
-// border-width: 1px;
-// border-color: lightgray;
-// transition: ease 0.01s all;
-// `
-// const ReviewsBtn = styled.button`
-// text-align: center;
-// color: black;
-// font-family: 'Ubuntu';
-// padding: 5px 16px;
-// background-color: white;
-// font-size: 11px;
-// border-radius: 6px;
-// border-width: 1px;
-// border-color: lightgray;
-// transition: ease 0.01s all;
-// ${props => props.reviewBtnPrimary && css`
-// opacity: .5;
-// color: black;
-// background-color: #ffd1dc;
-// font-size: 11.25px;
-// `}
+const MerchantProWrap = styled.div`
+text-align: center;
+`
+const SubmitBtn = styled.button`
+text-align: center;
+color: black;
+font-family: 'Ubuntu';
+padding: 5px 16px;
+background-color: white;
+font-size: 11px;
+border-radius: 6px;
+border-width: 1px;
+border-color: lightgray;
+transition: ease 0.01s all;
+`
+const ReviewsBtn = styled.button`
+text-align: center;
+color: black;
+font-family: 'Ubuntu';
+padding: 5px 16px;
+background-color: white;
+font-size: 11px;
+border-radius: 6px;
+border-width: 1px;
+border-color: lightgray;
+transition: ease 0.01s all;
+${props => props.reviewBtnPrimary && css`
+opacity: .5;
+color: black;
+background-color: #ffd1dc;
+font-size: 11.25px;
+`}
 
-// `
-// const ViewMenuBtn = styled.button`
-//   text-align: center;
-//   color: black;
-//   font-family: 'Ubuntu';
-//   padding: 5px 16px;
-//   background-color: white;
-//   font-size: 11px;
-//   border-radius: 6px;
-//   border-width: 1px;
-//   border-color: lightgray;
-//   transition: ease 0.01s all;
+`
+const ViewMenuBtn = styled.button`
+  text-align: center;
+  color: black;
+  font-family: 'Ubuntu';
+  padding: 5px 16px;
+  background-color: white;
+  font-size: 11px;
+  border-radius: 6px;
+  border-width: 1px;
+  border-color: lightgray;
+  transition: ease 0.01s all;
 
-// `
-// const LocateBtn = styled.button`
-//   color: black;
-//   font-family: 'Ubuntu';
-//   padding: 5px 16px;
-//   background-color: white;
-//   font-size: 11px;
-//   border-radius: 6px;
-//   border-width: 1px;
-//   margin-top: 25px;
-//   border-color: lightgray;
-//   transition: ease 0.01s all;
-//   ${props => props.locatePrimary && css`
-// opacity: .5;
-// color: black;
-// background-color: #ffd1dc;
-// font-size: 11.25px;
-// `}
-// `
+`
+const LocateBtn = styled.button`
+  color: black;
+  font-family: 'Ubuntu';
+  padding: 5px 16px;
+  background-color: white;
+  font-size: 11px;
+  border-radius: 6px;
+  border-width: 1px;
+  margin-top: 25px;
+  border-color: lightgray;
+  transition: ease 0.01s all;
+  ${props => props.locatePrimary && css`
+opacity: .5;
+color: black;
+background-color: #ffd1dc;
+font-size: 11.25px;
+`}
+`
+const H2 = styled.div`
+font-family: 'Ubuntu';
+text-align: center;
+`
+const P = styled.div`
+font-family: 'Ubuntu';
+text-align: center;
+margin-top: 30px;
+`
+const Input = styled.input`
+box-sizing:border-box;
+margin:20px;
+background-color: #fafafa;
+width:80%;
+resize: vertical;
+padding:16px;
+border-radius:15px;
+border:0;
+box-shadow:4px 4px 10px;
+`
+const LeaveAReview = styled.div`
+margin-bottom: -17px;
+margin-top: 30px;
+font-family: 'Ubuntu';
+`
+const Review = styled.h5`
+font-family: 'Ubuntu';
+margin-top: 50px;
+font-color: green;
 
-// const P = styled.div`
-// font-family: 'Ubuntu';
-// text-align: center;
-// margin-top: 30px;
-// `
-// const Input = styled.input`
-// box-sizing:border-box;
-// margin:20px;
-// background-color: #fafafa;
-// width:80%;
-// resize: vertical;
-// padding:16px;
-// border-radius:15px;
-// border:0;
-// box-shadow:4px 4px 10px;
-// `
-// const LeaveAReview = styled.div`
-// margin-bottom: -17px;
-// margin-top: 30px;
-// font-family: 'Ubuntu';
-// `
+`
 
+const BigPic = styled.div`
+  width: 90%;
+  height: 90vw;
+  align-self: center;
+  position: absolute;
+  z-index: 10;
+  margin-left: 5%;
+`
+const close = styled.span`
+`
+const Imagee = styled.img`
+  display: block;
+  width: 100%;
+  height: 100%;
+`
 
-const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, setMerchData, openOrClosed, setOpenOrClosed, userData, setUserData }) => {
+const MerchantProfile = ({
+   merchant, user, 
+   userSubs, setUserSubs, 
+   merchData, setMerchData, 
+   openOrClosed, setOpenOrClosed, 
+   userData, setUserData }) => {
+  const [ locatePrimary, setLocatePrimary ] = useState(false);
+  const [ viewMenuPrimary, setViewMenuPrimary ] = useState(false);
   const [ reviews, setReviews ] = useState([]);
   const [ pictureFeedView, setPictureFeedView ] = useState(true);
-  const [ reviewView, setReviewView ] = useState(false)
-  const {t} = useTranslation()
+  const [ reviewView, setReviewView ] = useState(false);
+  const {t} = useTranslation();
+  const [ reviewBtnPrimary, setReviewBtnPrimary ] = useState(false);
+  const [ bigPic, setBigPic ] = useState(false);
+  const [ selectedImage, setSelectedImage ] = useState('');
   //const [reviews, setReviews] = useState(merchant.Reviews);
   const findReviews = () => {
     if (merchant.Reviews) {
@@ -166,44 +200,71 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
 
   return (
 
- <div>
+    <MerchantProWrap>
       <div>
-        <div>{merchant.name} {openOrClosed}</div>
-        <img/>
-        <div>{t("infoTxt")}</div>
+        {
+          bigPic ? 
+          
+          <BigPic>
+            <a onClick={() => setBigPic(false)}>X</a>
+            <Imagee src={selectedImage}></Imagee>
+          </BigPic>
+          :
+          ''
+        }
+        <h2>{merchant.name} {openOrClosed}</h2>
+        {/* <Image
+            cloudName="opsparkpopup"
+            publicId={image.image}
+            width="300"
+            crop="scale"
+          /> */}
+        <H2>{t("infoTxt")}</H2>
         <p>
           {merchant.info}
         </p>
       </div>
       <Link to="/locate">
-      <button
-      onClick={() => {
-      }}>{t("locateBtn")}</button>
-      </Link>
-      <Link to="/menu">
-        <button
+        <LocateBtn
+          locatePrimary={locatePrimary}
           onClick={() => {
-            console.log('hey there', merchant.id, userSubs)
-          }}>{t("viewMenuBtn")}
-        </button>
+          setLocatePrimary(!locatePrimary)
+          setViewMenuPrimary(false)
+          setReviewBtnPrimary(false)
+          setReviewView(false)
+          }}>{t("locateBtn")}
+        </LocateBtn>
       </Link>
-      <button
+        <ViewMenuBtn
+          viewMenuPrimary={viewMenuPrimary}
+          onClick={() => {
+            setPictureFeedView(true)
+            setReviewView(false)
+          }}>{t("pictureFeedTxt")}
+        </ViewMenuBtn>
+      <ViewMenuBtn
+      viewMenuPrimary={viewMenuPrimary}
       onClick={() => {
+        // setViewMenuPrimary(!viewMenuPrimary)
+        // setLocatePrimary(false)
+        // console.log('hey there', merchant.id, userSubs)
         setReviewView(false);
         setPictureFeedView(false);
-       }}>View Menu</button>
-       <button
+       }}>{t("viewMenuBtn")}</ViewMenuBtn>
+       <ViewMenuBtn
         onClick={() => {
           setPictureFeedView(false);
           setReviewView(true);
         }}
-       >{t("reviewsBtn")}</button>
+       >{t("reviewsBtn")}</ViewMenuBtn>
      {
        pictureFeedView && !reviewView ?
        <div>
         {
           pictureFeedView ?
           <PictureFeed
+            setSelectedImage={setSelectedImage}
+            setBigPic={setBigPic}
             merchant={merchant}
           />
           :
@@ -213,17 +274,17 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
       reviewView && !pictureFeedView ?
       <div>
       <div>
-      <div>{t("leaveAReviewTxt")}:</div>
+      <LeaveAReview>{t("leaveAReviewTxt")}:</LeaveAReview>
         <form onSubmit={(e) => {
           e.preventDefault();
 
         }}>
-          <input type="text" value={reviewText} onChange={(e)=>setReviewText(e.target.value)} maxlength="255"></input>
-          <button onClick={submitReview}>{t("submitBtn")}</button>
+          <Input type="text" value={reviewText} onChange={(e)=>setReviewText(e.target.value)} maxlength="255"></Input>
+          <SubmitBtn onClick={submitReview}>{t("submitBtn")}</SubmitBtn>
         </form>
       </div>
       <div>
-        <div>{t("reviewsTxt")}:</div>
+        <Review>{t("reviewsTxt")}:</Review>
         {reviews.map(review => <div key={review.id}>
           <p>
             <b>{review.User.name}</b>: {review.message}
@@ -239,14 +300,12 @@ const MerchantProfile = ({ merchant, user, userSubs, setUserSubs, merchData, set
     </div>
       :
     <div>
-      <div>{t("leaveAReviewTxt")}</div>
       <Menu
         merchant={merchant}
       />
     </div>
       }
-    </div>
-   
+    </MerchantProWrap>
   )
 };
 

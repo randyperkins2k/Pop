@@ -22,6 +22,12 @@ const Feed = styled.div`
   margin: auto;
 `
 
+const Imagee = styled.img`
+  display: block;
+  width: 100%;
+  height: 100%;
+`
+
 const Pic = styled.div`
   display: block;
   //position: relative;
@@ -29,10 +35,23 @@ const Pic = styled.div`
   color: #fff;
   cursor: pointer;
   padding-block: 1px;
+  padding-top: 1px;
+  padding-left: 1px;
+  height: 33vw;
+  &:hover {
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); */
+  }
 ` 
 
 
-const PictureFeed = ({ merchant }) => {
+const PictureFeed = ({ merchant, setSelectedImage, setBigPic }) => {
   const [ imageIds, setImageIds ] = useState();
   const [ pictureUp, setPictureUp ] = useState(false);
   const { t } = useTranslation()
@@ -60,15 +79,10 @@ const PictureFeed = ({ merchant }) => {
         imageIds.map((image, index) => {
           return (
             <Pic>
-              <Image
-                key={index}
-                cloudName="opsparkpopup"
-                publicId={image.image}
-                width="117"
-                crop="scale"
-              >
-                <Transformation height="90" width="90" crop="fill"/>
-              </Image>
+              <Imagee onClick={() => {
+                setSelectedImage(image.image)
+                setBigPic(true)
+                }} src={image.image} ></Imagee>
             </Pic> 
           )
         })
