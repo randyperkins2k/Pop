@@ -4,37 +4,36 @@ import YourPopupView from './YourPopupView.jsx';
 import styled, { css } from 'styled-components';
 import CreatePop from './CreatePop.jsx'
 import { useTranslation } from 'react-i18next'
-const Create = styled.button`
-  color: black;
-  font-family: 'Ubuntu';
-  padding: 5px 16px;
-  background-color: white;
-  font-size: 11px;
-  border-radius: 6px;
-  border-width: 1px;
-  border-color: lightgray;
-  transition: ease 0.01s all;
-  ${props => props.createPopUpPrimary && css`
-  opacity: .5;
-  color: black;
-  background-color: #ffd1dc;
-  font-size: 11.25px;
-  `}
-`
-const YourPopWrap = styled.div`
-  margin-top: 60px;
-  text-align: center;
-  font-family: 'Ubuntu';
-  div {
-    margin-top: 30px;
-    margin-bottom:30px;
-    color: #ffd1dc;
-    margin-bottom: 30px:
-  }
-`
+// const Create = styled.button`
+//   color: black;
+//   font-family: 'Ubuntu';
+//   padding: 5px 16px;
+//   background-color: white;
+//   font-size: 11px;
+//   border-radius: 6px;
+//   border-width: 1px;
+//   border-color: lightgray;
+//   transition: ease 0.01s all;
+//   ${props => props.createPopUpPrimary && css`
+//   opacity: .5;
+//   color: black;
+//   background-color: #ffd1dc;
+//   font-size: 11.25px;
+//   `}
+// `
+// const YourPopWrap = styled.div`
+//   margin-top: 60px;
+//   text-align: center;
+//   font-family: 'Ubuntu';
+//   div {
+//     margin-top: 30px;
+//     margin-bottom:30px;
+//     color: #ffd1dc;
+//     margin-bottom: 30px:
+//   }
+// `
 
 const YourPopUps = ({ yourPopups, setYourPopups, merchData, setMerchData, merchant, selectMerch, userSubs, setUserSubs }) => {
-  const [createPopUpPrimary, setCreatePopUpPrimary] = useState(false)
   const {t} = useTranslation()
   //const [ yourPopups, setYourPopups ] = useState();
   //const [ adminId, setAdminId] = useState(231);
@@ -46,17 +45,15 @@ const YourPopUps = ({ yourPopups, setYourPopups, merchData, setMerchData, mercha
   // },[])
 
   return (
-    <YourPopWrap>
+    <div>
+        <ul>
       <h5>{t('yourPopUpsBtn')}</h5>
       <Link to='/create'>
-      <Create
-      createPopUpPrimary={createPopUpPrimary}
+      <button
       onClick={() => {
         console.log(!!yourPopups)
-        setCreatePopUpPrimary(!createPopUpPrimary)
-      }}>{t('createPopUpBtn')}</Create>
+      }}>{t('createPopUpBtn')}</button>
       </Link>
-        <div>
       { yourPopups ?
         yourPopups.map(merch => {
             return <YourPopupView
@@ -75,8 +72,8 @@ const YourPopUps = ({ yourPopups, setYourPopups, merchData, setMerchData, mercha
             <h3>You don't own any Pop Ups</h3>
           }
 
-          </div>
-    </YourPopWrap>
+          </ul>
+    </div>
   )
 };
 

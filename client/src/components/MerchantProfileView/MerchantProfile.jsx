@@ -115,7 +115,6 @@ const BigPic = styled.div`
   margin-left: 5%;
 `
 const close = styled.span`
-  
 `
 const Imagee = styled.img`
   display: block;
@@ -220,7 +219,7 @@ const MerchantProfile = ({
             width="300"
             crop="scale"
           /> */}
-        <H2>Info</H2>
+        <H2>{t("infoTxt")}</H2>
         <p>
           {merchant.info}
         </p>
@@ -241,7 +240,7 @@ const MerchantProfile = ({
           onClick={() => {
             setPictureFeedView(true)
             setReviewView(false)
-          }}>Picture feed
+          }}>{t("pictureFeedTxt")}
         </ViewMenuBtn>
       <ViewMenuBtn
       viewMenuPrimary={viewMenuPrimary}
@@ -251,13 +250,13 @@ const MerchantProfile = ({
         // console.log('hey there', merchant.id, userSubs)
         setReviewView(false);
         setPictureFeedView(false);
-       }}>View Menu</ViewMenuBtn>
+       }}>{t("viewMenuBtn")}</ViewMenuBtn>
        <ViewMenuBtn
         onClick={() => {
           setPictureFeedView(false);
           setReviewView(true);
         }}
-       >Reviews</ViewMenuBtn>
+       >{t("reviewsBtn")}</ViewMenuBtn>
      {
        pictureFeedView && !reviewView ?
        <div>

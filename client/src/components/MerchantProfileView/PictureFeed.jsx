@@ -8,6 +8,10 @@ import Picture from './Picture.jsx';
 //import { Container, Row, Col } from 'react-bootstrap'
 
 
+// const PictureFeedTxt = styled.div`
+// font-family: 'Ubuntu';
+// text-align: center;
+// `
 const PictureFeedTxt = styled.div`
 font-family: 'Ubuntu';
 text-align: center;
@@ -68,6 +72,7 @@ const PictureFeed = ({ merchant, setSelectedImage, setBigPic }) => {
 
   return (
     <div>
+      <div>{t("pictureFeedTxt")}</div>
       <Feed>
       {
         imageIds ? 
