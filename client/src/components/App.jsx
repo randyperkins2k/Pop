@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import CreatePop from './YourPopups/CreatePop.jsx';
 import Burger from './SideBarView/Burger.js';
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';

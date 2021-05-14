@@ -30,7 +30,9 @@ import { useTranslation } from 'react-i18next'
 
 const mapContainerStyle = {
     width: '100vw',
-    height: '100vh'
+    height: '100vh',
+ 
+
   }
 
 const libraries = ["places"];

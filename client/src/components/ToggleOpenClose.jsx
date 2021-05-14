@@ -23,7 +23,7 @@ const Input = styled.input`
 		}
 	}
 
-	$: focus + span {
+	&:focus + span {
 		box-shadow: 0 0 0 2px rgba(0, 0, 0, 0, 0.1);
 	}
 
@@ -35,6 +35,7 @@ const Input = styled.input`
 const Slider = styled.span`
 	display: flex;
 	cursor: pointer;
+	margin-left: 156px;
 	width: 50px;
 	height: 25px;
 	border-radius: 100px;
