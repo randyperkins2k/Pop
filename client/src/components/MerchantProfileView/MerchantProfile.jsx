@@ -123,10 +123,10 @@ const Imagee = styled.img`
 `
 
 const MerchantProfile = ({
-   merchant, user, 
-   userSubs, setUserSubs, 
-   merchData, setMerchData, 
-   openOrClosed, setOpenOrClosed, 
+   merchant, user,
+   userSubs, setUserSubs,
+   merchData, setMerchData,
+   openOrClosed, setOpenOrClosed,
    userData, setUserData }) => {
   const [ locatePrimary, setLocatePrimary ] = useState(false);
   const [ viewMenuPrimary, setViewMenuPrimary ] = useState(false);
@@ -203,8 +203,8 @@ const MerchantProfile = ({
     <MerchantProWrap>
       <div>
         {
-          bigPic ? 
-          
+          bigPic ?
+
           <BigPic>
             <a onClick={() => setBigPic(false)}>X</a>
             <Imagee src={selectedImage}></Imagee>
@@ -224,6 +224,9 @@ const MerchantProfile = ({
           {merchant.info}
         </p>
       </div>
+      { merchant.isOpen
+        ?
+      (<div> <h5>{merchant.address}</h5>
       <Link to="/locate">
         <LocateBtn
           locatePrimary={locatePrimary}
@@ -234,7 +237,8 @@ const MerchantProfile = ({
           setReviewView(false)
           }}>{t("locateBtn")}
         </LocateBtn>
-      </Link>
+      </Link></div>)
+      : null }
         <ViewMenuBtn
           viewMenuPrimary={viewMenuPrimary}
           onClick={() => {
