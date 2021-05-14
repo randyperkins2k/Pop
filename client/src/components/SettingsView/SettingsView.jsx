@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled, { css, ThemeProvider, createGlobalStyle} from 'styled-components'
 import App from  '../App.jsx'
+import axios from 'axios';
 
 
 
@@ -35,16 +36,16 @@ const SpanishBtn = styled.button`
 `}
 `
 
-const Settings = () => {
+const Settings = ({ user, setUser }) => {
   const [englishPrimary, setEnglishPrimary] = useState(false)
   const [spanishPrimary, setSpanishPrimary] = useState(false)
   const { t, i18n } = useTranslation();
-  
+
   function getLang(lang) {
     i18n.changeLanguage(lang);
   }
   return (
- 
+
 
     <div>
       <br/>
@@ -54,21 +55,29 @@ const Settings = () => {
       <br/>
       <br/>
 
-      <EnglishBtn 
+      <EnglishBtn
       englishPrimary={englishPrimary}
       onClick={()=>{
         getLang('en')
         setEnglishPrimary(!englishPrimary)
         setSpanishPrimary(false)
+        console.log(user);
+        axios.put('/api/users/english', {
+          id: user.id
+        })
       }}>
         {t('englishBtn')}
         </EnglishBtn>
-      <SpanishBtn 
+      <SpanishBtn
       spanishPrimary={spanishPrimary}
       onClick={()=>{
         setSpanishPrimary(!spanishPrimary)
         setEnglishPrimary(false)
         getLang('sp')
+        console.log(user);
+        axios.put('/api/users/spanish', {
+          id: user.id
+        })
       }}>
           {t('spanishBtn')}
           </SpanishBtn>
@@ -82,7 +91,7 @@ const Settings = () => {
           <br/>
           <br/>
     </div>
-         
+
   )
 };
 

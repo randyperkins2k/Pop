@@ -103,16 +103,16 @@ const App = () => {
   useEffect(() => getPops(), []);
 
   return (
-    <ThemeProvider 
+    <ThemeProvider
     theme={theme}
-    
+
     >
       <GlobalStyles/>
       <button
-                onClick={(e) => 
+                onClick={(e) =>
                   setTheme(
                     theme.mode === 'dark'
-                    ? {mode:'light'} 
+                    ? {mode:'light'}
                     : {mode:'dark'}
                     )
                   }
@@ -179,7 +179,7 @@ const Home = ({
 }) => {
   const [buttonBackground, setButtonBackground] = useState("#ffd1dc")
   const [ zindex, setZindex ] = useState(-1)
-  
+
 
 
   function getLang(lang) {
@@ -194,10 +194,10 @@ const Home = ({
     z-index: ${zindex};
     background-color: transparent;
     opacity: .5;
-  ` 
+  `
 useEffect(() => {
   if(sideBarDisplay) {
-    setZindex(98) 
+    setZindex(98)
   } else if(!sideBarDisplay) {
     setZindex(-1)
   }
@@ -216,24 +216,24 @@ useEffect(() => {
               //   setSideBarDisplay(!sideBarDisplay)
               //   }}
             />
-             
+
                 <h1>Pop^</h1>
                 {/* <ToggleSwitch /> */}
                 {
                   !sideBarDisplay ?
                   ''
                   :
-                 
+
                       <SideBar
                       setSideBarDisplay={setSideBarDisplay}
                       open={open}
                       setOpen={setOpen}
                       />
-                      
-                    
-                  
+
+
+
                 }
-              
+
             </div>
             <Overlay></Overlay>
               <div
@@ -241,7 +241,7 @@ useEffect(() => {
                 className='main'
                 >
                   <Link to='/'>
-                    <button 
+                    <button
                       onClick={() => {
                         setActive(!active)
                       }}
@@ -254,7 +254,7 @@ useEffect(() => {
                       }}
                     >{t('listViewBtn')}</button>
                   </Link>
-               
+
                   <Switch>
                     <Route
                       path='/'
@@ -337,7 +337,10 @@ useEffect(() => {
                     <Route
                       path='/settings'
                       render={(props) => {
-                        return <SettingsView/>
+                        return <SettingsView
+                        user={user}
+                        setUser={setUser}
+                      />
                       }}
                     />
                     <Route
@@ -368,7 +371,7 @@ useEffect(() => {
                               setUserSubs={setUserSubs}
                               merchData={merchData}
                               setMerchData={setMerchData}
-                          
+
                             />
                           </div>
                         )
@@ -450,7 +453,7 @@ useEffect(() => {
                 />
                   </Switch>
                 </div>
-          
+
       </Well>
   )
 }
@@ -468,7 +471,7 @@ export default App;
 //   align-items: 'center';
 //   color: black;
 //   font-family: 'Ubuntu';
-  
+
 //   background-color: white;
 //   font-size: 14px;
 //   border-radius: 6px;
