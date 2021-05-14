@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-
+//refact
 
 const sequelize = new Sequelize({
   host: 'localhost',
@@ -25,6 +25,11 @@ const Users = sequelize.define('Users', {
   picture: DataTypes.STRING,
   cloudinary_id: DataTypes.STRING,
   email: DataTypes.STRING,
+  spanish: DataTypes.BOOLEAN,
+  dark: DataTypes.BOOLEAN,
+  lat: DataTypes.DECIMAL(20, 15),
+  lon: DataTypes.DECIMAL(20, 15),
+  phone: DataTypes.STRING,
 });
 
 const Merchants = sequelize.define('Merchants', {
@@ -43,6 +48,7 @@ const Merchants = sequelize.define('Merchants', {
   info: DataTypes.STRING,
   lat: DataTypes.DECIMAL(20, 15),
   lon: DataTypes.DECIMAL(20, 15),
+  address: DataTypes.STRING,
   category: DataTypes.STRING,
   website: DataTypes.STRING,
   phone: DataTypes.STRING,
@@ -69,7 +75,7 @@ const Products = sequelize.define('Products', {
 });
 
 //join tables
-Products.sync();
+//Products.sync();
 const Reviews = sequelize.define('Reviews', {
   id: {
     type: DataTypes.INTEGER,
@@ -184,7 +190,7 @@ const Pictures = sequelize.define('Picture', {
   }
 });
 
-Pictures.sync();
+//Pictures.sync();
 Merchants.hasMany(Pictures);
 
 module.exports = {

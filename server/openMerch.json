@@ -1,18 +1,6 @@
 {
   "merchants": [
     {
-      "name": "Deez Shells Jewelry",
-      "cloudinary_id": "",
-      "lat": 29.959252736079804,
-      "lon": -90.10501046009264,
-      "info": "Hi, me and my husband have been making and selling jewelry made from shells",
-      "category": "arts",
-      "website": "deeznuts.com",
-      "isOpen": true,
-      "lastOpen": ""
-
-    },
-    {
       "name": "Philly cheesesteaks",
       "cloudinary_id": "",
       "lat": 29.961443003163353,
