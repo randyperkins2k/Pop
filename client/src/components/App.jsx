@@ -90,6 +90,8 @@ const App = () => {
                   email: email,
                   picture: picture,
                   id: addUser.data.id,
+                  spanish: addUser.data.spanish,
+                  dark: addUser.data.dark
                 });
             })
         } else {
@@ -179,13 +181,20 @@ const Home = ({
 }) => {
   const [buttonBackground, setButtonBackground] = useState("#ffd1dc")
   const [ zindex, setZindex ] = useState(-1)
-
-
-
-  function getLang(lang) {
-    i18n.changeLanguage(lang);
-  }
   const { t, i18n } = useTranslation();
+
+
+
+  function setLanguage() {
+    if (user.spanish) {
+      i18n.changeLanguage('sp');
+    }
+    else {
+      i18n.changeLanguage('en');
+    }
+  }
+
+  useEffect(async () =>  user ? setLanguage() : null, [user]);
 
   const Overlay = styled.div`
     position: absolute;
