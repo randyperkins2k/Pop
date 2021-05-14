@@ -85,10 +85,17 @@ merchants.put('/merchcoords/:merchid', (req, res) => {
     .then(data => {
       //res.send(data.data.features[0].properties.name);
       //res.send('hi mom');
+      let setAddress;
+      if (data.data.features[0].properties.housenumber && data.data.features[0].properties.street) {
+        setAddress = data.data.features[0].properties.housenumber + ' ' + data.data.features[0].properties.street;
+      } else {
+        setAddress = 'No Address';
+      }
       Merchants.update(
         {lat: req.body.lat,
          lon: req.body.lng,
-         address: data.data.features[0].properties.housenumber + ' ' + data.data.features[0].properties.street},
+         address: setAddress
+        },
          {where: {
            id: merchid
          }}

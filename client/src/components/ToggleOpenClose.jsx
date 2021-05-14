@@ -114,7 +114,10 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
 							})
 					})
 			})
-			.catch(err => console.log('opening merchant error', err));
+			.catch(err => {
+				console.log('opening merchant error', err);
+				alert('please choose valid location');
+			});
   }
 
 	useEffect(() => initiate(), []);
