@@ -76,6 +76,51 @@ users.post('/adduser/:name/:email/', (req, res) => {
     .catch(err => res.send(err));
 });
 
+//switch to dark mode
+users.put('/dark', (req, res) => {
+  const { id } = req.body;
+  Users.update(
+    {dark: true},
+    {where: {id: id}}
+  )
+  .then(result => res.send(result))
+  .catch(err => res.send(err));
+});
+
+//switch to light mode
+users.put('/light', (req, res) => {
+  const { id } = req.body;
+  Users.update(
+    {dark: false},
+    {where: {id: id}}
+  )
+  .then(result => res.send(result))
+  .catch(err => res.send(err));
+});
+
+//switch to spanish
+users.put('/spanish', (req, res) => {
+  const { id } = req.body;
+  Users.update(
+    {spanish: true},
+    {where: {id: id}}
+  )
+  .then(result => res.send(result))
+  .catch(err => res.send(err));
+});
+
+//switch to english
+users.put('/english', (req, res) => {
+  const { id } = req.body;
+  Users.update(
+    {spanish: false},
+    {where: {id: id}}
+  )
+  .then(result => res.send(result))
+  .catch(err => res.send(err));
+});
+
+
 //delete user
 users.delete('/deleteuser/:id', (req, res) => {
   const { id } = req.params;
