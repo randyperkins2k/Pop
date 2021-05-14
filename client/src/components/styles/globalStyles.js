@@ -20,7 +20,7 @@ export default createGlobalStyle`
   ul {
     margin-left: -40px;
     margin-top: 0px;
-    background-color:#ffd1dc;
+    background-color:white;
   }
   h1{
     margin-top: 30px;

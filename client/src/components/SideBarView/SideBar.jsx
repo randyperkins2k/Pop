@@ -4,31 +4,34 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 const Button = styled.button`
-  background: lightgrey;
+  background: white;
   border-radius: 10px;
-  border-width: 4px;
-  border-color: #ffd1dc;
+  border-width: 1px;
+  border-color: lightgray;
   margin: 0.5em 1em;
-  padding: 0.25em 1em;
+  font-family: 'Ubuntu';
+  padding: 6px 16px;
   width: 9em;
   display: block;
 `;
 
 const SidebarDiv = styled.nav`
+  opacity: .9;
   overflow: auto;
   z-index: 99;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #004d80;
+  background: white;
   height: 100vh;
   text-align: left;
   padding: 2rem;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 199px;
+  left: -126px;
   transition: transform 0.3s ease-in-out;
   transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
+  width: 49%;
 `;
 
 const SidebarUl = styled.ul`
@@ -36,40 +39,42 @@ const SidebarUl = styled.ul`
   color: white;
   padding: 16px;
   text-decoration: none;
+  
 `;
 
-const SideBar = ({ open, close, setMLPrimary, setLVPrimary }) => {
+const SideBar = ({ open, setSideBarDisplay, setOpen }) => {
   const {t} = useTranslation();
   return (
     <SidebarDiv open={open}>
       <SidebarUl>
-        <br/>
-          <Link to='/'>
-            <Button><a onClick={() => {
-              close(false)
-              }}>{t("popUpsBtn")}</a></Button> 
-          </Link>
+       
+     
         <br/>
           <Link to='/yourprofile'>
             <Button><a onClick={() => {
-              close(false)
+              setSideBarDisplay(false)
+              setOpen(false);
+              
               }}>{t('yourProfileBtn')}</a></Button>
           </Link>
         <br/>
           <Link to='/yourpopups'>
             <Button><a onClick={() => {
-              close(false)
+              setSideBarDisplay(false)
+              setOpen(false);
             }}>{t('yourPopUpsBtn')}</a></Button>
           </Link>
         <br/>
           <Link to='/settings'>
             <Button><a onClick={() => {
-              close(false)
+              setSideBarDisplay(false)
+              setOpen(false);
             }}>{t('settingsBtn')}</a></Button>
           </Link>
         <br/>
           <Button><a href="/logout" onClick={() => {
-            close(false)
+            setSideBarDisplay(false)
+            setOpen(false);
             }}>{t('logoutBtn')}</a></Button>
       </SidebarUl>
     </SidebarDiv>
