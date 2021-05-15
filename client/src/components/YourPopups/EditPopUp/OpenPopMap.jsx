@@ -118,7 +118,12 @@ const OpenPopupMap = ({ merchData, selectMerchant,
         /> :
         ''
       }
-      <div>{t("touchMap")}</div>
+      {merchant.isOpen ?
+      null :
+      (
+        <div>{t("touchMap")}</div>
+      )}
+      {merchant.isOpen ? (<div><h4>close "{merchant.name}" to see location map</h4></div>) : (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={12}
@@ -187,6 +192,7 @@ const OpenPopupMap = ({ merchData, selectMerchant,
         )
       }
     </GoogleMap>
+      )}
     </div>
   );
 };
