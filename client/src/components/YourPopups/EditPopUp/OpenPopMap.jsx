@@ -45,6 +45,7 @@ const OpenPopupMap = ({ merchData, selectMerchant,
   const [ yourLocBool, setYourLocBool ] = useState(false);
   const [ openOrClosed, setOpenOrClosed ] = useState('');
   const [ cancelConfirm, setCancelConfirm ] = useState(false);
+  const [ profilePic, setProfilePic ] = useState(merchant.picture);
   const back = useHistory();
   const { t } = useTranslation()
   //const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
@@ -123,7 +124,7 @@ const OpenPopupMap = ({ merchData, selectMerchant,
       (
         <div>{t("touchMap")}</div>
       )}
-      {merchant.isOpen ? (<div><h4>close "{merchant.name}" to see location map</h4></div>) : (
+      {merchant.isOpen ? (<div><h4>close "{merchant.name}" to see location map</h4><img src={profilePic}></img></div>) : (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={12}
