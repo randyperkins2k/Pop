@@ -1,7 +1,19 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components'
 
+const Div = styled.div`
+margin-top: 30px;
+`
+const Div2 = styled.div`
+margin-top: 60px;
+`
+const H2 = styled.div`
+margin-top: 15px;
+color:#f5abc9;
+font-size: 1.5rem;
+`
 const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
   const [owners, setOwners] = useState([]);
   const [text, setText] = useState('');
@@ -78,11 +90,13 @@ const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
   };
 
   return (
-  <div>
-    <h4>{t("addOwnerTxt")}:</h4>
+  <Div>
+    <H2>{t("addOwnerTxt")}</H2>
+    <br/>
     <label>{t("EnterEmailTxt")}: </label>
     <input id="email" type="text" value={text} onChange={(e) => setText(e.target.value)}></input>
     <button onClick={() => addOwner()}>{t("addBtn")}</button>
+    <Div2></Div2>
     <h4>{t("currentOnersTxt")}: </h4>
     {owners.map(owner =>
       <div key={owner.id}>
@@ -93,7 +107,7 @@ const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
         }
       </div>
     )}
-  </div>)
+  </Div>)
 
 }
 
