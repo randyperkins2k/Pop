@@ -145,7 +145,7 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
         </Link>
         <button
           onClick={() => setUploadPicWindow(true)}
-        >Upload photo</button>
+        >{t("uploadPhotoBtn")}</button>
         <Link to="/editmenu">
           <button>{t("editMenuBtn")}</button>
         </Link>
@@ -170,7 +170,13 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
         ''
       }
       <div className='profilePreview'>
-        <MerchantProfile merchant={merchant} openOrClosed={openOrClosed} setOpenOrClosed={setOpenOrClosed} style={{fontFamily: 'Ubuntu'}}/>
+        <MerchantProfile 
+          merchant={merchant} 
+          openOrClosed={openOrClosed} 
+          setOpenOrClosed={setOpenOrClosed}
+          uploadPicWindow={uploadPicWindow} 
+          style={{fontFamily: 'Ubuntu'}}
+        />
       </div>
     </div >
   )

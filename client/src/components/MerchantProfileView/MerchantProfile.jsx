@@ -139,7 +139,8 @@ const MerchantProfile = ({
    userSubs, setUserSubs, 
    merchData, setMerchData, 
    openOrClosed, setOpenOrClosed, 
-   userData, setUserData }) => {
+   userData, setUserData,
+   uploadPicWindow }) => {
   const [ locatePrimary, setLocatePrimary ] = useState(false);
   const [ viewMenuPrimary, setViewMenuPrimary ] = useState(false);
   const [ reviews, setReviews ] = useState([]);
@@ -280,7 +281,9 @@ const MerchantProfile = ({
         {
           pictureFeedView ?
           <PictureFeed
+            uploadPicWindow={uploadPicWindow}
             setSelectedImage={setSelectedImage}
+            selectedImage={selectedImage}
             setBigPic={setBigPic}
             merchant={merchant}
           />

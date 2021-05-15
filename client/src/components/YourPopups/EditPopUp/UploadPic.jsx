@@ -36,7 +36,7 @@ const UploadPic = ({ merchant, setUploadPicWindow }) => {
       const response = await axios.post(`/api/images/${profileOrFeed}/${merchant.id}`, {image: base64EncodedImage})
       alert(response.data)
       if (profileOrFeed === 'profilepic') {
-        
+
       }
       setUploadPicWindow(false) 
     } catch(err) {
@@ -47,6 +47,7 @@ const UploadPic = ({ merchant, setUploadPicWindow }) => {
   return (
     <div>
       <h1>Upload</h1>
+      <button onClick={() => setUploadPicWindow(false)}>Cancel</button>
       <select onChange={(e) => setProfileOrFeed(e.target.value)}>
         <option value={'upload'} >picture feed</option>
         <option value={'profilepic'}>profile</option>

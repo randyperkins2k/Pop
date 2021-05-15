@@ -30,7 +30,8 @@ import { useTranslation } from 'react-i18next'
 
 const mapContainerStyle = {
     width: '100vw',
-    height: '100vh'
+    height: '100vw',
+    position: 'sticky',
   }
 
 const libraries = ["places"];
@@ -85,6 +86,20 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
       return "loading maps"
     }
 
+  const assignIcon = (merch) => {
+    if (merch.category === 'foodpopup') {
+      return '/assets/foodmarker.svg'
+    } else if (merch.category === 'foodtruck') {
+      return '/assets/foodTruck.svg'  
+    } else if (merch.category === 'performer') {
+      return '/assets/showgirl.svg'
+    } else if (merch.category === 'produce') {
+      return '/assets/potatoes.svg'
+    } else if (merch.category === 'arts') {
+      return '/assets/easle2.svg'
+    }
+  }
+
 // console.log(t("touch"))
   return (
     <div>
@@ -134,7 +149,7 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
               setSelectedPopUp(merch)
             }}
             icon={{
-              url: '/assets/foodmarker.svg',
+              url: assignIcon(merch),
               scaledSize: new google.maps.Size(40, 40)
             }}
           />

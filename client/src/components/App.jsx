@@ -190,7 +190,7 @@ const Home = ({
   const Overlay = styled.div`
     position: absolute;
     width: 100%;
-    height: 5000px;
+    height: 100vw;
     z-index: ${zindex};
     background-color: transparent;
     opacity: .5;

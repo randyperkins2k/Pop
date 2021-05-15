@@ -18,14 +18,12 @@ const MerchList = ({ merchant, selectMerchant }) => {
 
    
     <div style={{paddingBlock: "2%"}}className="merchant-listing">
-        <Thumbnail src={merchant.picture}/>
         {
           isOpen ? 
           <div>{t('openTxt')}</div> :
           <div>{t('closedTxt')}</div>
         }
         <span></span>
-        <div><Thumbnail src={merchant.picture}/></div>
         <Link to='/profile'>
           <button onClick={() => selectMerchant(merchant)}>{ name }</button>
         </Link>

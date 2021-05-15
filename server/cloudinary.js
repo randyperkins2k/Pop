@@ -50,10 +50,15 @@ images.post('/profilepic/:id', async (req, res) => {
   }
 });
 
-console.log({
-  cloud_name: cloudName,
-  api_key: cloudAPI,
-  api_secret: cloudSecret
+images.delete('/delete', async (req, res) => {
+  const { url } = req.body;
+  try {
+    await Pictures.destroy({where:{image: url}})
+    res.status(201)
+    //console.log(url);
+  } catch(err) {
+    console.log('pic deletion error', err)
+  }
 })
 
 images.get('/getimages/:id', async (req, res) => {
