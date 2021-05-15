@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next'
 
 const Ul = styled.ul`
-background-color: pink;
+background-color: ${props => props.theme.mode === 'dark' ? '#803452' : '#ffd1dc'};
 `
 
 const MerchList = ({ merchant, selectMerchant }) => {
