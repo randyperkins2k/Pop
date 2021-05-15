@@ -10,13 +10,6 @@ import { useTranslation } from 'react-i18next'
 const Div = styled.div`
 margin-top: 30px;
 `
-// const H2 = styled.div`
-// margin-top: 15px;
-// color:#f5abc9;
-// font-size: 1.5rem;
-// `
-
-
 const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData }) => {
   const [ openOrClosed, setOpenOrClosed] = useState('');
   const [ uploadPicWindow, setUploadPicWindow ] = useState(false);
