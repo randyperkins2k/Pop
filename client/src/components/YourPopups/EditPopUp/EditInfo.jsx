@@ -6,8 +6,9 @@ import styled from 'styled-components'
 
 const H2 = styled.div`
 margin-top: 15px;
+margin-bottom: 0;
 color:#f5abc9;
-font-size: 1.5rem;
+font-size: 2rem;
 `
 
 const Div = styled.div`
@@ -64,7 +65,7 @@ const EditInfo = ({ merchant, selectMerchant, yourPopups, setYourPopups, userSub
   return (
   <div>
     <div>
-      <H2> {t("editTxt")} {`${merchant.name}'s`}: </H2>
+      <h1> {t("editTxt")} {`${merchant.name}'s`}: </h1>
       <br/>
       <hr/>
       <br/>
@@ -82,3 +83,6 @@ const EditInfo = ({ merchant, selectMerchant, yourPopups, setYourPopups, userSub
 };
 
 export default EditInfo;
+
+
+
