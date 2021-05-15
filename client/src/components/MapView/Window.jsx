@@ -11,7 +11,6 @@ const Window = ({ merchant, selectMerchant }) => {
     <div>
       <span></span>
       <h2>{merchant.name}</h2>
-      <h2>{merchant.website}</h2>
       <Link to='/profile'>
         <button onClick={() => {
           selectMerchant(merchant)
