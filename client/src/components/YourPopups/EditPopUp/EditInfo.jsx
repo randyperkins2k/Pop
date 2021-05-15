@@ -10,6 +10,11 @@ color:#f5abc9;
 font-size: 1.5rem;
 `
 
+const Div = styled.div`
+margin-top: 1px;
+
+`
+
 const EditInfo = ({ merchant, selectMerchant, yourPopups, setYourPopups, userSubs, setUserSubs, merchData, setMerchData }) => {
   //console.log(merchant.info);
   const { t } = useTranslation()
@@ -64,6 +69,7 @@ const EditInfo = ({ merchant, selectMerchant, yourPopups, setYourPopups, userSub
       <hr/>
       <br/>
       <input value={text} onChange={(e) => setText(e.target.value) }></input>
+      <Div></Div>
       <button
       onClick={ ()=> updateInfo()}>{t("updateInfoBtn")}</button>
     </div>
