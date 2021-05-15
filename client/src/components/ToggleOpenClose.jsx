@@ -72,13 +72,12 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
 	const { t } = useTranslation()
 
 	const initiate = () => {
-		console.log('hello initiate');
-		console.log(merchant);
-		console.log(merchant.isOpen);
 		merchant.isOpen ? setToggled(true) : setToggled(false);
 	};
 
 	const closeBusiness = () => {
+		console.log('merchant: ');
+		console.log(merchant);
     axios.put(`/api/merchants/closemerchant/${merchant.id}`)
       .then(() => {
         axios.get('/api/merchants')
@@ -98,6 +97,8 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
   }
 
   const openBusiness = () => {
+		console.log('merchant: ');
+		console.log(merchant);
 		axios.put(`/api/merchants/merchcoords/${merchant.id}`, {lat: center.lat, lng: center.lng})
 			.then(() => {
 				axios.put(`/api/merchants/openmerchant/${merchant.id}`)
