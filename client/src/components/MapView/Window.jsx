@@ -16,7 +16,7 @@ const Window = ({ merchant, selectMerchant }) => {
   return (
     <div>
       <span></span>
-      <H2>{merchant.name}</H2>
+      <h1>{merchant.name}</h1>
       <Link to='/profile'>
         <button onClick={() => {
           selectMerchant(merchant)

@@ -65,8 +65,7 @@ const EditInfo = ({ merchant, selectMerchant, yourPopups, setYourPopups, userSub
   return (
   <div>
     <div>
-      <h1> {t("editTxt")} {`${merchant.name}'s`}: </h1>
-      <br/>
+      <h1> {t("editTxt")} {`${merchant.name}'s info`}</h1>
       <hr/>
       <br/>
       <input value={text} onChange={(e) => setText(e.target.value) }></input>
