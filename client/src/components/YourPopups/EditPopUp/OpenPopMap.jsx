@@ -21,7 +21,8 @@ const libraries = ["places"];
 
 const mapContainerStyle = {
   width: '100vw',
-  height: '100vh'
+  height: '75vh',
+  position: 'sticky',
 }
 
 const options = {
@@ -48,6 +49,7 @@ const OpenPopupMap = ({ merchData, selectMerchant,
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries
   })
+
 
   const mapMarkerClick = React.useCallback(()=>{
     setSelectedPopUp(merch)
