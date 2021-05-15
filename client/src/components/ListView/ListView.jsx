@@ -56,7 +56,7 @@ const updateSearch = (e) => {
       { inputView ?
         <input
         type='text'
-        value={search}
+        value={search.toLowerCase()}
         onChange={updateSearch}
 />
 :
