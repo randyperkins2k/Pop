@@ -8,7 +8,14 @@ import { Image } from 'cloudinary-react'
 import styled, { css } from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
+const H22 = styled.h1`
 
+margin-top: 15px;
+margin-bottom: 0px;
+color:#f5abc9;
+font-size: 1.5rem;
+
+`
 const MerchantProWrap = styled.div`
 text-align: center;
 `
@@ -225,7 +232,7 @@ const MerchantProfile = ({
           :
           ''
         }
-        <h2>{merchant.name} {openOrClosed}</h2>
+        <H22>{merchant.name} {openOrClosed}</H22>
         <ProfilePic>
           <Imager src={profilePic}></Imager>
         </ProfilePic>
@@ -237,6 +244,7 @@ const MerchantProfile = ({
             crop="scale"
           /> */}
         <H2>{t("infoTxt")}</H2>
+        <br/>
         <p>
           {merchant.info}
         </p>

@@ -45,7 +45,7 @@
 	"editInfoBtn" : "Edita tu info",
 	"updateInfoBtn" : "Cambiar tu Información",
 	"editMenuBtn" : "Edita el menú",
-	"editOwnerBtn" : "Administrar Propietarios",
+	"editOwnerBtn" : "Propietarios",
 	"openShopBtn" : "Abre tu Negocio",
 	"closeShopBtn" : "Cierra tu Negocio",
 	"profileBtn" : "Perfil",
@@ -75,6 +75,8 @@
 	"cancel?" : "Cancelar?",
 	"loginBtn" : "Entrar", 
 	"choosefileBtn" : "Elija el archivo", 
-	"upoadTxt" : "Subir"
+	"upoadTxt" : "Subir",
+	"close2" : "Cierra",
+	"toSeelocTxt" : "para ver tu ubicación en el mapa"
 	
 }
