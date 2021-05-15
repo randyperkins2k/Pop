@@ -49,7 +49,14 @@ const OpenPopupMap = ({ merchData, selectMerchant,
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries
   })
+  const setCoord = () => {
+    if (merchant.lat && merchant.lon) {
+      setCenter({lat: merchant.lat, lng: merchant.lon});
+    }
+  };
 
+  //useEffect(async () =>  user ? setLanguage() : null, [user]);
+  useEffect(() => merchant ? setCoord() : null, [merchant]);
 
   const mapMarkerClick = React.useCallback(()=>{
     setSelectedPopUp(merch)
