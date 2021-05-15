@@ -23,7 +23,6 @@ const MerchList = ({ merchant, selectMerchant }) => {
           <div>{t('closedTxt')}</div>
         }
         <span></span>
-        <div></div>
         <Link to='/profile'>
           <button onClick={() => selectMerchant(merchant)}>{ name }</button>
         </Link>

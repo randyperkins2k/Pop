@@ -161,11 +161,18 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
         <UploadPic
           merchant={merchant}
           setUploadPicWindow={setUploadPicWindow}
+          
         /> :
         ''
       }
       <div className='profilePreview'>
-        <MerchantProfile merchant={merchant} openOrClosed={openOrClosed} setOpenOrClosed={setOpenOrClosed} style={{fontFamily: 'Ubuntu'}}/>
+        <MerchantProfile 
+          merchant={merchant} 
+          openOrClosed={openOrClosed} 
+          setOpenOrClosed={setOpenOrClosed}
+          uploadPicWindow={uploadPicWindow} 
+          style={{fontFamily: 'Ubuntu'}}
+        />
       </div>
     </div >
   )

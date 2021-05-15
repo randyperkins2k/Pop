@@ -36,7 +36,7 @@ merchants.post('/add', (req, res) => {
     .then(results => {
       if (!results.length) {
         //const isOpen = true;
-        Merchants.create({ name, category, info, website, lat, lon, isOpen })
+        Merchants.create({ name, category, info, website, lat, lon, isOpen, picture: 'https://res.cloudinary.com/opsparkpopup/image/upload/v1620963667/pop_up/a47042f201eca7299adbbf8a197f6220_gx4njo.png' })
           .then(newPopup => {
             Admins.create({UserId: adminId, MerchantId: newPopup.id})
             res.send(newPopup)

@@ -54,8 +54,8 @@ const SideBar = ({ open, setSideBarDisplay, setOpen }) => {
           <Link to='/yourprofile'>
             <Button><a onClick={() => {
               setSideBarDisplay(false)
-              setOpen(false);
-              
+              setOpen(false)
+
               }}>{t('yourProfileBtn')}</a></Button>
           </Link>
         <br/>

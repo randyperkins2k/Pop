@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import Picture from './Picture.jsx';
+import Confirmation from '.././Confirmation.jsx'
 //import { Container, Row, Col } from 'react-bootstrap'
 
 
@@ -51,10 +52,20 @@ const Pic = styled.div`
 ` 
 
 
-const PictureFeed = ({ merchant, setSelectedImage, setBigPic }) => {
+const PictureFeed = ({ merchant, setSelectedImage, setBigPic, uploadPicWindow, selectedImage }) => {
   const [ imageIds, setImageIds ] = useState();
   const [ pictureUp, setPictureUp ] = useState(false);
+  const [ deletePicBool, setDeletePicBool ] = useState(false);
   const { t } = useTranslation()
+
+  const picDelete = async (image) => {
+    try {
+      await axios.delete(`/api/images/delete`, { data: {url: image}})
+      //await loadImages(); 
+    } catch(err) {
+      console.log('front pic delete error', err)
+    }
+  }
 
   const loadImages = async () => {
     try {
@@ -73,12 +84,36 @@ const PictureFeed = ({ merchant, setSelectedImage, setBigPic }) => {
   return (
     <div>
       <div>{t("pictureFeedTxt")}</div>
+      {
+        ( uploadPicWindow && deletePicBool ) ?
+          <Confirmation
+            text={'do you want to delete this picture?'}
+            yesContext={() => picDelete(selectedImage)}
+            noContext={() =>setDeletePicBool(false)}
+          /> :
+          ''
+      }
       <Feed>
       {
         imageIds ? 
         imageIds.map((image, index) => {
           return (
             <Pic>
+              {
+                uploadPicWindow && !deletePicBool ?
+                <button
+                  style={{
+                    right:'-39px',
+                    top: '35px',
+                    position: 'relative',
+                  }}
+                  onClick={() => {
+                    setDeletePicBool(true)
+                    setSelectedImage(image.image)
+                  }}
+                >X</button> :
+                ''
+              }
               <Imagee onClick={() => {
                 setSelectedImage(image.image)
                 setBigPic(true)
