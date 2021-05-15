@@ -46,7 +46,7 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
   const [ yourLocBool, setYourLocBool] = useState(false);
   const { t, i18n } = useTranslation();
   //const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
- 
+
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries
@@ -103,20 +103,23 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
 // console.log(t("touch"))
   return (
     <div>
-      
+
       <div>{t("touchMap")}</div>
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={zoomLevel}
       center={center}
       options={options}
-      onClick={(event) =>{
-        setCenter({
-          lat: event.latLng.lat(),
-          lng: event.latLng.lng(),
-          time: new Date()
-        })
-        alert('location moved!');
+      onClick={(event) =>{ {
+        if (!isLocater) {
+          setCenter({
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng(),
+            time: new Date()
+          })
+          alert('location moved!');
+        }
+      }
         //console.log(currentLocMarker);
         //console.log(currentLocMarker);
         //why even bother with state right here?
@@ -176,43 +179,6 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
       }
     </GoogleMap>
     </div>
-    // <GoogleMap
-    //   defaultZoom={13.5}
-    //   defaultCenter={{lat: 29.956124, lng: -90.090509}}
-    // >
-    //   {merchData.merchants.map(merch => {
-    //     if (merch.isOpen) {
-    //       return <Marker
-    //         key={merch.id}
-    //         position={{
-    //           lat: merch.lat,
-    //           lng: merch.lon
-    //         }}
-    //         onClick={()=>{
-    //           setSelectedPopUp(merch)
-    //         }}
-    //       />
-    //     }
-    //   })}
-    //   {
-    //     selectedPopUp && (
-    //       <InfoWindow
-    //       position={{
-    //         lat: selectedPopUp.lat,
-    //         lng: selectedPopUp.lon
-    //       }}
-    //       onCloseClick={()=>{
-    //         setSelectedPopUp(null);
-    //       }}
-    //       >
-    //         <div>
-    //           <div>{selectedPopUp.name}</div>
-    //           <div>{selectedPopUp.website}</div>
-    //         </div>
-    //       </InfoWindow>
-    //     )
-    //   }
-    // </GoogleMap>
   );
 };
 export default Map;

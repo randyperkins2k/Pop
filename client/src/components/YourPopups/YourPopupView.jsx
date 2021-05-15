@@ -48,13 +48,13 @@ const YourPopupView = ({ merchant, selectMerch, yourPopups, setYourPopups, merch
   return (
     <div className="merchant-listing">
       <div>
+        <img></img>
+        <span></span>
         {
           merchant.isOpen ?
           <h3>{t('openTxt')}</h3> :
           <h3>{t('closedTxt')}</h3>
         }
-        <img></img>
-        <span></span>
         <h2>{merchant.name}</h2>
         <h2></h2>
         <Link

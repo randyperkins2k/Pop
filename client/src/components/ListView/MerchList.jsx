@@ -3,11 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next'
 
-const Thumbnail = styled.img`
-  display: block;
-  height: 90%;
-  width: 90vw;
-  position: fixed;
+const Ul = styled.ul`
+background-color: pink;
 `
 
 const MerchList = ({ merchant, selectMerchant }) => {
@@ -17,7 +14,9 @@ const MerchList = ({ merchant, selectMerchant }) => {
   return (
 
    
-    <div style={{paddingBlock: "2%"}}className="merchant-listing">
+    <div className="merchant-listing">
+      <Ul>
+        <img></img>
         {
           isOpen ? 
           <div>{t('openTxt')}</div> :
@@ -27,6 +26,7 @@ const MerchList = ({ merchant, selectMerchant }) => {
         <Link to='/profile'>
           <button onClick={() => selectMerchant(merchant)}>{ name }</button>
         </Link>
+      </Ul>
     </div>
 
 
