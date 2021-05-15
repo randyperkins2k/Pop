@@ -73,6 +73,8 @@
 	"alreadyAdminPrompt" : "is already an admin", 
 	"cancelOpeningTxt" : "Cancel Opening", 
 	"cancel?" : "cancel?",
-	"loginBtn" : "Login"
+	"loginBtn" : "Login", 
+	"choosefileBtn" : "Choose file",
+	"upoadTxt" : "Upload"
 
 }

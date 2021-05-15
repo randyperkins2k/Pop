@@ -73,6 +73,8 @@
 	"alreadyAdminPrompt" : "ya es administrador", 
 	"cancelOpeningTxt" : "Cancelar apertura de",
 	"cancel?" : "Cancelar?",
-	"loginBtn" : "Entrar"
+	"loginBtn" : "Entrar", 
+	"choosefileBtn" : "Elija el archivo", 
+	"upoadTxt" : "Subir"
 	
 }

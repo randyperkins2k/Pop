@@ -4,6 +4,11 @@ import axios from 'axios';
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 
+const H2 = styled.div`
+margin-top: 15px;
+color:#f5abc9;
+font-size: 1.5rem;
+`
 
 const EditInfo = ({ merchant, selectMerchant, yourPopups, setYourPopups, userSubs, setUserSubs, merchData, setMerchData }) => {
   //console.log(merchant.info);
@@ -54,7 +59,10 @@ const EditInfo = ({ merchant, selectMerchant, yourPopups, setYourPopups, userSub
   return (
   <div>
     <div>
-      <h3> {t("editTxt")} {`${merchant.name}'s`}: </h3>
+      <H2> {t("editTxt")} {`${merchant.name}'s`}: </H2>
+      <br/>
+      <hr/>
+      <br/>
       <input value={text} onChange={(e) => setText(e.target.value) }></input>
       <button
       onClick={ ()=> updateInfo()}>{t("updateInfoBtn")}</button>
