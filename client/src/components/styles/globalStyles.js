@@ -27,7 +27,7 @@ export default createGlobalStyle`
     font-family: 'Londrina Solid', cursive;
     color: #f5abc9;
     text-align: center;
-    margin-bottom: 2.6rem;
+    margin-bottom: .5rem;
   }
   h2 {
 
