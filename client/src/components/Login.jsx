@@ -29,17 +29,17 @@ import { useTranslation } from 'react-i18next'
 const Login = ({}) => {
   const { t } = useTranslation()
   return (
-    <div 
+    <div
       style={{
       backgroundColor: '#f5abc9',
       height: '100vh'
       }}
     >
-   
+
           <img src={popUpLogo} ></img>
           <div>A handy app for finding pop-ups in your area, or any area!</div>
           <button ><a color="white" href="/google"> {t("loginBtn")} </a></button>
-     
+
     </div>
   )
 };

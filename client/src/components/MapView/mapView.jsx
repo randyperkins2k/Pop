@@ -77,10 +77,10 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
     if (merch.category === 'foodpopup') {
       return '/assets/foodmarker.svg'
     } else if (merch.category === 'foodtruck') {
-      return '/assets/foodTruck.svg'  
+      return '/assets/foodTruck.svg'
     } else if (merch.category === 'performer') {
       return '/assets/showgirl.svg'
-    } else if (merch.category === 'produce') {  
+    } else if (merch.category === 'produce') {
       return '/assets/potatoes.svg'
     } else if (merch.category === 'arts') {
       return '/assets/easel2.svg'
@@ -90,8 +90,7 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
 // console.log(t("touch"))
   return (
     <div>
-
-      <Div>{t("touchMap")}</Div>
+      {isLocater ? null : <Div>{t("touchMap")}</Div>}
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={zoomLevel}
