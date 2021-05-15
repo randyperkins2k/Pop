@@ -4,27 +4,13 @@ import EditProfile from './EditProfile.jsx'
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next'
 
-// const EditProfileBtn = styled.button`
-//   margin-left: 11px;
-//   margin-top: 30px;
-//   background-color: white;
-//   border-style: solid;
-//   border-width: 1px;
-//   border-color: lightgray;
-//   border-radius: 6px;
-//   transition: .01s;
-//   ${props => props.editProfilePrimary && css`
-//   opacity: .5;
-//   color: black;
-//   background-color: #ffd1dc;
-//   font-size: 11.25px;
-//   `}
-// `
-// const ProfileWrap = styled.div`
-//   margin-top: 30px;
-//   text-align: center;
-//   font-family: 'Ubuntu';
-// `
+const Div2 = styled.div`
+margin: 30px;
+`
+const Div = styled.div`
+
+margin: 53px 0 6px ;
+`
 
 const UserProfile = ({ user }) => {
   const [editWindowOpen, setEditWindowOpen] = useState(false);
@@ -32,13 +18,16 @@ const UserProfile = ({ user }) => {
 console.log(user)
   return (
     <div>
-      <h5>{t("userProfileTxt")}</h5>
+      <h1>{t("userProfileTxt")}</h1>
+      <hr/>
+      <Div2></Div2>
       <img src={user.picture}/>
       <br/>
       <br/>
       <h5>{user.name}</h5>
       <br/>
       <h5>{user.email}</h5>
+      <Div></Div>
       <button 
        onClick={() => {
          setEditWindowOpen(true)

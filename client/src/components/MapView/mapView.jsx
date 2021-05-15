@@ -10,23 +10,10 @@ import Window from '../MapView/Window.jsx'
 import styled, { css } from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
-//import SearchBar from './../searchbar/SearchBar.jsx'
-//import map from '../popup/foodmarker.png'
+const Div = styled.div`
 
-// const TouchMap = styled.div`
-// font-family: 'Ubuntu';
-// margin-top: 30px;
-// opacity: .5;
-// text-align: center;
-// `
-// const Nav = styled.nav`
-// position: absolute;
-// padding: '2rem 0';
-// text-align: center;
-// margin-top: -200px;
-// margin-left: 120px;
-// `
-
+margin: 30px 0 6px ;
+`
 
 const mapContainerStyle = {
     width: '100vw',
@@ -104,7 +91,7 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
   return (
     <div>
 
-      <div>{t("touchMap")}</div>
+      <Div>{t("touchMap")}</Div>
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={zoomLevel}

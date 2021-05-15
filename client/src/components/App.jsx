@@ -38,7 +38,10 @@ import GlobalStyles from './styles/globalStyles.js'
 
 
 
-
+const H1 = styled.h1`
+font-size: 2.5rem;
+margin: 60px;
+`
 
 
 /*============================ (End Styled Components) ==============================*/
@@ -239,7 +242,7 @@ useEffect(() => {
               //   }}
             />
 
-                <h1>Pop^</h1>
+                <H1>Pop^</H1>
                 {/* <ToggleSwitch /> */}
                 {
                   !sideBarDisplay ?

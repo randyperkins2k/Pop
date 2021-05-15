@@ -36,6 +36,10 @@ const SpanishBtn = styled.button`
 `}
 `
 
+const Div = styled.div`
+margin: 30px;
+`
+
 const Settings = ({ user, setUser, theme, setTheme }) => {
   const [englishPrimary, setEnglishPrimary] = useState(false)
   const [spanishPrimary, setSpanishPrimary] = useState(false)
@@ -49,9 +53,10 @@ const Settings = ({ user, setUser, theme, setTheme }) => {
 
     <div>
       <br/>
-      <h5>{t("settingsText")}</h5>
+      <h1>{t("settingsText")}</h1>
       <hr/>
       <br/>
+      <Div></Div>
       <button
         onClick={(e) => {
           if (theme.mode === 'dark') {

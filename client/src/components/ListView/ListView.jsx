@@ -4,9 +4,16 @@ import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next'
 
 const Ul = styled.ul`
-background-color: pink;
+background-color: #f5abc9;
 `
+const Div = styled.div`
 
+margin: 30px  ;
+`
+const Div2 = styled.div`
+
+margin: 16px 0 36px;
+`
 
 const ListView = ({ merchData, selectMerchant, userSubs, setUserSubs }) => {
   const [ openPopsView, setOpenPopsView ] = useState(true);
@@ -23,6 +30,7 @@ const updateSearch = (e) => {
 
   return (
     <div>
+      <Div></Div>
 
       <button
       inputView={inputView}
@@ -48,12 +56,13 @@ const updateSearch = (e) => {
       { inputView ?
         <input
         type='text'
-        value={search} //                                            value comes from useplacesautocomplete hook
+        value={search}
         onChange={updateSearch}
 />
 :
 null
 }
+<Div2></Div2>
       <Ul>
       {
         !searchPopsView ?

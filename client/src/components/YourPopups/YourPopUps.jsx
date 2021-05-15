@@ -48,16 +48,22 @@ const YourPopUps = ({ yourPopups, setYourPopups, merchData, setMerchData, mercha
   //   })
   // },[])
 
+  const Div = styled.div`
+  margin: 30px;
+  ` 
   return (
     <div>
-        <Ul>
-      <h5>{t('yourPopUpsBtn')}</h5>
+      <h1>{t('yourPopUpsBtn')}</h1>
+      <hr/>
+      <Div></Div>
       <Link to='/create'>
       <button
       onClick={() => {
         console.log(!!yourPopups)
       }}>{t('createPopUpBtn')}</button>
+      <Div></Div>
       </Link>
+        <Ul>
       { yourPopups ?
         yourPopups.map(merch => {
             return <YourPopupView
