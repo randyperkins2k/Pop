@@ -4,37 +4,10 @@ import YourPopupView from './YourPopupView.jsx';
 import styled, { css } from 'styled-components';
 import CreatePop from './CreatePop.jsx'
 import { useTranslation } from 'react-i18next'
-// const Create = styled.button`
-//   color: black;
-//   font-family: 'Ubuntu';
-//   padding: 5px 16px;
-//   background-color: white;
-//   font-size: 11px;
-//   border-radius: 6px;
-//   border-width: 1px;
-//   border-color: lightgray;
-//   transition: ease 0.01s all;
-//   ${props => props.createPopUpPrimary && css`
-//   opacity: .5;
-//   color: black;
-//   background-color: #ffd1dc;
-//   font-size: 11.25px;
-//   `}
-// `
-// const YourPopWrap = styled.div`
-//   margin-top: 60px;
-//   text-align: center;
-//   font-family: 'Ubuntu';
-//   div {
-//     margin-top: 30px;
-//     margin-bottom:30px;
-//     color: #ffd1dc;
-//     margin-bottom: 30px:
-//   }
-// `
+
 
 const Ul = styled.ul`
-background-color: ${props => props.theme.mode === 'dark' ? '#803452' : '#ffd1dc'};
+background-color: ${props => props.theme.mode === 'dark' ? '#803452' : '#f5abc9'};
 `
 
 const YourPopUps = ({ yourPopups, setYourPopups, merchData, setMerchData, merchant, selectMerch, userSubs, setUserSubs }) => {

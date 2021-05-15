@@ -38,7 +38,7 @@ transition: ease 0.01s all;
 ${props => props.reviewBtnPrimary && css`
 opacity: .5;
 color: black;
-background-color: #ffd1dc;
+background-color: #f5abc9;
 font-size: 11.25px;
 `}
 
@@ -70,7 +70,7 @@ const LocateBtn = styled.button`
   ${props => props.locatePrimary && css`
 opacity: .5;
 color: black;
-background-color: #ffd1dc;
+background-color: ##f5abc9;
 font-size: 11.25px;
 `}
 `

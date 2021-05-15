@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next'
 
 const Ul = styled.ul`
-background-color: ${props => props.theme.mode === 'dark' ? '#803452' : '#ffd1dc'};
+background-color: ${props => props.theme.mode === 'dark' ? '#803452' : '##f5abc9'};
 `
 const Div = styled.div`
 

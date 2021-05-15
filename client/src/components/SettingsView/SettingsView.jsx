@@ -18,7 +18,7 @@ const EnglishBtn = styled.button`
   ${props => props.englishPrimary && css`
   opacity: .5;
   color: black;
-  background-color: #ffd1dc;
+  background-color: ##f5abc9;
   font-size: 14.25px;
 `}
 `
@@ -31,7 +31,7 @@ const SpanishBtn = styled.button`
   ${props => props.spanishPrimary && css`
   opacity: .5;
   color: black;
-  background-color: #ffd1dc;
+  background-color: ##f5abc9;
   font-size: 14.25px;
 `}
 `

@@ -68,7 +68,7 @@ export default createGlobalStyle`
     :active {
         opacity: .5;
         color: black;
-        background-color: #ffd1dc;
+        background-color: ##f5abc9;
         padding: 6.25px 16.25px
     }
     /* ${props => props.buttonPink && css`
