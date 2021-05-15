@@ -110,6 +110,7 @@ const OpenPopupMap = ({ merchData, selectMerchant,
         user={user}
         setYourPopups={setYourPopups}
         setSubs={setSubs}
+        setCoord={setCoord}
       />
       <br/>
       <button onClick={() => {
