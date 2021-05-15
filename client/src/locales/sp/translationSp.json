@@ -75,6 +75,8 @@
 	"cancel?" : "Cancelar?",
 	"loginBtn" : "Entrar", 
 	"choosefileBtn" : "Elija el archivo", 
-	"upoadTxt" : "Subir"
+	"upoadTxt" : "Subir",
+	"close2" : "Cierra",
+	"toSeelocTxt" : "para ver tu ubicación en el mapa"
 	
 }

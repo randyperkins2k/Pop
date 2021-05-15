@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 const H22 = styled.h1`
 
 margin-top: 15px;
+margin-bottom: 0px;
 color:#f5abc9;
 font-size: 1.5rem;
 
