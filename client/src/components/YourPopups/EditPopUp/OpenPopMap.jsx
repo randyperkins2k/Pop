@@ -16,12 +16,6 @@ import { useTranslation } from 'react-i18next';
 //import map from '../popup/foodmarker.png'
 
 
-// const TouchMap = styled.div`
-// font-family: 'Ubuntu';
-// margin-left: 84px;
-// margin-top: 30px;
-// opacity: .5;
-// `
 const libraries = ["places"];
 
 const mapContainerStyle = {

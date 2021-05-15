@@ -19,7 +19,7 @@ export default createGlobalStyle`
   }
   ul {
     margin-left: -40px;
-    margin-top: 0px;
+    margin-top: 30px;
     background-color:${props => props.theme.mode === 'dark' ? 'rgba(50,60,75,1)' : '#fff'};
   }
   h1{
@@ -32,6 +32,10 @@ export default createGlobalStyle`
   h2 {
 
   }
+  h6 {
+    margin-top: 30px;
+    margin-bottom: 0;
+  }
   hr {
     border: 1px solid lightgray;
     border-radius: 1px;
@@ -41,7 +45,7 @@ export default createGlobalStyle`
   }
   input {
     box-sizing:border-box;
-    margin:20px;
+    margin:6px;
     background-color: #fafafa;
     width:80%;
     resize: vertical;
