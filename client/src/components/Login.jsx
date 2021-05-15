@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import popghostletters from '../popup/popghostletters.png';
 import popUpLogo from '../popup/popUpLogo.jpg';
+import { useTranslation } from 'react-i18next'
 
 // const LoginButton = styled.button`
 //   background: #4d4d4d;
@@ -26,6 +27,7 @@ import popUpLogo from '../popup/popUpLogo.jpg';
 // `;
 
 const Login = ({}) => {
+  const { t } = useTranslation()
   return (
     <div 
       style={{
@@ -36,7 +38,7 @@ const Login = ({}) => {
    
           <img src={popUpLogo} ></img>
           <div>A handy app for finding pop-ups in your area, or any area!</div>
-          <button ><a color="white" href="/google"> Login </a></button>
+          <button ><a color="white" href="/google"> {t("loginBtn")} </a></button>
      
     </div>
   )

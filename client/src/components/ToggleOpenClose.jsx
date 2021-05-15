@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next'
 
 const InputWrapper = styled.label`
 	position: relative;
@@ -68,6 +69,7 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
 		setSubs, setYourPopups
 	}) => {
 	const [toggled, setToggled] = useState(false);
+	const { t } = useTranslation()
 
 	const initiate = () => {
 		console.log('hello initiate');
@@ -139,7 +141,7 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
 			}}
 			/>
 			<Slider />
-			<p style={{fontFamily: 'Ubuntu', fontSize: '11px', marginTop: '3px'}}>{toggled ? 'OPEN' : 'CLOSED'}</p>
+			<p style={{fontFamily: 'Ubuntu', fontSize: '11px', marginTop: '3px'}}>{toggled ? `${t("openTxt")}` : `${t("closedTxt")}`}</p>
 		</InputWrapper>
 
 	)

@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
+
 const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
   const [owners, setOwners] = useState([]);
   const [text, setText] = useState('');
   const [users, setUsers] = useState([]);
+  const {t} = useTranslation()
   const getAdmins = () => {
     axios.get(`/api/merchants/admins/${merchant.id}`)
       .then(res => {
@@ -35,13 +38,13 @@ const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
       }
     });
     if (!isValidEmail) {
-      alert('please enter a valid email');
+      alert(t("enterEmailPrompt"));
       setText('');
       return;
     }
     owners.forEach(owner => {
       if (text.toLowerCase() === owner.email) {
-        alert(`${owner.name} is already an admin`);
+        alert(`${owner.name} ${t("alreadyAdminPrompt")}`);
         isValidEmail = false;
         //setText('');
         return;
@@ -76,11 +79,11 @@ const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
 
   return (
   <div>
-    <h4>Add Owner:</h4>
-    <label>Enter email: </label>
+    <h4>{t("addOwnerTxt")}:</h4>
+    <label>{t("EnterEmailTxt")}: </label>
     <input id="email" type="text" value={text} onChange={(e) => setText(e.target.value)}></input>
-    <button onClick={() => addOwner()}>Add</button>
-    <h4>Current Owners: </h4>
+    <button onClick={() => addOwner()}>{t("addBtn")}</button>
+    <h4>{t("currentOnersTxt")}: </h4>
     {owners.map(owner =>
       <div key={owner.id}>
         <h6>{owner.name}</h6>

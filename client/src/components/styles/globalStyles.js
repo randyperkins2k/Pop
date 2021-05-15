@@ -71,11 +71,11 @@ export default createGlobalStyle`
         background-color: #ffd1dc;
         padding: 6.25px 16.25px
     }
-    ${props => props.buttonPink && css`
+    /* ${props => props.buttonPink && css`
     opacity: .5;
     background-color: #ffd1dc;     font-size: 14.25px;
 
-  `}
+  `} */
 
   }
   

@@ -139,13 +139,13 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
        <button>{t("backBtn")}</button>
       </Link>
       <div className='controlPanel'>
-        <h6>Control panel</h6>
+        <h6>{t("controlpaneltxt")}</h6>
         <Link to="/editinfo">
           <button>{t("editInfoBtn")}</button>
         </Link>
         <button
           onClick={() => setUploadPicWindow(true)}
-        >Upload photo</button>
+        >{t("uploadPhotoBtn")}</button>
         <Link to="/editmenu">
           <button>{t("editMenuBtn")}</button>
         </Link>
@@ -153,7 +153,7 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
           <button>{t("editOwnerBtn")}</button>
         </Link>
         <Link to='/openpopmap'>
-          {merchant.isOpen ? (<button>Close</button>) : (<button>Open</button>)}
+          {merchant.isOpen ? (<button>{t("closeBtn")}</button>) : (<button>{t("openBtn")}</button>)}
         </Link>
       </div>
       {

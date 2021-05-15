@@ -94,11 +94,11 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
           setCategory(e.target.value);
           }}>
           <option value="" selected disabled hidden>{t("categoryTxt")}</option>
-          <option value={'foodpopup'}>Food Pop</option>
-          <option value={'foodtruck'}>Food Truck</option>
-          <option value={'performer'}>Performer</option>
-          <option value={'arts'}>Arts/Craft</option>
-          <option value={'produce'}>Market</option>
+          <option value={'foodpopup'}>{t("foodPopTxt")}</option>
+          <option value={'foodtruck'}>{t("foodTrucktxt")}</option>
+          <option value={'performer'}>{t("Performertxt")}</option>
+          <option value={'arts'}>{t("Artandcraftstxt")}</option>
+          <option value={'produce'}>{t("markettxt")}</option>
         </select>
         <h6>{t("infoTxt")}</h6>
         <form onSubmit={(e) => {
@@ -122,7 +122,7 @@ const CreatePop = ({ user, setUser, yourPopups, setYourPopups, currentLocMarker,
         {
           cancelConfirm ?
           <Confirmation
-            text={'Cancel?'}
+            text={t("cancel?")}
             yesContext={() => {
               back.push('/yourpopups')
             }}

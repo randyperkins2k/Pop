@@ -29,7 +29,13 @@ const updateSearch = (e) => {
       onClick={() => {
         setInputView(false)
         setOpenPopsView(true)
-        }}>{t('openNowBtn')}</button>
+      }}>{t('openNowBtn')}</button>
+      <button
+       inputView={inputView}
+       onClick={() => {
+        setInputView(!inputView)
+        setSearchPopsView(true)
+      }}>{t('searchPopUpsBtn')}</button>
       <button
       inputView={inputView}
       onClick={() => {
@@ -39,12 +45,6 @@ const updateSearch = (e) => {
         }}
         >
           {t('favoritesBtn')}</button>
-      <button
-       inputView={inputView}
-       onClick={() => {
-        setInputView(!inputView)
-        setSearchPopsView(true)
-      }}>{t('searchPopUpsBtn')}</button>
       { inputView ?
         <input
         type='text'
