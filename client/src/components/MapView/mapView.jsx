@@ -30,9 +30,7 @@ import { useTranslation } from 'react-i18next'
 
 const mapContainerStyle = {
     width: '100vw',
-    height: '100vh',
- 
-
+    height: '65vh'
   }
 
 const libraries = ["places"];
@@ -47,7 +45,7 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
   const [ yourLocBool, setYourLocBool] = useState(false);
   const { t, i18n } = useTranslation();
   //const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
- 
+
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries
@@ -90,20 +88,23 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
 // console.log(t("touch"))
   return (
     <div>
-      
+
       <div>{t("touchMap")}</div>
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={zoomLevel}
       center={center}
       options={options}
-      onClick={(event) =>{
-        setCenter({
-          lat: event.latLng.lat(),
-          lng: event.latLng.lng(),
-          time: new Date()
-        })
-        alert('location moved!');
+      onClick={(event) =>{ {
+        if (!isLocater) {
+          setCenter({
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng(),
+            time: new Date()
+          })
+          alert('location moved!');
+        }
+      }
         //console.log(currentLocMarker);
         //console.log(currentLocMarker);
         //why even bother with state right here?

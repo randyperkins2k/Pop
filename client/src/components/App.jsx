@@ -66,8 +66,18 @@ const App = () => {
       .then(response => {
         // console.log('merchants', response.data);
         setMerchData(response.data);
+        setInterval(function() {
+          axios.get('/api/merchants')
+            .then(response => {
+              setMerchData(response.data);
+              console.log('merchants updated');
+              console.log(response.data);
+            });
+        }, 10000);
       })
-  }
+      .catch(err => console.log(err));
+  };
+
   // Function checks if user is logged in.
   const logged = () => {
     axios.get('/testing')
