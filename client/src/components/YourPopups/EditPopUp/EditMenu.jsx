@@ -4,48 +4,14 @@ import axios from 'axios';
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 
-// const Div = styled.div`
-// text-align: center;
-// font-family: 'Ubuntu';
-// `
-// const Input = styled.input`
-//   box-sizing:border-box;
-//   margin-top: 13px;
-//   background-color: #fafafa;
-//   width:63%;
-//   resize: vertical;
-//   padding:1px;
-//   border-radius:15px;
-//   border:0;
-//   box-shadow:4px 4px 10px;
-
-// `
-// const ItemBtn = styled.button`
-// color: black;
-// font-family: 'Ubuntu';
-// padding: 0px 11px 0px 11px;
-// background-color: white;
-// font-size: 20px;
-// border-radius: 6px;
-// border-width: 1px;
-// border-color: lightgray;
-// `
-
-// const AddProductBtn = styled.button`
-// font-family: 'Ubuntu';
-// color: black;
-// font-family: 'Ubuntu';
-// padding: 5px 16px;
-// background-color: white;
-// font-size: 11px;
-// border-radius: 6px;
-// border-width: 1px;
-// margin-top: 25px;
-// border-color: lightgray;
-// transition: ease 0.01s all;
-// margin-bottom: 30px;
-// `
-
+const Div = styled.div`
+margin-top:30px;
+`
+const H2 = styled.div`
+margin-top: 15px;
+color:#f5abc9;
+font-size: 1.5rem;
+`
 const EditMenu = ({ merchant, selectMerchant }) => {
   const {t} = useTranslation()
   console.log('hello from edit menu');
@@ -103,9 +69,9 @@ const EditMenu = ({ merchant, selectMerchant }) => {
   }
 
   return(
-    <div>
+    <Div>
       <div>
-        <h5>{`${merchant.name}'s ${t("products2Txt")}`}: </h5>
+        <H2>{`${merchant.name}'s ${t("products2Txt")}`}: </H2>
         {products.map(product =>
           <p>&emsp; &#8226; &nbsp;<b>{product.name}</b><small>(<i>${parseFloat(product.price).toFixed(2)}</i></small>)
           <button onClick={
@@ -116,17 +82,21 @@ const EditMenu = ({ merchant, selectMerchant }) => {
       <div>
         <form>
           <h5>{t("addaProductTxt")}:</h5>
+          <br/>
           <label><b>{t("productNameTxt")}:</b></label>
           <input type="text" value={nameText} onChange={(e) => setNameText(e.target.value)}></input><br></br>
-          <label><b>{t("priceTxt")}:</b></label>
+          <br/>
+          <label><b>{t("priceTxt")}:</b></label><br/>
           <input type="number" value={priceNum} onChange={(e) => setPriceNum(e.target.value)}></input><br></br>
+          <br/>
         </form>
         <button onClick={() => {addProduct()}}>{t("addProductBtn")}</button><br></br>
+        <br/>
       </div>
       <div>
         <MerchantProfile merchant={merchant} style={{fontFamily: 'Ubuntu'}}/>
       </div>
-    </div>
+    </Div>
   )
 
 }

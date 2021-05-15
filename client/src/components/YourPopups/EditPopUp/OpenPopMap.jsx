@@ -13,8 +13,9 @@ import Confirmation from '../../Confirmation.jsx';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-//import map from '../popup/foodmarker.png'
-
+const Div = styled.div`
+margin-top: 30px;
+`
 
 const libraries = ["places"];
 
@@ -87,7 +88,7 @@ const OpenPopupMap = ({ merchData, selectMerchant,
 
 
   return (
-    <div>
+    <Div>
       <ToggleOpenClose
         merchant={merchant}
         openOrClosed={openOrClosed}
@@ -100,6 +101,7 @@ const OpenPopupMap = ({ merchData, selectMerchant,
         setYourPopups={setYourPopups}
         setSubs={setSubs}
       />
+      <br/>
       <button onClick={() => {
         setCancelConfirm(true);
       }}>{t("cancelBtn")}</button>
@@ -181,7 +183,7 @@ const OpenPopupMap = ({ merchData, selectMerchant,
         )
       }
     </GoogleMap>
-    </div>
+    </Div>
   );
 };
 

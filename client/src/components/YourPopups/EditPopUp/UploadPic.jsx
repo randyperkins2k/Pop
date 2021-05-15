@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next'
 
 const UploadPic = ({ merchant, setUploadPicWindow }) => {
   const [ fileInputState, setFileInputState ] = useState('');
   const [ selectedFile, setSelectedFile ] = useState('');
   const [ previewSource, setPreviewSource ] = useState('');
   const [ profileOrFeed, setProfileOrFeed ] = useState('upload');
-  
+  const { t } = useTranslation()
+
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     previewFile(file);
@@ -46,17 +48,17 @@ const UploadPic = ({ merchant, setUploadPicWindow }) => {
 
   return (
     <div>
-      <h1>Upload</h1>
-      <button onClick={() => setUploadPicWindow(false)}>Cancel</button>
+      <h1>{t("upoadTxt")}</h1>
+      <button onClick={() => setUploadPicWindow(false)}>{t("cancelBtn")}</button>
       <select onChange={(e) => setProfileOrFeed(e.target.value)}>
-        <option value={'upload'} >picture feed</option>
-        <option value={'profilepic'}>profile</option>
+        <option value={'upload'} >{t("pictureFeedTxt")}</option>
+        <option value={'profilepic'}>{t("profileBtn")}</option>
       </select>
       <form onSubmit={handleSubmitFile}>
         <input
           type="file" name="image" onChange={handleFileInputChange} value={fileInputState} className="form-input"
         ></input>
-        <button className="btn" type="submit">Upload</button>
+        <button className="btn" type="submit">{t("uploadPhotoBtn")}</button>
       </form>
       {
         previewSource ?

@@ -7,92 +7,14 @@ import UploadPic from './UploadPic.jsx';
 import ToggleOpenClose from '../../ToggleOpenClose.jsx'
 import { useTranslation } from 'react-i18next'
 
-
-// import * as merchData from '../../openMerch.json';
-// const merchant = merchData.merchants[0];
-
-
-// const EditYourPopUpWrap = styled.div`
-// margin-top: 30px;
-// text-align: center;
-// font-family: 'Ubuntu';
-// h6 {
-//   margin-top: 30px;
-//   font-family: 'helvetica';
-// }
-// `
-// const OpenShopBtn = styled.button`
-// color: black;
-// font-family: 'Ubuntu';
-// padding: 5px 16px;
-// background-color: white;
-// font-size: 11px;
-// border-radius: 6px;
-// border-width: 1px;
-// border-color: lightgray;
-// transition: ease 0.01s all;
-
-// `
-// const BackBtn = styled.button`
-// color: black;
-// font-family: 'Ubuntu';
-// padding: 5px 16px;
-// background-color: white;
-// font-size: 11px;
-// border-radius: 6px;
-// border-width: 1px;
-// border-color: lightgray;
-// `
-// const EditInfoBtn = styled.button`
-// color: black;
-// font-family: 'Ubuntu';
-// padding: 5px 16px;
-// background-color: white;
-// font-size: 11px;
-// border-radius: 6px;
-// border-width: 1px;
-// border-color: lightgray;
-// `
-// const UploadBtn = styled.button`
-// color: black;
-// font-family: 'Ubuntu';
-// padding: 5px 16px;
-// background-color: white;
-// font-size: 11px;
-// border-radius: 6px;
-// border-width: 1px;
-// border-color: lightgray;
-// `
-// const EditMenuBtn = styled.button`
-// color: black;
-// font-family: 'Ubuntu';
-// padding: 5px 16px;
-// background-color: white;
-// font-size: 11px;
-// border-radius: 6px;
-// border-width: 1px;
-// border-color: lightgray;
-// `
-// const EditOwnerBtn = styled.button`
-// color: black;
-// font-family: 'Ubuntu';
-// padding: 5px 16px;
-// background-color: white;
-// font-size: 11px;
-// border-radius: 6px;
-// border-width: 1px;
-// border-color: lightgray;
-// `
-// const CloseBusinessBtn = styled.button`
-// color: black;
-// font-family: 'Ubuntu';
-// padding: 5px 16px;
-// background-color: white;
-// font-size: 11px;
-// border-radius: 6px;
-// border-width: 1px;
-// border-color: lightgray;
-// `
+const Div = styled.div`
+margin-top: 30px;
+`
+const H2 = styled.div`
+margin-top: 15px;
+color:#f5abc9;
+font-size: 1.5rem;
+`
 
 
 const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData }) => {
@@ -134,12 +56,15 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
 
 
   return (
-    <div >
+    <Div >
       <Link to='/yourpopups'>
        <button>{t("backBtn")}</button>
       </Link>
       <div className='controlPanel'>
-        <h6>{t("controlpaneltxt")}</h6>
+        <H2>{t("controlpaneltxt")}</H2>
+        <br/>
+        <hr/>
+        <br/>
         <Link to="/editinfo">
           <button>{t("editInfoBtn")}</button>
         </Link>
@@ -174,7 +99,7 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
           style={{fontFamily: 'Ubuntu'}}
         />
       </div>
-    </div >
+    </Div >
   )
 };
 
