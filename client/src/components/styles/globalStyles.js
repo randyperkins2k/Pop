@@ -7,7 +7,7 @@ export default createGlobalStyle`
   }
   body {
     font-family: 'Ubuntu';
-    background-color: ${props => props.theme.mode === 'dark' ? '#3B4252' : '#fff'};
+    background-color: ${props => props.theme.mode === 'dark' ? 'rgba(50,60,75,1)' : '#fff'};
     color: ${props => props.theme.mode === 'dark' ? '#fff' : '#000'};
   }
   nav {
@@ -20,12 +20,12 @@ export default createGlobalStyle`
   ul {
     margin-left: -40px;
     margin-top: 0px;
-    background-color:white;
+    background-color:${props => props.theme.mode === 'dark' ? 'rgba(50,60,75,1)' : '#fff'};
   }
   h1{
     margin-top: 30px;
     font-family: 'Londrina Solid', cursive;
-    color: #ffd1dc;
+    color: #f5abc9;
     text-align: center;
     margin-bottom: 2.6rem;
   }

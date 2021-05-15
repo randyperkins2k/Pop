@@ -13,6 +13,9 @@ const Button = styled.button`
   padding: 6px 16px;
   width: 9em;
   display: block;
+  box-shadow: 
+  -1px -1px 4px rgba(120,120,120, 1),
+  1px 1px 4px rgba(0,0,0 1);
 `;
 
 const SidebarDiv = styled.nav`
@@ -22,7 +25,7 @@ const SidebarDiv = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: white;
+  background: ${props => props.theme.mode === 'dark' ? 'rgba(50,60,75,1)' : '#fff'};
   height: 100vh;
   text-align: left;
   padding: 2rem;
@@ -37,7 +40,7 @@ const SidebarDiv = styled.nav`
 
 const SidebarUl = styled.ul`
   display: block;
-  color: white;
+  color: ${props => props.theme.mode === 'dark' ? 'rgba(50,60,75,1)' : '#fff'};
   padding: 16px;
   text-decoration: none;
   
