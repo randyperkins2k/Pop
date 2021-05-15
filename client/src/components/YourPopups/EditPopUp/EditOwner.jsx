@@ -88,6 +88,7 @@ const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
   return (
   <Div>
     <h1>{t("addOwnerTxt")}</h1>
+    <hr/>
     <br/>
     <label>{t("EnterEmailTxt")}: </label>
     <input id="email" type="text" value={text} onChange={(e) => setText(e.target.value)}></input>

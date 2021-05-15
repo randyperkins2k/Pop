@@ -72,6 +72,7 @@ const EditMenu = ({ merchant, selectMerchant }) => {
     <Div>
       <div>
         <h1>{`${merchant.name}'s ${t("products2Txt")}`} </h1>
+        <hr/>
         {products.map(product =>
           <p>&emsp; &#8226; &nbsp;<b>{product.name}</b><small>(<i>${parseFloat(product.price).toFixed(2)}</i></small>)
           <button onClick={
