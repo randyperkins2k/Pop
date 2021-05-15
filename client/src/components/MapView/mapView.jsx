@@ -80,10 +80,10 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
       return '/assets/foodTruck.svg'  
     } else if (merch.category === 'performer') {
       return '/assets/showgirl.svg'
-    } else if (merch.category === 'produce') {
+    } else if (merch.category === 'produce') {  
       return '/assets/potatoes.svg'
     } else if (merch.category === 'arts') {
-      return '/assets/easle2.svg'
+      return '/assets/easel2.svg'
     }
   }
 
