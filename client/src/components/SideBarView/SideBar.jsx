@@ -31,7 +31,8 @@ const SidebarDiv = styled.nav`
   left: -126px;
   transition: transform 0.3s ease-in-out;
   transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
-  width: 49%;
+  width: 28%;
+  box-shadow:4px 0px 10px;
 `;
 
 const SidebarUl = styled.ul`

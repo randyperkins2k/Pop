@@ -33,6 +33,10 @@ import { useTranslation } from 'react-i18next'
 //   }
 // `
 
+const Ul = styled.ul`
+background-color: pink;
+`
+
 const YourPopUps = ({ yourPopups, setYourPopups, merchData, setMerchData, merchant, selectMerch, userSubs, setUserSubs }) => {
   const {t} = useTranslation()
   //const [ yourPopups, setYourPopups ] = useState();
@@ -46,7 +50,7 @@ const YourPopUps = ({ yourPopups, setYourPopups, merchData, setMerchData, mercha
 
   return (
     <div>
-        <ul>
+        <Ul>
       <h5>{t('yourPopUpsBtn')}</h5>
       <Link to='/create'>
       <button
@@ -72,7 +76,7 @@ const YourPopUps = ({ yourPopups, setYourPopups, merchData, setMerchData, mercha
             <h3>You don't own any Pop Ups</h3>
           }
 
-          </ul>
+          </Ul>
     </div>
   )
 };

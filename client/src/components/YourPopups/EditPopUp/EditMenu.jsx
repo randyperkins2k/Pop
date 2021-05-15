@@ -105,7 +105,7 @@ const EditMenu = ({ merchant, selectMerchant }) => {
   return(
     <div>
       <div>
-        <h5>{`${merchant.name}'s`} products: </h5>
+        <h5>{`${merchant.name}'s ${t("products2Txt")}`}: </h5>
         {products.map(product =>
           <p>&emsp; &#8226; &nbsp;<b>{product.name}</b><small>(<i>${parseFloat(product.price).toFixed(2)}</i></small>)
           <button onClick={
@@ -115,13 +115,13 @@ const EditMenu = ({ merchant, selectMerchant }) => {
       </div>
       <div>
         <form>
-          <h5>add new product:</h5>
-          <label><b>name:</b></label>
+          <h5>{t("addaProductTxt")}:</h5>
+          <label><b>{t("productNameTxt")}:</b></label>
           <input type="text" value={nameText} onChange={(e) => setNameText(e.target.value)}></input><br></br>
-          <label><b>price:</b></label>
+          <label><b>{t("priceTxt")}:</b></label>
           <input type="number" value={priceNum} onChange={(e) => setPriceNum(e.target.value)}></input><br></br>
         </form>
-        <button onClick={() => {addProduct()}}>add product</button><br></br>
+        <button onClick={() => {addProduct()}}>{t("addProductBtn")}</button><br></br>
       </div>
       <div>
         <MerchantProfile merchant={merchant} style={{fontFamily: 'Ubuntu'}}/>

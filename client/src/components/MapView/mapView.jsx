@@ -164,43 +164,6 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
       }
     </GoogleMap>
     </div>
-    // <GoogleMap
-    //   defaultZoom={13.5}
-    //   defaultCenter={{lat: 29.956124, lng: -90.090509}}
-    // >
-    //   {merchData.merchants.map(merch => {
-    //     if (merch.isOpen) {
-    //       return <Marker
-    //         key={merch.id}
-    //         position={{
-    //           lat: merch.lat,
-    //           lng: merch.lon
-    //         }}
-    //         onClick={()=>{
-    //           setSelectedPopUp(merch)
-    //         }}
-    //       />
-    //     }
-    //   })}
-    //   {
-    //     selectedPopUp && (
-    //       <InfoWindow
-    //       position={{
-    //         lat: selectedPopUp.lat,
-    //         lng: selectedPopUp.lon
-    //       }}
-    //       onCloseClick={()=>{
-    //         setSelectedPopUp(null);
-    //       }}
-    //       >
-    //         <div>
-    //           <div>{selectedPopUp.name}</div>
-    //           <div>{selectedPopUp.website}</div>
-    //         </div>
-    //       </InfoWindow>
-    //     )
-    //   }
-    // </GoogleMap>
   );
 };
 export default Map;

@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import CreatePop from './YourPopups/CreatePop.jsx';
 import Burger from './SideBarView/Burger.js';
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
@@ -59,6 +58,7 @@ const App = () => {
   const [ center, setCenter ] = useState({lat: 29.956124, lng: -90.090509});
   const [theme, setTheme] = useState({ mode: 'light' })
   const [open, setOpen] = useState(false);
+  
 
   // Function which fetches merchant data from database.
   const getPops = () => {
@@ -117,10 +117,10 @@ const App = () => {
   return (
     <ThemeProvider
     theme={theme}
-
     >
-      <GlobalStyles/>
-
+      <GlobalStyles
+      />
+      
       <Router>
         {isLogged === true ? <Redirect to="/" /> : <Redirect to="/login" />}
         <Switch>
@@ -130,7 +130,7 @@ const App = () => {
             render={props => {
               return (
                   <Home
-
+        
                     myPops={myPops}
                     setMyProps={setMyPops}
                     user={user}
@@ -183,7 +183,6 @@ const Home = ({
   open, setOpen,
   center, setCenter, theme, setTheme
 }) => {
-  const [buttonBackground, setButtonBackground] = useState("#ffd1dc")
   const [ zindex, setZindex ] = useState(-1)
   const { t, i18n } = useTranslation();
 
@@ -264,16 +263,13 @@ useEffect(() => {
                 className='main'
                 >
                   <Link to='/'>
-                    <button
-                      onClick={() => {
-                        setActive(!active)
-                      }}
+                    <button 
                     >{t('mapViewBtn')}</button>
                   </Link>
                   <Link to='/listview'>
                     <button
                       onClick={() => {
-                        setActive(true)
+                      
                       }}
                     >{t('listViewBtn')}</button>
                   </Link>

@@ -102,7 +102,6 @@ font-family: 'Ubuntu';
 const Review = styled.h5`
 font-family: 'Ubuntu';
 margin-top: 50px;
-font-color: green;
 
 `
 

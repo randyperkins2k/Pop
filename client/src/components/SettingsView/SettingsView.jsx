@@ -49,7 +49,7 @@ const Settings = ({ user, setUser, theme, setTheme }) => {
 
     <div>
       <br/>
-      <h5>Settings</h5>
+      <h5>{t("settingsText")}</h5>
       <hr/>
       <br/>
       <button

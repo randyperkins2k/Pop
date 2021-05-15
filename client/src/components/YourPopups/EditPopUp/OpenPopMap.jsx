@@ -11,6 +11,8 @@ import styled from 'styled-components'
 import ToggleOpenClose from '../../ToggleOpenClose.jsx';
 import Confirmation from '../../Confirmation.jsx';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 //import map from '../popup/foodmarker.png'
 
 
@@ -44,6 +46,7 @@ const OpenPopupMap = ({ merchData, selectMerchant,
   const [ openOrClosed, setOpenOrClosed ] = useState('');
   const [ cancelConfirm, setCancelConfirm ] = useState(false);
   const back = useHistory();
+  const { t } = useTranslation()
   //const [ currentLocMarker, setCurrentLocMarker ] = useState(null);
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
@@ -105,17 +108,17 @@ const OpenPopupMap = ({ merchData, selectMerchant,
       />
       <button onClick={() => {
         setCancelConfirm(true);
-      }}>Cancel</button>
+      }}>{t("cancelBtn")}</button>
       {
         cancelConfirm ?
         <Confirmation
-          text={`Cancel opening ${merchant.name}?`}
+          text={`${t("cancelOpeningTxt")} ${merchant.name}?`}
           yesContext={() => back.push('/edit')}
           noContext={() => setCancelConfirm(false)}
         /> :
         ''
       }
-      <div>Touch map to set location</div>
+      <div>{t("touchMap")}</div>
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={12}

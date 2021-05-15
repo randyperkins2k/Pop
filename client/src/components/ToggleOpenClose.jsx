@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next'
 
 const InputWrapper = styled.label`
 	position: relative;
@@ -23,7 +24,7 @@ const Input = styled.input`
 		}
 	}
 
-	$: focus + span {
+	&:focus + span {
 		box-shadow: 0 0 0 2px rgba(0, 0, 0, 0, 0.1);
 	}
 
@@ -35,6 +36,7 @@ const Input = styled.input`
 const Slider = styled.span`
 	display: flex;
 	cursor: pointer;
+	margin-left: 156px;
 	width: 50px;
 	height: 25px;
 	border-radius: 100px;
@@ -67,6 +69,7 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
 		setSubs, setYourPopups
 	}) => {
 	const [toggled, setToggled] = useState(false);
+	const { t } = useTranslation()
 
 	const initiate = () => {
 		console.log('hello initiate');
@@ -138,7 +141,7 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
 			}}
 			/>
 			<Slider />
-			<p style={{fontFamily: 'Ubuntu', fontSize: '11px', marginTop: '3px'}}>{toggled ? 'OPEN' : 'CLOSED'}</p>
+			<p style={{fontFamily: 'Ubuntu', fontSize: '11px', marginTop: '3px'}}>{toggled ? `${t("openTxt")}` : `${t("closedTxt")}`}</p>
 		</InputWrapper>
 
 	)
