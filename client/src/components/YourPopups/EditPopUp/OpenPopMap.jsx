@@ -21,7 +21,7 @@ const libraries = ["places"];
 
 const mapContainerStyle = {
   width: '100vw',
-  height: '40vh',
+  height: '60vh',
 }
 
 const options = {
@@ -124,12 +124,7 @@ const OpenPopupMap = ({ merchData, selectMerchant,
         /> :
         ''
       }
-      {merchant.isOpen ?
-      null :
-      (
         <div>{t("touchMap")}</div>
-      )}
-      {merchant.isOpen ? (<div><h4>{`${t("close2")} ${merchant.name} ${t("toSeelocTxt")}`}</h4><img src={profilePic}></img></div>) : null }
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={12}
