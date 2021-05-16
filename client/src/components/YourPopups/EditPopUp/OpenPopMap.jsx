@@ -21,8 +21,7 @@ const libraries = ["places"];
 
 const mapContainerStyle = {
   width: '100vw',
-  height: '75vh',
-  position: 'sticky',
+  height: '60vh',
 }
 
 const options = {
@@ -49,14 +48,6 @@ const OpenPopupMap = ({ merchData, selectMerchant,
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries
   })
-  const setCoord = () => {
-    if (merchant.lat && merchant.lon) {
-      setCenter({lat: merchant.lat, lng: merchant.lon});
-    }
-  };
-
-  //useEffect(async () =>  user ? setLanguage() : null, [user]);
-  useEffect(() => merchant ? setCoord() : null, [merchant]);
 
   const mapMarkerClick = React.useCallback(()=>{
     setSelectedPopUp(merch)
@@ -110,7 +101,6 @@ const OpenPopupMap = ({ merchData, selectMerchant,
         user={user}
         setYourPopups={setYourPopups}
         setSubs={setSubs}
-        setCoord={setCoord}
       />
       <br/>
       <button onClick={() => {
@@ -125,12 +115,7 @@ const OpenPopupMap = ({ merchData, selectMerchant,
         /> :
         ''
       }
-      {merchant.isOpen ?
-      null :
-      (
         <div>{t("touchMap")}</div>
-      )}
-      {merchant.isOpen ? (<div><h4>{`${t("close2")} ${merchant.name} ${t("toSeelocTxt")}`}</h4><img src={profilePic}></img></div>) : (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={12}
@@ -199,7 +184,6 @@ const OpenPopupMap = ({ merchData, selectMerchant,
         )
       }
     </GoogleMap>
-      )}
     </Div>
   );
 };
