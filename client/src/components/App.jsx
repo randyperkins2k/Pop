@@ -164,7 +164,6 @@ const App = () => {
   )
 };
 /*================================ (End App Component) ==================================*/
-
   const Overlay = styled.div`
     position: absolute;
     width: 100%;
