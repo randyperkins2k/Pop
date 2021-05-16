@@ -269,6 +269,8 @@ const MerchantProfile = ({
         <p>
           {merchant.info}
         </p>
+        <br/>
+        
       </div>
       { merchant.isOpen
         ?
