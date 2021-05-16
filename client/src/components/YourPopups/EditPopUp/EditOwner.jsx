@@ -9,11 +9,7 @@ margin-top: 30px;
 const Div2 = styled.div`
 margin-top: 60px;
 `
-const H2 = styled.div`
-margin-top: 15px;
-color:#f5abc9;
-font-size: 1.5rem;
-`
+
 const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
   const [owners, setOwners] = useState([]);
   const [text, setText] = useState('');
@@ -91,7 +87,8 @@ const EditOwner = ({ merchant, selectMerchant, user, setUser }) => {
 
   return (
   <Div>
-    <H2>{t("addOwnerTxt")}</H2>
+    <h1>{t("addOwnerTxt")}</h1>
+    <hr/>
     <br/>
     <label>{t("EnterEmailTxt")}: </label>
     <input id="email" type="text" value={text} onChange={(e) => setText(e.target.value)}></input>

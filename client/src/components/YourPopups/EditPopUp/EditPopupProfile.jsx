@@ -10,13 +10,6 @@ import { useTranslation } from 'react-i18next'
 const Div = styled.div`
 margin-top: 30px;
 `
-const H2 = styled.div`
-margin-top: 15px;
-color:#f5abc9;
-font-size: 1.5rem;
-`
-
-
 const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData }) => {
   const [ openOrClosed, setOpenOrClosed] = useState('');
   const [ uploadPicWindow, setUploadPicWindow ] = useState(false);
@@ -61,7 +54,7 @@ const EditPopupProfile = ({ merchant, selectMerchant, merchData, setMerchData })
        <button>{t("backBtn")}</button>
       </Link>
       <div className='controlPanel'>
-        <H2>{t("controlpaneltxt")}</H2>
+        <h1>{t("controlpaneltxt")}</h1>
         <br/>
         <hr/>
         <br/>

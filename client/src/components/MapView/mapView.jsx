@@ -116,7 +116,14 @@ const Map = ({ merchData, merchant, selectMerchant, currentLocMarker, setCurrent
         position={
           center
         }
+<<<<<<< HEAD
       
+=======
+        icon={{
+          url: '/assets/default.svg',
+          scaledSize: new google.maps.Size(60, 60)
+        }}
+>>>>>>> b8f342d545a7549516f18e5d9f9b7dc32ea21bfd
       /> :
       ''
     }
