@@ -62,7 +62,8 @@
 	"Artandcraftstxt" : "Arts/Crafts",
 	"markettxt" : "Market", 
 	"controlpaneltxt" : "Control panel", 
-	"uploadPhotoBtn" : "Edit Photos",
+	"uploadFotoBtn" : "Upload foto",
+	"uploadPhotoBtn" : "Upload",
 	"closeBtn" : "CLOSE",
 	"noAdressTxt" : "No address",
 	"addOwnerTxt" : "Add Owner",
@@ -75,7 +76,7 @@
 	"cancel?" : "cancel?",
 	"loginBtn" : "Login", 
 	"choosefileBtn" : "Choose file",
-	"upoadTxt" : "Upload",
+	"upoadTxt" : "Edit Photos",
 	"close2" : "Close",
 	"toSeelocTxt" : "to see your location on the map"
 

@@ -75,11 +75,6 @@ export default createGlobalStyle`
         background-color: ${props => props.theme.mode === 'dark' ? '#f5abc9' : '#f5abc9'};
         padding: 6.25px 16.25px
     }
-    /* ${props => props.buttonPink && css`
-    opacity: .5;
-    background-color: #ffd1dc;     font-size: 14.25px;
-
-  `} */
 
   }
   
