@@ -49,7 +49,7 @@ const Pic = styled.div`
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3); */
   }
-` 
+`
 
 
 const PictureFeed = ({ merchant, setSelectedImage, setBigPic, uploadPicWindow, selectedImage }) => {
@@ -61,7 +61,7 @@ const PictureFeed = ({ merchant, setSelectedImage, setBigPic, uploadPicWindow, s
   const picDelete = async (image) => {
     try {
       await axios.delete(`/api/images/delete`, { data: {url: image}})
-      //await loadImages(); 
+      //await loadImages();
     } catch(err) {
       console.log('front pic delete error', err)
     }
@@ -83,7 +83,6 @@ const PictureFeed = ({ merchant, setSelectedImage, setBigPic, uploadPicWindow, s
 
   return (
     <div>
-      <div>{t("pictureFeedTxt")}</div>
       {
         ( uploadPicWindow && deletePicBool ) ?
           <Confirmation
@@ -95,7 +94,7 @@ const PictureFeed = ({ merchant, setSelectedImage, setBigPic, uploadPicWindow, s
       }
       <Feed>
       {
-        imageIds ? 
+        imageIds ?
         imageIds.map((image, index) => {
           return (
             <Pic>
@@ -118,7 +117,7 @@ const PictureFeed = ({ merchant, setSelectedImage, setBigPic, uploadPicWindow, s
                 setSelectedImage(image.image)
                 setBigPic(true)
                 }} src={image.image} ></Imagee>
-            </Pic> 
+            </Pic>
           )
         })
         :

@@ -141,10 +141,10 @@ const Imager = styled.img`
 `
 
 const MerchantProfile = ({
-   merchant, user, 
-   userSubs, setUserSubs, 
-   merchData, setMerchData, 
-   openOrClosed, setOpenOrClosed, 
+   merchant, user,
+   userSubs, setUserSubs,
+   merchData, setMerchData,
+   openOrClosed, setOpenOrClosed,
    userData, setUserData,
    uploadPicWindow }) => {
   const [ locatePrimary, setLocatePrimary ] = useState(false);
@@ -236,14 +236,13 @@ const MerchantProfile = ({
         <ProfilePic>
           <Imager src={profilePic}></Imager>
         </ProfilePic>
-        
+
         {/* <Image
             cloudName="opsparkpopup"
             publicId={image.image}
             width="300"
             crop="scale"
           /> */}
-        <H2>{t("infoTxt")}</H2>
         <br/>
         <p>
           {merchant.info}
@@ -304,19 +303,11 @@ const MerchantProfile = ({
       </div> :
       reviewView && !pictureFeedView ?
       <div>
-      <div>
-      <LeaveAReview>{t("leaveAReviewTxt")}:</LeaveAReview>
-        <form onSubmit={(e) => {
-          e.preventDefault();
 
-        }}>
-          <Input type="text" value={reviewText} onChange={(e)=>setReviewText(e.target.value)} maxlength="255"></Input>
-          <SubmitBtn onClick={submitReview}>{t("submitBtn")}</SubmitBtn>
-        </form>
-      </div>
       <div>
         <Review>{t("reviewsTxt")}:</Review>
-        {reviews.map(review => <div key={review.id}>
+        {reviews.map(review =>
+        <div key={review.id}>
           <p>
             <b>{review.User.name}</b>: {review.message}
             {
@@ -324,9 +315,18 @@ const MerchantProfile = ({
               ? (<button onClick={() => deleteReview(review)}><small>x</small></button>)
               : null
             }
-
           </p>
         </div>)}
+        <div>
+          <LeaveAReview>{t("leaveAReviewTxt")}:</LeaveAReview>
+           <form onSubmit={(e) => {
+              e.preventDefault();
+
+            }}>
+              <Input type="text" value={reviewText} onChange={(e)=>setReviewText(e.target.value)} maxlength="255"></Input>
+              <SubmitBtn onClick={submitReview}>{t("submitBtn")}</SubmitBtn>
+          </form>
+        </div>
       </div>
     </div>
       :
