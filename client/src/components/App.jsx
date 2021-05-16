@@ -22,9 +22,9 @@ import OpenPopupMap from './YourPopups/EditPopUp/OpenPopMap.jsx';
 import { HashRouter as Well, BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled, { css, ThemeProvider, createGlobalStyle } from 'styled-components';
-import { ReactComponent as MoonPic } from '../popup/moonArt.svg'
+
 import Picture from './MerchantProfileView/Picture.jsx';
-//import { ThemeProvider } from 'styled-components'
+
 import GlobalStyles from './styles/globalStyles.js'
 //import { overlap } from 'sequelize/types/lib/operators';
 
@@ -67,14 +67,11 @@ const App = () => {
   const getPops = () => {
     axios.get('/api/merchants')
       .then(response => {
-        // console.log('merchants', response.data);
         setMerchData(response.data);
         setInterval(function() {
           axios.get('/api/merchants')
             .then(response => {
               setMerchData(response.data);
-              console.log('merchants updated');
-              console.log(response.data);
             });
         }, 10000);
       })
@@ -85,18 +82,13 @@ const App = () => {
   const logged = () => {
     axios.get('/testing')
       .then(results => {
-        // console.log(results.data);
         if (results.data.displayName) {
           const { displayName, email, picture } = results.data;
           setIsLogged(true);
-          // console.log('before post', displayName, email, picture);
-          // Picture removed from endpoint due to HTTP issue.
           axios.post(`/api/users/adduser/${displayName}/${email}`)
             .then(addUser => {
-              // console.log('this is add user', addUser);
-              let subs, yourPops;
+              // let subs, yourPops; // Variables never used.
               addUser.data.Subs ? setUserSubs(addUser.data.Subs.map(Sub => Sub.Merchant)) : setUserSubs([]);
-              // console.log('subscriptions:', addUser.data.Subs);
               addUser.data.Admins ? setYourPopups(addUser.data.Admins.map(Admin => Admin.Merchant)) : setYourPopups([]);
                 setUser({
                   name: displayName,
@@ -173,6 +165,14 @@ const App = () => {
 };
 /*================================ (End App Component) ==================================*/
 
+  const Overlay = styled.div`
+    position: absolute;
+    width: 100%;
+    height: 100vw;
+    z-index: ${props => props.zindex};
+    background-color: transparent;
+    opacity: .5;
+  `
 /*=================================== Home Component ====================================*/
 const Home = ({
   myPops, setMyPops,
@@ -212,14 +212,6 @@ const Home = ({
 
   useEffect(async () =>  user ? setLightOrDark() : null, [user]);
 
-  const Overlay = styled.div`
-    position: absolute;
-    width: 100%;
-    height: 100vw;
-    z-index: ${zindex};
-    background-color: transparent;
-    opacity: .5;
-  `
 useEffect(() => {
   if(sideBarDisplay) {
     setZindex(98)
