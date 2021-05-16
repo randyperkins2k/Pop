@@ -66,7 +66,7 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
 		openOrClosed, merchData,
 		setMerchData, selectMerchant,
 		center, user,
-		setSubs, setYourPopups, setCoord
+		setSubs, setYourPopups
 	}) => {
 	const [toggled, setToggled] = useState(false);
 	const { t } = useTranslation()
@@ -95,7 +95,6 @@ const ToggleOpenClose = ({ merchant, setOpenOrClosed,
   }
 
   const openBusiness = () => {
-		setCoord();
 		axios.put(`/api/merchants/merchcoords/${merchant.id}`, {lat: center.lat, lng: center.lng})
 			.then(() => {
 				axios.put(`/api/merchants/openmerchant/${merchant.id}`)
