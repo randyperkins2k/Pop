@@ -88,6 +88,8 @@ merchants.put('/merchcoords/:merchid', (req, res) => {
       let setAddress;
       if (data.data.features[0].properties.housenumber && data.data.features[0].properties.street) {
         setAddress = data.data.features[0].properties.housenumber + ' ' + data.data.features[0].properties.street;
+      } else if (data.data.features[0].properties.name) {
+        setAddress = data.data.features[0].properties.name;
       } else {
         setAddress = 'No Address';
       }
